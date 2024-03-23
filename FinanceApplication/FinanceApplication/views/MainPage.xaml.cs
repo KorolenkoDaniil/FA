@@ -4,6 +4,7 @@ using FinanceApp.classes.Wallets;
 using FinanceApplication.core.Category;
 using FinanceApplication.core.Colors;
 using FinanceApplication.core.Operations;
+using FinanceApplication.views;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -15,8 +16,28 @@ namespace FinanceApplication
         public MainPage()
         {
             InitializeComponent();
-            P();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
+
+        Context context = new Context();
+
+
+        private async void ToSignUpPage(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RegistrationPage(context));
+            Console.WriteLine(await ColorRepository.GetColor(1));
+        }
+
+        private async void ToSignInPage(object sender, EventArgs e)
+        {
+            //await Navigation.PushAsync(new AuthorisationPage(context));
+        }
+
+
+
+
+
+
 
         //public async void P()
         //{

@@ -22,4 +22,13 @@
   <ItemGroup>
     <Folder Include="icons\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="views\ListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\RegistrationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
