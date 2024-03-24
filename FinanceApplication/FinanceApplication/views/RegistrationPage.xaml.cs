@@ -82,10 +82,8 @@ namespace FinanceApplication.views
 
                 await Navigation.PushAsync(new ListPage(context));
             }
-            else
-            {
-                { BadRequestLabel.IsVisible = true; return; }
-            }
+            else BadRequestLabel.IsVisible = true; return; 
+           
         }
     }
 }

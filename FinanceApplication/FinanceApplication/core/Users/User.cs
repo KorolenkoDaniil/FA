@@ -15,6 +15,8 @@
             ColorId = colorid;
         }
 
+        public User () { }
+
         public override string ToString() => $"{UserId} {NickName} {Email} {Password} {ColorId}";
       
     }

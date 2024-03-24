@@ -12,6 +12,7 @@ namespace FinanceApplication.core.Operations
         public string Details { get; private set; }
         public int Categoryid { get; private set; }
 
+        public Operation () { }
         public Operation(decimal amount, int userid, int walletid, DateTime date, string details, int categoryid)
         {
             Amount = amount;

@@ -1,7 +1,7 @@
-﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FinanceApplication.views.RegistrationPage">
-
+             x:Class="FinanceApplication.views.AuthorisationPage">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="FrameStyle" TargetType="Frame">
@@ -27,77 +27,47 @@
     <AbsoluteLayout BackgroundColor="#F5F5F5">
         <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" Margin="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height=".1*"/>
-                <RowDefinition Height=".1*"/>
-
-                <RowDefinition Height=".1*"/>
+                <RowDefinition Height=".083*"/>
+                <RowDefinition Height=".083*"/>
+                <RowDefinition Height=".066*"/>
+                <RowDefinition Height=".12*"/>
                 <RowDefinition Height=".01*"/>
-
+                <RowDefinition Height=".12*"/>
+                <RowDefinition Height=".066*"/>
                 <RowDefinition Height=".1*"/>
-                <RowDefinition Height=".06*"/>
-
-                <RowDefinition Height=".1*"/>
-                <RowDefinition Height=".01*"/>
-
-                <RowDefinition Height=".1*"/>
-                <RowDefinition Height=".01*"/>
-
-                <RowDefinition Height=".13*"/>
+                <RowDefinition Height=".12*"/>
                 <RowDefinition Height=".05*"/>
-                <RowDefinition Height=".05*"/>
-
+                <RowDefinition Height=".096*"/>
+                <RowDefinition Height=".083*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".86*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Text="Create an Account" TextColor="Black" FontSize="24" FontAttributes="Bold" FontFamily="OpenSans-Regular" Grid.Column="0" Grid.Row="0"/>
+            <Label Text="Authorisation" TextColor="Black" FontSize="24" FontAttributes="Bold" FontFamily="OpenSans-Regular" Grid.Column="0" Grid.Row="0"/>
+            
+            <Label Text="Welcome back" HorizontalOptions="Center" TextColor="Black" FontSize="24" FontAttributes="Bold" FontFamily="OpenSans-Regular" Grid.Column="0" Grid.Row="1"/>
 
-            <Image Grid.Column="0" Grid.Row="1"/>
-
-            <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="2" Margin="0">
+            <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="3" Margin="0">
                 <StackLayout>
                     <Label Style="{StaticResource Text1}" Text="Email" Margin="10, 0,0,0" Grid.Column="0" Grid.Row="0"/>
                     <Entry x:Name="entryEmail" TextColor="Black" Margin="10, 0, 0, 0" Grid.Column="0" Grid.Row="1"/>
                 </StackLayout>
             </Frame>
-            
-            <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="4">
-                <StackLayout>
-                    <Label Style="{StaticResource Text1}" Text="Nickname" Margin="10, 0,0,0"/>
-                    <Entry x:Name="entryNickname" TextColor="Black" Margin="10, 0,0,0"/>
-                </StackLayout>
-            </Frame>
 
-            <Frame  Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="6">
+            <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="5">
                 <StackLayout>
                     <Label Style="{StaticResource Text1}" Text="Password" Margin="10, 0,0,0"/>
                     <Entry x:Name="entryPass1" TextColor="Black" Margin="10, 0,0,0"/>
                 </StackLayout>
             </Frame>
 
-            <Frame  Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="8">
-                <StackLayout>
-                    <Label Style="{StaticResource Text1}" Text="Repeat password" Margin="10, 0,0,0"/>
-                    <Entry x:Name="entryPass2" TextColor="Black" Margin="10, 0,0,0"/>
-                </StackLayout>
+            <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="7">
+                <Button Style="{StaticResource ButtonStyle}" Text="Log In" Clicked="LogInClicked"/>
             </Frame>
 
+            <Label Text="Or use csocial medis" HorizontalOptions="Center" TextColor="Black" FontSize="14" FontFamily="OpenSans-Regular" Grid.Column="0" Grid.Row="9"/>
 
-            <Grid Grid.Column="0" Grid.Row="10">
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                </Grid.RowDefinitions>
-                
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-
-                <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Grid.Row="0" Text="Cancel" Clicked="CancelClicked"/>
-                <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" Grid.Row="0" Text="Create" Clicked="CreateClicked"/>
-            </Grid>
 
             <Frame x:Name="ErrorLabel" CornerRadius="10" Padding="0" Grid.Column="0" Grid.Row="11" BackgroundColor="#ffd9d9">
                 <Label VerticalOptions="Center" HorizontalOptions="Center" Text="ERROR. Please check your email and password"></Label>

@@ -22,6 +22,7 @@ namespace FinanceApp.classes.Wallets
         public bool Include { get; private set; }
         //public int IconId { get; private set; }
 
+        public Wallet () { }
 
         public Wallet (int userid, string name, string type, decimal amount, int colorID, bool include)
         {

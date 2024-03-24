@@ -30,7 +30,8 @@ namespace FinanceApplication
 
         private async void ToSignInPage(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new AuthorisationPage(context));
+            Console.WriteLine(await ColorRepository.GetColor(1));
+            await Navigation.PushAsync(new AuthorisationPage(context));
         }
 
 

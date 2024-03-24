@@ -7,6 +7,7 @@
         public int UserId { get; private set; }    
         public int ColorId { get; private set; }
 
+        public Category () { }
         public Category(string name, int userId, int colorId)
         {
             Name = name;

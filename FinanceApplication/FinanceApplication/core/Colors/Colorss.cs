@@ -8,7 +8,8 @@
         public string LightMode { get; private set; }
         public string DarkText { get; private set; }
         public string LightText { get; private set; }
-
+        
+        public Colorss () { }
         public Colorss(string name, string darkMode, string lightMode, string darkText, string lightText)
         {
             Name = name;
