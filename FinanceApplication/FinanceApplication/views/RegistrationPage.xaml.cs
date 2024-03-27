@@ -3,6 +3,7 @@ using FinanceApp.classes.Users;
 using FinanceApp.classes.Wallets;
 using FinanceApplication.core.Category;
 using FinanceApplication.core.Colors;
+using FinanceApplication.core.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,6 +79,24 @@ namespace FinanceApplication.views
                 if (resultsC.All(result => result)) Console.WriteLine("Все  успешно сохранены.");
                 else { Console.WriteLine("Не все категории были успешно сохранены."); return; }
 
+
+
+
+                List<Operation> operations = new List<Operation>
+                {
+                    new Operation(2, context.User.UserId, 1, DateTime.Now, "sdf", 1),
+                    new Operation(2, context.User.UserId, 1, DateTime.Now, "sdf", 1),
+                    new Operation(2, context.User.UserId, 1, DateTime.Now, "sdf", 1),
+                };
+
+                List<Task<bool>> saveTasks1 = operations.Select(o => OperationRepository.SaveOperation(o)).ToList();
+
+                bool[] results1 = await Task.WhenAll(saveTasks1);
+
+                if (results1.All(result => result)) Console.WriteLine("Все  успешно сохранены.");
+                else { Console.WriteLine("Не все категории были успешно сохранены."); return; }
+
+                context.SetOperationsCollection (await OperationRepository.GetOperations(context.User.UserId));
 
 
                 await Navigation.PushAsync(new ListPage(context));

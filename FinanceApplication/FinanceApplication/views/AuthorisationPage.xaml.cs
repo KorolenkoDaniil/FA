@@ -38,7 +38,7 @@ namespace FinanceApplication.views
                     context.ChangeTheme(await ColorRepository.GetColor(context.User.ColorId));
                     context.SetWalletsCollection(await WalletRepository.GetWallets(context.User.UserId));
                     context.SetCategoryCollection(await CategoryRepository.GetCategorys(context.User.UserId));
-                    context.SetOperationsCollection(await OperationRepository.GetOperations(context.User.UserId));
+                    context.SetOperationsCollection (await OperationRepository.GetOperations(context.User.UserId));
                     await Navigation.PushAsync(new ListPage(context));
                 }
                 else

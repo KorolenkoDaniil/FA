@@ -2,11 +2,98 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FinanceApplication.views.ListPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TextOpenSans" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontFamily" Value="OpenSans-Regular"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout BackgroundColor="#F5F5F5">
+        <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".08*"/>
+                <RowDefinition Height=".08*"/>
+                <RowDefinition Height=".08*"/>
+                <RowDefinition Height=".07*"/>
+                <RowDefinition Height=".07*"/>
+                <RowDefinition Height=".1*"/>
+                <RowDefinition Height=".45*"/>
+                <RowDefinition Height=".07*"/>
+                
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Column="0" Grid.Row="0" Padding="15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".5*"/>
+                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition Width=".1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Transactions" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}"/>
+
+                    <Frame CornerRadius="30" BackgroundColor="#F4F4F4" Grid.Column="1" Grid.Row="0" Padding="0">
+                        <Label HorizontalOptions="Center" VerticalOptions="Center" Text="20, July, 2024" Style="{StaticResource TextOpenSans}"></Label>
+                    </Frame>
+
+                    <!--<Image Grid.Row="0" Grid.Column="2">-->
+                </Grid>
+            </Frame>
+
+            <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="1" VerticalOptions="End" FontSize="Medium" Text="Total balance"/>
+            <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="2" FontSize="32" Text="$00.00"/>
+
+
+
+            <Frame Grid.Column="0" Grid.Row="3" Padding="10" Margin="15, 0, 15, 0" CornerRadius="10">
+                <Grid Padding="0,0,10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".1*"/>
+                        <ColumnDefinition Width=".5*"/>
+                        <ColumnDefinition Width=".4*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--<Image Grid.Row="0" Grid.Column="0"/>-->
+
+                    <Label Style="{StaticResource TextOpenSans}" Text="Increase" Grid.Row="0" VerticalTextAlignment="Center" Grid.Column="1"/>
+                    <Label Style="{StaticResource TextOpenSans}" Text="$500" HorizontalOptions="End" Grid.Row="0" Grid.Column="2" VerticalTextAlignment="Center" TextColor="#20CB3B"/>
+                </Grid>
+            </Frame>
+            
+            
+            <Frame Grid.Column="0" Grid.Row="4" Padding="10" Margin="15, 0, 15, 0" CornerRadius="10">
+                <Grid Padding="0,0,10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".1*"/>
+                        <ColumnDefinition Width=".5*"/>
+                        <ColumnDefinition Width=".4*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--<Image Grid.Row="0" Grid.Column="0"/>-->
+
+                    <Label Style="{StaticResource TextOpenSans}" Text="Expenses" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center"/>
+                    <Label Style="{StaticResource TextOpenSans}" Text="$500" HorizontalOptions="End" Grid.Row="0" Grid.Column="2" VerticalTextAlignment="Center" TextColor="Red"/>
+                </Grid>
+            </Frame>
+
+            <Label Style="{StaticResource TextOpenSans}" Text="Spending calendar" Grid.Column="0" Grid.Row="5" Margin="15, 0, 15, 0" VerticalOptions="Center"/>
+
+            <CollectionView Grid.Row="6" Grid.Column="0" x:Name="OperationsCollection" SelectionMode="Single" SelectionChanged="OnItemSelected" >
+                <CollectionView.ItemTemplate >
+                    <DataTemplate>
+                       
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Frame x:Name="NoOperations"  Grid.Row="7" Grid.Column="0" Padding="0">
+                <Label Text="you have no operations yet" TextColor="Black"/>
+            </Frame>
+            
+        </Grid>
+    </AbsoluteLayout>
 </ContentPage>
