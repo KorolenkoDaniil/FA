@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -12,6 +12,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="icons\calendar.png" />
+    <None Remove="icons\calendar2.png" />
+    <None Remove="icons\card.png" />
+    <None Remove="icons\categories.png" />
+    <None Remove="icons\converter.png" />
+    <None Remove="icons\diagram.png" />
+    <None Remove="icons\list.png" />
+    <None Remove="icons\OIG1.png" />
+    <None Remove="icons\settings.png" />
+    <None Remove="icons\trashCan.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="icons\calendar.png" />
+    <EmbeddedResource Include="icons\calendar2.png" />
+    <EmbeddedResource Include="icons\card.png" />
+    <EmbeddedResource Include="icons\categories.png" />
+    <EmbeddedResource Include="icons\converter.png" />
+    <EmbeddedResource Include="icons\diagram.png" />
+    <EmbeddedResource Include="icons\list.png" />
+    <EmbeddedResource Include="icons\OIG1.png" />
+    <EmbeddedResource Include="icons\settings.png" />
+    <EmbeddedResource Include="icons\trashCan.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
@@ -20,14 +46,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="icons\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Update="views\AuthorisationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="views\CardPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="views\ListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\OperationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="views\RegistrationPage.xaml">

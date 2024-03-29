@@ -24,19 +24,48 @@ namespace FinanceApplication.views
             this.context = context;
             BindingContext = this;
             NoOperations.IsVisible = false;
+            imageCard.Source = ImageSource.FromResource("FinanceApplication.icons.card.png");
+            imageCathegory.Source = ImageSource.FromResource("FinanceApplication.icons.categories.png");
+            imageList.Source = ImageSource.FromResource("FinanceApplication.icons.list.png");
+            imageDiagram.Source = ImageSource.FromResource("FinanceApplication.icons.diagram.png");
+            imageConverter.Source = ImageSource.FromResource("FinanceApplication.icons.converter.png");
             ShowOperations();
+
+
+            Console.WriteLine("точка 8");
+
+        }
+
+        private void ShowOperations()
+        {
+            Console.WriteLine("!!!");
+            var operations1 = from p in context.Operations
+                              join c in context.Categories on p.Cathegory equals c.Name
+                              select new
+                              {
+                                  Day = p.Day,
+                                  Month = p.Month,
+                                  Year = p.Year,
+                                  Profit = p.Profit,
+                                  Sum = p.Sum,
+                                  Cathegory = p.Cathegory,
+                                  Name = c.Name
+                              };
+
+
+            foreach (var op in operations1)
+            {
+                Console.WriteLine($"{op.Day} {op.Name} {op.Sum} {op.Profit} {op.Month}");
+            }
+
+            OperationsCollection.ItemsSource = operations1;
+            
         }
 
 
-        private void ShowOperations()
-        { 
-            if (context.Operations == null) { NoOperations.IsVisible = true; return; } 
-            
-            foreach (Operation operation in context.Operations) 
-            {
-                Console.WriteLine(operation);
-            }
-            OperationsCollection.ItemsSource = context.Operations;
+        private async void ToCardPage (object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new CardPage(context));
         }
 
         private void OnItemSelected(object sender, SelectionChangedEventArgs e)

@@ -35,6 +35,8 @@ namespace FinanceApplication.views
         {
             Regex regex = new Regex(@"@gmail.com");
 
+            Console.WriteLine("точка 1");
+
             if (string.IsNullOrEmpty(entryEmail.Text) || string.IsNullOrEmpty(entryNickname.Text) ||
                 string.IsNullOrEmpty(entryPass1.Text) || string.IsNullOrEmpty(entryPass2.Text)) { ErrorLabel.IsVisible = true; return; }
            
@@ -47,6 +49,9 @@ namespace FinanceApplication.views
                 context.ChangeTheme(await ColorRepository.GetColor(1));
             }
 
+            Console.WriteLine("точка 2");
+
+
             if (context.User != null)
             {
                 List<Wallet> wallets = new List<Wallet>
@@ -55,12 +60,20 @@ namespace FinanceApplication.views
                     new Wallet(context.User.UserId, "кошелек 2", "сберегательный счет", 0, context.User.UserId % 20, true)
                 };
 
+                Console.WriteLine("точка 3");
+
                 List<Task<bool>> saveTasks = wallets.Select(wallet => WalletRepository.SaveWallet(wallet)).ToList();
 
                 bool[] results = await Task.WhenAll(saveTasks);
 
                 if (results.All(result => result)) Console.WriteLine("Все кошельки успешно сохранены.");
                 else { Console.WriteLine("Не все кошельки были успешно сохранены."); return; }
+                
+                
+                Console.WriteLine("точка 4");
+
+
+                context.SetWalletsCollection(wallets);
 
 
                 List<Category> categories = new List<Category>
@@ -72,7 +85,12 @@ namespace FinanceApplication.views
                     new Category("категория 5", context.User.UserId, 6),
                 };
 
+                context.SetCategoryCollection(categories);
+
+
                 List<Task<bool>> saveTasksC = categories.Select(category => CategoryRepository.SaveCategory(category)).ToList();
+
+                Console.WriteLine("точка 5");
 
                 bool[] resultsC = await Task.WhenAll(saveTasks);
 
@@ -84,10 +102,12 @@ namespace FinanceApplication.views
 
                 List<Operation> operations = new List<Operation>
                 {
-                    new Operation(2, context.User.UserId, 1, DateTime.Now, "sdf", 1),
-                    new Operation(2, context.User.UserId, 1, DateTime.Now, "sdf", 1),
-                    new Operation(2, context.User.UserId, 1, DateTime.Now, "sdf", 1),
+                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
+                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
+                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
                 };
+
+                Console.WriteLine("точка 6");
 
                 List<Task<bool>> saveTasks1 = operations.Select(o => OperationRepository.SaveOperation(o)).ToList();
 
@@ -96,7 +116,9 @@ namespace FinanceApplication.views
                 if (results1.All(result => result)) Console.WriteLine("Все  успешно сохранены.");
                 else { Console.WriteLine("Не все категории были успешно сохранены."); return; }
 
-                context.SetOperationsCollection (await OperationRepository.GetOperations(context.User.UserId));
+                Console.WriteLine("точка 7");
+
+                context.SetOperationsCollection(operations);
 
 
                 await Navigation.PushAsync(new ListPage(context));
