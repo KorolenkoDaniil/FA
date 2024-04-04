@@ -13,7 +13,7 @@ namespace FinanceApp.classes
         public Colorss Color { get; private set; }
         public List<Wallet> Wallets { get; private set; }
         public List<Category> Categories { get; private set; }
-        public List<Operation>Operations { get; private set; }
+        public List<Operation> Operations { get; private set; }
 
 
         public void ChangeTheme(Colorss color) => Color = color;

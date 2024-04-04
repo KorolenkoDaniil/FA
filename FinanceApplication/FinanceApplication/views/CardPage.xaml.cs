@@ -1,10 +1,6 @@
 ﻿using FinanceApp.classes;
+using FinanceApp.classes.Wallets;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,6 +14,24 @@ namespace FinanceApplication.views
         {
             InitializeComponent();
             this.context = context;
+            ShowCards();
+            BindingContext = this;
+        }
+
+
+
+        public void ShowCards()
+        {
+            foreach (Wallet wallet in context.Wallets)
+            {
+                Console.WriteLine(wallet);
+            }
+            CardsCollection.ItemsSource = context.Wallets;
+        }
+
+        private async void ToCardPage(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new CardPage(context));
         }
     }
 }

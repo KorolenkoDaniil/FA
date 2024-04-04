@@ -47,14 +47,35 @@
 
 
 
-            <CollectionView Grid.Row="3" Grid.Column="0" x:Name="OperationsCollection">
+            <CollectionView Grid.Row="3" Grid.Column="0" x:Name="CardsCollection">
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
-                        <StackLayout>
-                            <Frame BackgroundColor="White">
-                               
-                            </Frame>
-                        </StackLayout>
+                        <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="10, 20, 10, 20" WidthRequest="100" HeightRequest="120" CornerRadius="20" BackgroundColor="White" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height=".1*"/>
+                                    <RowDefinition Height=".1*"/>
+                                    <RowDefinition Height=".3*"/>
+                                    <RowDefinition Height=".2*"/>
+                                    <RowDefinition Height=".2*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width=".5*"/>
+                                    <ColumnDefinition Width=".5*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Name}" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="0"/>
+                                <Label Text="{Binding Type}" Style="{StaticResource TextOpenSans}" FontSize="Small" TextColor="#a3a3a3" Grid.Column="0" Grid.Row="1"/>
+
+                                <StackLayout  Grid.Column="0" Grid.Row="2" Padding="0">
+                                    <Frame BackgroundColor="Gray" CornerRadius="10" WidthRequest="17" HeightRequest="20"/>
+                                </StackLayout>
+
+                                <Label Text="Increase" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="3"/>
+                                <Label Text="Expenses" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="4"/>
+
+                            </Grid>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
