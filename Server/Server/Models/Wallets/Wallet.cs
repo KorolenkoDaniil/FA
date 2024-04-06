@@ -11,23 +11,23 @@ namespace Server.Wallets
         public string Name { get; set; }
         public string Type { get; set; }
         public decimal Amount { get; set; }
-        public string Color { get; set; }
+        public int ColorId { get; set; }
         public bool Include { get; set; }
         public int IconId { get; set; }
 
 
         public Wallet () { }
-        public Wallet (int userid, string name, string type, decimal amount, string color, bool include, int iconid)
+        public Wallet (int userid, string name, string type, decimal amount, int colorId, bool include, int iconid)
         {
             UserId = userid;
             Name = name;
             Type = type;
             Amount = amount;
-            Color = color;
+            ColorId = colorId;
             Include = include;
             IconId = iconid;
         }
-        public override string ToString() => $"{WalletId} {UserId} {Name} {Type} {Amount} {Color} {Include} {IconId} ";
+        public override string ToString() => $"{WalletId} {UserId} {Name} {Type} {Amount} {ColorId} {Include} {IconId} ";
 
     }
 }

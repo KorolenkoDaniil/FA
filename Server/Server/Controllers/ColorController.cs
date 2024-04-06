@@ -18,5 +18,18 @@ namespace Server.Controllers
             Console.WriteLine(id);
             return colorRepository.SearchById(id);
         }
+
+        [HttpPost]
+        public List<Colorss> GetColors()
+        {
+            List<Colorss> colors = colorRepository.ReturnAllColors();
+            Console.WriteLine("-----------------------");
+            foreach (Colorss colorss in colors)
+            {
+                Console.WriteLine(colorss);
+            }
+            Console.WriteLine("-----------------------");
+            return colors;
+        }
     }
 }

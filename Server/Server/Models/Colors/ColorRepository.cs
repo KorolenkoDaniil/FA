@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System.Linq;
 
 namespace Server.Colors
 {
@@ -21,5 +22,12 @@ namespace Server.Colors
             Colorss foundUser = ColorDB.Table<Colorss>().FirstOrDefault(u => u.ColorId == colorId);
             return foundUser;
         }
+
+        public List<Colorss> ReturnAllColors()
+        {
+            List<Colorss> allColors = ColorDB.Table<Colorss>().ToList();
+            return allColors;
+        }
+
     }
 }
