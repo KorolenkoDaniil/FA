@@ -12,45 +12,43 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
-    
+
+
     <AbsoluteLayout BackgroundColor="#F5F5F5" Padding="0">
-            <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height=".08*"/>
-                    <RowDefinition Height=".08*"/>
-                    <RowDefinition Height=".08*"/>
-                    <RowDefinition Height=".695*"/>
-                    <RowDefinition Height=".065*"/>
-                </Grid.RowDefinitions>
+        <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".08*"/>
+                <RowDefinition Height=".08*"/>
+                <RowDefinition Height=".08*"/>
+                <RowDefinition Height=".695*"/>
+                <RowDefinition Height=".065*"/>
+            </Grid.RowDefinitions>
 
-                <Frame Grid.Column="0" Grid.Row="0" Padding="15">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".5*"/>
-                            <ColumnDefinition Width=".4*"/>
-                            <ColumnDefinition Width=".1*"/>
-                        </Grid.ColumnDefinitions>
+            <Frame Grid.Column="0" Grid.Row="0" Padding="15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".5*"/>
+                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition Width=".1*"/>
+                    </Grid.ColumnDefinitions>
 
-                        <Label Text="Transactions" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}"/>
+                    <Label Text="Transactions" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}"/>
 
-                        <Frame CornerRadius="30" BackgroundColor="#F4F4F4" Grid.Column="1" Grid.Row="0" Padding="0">
-                            <Label HorizontalOptions="Center" VerticalOptions="Center" Text="20, July, 2024" Style="{StaticResource TextOpenSans}"></Label>
-                        </Frame>
+                    <Frame CornerRadius="30" BackgroundColor="#F4F4F4" Grid.Column="1" Grid.Row="0" Padding="0">
+                        <Label HorizontalOptions="Center" VerticalOptions="Center" Text="20, July, 2024" Style="{StaticResource TextOpenSans}"></Label>
+                    </Frame>
 
-                        <!--<Image Grid.Row="0" Grid.Column="2">-->
-                    </Grid>
-                </Frame>
+                    <!--<Image Grid.Row="0" Grid.Column="2">-->
+                </Grid>
+            </Frame>
 
-                <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="1" VerticalOptions="End" FontSize="Medium" Text="Total balance"/>
-                <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="2" FontSize="32" Text="$00.00"/>
-
-
+            <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="1" VerticalOptions="End" FontSize="Medium" Text="Total balance"/>
+            <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="2" FontSize="32" Text="$00.00"/>
 
             <CollectionView Grid.Row="3" Grid.Column="0" x:Name="CardsCollection">
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
-                        <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="10, 20, 10, 20" WidthRequest="100" HeightRequest="120" CornerRadius="20" BackgroundColor="{Binding }" >
+                        <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="10, 20, 10, 20" WidthRequest="100" HeightRequest="120" CornerRadius="20" BackgroundColor="White" >
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height=".1*"/>
@@ -63,17 +61,31 @@
                                     <ColumnDefinition Width=".5*"/>
                                     <ColumnDefinition Width=".5*"/>
                                 </Grid.ColumnDefinitions>
+                                <StackLayout>
+                                    <Frame Margin="15, 15, 15, 15" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="20" BackgroundColor="White" >
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height=".1*"/>
+                                                <RowDefinition Height=".1*"/>
+                                                <RowDefinition Height=".3*"/>
+                                                <RowDefinition Height=".2*"/>
+                                                <RowDefinition Height=".2*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width=".5*"/>
+                                                <ColumnDefinition Width=".5*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding Name}" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="0"/>
+                                            <Label Text="{Binding Type}" Style="{StaticResource TextOpenSans}" FontSize="Small" TextColor="#a3a3a3" Grid.Column="0" Grid.Row="1"/>
 
-                                <Label Text="{Binding Name}" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="0"/>
-                                <Label Text="{Binding Type}" Style="{StaticResource TextOpenSans}" FontSize="Small" TextColor="#a3a3a3" Grid.Column="0" Grid.Row="1"/>
-
-                                <StackLayout  Grid.Column="0" Grid.Row="2" Padding="0">
-                                    <Frame BackgroundColor="Gray" CornerRadius="10" WidthRequest="17" HeightRequest="20"/>
+                                            <AbsoluteLayout Grid.Column="0" Grid.Row="2">
+                                                <Frame BackgroundColor="Gray" CornerRadius="10" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, .4, .8 "/>
+                                            </AbsoluteLayout>
+                                            <Label Text="Increase" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="3"/>
+                                            <Label Text="Expenses" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="4"/>
+                                        </Grid>
+                                    </Frame>
                                 </StackLayout>
-
-                                <Label Text="Increase" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="3"/>
-                                <Label Text="Expenses" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="4"/>
-
                             </Grid>
                         </Frame>
                     </DataTemplate>

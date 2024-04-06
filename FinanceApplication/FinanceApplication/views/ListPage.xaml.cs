@@ -34,20 +34,6 @@ namespace FinanceApplication.views
         private void ShowOperations()
         {
             Console.WriteLine("!!!");
-
-
-            //var operations1 = from p in context.Operations
-            //                  join c in context.Categories on p.Cathegory equals c.Name
-            //                  select new
-            //                  {
-            //                      Day = p.Day,
-            //                      Month = p.Month,
-            //                      Year = p.Year,
-            //                      Profit = p.Profit,
-            //                      Sum = p.Sum,
-            //                      Cathegory = p.Cathegory,
-            //                      Name = c.Name
-            //                  };
             Console.WriteLine("----------- новая таблица");
 
             var operations1 = from operation in context.Operations
