@@ -22,6 +22,7 @@ namespace FinanceApplication.core.Category
 
             if (response.IsSuccessStatusCode)
             {
+
                 Console.WriteLine(response.IsSuccessStatusCode);
                 return true;
             }
@@ -42,10 +43,13 @@ namespace FinanceApplication.core.Category
             {
                 string CategoriessJson = await response.Content.ReadAsStringAsync();
                 List<Category> userCategories = JsonConvert.DeserializeObject<List<Category>>(CategoriessJson);
+
+                Console.WriteLine("----------- категория");
                 foreach (Category Category in userCategories)
                 {
                     Console.WriteLine(Category);
                 }
+                Console.WriteLine("----------- категория");
                 return userCategories;
             }
             else

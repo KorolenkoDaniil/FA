@@ -25,6 +25,9 @@ namespace FinanceApplication.core.Colors
             {
                 string color = await response.Content.ReadAsStringAsync();
                 Colorss result = JsonConvert.DeserializeObject<Colorss>(color);
+                Console.WriteLine("----------- цвет");
+                Console.WriteLine(result);
+                Console.WriteLine("----------- цвет");
                 return result;
             }
             else

@@ -50,7 +50,7 @@
             <CollectionView Grid.Row="3" Grid.Column="0" x:Name="CardsCollection">
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
-                        <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="10, 20, 10, 20" WidthRequest="100" HeightRequest="120" CornerRadius="20" BackgroundColor="White" >
+                        <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="10, 20, 10, 20" WidthRequest="100" HeightRequest="120" CornerRadius="20" BackgroundColor="{Binding }" >
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height=".1*"/>

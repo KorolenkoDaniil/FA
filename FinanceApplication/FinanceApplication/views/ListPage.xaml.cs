@@ -1,21 +1,16 @@
 ﻿using FinanceApp.classes;
-using FinanceApp.classes.Wallets;
-using FinanceApplication.core.Operations;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace FinanceApplication.views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ListPage : ContentPage
 	{
         Context context = new Context();
+        public decimal totalBalance = 0;
 
         public ListPage (Context context)
 		{
@@ -30,7 +25,7 @@ namespace FinanceApplication.views
             imageDiagram.Source = ImageSource.FromResource("FinanceApplication.icons.diagram.png");
             imageConverter.Source = ImageSource.FromResource("FinanceApplication.icons.converter.png");
             ShowOperations();
-
+            total.Text = $"$ {totalBalance}";
 
             Console.WriteLine("точка 8");
 
@@ -39,27 +34,60 @@ namespace FinanceApplication.views
         private void ShowOperations()
         {
             Console.WriteLine("!!!");
-            var operations1 = from p in context.Operations
-                              join c in context.Categories on p.Cathegory equals c.Name
+
+
+            //var operations1 = from p in context.Operations
+            //                  join c in context.Categories on p.Cathegory equals c.Name
+            //                  select new
+            //                  {
+            //                      Day = p.Day,
+            //                      Month = p.Month,
+            //                      Year = p.Year,
+            //                      Profit = p.Profit,
+            //                      Sum = p.Sum,
+            //                      Cathegory = p.Cathegory,
+            //                      Name = c.Name
+            //                  };
+            Console.WriteLine("----------- новая таблица");
+
+            var operations1 = from operation in context.Operations
+                              join cathegory in context.Categories on operation.Cathegory equals cathegory.Name
+                              join wallet in context.Wallets on operation.WalletId equals wallet.WalletId
                               select new
                               {
-                                  Day = p.Day,
-                                  Month = p.Month,
-                                  Year = p.Year,
-                                  Profit = p.Profit,
-                                  Sum = p.Sum,
-                                  Cathegory = p.Cathegory,
-                                  Name = c.Name
+                                  Id = operation.Id,
+                                  UserId = cathegory.UserId,
+                                  Day = operation.Day,
+                                  Month = operation.Month,
+                                  Year = operation.Year,
+                                  Profit = operation.Profit,
+                                  Sum = operation.Sum,
+                                  WalletId = operation.WalletId,
+                                  Cathegory = cathegory.Name,
+                                  Description = operation.Description,
+                                  WalletName = wallet.Name,
+                                  WalletType = wallet.Type,
+                                  Include = wallet.Include,
                               };
-
 
             foreach (var op in operations1)
             {
-                Console.WriteLine($"{op.Day} {op.Name} {op.Sum} {op.Profit} {op.Month}");
+                Console.WriteLine($"{op.Id} {op.UserId} {op.Day} {op.Month} {op.Year} {op.Profit} {op.Sum} {op.WalletId} {op.Cathegory} {op.Description} {op.WalletName} {op.WalletType} {op.Include}");
+                if (op.Include)
+                {
+                    if (op.Profit) totalBalance += op.Sum;
+                    else totalBalance -= op.Sum;
+                } 
             }
+            Console.WriteLine("----------- новая таблица");
+            Console.WriteLine("----------- сумма");
+            Console.WriteLine(totalBalance);
+            Console.WriteLine("----------- сумма");
+
 
             OperationsCollection.ItemsSource = operations1;
-            
+
+            Console.WriteLine("!!!");
         }
 
 
@@ -72,5 +100,10 @@ namespace FinanceApplication.views
         {
 
         }
+
+        //decimal TotalBalance
+        //{
+        //    get => totalBalance;
+        //}
     }
 }

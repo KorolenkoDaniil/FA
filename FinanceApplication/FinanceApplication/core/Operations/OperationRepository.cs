@@ -43,10 +43,13 @@ namespace FinanceApplication.core.Operations
             {
                 string OperationsJson = await response.Content.ReadAsStringAsync();
                 List<Operation> userOperations = JsonConvert.DeserializeObject<List<Operation>>(OperationsJson);
+                Console.WriteLine("----------- операция");
                 foreach (Operation Operation in userOperations)
                 {
                     Console.WriteLine(Operation);
                 }
+                Console.WriteLine("----------- операция");
+
                 return userOperations;
             }
             else

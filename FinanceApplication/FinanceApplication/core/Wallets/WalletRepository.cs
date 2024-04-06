@@ -41,10 +41,12 @@ namespace FinanceApp.classes.Wallets
             {
                 string walletsJson = await response.Content.ReadAsStringAsync();
                 List<Wallet> userWallets = JsonConvert.DeserializeObject<List<Wallet>>(walletsJson);
+                Console.WriteLine("----------- кошелек");
                 foreach (Wallet wallet in userWallets)
                 {
                     Console.WriteLine(wallet);
                 }
+                Console.WriteLine("----------- кошелек");
                 return userWallets;
             }
             else

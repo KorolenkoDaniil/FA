@@ -3,9 +3,9 @@
     public class Category
     {
         public int CategoryId { get; set; }    
-        public string Name { get; private set; }    
-        public int UserId { get; private set; }    
-        public int ColorId { get; private set; }
+        public string Name { get; set; }    
+        public int UserId { get; set; }    
+        public int ColorId { get; set; }
 
         public Category () { }
         public Category(string name, int userId, int colorId)
