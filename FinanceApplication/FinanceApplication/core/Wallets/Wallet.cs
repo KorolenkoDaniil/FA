@@ -33,7 +33,7 @@ namespace FinanceApp.classes.Wallets
         }
 
   
-        public override string ToString() => $"{WalletId} {UserId} {Name} {Type} {Amount} {ColorId} {Include}";
+        public override string ToString() => $"{WalletId} {UserId} {Name} {Type} {Amount} цве {ColorId} {Include}";
 
     }
 }

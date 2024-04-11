@@ -14,6 +14,7 @@ namespace FinanceApp.classes
         public List<Wallet> Wallets { get; private set; }
         public List<Category> Categories { get; private set; }
         public List<Operation> Operations { get; private set; }
+        public List<Colorss> Colors { get; private set; }
 
 
         public void ChangeTheme(Colorss color) => Color = color;
@@ -21,6 +22,7 @@ namespace FinanceApp.classes
         public void SetWalletsCollection(List<Wallet> wallets) => Wallets = wallets;
         public void SetCategoryCollection(List<Category> categories) => Categories = categories;
         public void SetOperationsCollection(List<Operation> operations) => Operations = operations;
+        public void SetColorsCollection(List<Colorss> colors) => Colors = colors;
         
 
     }

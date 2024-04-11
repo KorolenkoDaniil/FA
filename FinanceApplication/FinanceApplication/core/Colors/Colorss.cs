@@ -2,12 +2,12 @@
 {
     public class Colorss
     {
-        public int ColorId { get; private set; }
-        public string Name { get; private set; }
-        public string DarkMode { get; private set; }
-        public string LightMode { get; private set; }
-        public string DarkText { get; private set; }
-        public string LightText { get; private set; }
+        public int ColorId { get; set; }
+        public string Name { get; set; }
+        public string DarkMode { get; set; }
+        public string LightMode { get; set; }
+        public string DarkText { get; set; }
+        public string LightText { get; set; }
         
         public Colorss () { }
         public Colorss(string name, string darkMode, string lightMode, string darkText, string lightText)

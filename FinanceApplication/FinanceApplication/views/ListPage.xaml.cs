@@ -53,17 +53,12 @@ namespace FinanceApplication.views
                                   Description = operation.Description,
                                   WalletName = wallet.Name,
                                   WalletType = wallet.Type,
-                                  Include = wallet.Include,
                               };
 
             foreach (var op in operations1)
             {
-                Console.WriteLine($"{op.Id} {op.UserId} {op.Day} {op.Month} {op.Year} {op.Profit} {op.Sum} {op.WalletId} {op.Cathegory} {op.Description} {op.WalletName} {op.WalletType} {op.Include}");
-                if (op.Include)
-                {
-                    if (op.Profit) totalBalance += op.Sum;
-                    else totalBalance -= op.Sum;
-                } 
+                Console.WriteLine($"{op.Id} {op.UserId} {op.Day} {op.Month} {op.Year} {op.Profit} {op.Sum} {op.WalletId} {op.Cathegory} {op.Description} {op.WalletName} {op.WalletType}");
+                totalBalance += op.Sum;
             }
             Console.WriteLine("----------- новая таблица");
             Console.WriteLine("----------- сумма");

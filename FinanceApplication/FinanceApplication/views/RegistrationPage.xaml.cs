@@ -102,9 +102,9 @@ namespace FinanceApplication.views
 
                 List<Operation> operations = new List<Operation>
                 {
-                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
-                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
-                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
+                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[0].WalletId + 1, context.Categories[0].Name, "qq" ),
+                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[0].WalletId + 1, context.Categories[0].Name, "qq" ),
+                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[0].WalletId + 1, context.Categories[0].Name, "qq" ),
                 };
 
                 Console.WriteLine("точка 6");

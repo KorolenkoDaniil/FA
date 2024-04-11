@@ -45,49 +45,36 @@
             <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="1" VerticalOptions="End" FontSize="Medium" Text="Total balance"/>
             <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="2" FontSize="32" Text="$00.00"/>
 
+
             <CollectionView Grid.Row="3" Grid.Column="0" x:Name="CardsCollection">
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
-                        <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="10, 20, 10, 20" WidthRequest="100" HeightRequest="120" CornerRadius="20" BackgroundColor="White" >
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height=".1*"/>
-                                    <RowDefinition Height=".1*"/>
-                                    <RowDefinition Height=".3*"/>
-                                    <RowDefinition Height=".2*"/>
-                                    <RowDefinition Height=".2*"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width=".5*"/>
-                                    <ColumnDefinition Width=".5*"/>
-                                </Grid.ColumnDefinitions>
-                                <StackLayout>
-                                    <Frame Margin="15, 15, 15, 15" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="20" BackgroundColor="White" >
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height=".1*"/>
-                                                <RowDefinition Height=".1*"/>
-                                                <RowDefinition Height=".3*"/>
-                                                <RowDefinition Height=".2*"/>
-                                                <RowDefinition Height=".2*"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width=".5*"/>
-                                                <ColumnDefinition Width=".5*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Label Text="{Binding Name}" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="0"/>
-                                            <Label Text="{Binding Type}" Style="{StaticResource TextOpenSans}" FontSize="Small" TextColor="#a3a3a3" Grid.Column="0" Grid.Row="1"/>
+                        <StackLayout>
+                            <Frame Margin="15, 15, 15, 15" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="20" BackgroundColor="{Binding LightMode}" >
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height=".1*"/>
+                                        <RowDefinition Height=".1*"/>
+                                        <RowDefinition Height=".3*"/>
+                                        <RowDefinition Height=".2*"/>
+                                        <RowDefinition Height=".2*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width=".5*"/>
+                                        <ColumnDefinition Width=".5*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                            <AbsoluteLayout Grid.Column="0" Grid.Row="2">
-                                                <Frame BackgroundColor="Gray" CornerRadius="10" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, .4, .8 "/>
-                                            </AbsoluteLayout>
-                                            <Label Text="Increase" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="3"/>
-                                            <Label Text="Expenses" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="4"/>
-                                        </Grid>
-                                    </Frame>
-                                </StackLayout>
-                            </Grid>
-                        </Frame>
+                                    <Label Text="{Binding Name}" Style="{StaticResource TextOpenSans}" TextColor="{Binding LightText}" Grid.Column="0" Grid.Row="0"/>
+                                    <Label Text="{Binding Type}" Style="{StaticResource TextOpenSans}" FontSize="Small" TextColor="#a3a3a3" Grid.Column="0" Grid.Row="1"/>
+
+                                    <AbsoluteLayout Grid.Column="0" Grid.Row="2">
+                                        <Frame BackgroundColor="Gray" CornerRadius="10" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, .4, .8 "/>
+                                    </AbsoluteLayout>
+                                    <Label Text="Increase" Style="{StaticResource TextOpenSans}" TextColor="{Binding LightText}" Grid.Column="0" Grid.Row="3"/>
+                                    <Label Text="Expenses" Style="{StaticResource TextOpenSans}" TextColor="{Binding LightText}" Grid.Column="0" Grid.Row="4"/>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

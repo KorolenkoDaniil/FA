@@ -1,12 +1,7 @@
 ﻿using FinanceApp.classes;
-using FinanceApp.classes.Users;
-using FinanceApp.classes.Wallets;
-using FinanceApplication.core.Category;
 using FinanceApplication.core.Colors;
-using FinanceApplication.core.Operations;
 using FinanceApplication.views;
 using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace FinanceApplication
@@ -17,10 +12,15 @@ namespace FinanceApplication
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+            GetColors();
         }
 
         Context context = new Context();
 
+        private async void GetColors()
+        {
+            context.SetColorsCollection(await ColorRepository.GetColors());
+        }
 
         private async void ToSignUpPage(object sender, EventArgs e)
         {
