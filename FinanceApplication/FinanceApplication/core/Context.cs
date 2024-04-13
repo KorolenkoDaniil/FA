@@ -7,22 +7,24 @@ using System.Collections.Generic;
 
 namespace FinanceApp.classes
 {
-    public class Context
+    public static class Context
     {
-        public User User { get; private set; }
-        public Colorss Color { get; private set; }
-        public List<Wallet> Wallets { get; private set; }
-        public List<Category> Categories { get; private set; }
-        public List<Operation> Operations { get; private set; }
-        public List<Colorss> Colors { get; private set; }
+        public static User User { get; private set; }
+        public static Colorss Color { get; private set; }
+        public static List<Wallet> Wallets { get; private set; }
+        public static List<Category> Categories { get; private set; }
+        public static List<Operation> Operations { get; private set; }
+        public static List<Colorss> Colors { get; private set; }
+
+        public static bool monthPeriod = true;
 
 
-        public void ChangeTheme(Colorss color) => Color = color;
-        public void ChangeUser(User user) => User = user;
-        public void SetWalletsCollection(List<Wallet> wallets) => Wallets = wallets;
-        public void SetCategoryCollection(List<Category> categories) => Categories = categories;
-        public void SetOperationsCollection(List<Operation> operations) => Operations = operations;
-        public void SetColorsCollection(List<Colorss> colors) => Colors = colors;
+        public static void ChangeTheme(Colorss color) => Color = color;
+        public static void ChangeUser(User user) => User = user;
+        public static void SetWalletsCollection(List<Wallet> wallets) => Wallets = wallets;
+        public static void SetCategoryCollection(List<Category> categories) => Categories = categories;
+        public static void SetOperationsCollection(List<Operation> operations) => Operations = operations;
+        public static void SetColorsCollection(List<Colorss> colors) => Colors = colors;
         
 
     }

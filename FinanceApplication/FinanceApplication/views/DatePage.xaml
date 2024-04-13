@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinanceApplication.views.DatePage">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TextOpenSans" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontFamily" Value="OpenSans-Regular"/>
+            </Style>
+            <Style x:Key="Month" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontFamily" Value="OpenSans-Regular"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout BackgroundColor="#F5F5F5" Padding="0">
+        <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".08*"/>
+                <RowDefinition Height=".02*"/>
+                <RowDefinition Height=".5*"/>
+                <RowDefinition Height=".335*"/>
+                <RowDefinition Height=".065*"/>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Column="0" Grid.Row="0" Padding="0, 10, 0, 10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".45*"/>
+                        <ColumnDefinition Width=".45*"/>
+                        <ColumnDefinition Width=".1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Transactions" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}"/>
+
+                    <Button x:Name="DateOnButton" CornerRadius="25" BackgroundColor="#F4F4F4" Grid.Column="1" Grid.Row="0" Padding="0" HorizontalOptions="End" FontSize="Micro" TextColor="Black" VerticalOptions="Center" Text="20, July, 2024" Clicked="ToListPage"></Button>
+
+                    <!--<Image Grid.Row="0" Grid.Column="2">-->
+                </Grid>
+            </Frame>
+
+            <Frame Grid.Column="0" Margin="20 ,0" CornerRadius="20" Grid.Row="2" BackgroundColor="red" Padding="1">
+                <Frame BackgroundColor="white" CornerRadius="19" Padding="10">
+                    <StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".5*"/>
+                                <ColumnDefinition Width=".5*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Text="ежемесячно" Grid.Column="0" Padding="0" CornerRadius="10" Grid.Row="0" BackgroundColor="Red" Clicked="monthTrue"/>
+                            <Button Text="Ежегодно" Grid.Column="1" Padding="0" CornerRadius="10" Grid.Row="0" BackgroundColor="red" Clicked="monthFalse"/>
+                        </Grid>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".2*"/>
+                                <ColumnDefinition Width=".6*"/>
+                                <ColumnDefinition Width=".2*"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <Image x:Name="LRow1" Grid.Column="0" Grid.Row="0" Scale=".3">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="SubstractionYear" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            
+                            <Label x:Name="YearLabel" TextColor="Black" Grid.Column="1" Grid.Row="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+
+                            <Image x:Name="LRow2" Grid.Column="2" Grid.Row="0" Scale=".3">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="AdditionYear" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
+
+                        <Grid x:Name="MonthGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".25*"/>
+                                <ColumnDefinition Width=".25*"/>
+                                <ColumnDefinition Width=".25*"/>
+                                <ColumnDefinition Width=".25*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".333*"/>
+                                <RowDefinition Height=".333*"/>
+                                <RowDefinition Height=".333*"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Style="{StaticResource Month}" Text="янв" BackgroundColor="Transparent" Grid.Column="0" Grid.Row="0" Clicked="NewPeriod"/>
+                            <Button Style="{StaticResource Month}" Text="фев" BackgroundColor="Transparent" Grid.Column="1" Grid.Row="0" Clicked="NewPeriod"/>
+                            <Button Style="{StaticResource Month}" Text="мар" BackgroundColor="Transparent" Grid.Column="2" Grid.Row="0" Clicked="NewPeriod"/>
+                            <Button Style="{StaticResource Month}" Text="апр" BackgroundColor="Transparent" Grid.Column="3" Grid.Row="0" Clicked="NewPeriod"/>
+                            <Button Style="{StaticResource Month}" Text="май" BackgroundColor="Transparent" Grid.Column="0" Grid.Row="1" Clicked="NewPeriod"/>
+                            <Button Style="{StaticResource Month}" Text="июн" BackgroundColor="Transparent" Grid.Column="1" Grid.Row="1" Clicked="NewPeriod"/>
+                            <Button Style="{StaticResource Month}" Text="июл" BackgroundColor="Transparent" Grid.Column="2" Grid.Row="1" Clicked="NewPeriod"/>
+                            <Button Style="{StaticResource Month}" Text="авг" BackgroundColor="Transparent" Grid.Column="3" Grid.Row="1" Clicked="NewPeriod"/>
+                            <Button Style="{StaticResource Month}" Text="сен" BackgroundColor="Transparent" Grid.Column="0" Grid.Row="2" Clicked="NewPeriod"/>
+                            <Button Style="{StaticResource Month}" Text="окт" BackgroundColor="Transparent" Grid.Column="1" Grid.Row="2" Clicked="NewPeriod"/>
+                            <Button Style="{StaticResource Month}" Text="ноя" BackgroundColor="Transparent" Grid.Column="2" Grid.Row="2" Clicked="NewPeriod"/>
+                            <Button Style="{StaticResource Month}" Text="дек" BackgroundColor="Transparent" Grid.Column="3" Grid.Row="2" Clicked="NewPeriod"/>
+
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </Frame>
+
+
+            <Frame BackgroundColor="White" Grid.Row="4" Grid.Column="0" Padding="3">
+                <Grid>
+
+                    <Image x:Name="imageCard" Grid.Column="0" Grid.Row="0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCardPage" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Image x:Name="imageCathegory" Grid.Column="1" Grid.Row="0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCardPage" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Image x:Name="imageList" Grid.Column="2" Grid.Row="0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToListPage" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Image x:Name="imageDiagram" Grid.Column="3" Grid.Row="0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCardPage" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Image x:Name="imageConverter" Grid.Column="4" Grid.Row="0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCardPage" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+
+                </Grid>
+            </Frame>
+
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>

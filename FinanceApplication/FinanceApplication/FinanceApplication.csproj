@@ -19,7 +19,9 @@
     <None Remove="icons\converter.png" />
     <None Remove="icons\diagram.png" />
     <None Remove="icons\list.png" />
+    <None Remove="icons\LRow.png" />
     <None Remove="icons\OIG1.png" />
+    <None Remove="icons\Rrow.png" />
     <None Remove="icons\settings.png" />
     <None Remove="icons\trashCan.png" />
   </ItemGroup>
@@ -32,7 +34,9 @@
     <EmbeddedResource Include="icons\converter.png" />
     <EmbeddedResource Include="icons\diagram.png" />
     <EmbeddedResource Include="icons\list.png" />
+    <EmbeddedResource Include="icons\LRow.png" />
     <EmbeddedResource Include="icons\OIG1.png" />
+    <EmbeddedResource Include="icons\Rrow.png" />
     <EmbeddedResource Include="icons\settings.png" />
     <EmbeddedResource Include="icons\trashCan.png" />
   </ItemGroup>
@@ -53,6 +57,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="views\ConverterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\DatePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="views\DiagramPage.xaml">

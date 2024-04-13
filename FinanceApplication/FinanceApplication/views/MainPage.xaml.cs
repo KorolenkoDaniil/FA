@@ -15,23 +15,21 @@ namespace FinanceApplication
             GetColors();
         }
 
-        Context context = new Context();
-
         private async void GetColors()
         {
-            context.SetColorsCollection(await ColorRepository.GetColors());
+            Context.SetColorsCollection(await ColorRepository.GetColors());
         }
 
         private async void ToSignUpPage(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new RegistrationPage(context));
+            await Navigation.PushAsync(new RegistrationPage());
             Console.WriteLine(await ColorRepository.GetColor(1));
         }
 
         private async void ToSignInPage(object sender, EventArgs e)
         {
             Console.WriteLine(await ColorRepository.GetColor(1));
-            await Navigation.PushAsync(new AuthorisationPage(context));
+            await Navigation.PushAsync(new AuthorisationPage());
         }
 
 

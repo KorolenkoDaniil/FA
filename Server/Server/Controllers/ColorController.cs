@@ -15,7 +15,7 @@ namespace Server.Controllers
         [HttpPost]
         public Colorss GetColor(int id)
         {
-            Console.WriteLine(id);
+            Console.WriteLine("айдишник цвета" + id);
             return colorRepository.SearchById(id);
         }
 

@@ -3,10 +3,10 @@
     public class User
     {
         public int UserId { get; set; }
-        public string NickName { get; private set; }
-        public string Email { get; private set; }
-        public string Password { get; private set; }
-        public int ColorId { get; private set; }
+        public string NickName { get; set; }
+        public string Email { get;  set; }
+        public string Password { get; set; }
+        public int ColorId { get; set; }
         public User(string name, string email, string password, int colorid)
         {
             NickName = name;

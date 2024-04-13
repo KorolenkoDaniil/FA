@@ -7,11 +7,9 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DiagramPage : ContentPage
 	{
-		Context context;
-        public DiagramPage (Context context)
+        public DiagramPage ()
 		{
 			InitializeComponent ();
-			this.context = context;
 		}
 
 

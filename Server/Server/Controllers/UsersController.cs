@@ -23,7 +23,10 @@ namespace Server.Controllers
         [HttpPost]
         public User Authorisation(string email, string password)
         {
-            return UserRepository.SearchByEmailAndPassword(email, password); ;
+            Console.WriteLine("-------------смена пользователя");
+            Console.WriteLine(UserRepository.SearchByEmailAndPassword(email, password));
+            Console.WriteLine("-------------смена пользователя");
+            return UserRepository.SearchByEmailAndPassword(email, password); 
         }
 
 
