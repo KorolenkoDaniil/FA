@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using FinanceApp.classes;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace FinanceApplication.views
@@ -6,9 +7,12 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ConverterPage : ContentPage
 	{
-		public ConverterPage ()
+        Context context = new Context();
+
+        public ConverterPage (Context context)
 		{
 			InitializeComponent ();
-		}
+            this.context = context;
+        }
 	}
 }

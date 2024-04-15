@@ -10,10 +10,13 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DatePage : ContentPage
     {
-        public DatePage()
+        Context context = new Context();
+
+        public DatePage(Context context)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+            this.context = context;
             imageCard.Source = ImageSource.FromResource("FinanceApplication.icons.card.png");
             imageCathegory.Source = ImageSource.FromResource("FinanceApplication.icons.categories.png");
             imageList.Source = ImageSource.FromResource("FinanceApplication.icons.list.png");
@@ -49,10 +52,10 @@ namespace FinanceApplication.views
         }
 
         private async void ToCardPage(object sender, EventArgs e) =>
-            await Navigation.PushAsync(new CardPage());
+            await Navigation.PushAsync(new CardPage(context));
 
         private async void ToListPage(object sender, EventArgs e) =>
-            await Navigation.PushAsync(new ListPage(DateTime.Now));
+            await Navigation.PushAsync(new ListPage(DateTime.Now, context));
 
         public static int ConvertMonthNameToNumber(string monthName)
         {
@@ -87,17 +90,17 @@ namespace FinanceApplication.views
             if (sender is Button button)
             {
                 DateTime newPeriod = new DateTime(int.Parse(YearLabel.Text), ConvertMonthNameToNumber(button.Text), 1);
-                await Navigation.PushAsync(new ListPage(newPeriod));
+                await Navigation.PushAsync(new ListPage(newPeriod, context));
             }
         }
 
-        private void monthTrue(object sender, EventArgs e) => Context.monthPeriod = true;
+        private void monthTrue(object sender, EventArgs e) => context.monthPeriod = true;
             
   
         private async void monthFalse(object sender, EventArgs e)
         {
-            Context.monthPeriod = false;
-            await Navigation.PushAsync(new ListPage(DateTime.Now));
+            context.monthPeriod = false;
+            await Navigation.PushAsync(new ListPage(DateTime.Now, context));
         }
 
     }

@@ -14,8 +14,9 @@ namespace Server.Colors
             
         public Colorss() { }
 
-        public Colorss(string name, string darkMode, string lightMode, string darkText, string lightText)
+        public Colorss(int colorId, string name, string darkMode, string lightMode, string darkText, string lightText)
         {
+            ColorId = colorId;
             Name = name;
             DarkMode = darkMode;
             LightMode = lightMode;

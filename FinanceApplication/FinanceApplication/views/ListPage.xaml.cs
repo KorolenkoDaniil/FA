@@ -1,6 +1,4 @@
 ﻿using FinanceApp.classes;
-using FinanceApplication.core;
-using FinanceApplication.core.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +10,14 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ListPage : ContentPage
 	{
+        Context context = new Context();
         public decimal totalBalance = 0;
 
-        public ListPage (DateTime newPeriod)
+        public ListPage (DateTime newPeriod, Context context)
 		{
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
+            this.context = context;
             BindingContext = this;
             NoOperations.IsVisible = false;
             imageCard.Source = ImageSource.FromResource("FinanceApplication.icons.card.png");
@@ -28,65 +28,64 @@ namespace FinanceApplication.views
             date.Text = newPeriod.ToString("d");
             ShowOperations(newPeriod);
             total.Text = $"$ {totalBalance}";
-            Console.WriteLine(Context.Color.LightMode);
-            PlusButton.BackgroundColor = Color.FromHex(Context.Color.LightMode);
+            Console.WriteLine(context.Color.LightMode);
+            PlusButton.BackgroundColor = Color.FromHex(context.Color.LightMode);
         }
 
     
         private void ShowOperations(DateTime newPeriod)
         {
-            Console.WriteLine("!!!");
-            Console.WriteLine("----------- новая таблица");
+            Console.WriteLine("---------- новая таблица");
 
 
             string month = ConvertFromIntToStringMonth(newPeriod.Month);
             int year = newPeriod.Year;
 
-            if (Context.monthPeriod) MonthSelection(month, year);
+            if (context.monthPeriod) MonthSelection(month, year);
             else YearSelection(year);
 
         }
 
         public void MonthSelection(string month, int year)
         {
-           var operations1 = from operation in Context.Operations
-                          join cathegory in Context.Categories on operation.Cathegory equals cathegory.Name
-                          join wallet in Context.Wallets on operation.WalletId equals wallet.WalletId
-                          where operation.Month == month && operation.Year == year
-                          select new
-                          {
-                              Id = operation.Id,
-                              UserId = cathegory.UserId,
-                              Day = operation.Day,
-                              Month = operation.Month,
-                              Year = operation.Year,
-                              Profit = operation.Profit,
-                              Sum = operation.Sum,
-                              WalletId = operation.WalletId,
-                              Cathegory = cathegory.Name,
-                              Description = operation.Description,
-                              WalletName = wallet.Name,
-                              WalletType = wallet.Type,
-                          };
+            var operations1 = from operation in context.Operations
+                              join cathegory in context.Categories on operation.Cathegory equals cathegory.Name
+                              join wallet in context.Wallets on operation.WalletId equals wallet.WalletId
+                              where operation.Month == month && operation.Year == year
+                              select new
+                              {
+                                  Id = operation.Id,
+                                  UserId = cathegory.UserId,
+                                  Day = operation.Day,
+                                  Month = operation.Month,
+                                  Year = operation.Year,
+                                  Profit = operation.Profit,
+                                  Sum = operation.Sum,
+                                  WalletId = operation.WalletId,
+                                  Cathegory = cathegory.Name,
+                                  Description = operation.Description,
+                                  WalletName = wallet.Name,
+                                  WalletType = wallet.Type,
+                              };
+
+            totalBalance = operations1.Sum(op => op.Sum);
+
+            Console.WriteLine("----------- новая таблица");
             foreach (var op in operations1)
             {
                 Console.WriteLine($"{op.Id} {op.UserId} {op.Day} {op.Month} {op.Year} {op.Profit} {op.Sum} {op.WalletId} {op.Cathegory} {op.Description} {op.WalletName} {op.WalletType}");
-                totalBalance += op.Sum;
             }
-            Console.WriteLine("----------- новая таблица");
             Console.WriteLine("----------- сумма");
             Console.WriteLine(totalBalance);
-            Console.WriteLine("----------- сумма");
-
 
             OperationsCollection.ItemsSource = operations1;
         }
 
         public void YearSelection(int year)
         {
-           var operations1 = from operation in Context.Operations
-                          join cathegory in Context.Categories on operation.Cathegory equals cathegory.Name
-                          join wallet in Context.Wallets on operation.WalletId equals wallet.WalletId
+           var operations1 = from operation in context.Operations
+                          join cathegory in context.Categories on operation.Cathegory equals cathegory.Name
+                          join wallet in context.Wallets on operation.WalletId equals wallet.WalletId
                           where operation.Year == year
                           select new
                           {
@@ -121,7 +120,7 @@ namespace FinanceApplication.views
 
         private async void ToCardPage(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CardPage());
+            await Navigation.PushAsync(new CardPage(context));
         }
 
         private void OnItemSelected(object sender, SelectionChangedEventArgs e)
@@ -131,7 +130,7 @@ namespace FinanceApplication.views
 
         private async void ToDatePage(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new DatePage());
+            await Navigation.PushAsync(new DatePage(context));
         }
 
 
@@ -159,6 +158,11 @@ namespace FinanceApplication.views
                 return monthName;
             }
             else { return null; }
+        }
+
+        private async void ToNewOperationPage(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewOperationPage(context));
         }
     }
 }

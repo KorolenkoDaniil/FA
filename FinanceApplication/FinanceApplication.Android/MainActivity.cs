@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using FFImageLoading.Forms.Platform;
 
 namespace FinanceApplication.Droid
 {
@@ -13,6 +14,8 @@ namespace FinanceApplication.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            CachedImageRenderer.Init(enableFastRenderer: true);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

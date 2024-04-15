@@ -15,28 +15,16 @@ namespace Server.Controllers
         [HttpPost]
         public IActionResult RegisterCategory([FromBody] Category category)
         {
-            Console.WriteLine(category);
             if (CategoriesRepository.SaveCategory(category)) return Ok();
             else return BadRequest();
         }
         [HttpPost]
         public List<Category> GetCategories(string id)
         {
+            Console.WriteLine($"id пользователя при получении категорий {id}");
             List <Category> a = CategoriesRepository.SearchByUserID(int.Parse(id));
-            Console.WriteLine("----------- категория");
-            foreach (Category category in a)
-            {
-                Console.WriteLine(category);
-            }
+
             return a;
         }
-
-
-        //[HttpPost]
-        //public List<Category> GetCategories(string id)
-        //{
-        //    return CategoriesRepository.SearchByUserID(int.Parse(id));
-        //}
-
     }
 }

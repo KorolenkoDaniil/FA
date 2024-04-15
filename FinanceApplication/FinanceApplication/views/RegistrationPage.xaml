@@ -1,5 +1,5 @@
 ﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="FinanceApplication.views.RegistrationPage">
 
     <ContentPage.Resources>
@@ -95,8 +95,8 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" Grid.Row="0" Text="Cancel" Clicked="CancelClicked"/>
-                <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" Grid.Row="0" Text="Create" Clicked="CreateClicked"/>
+                <Button x:Name="CanselButton" Style="{StaticResource ButtonStyle}" Grid.Column="0" Grid.Row="0" Text="Cancel" Clicked="CancelClicked"/>
+                <Button x:Name="CreateButton" Style="{StaticResource ButtonStyle}" Grid.Column="1" Grid.Row="0" Text="Create" Clicked="CreateClicked"/>
             </Grid>
 
             <Frame x:Name="ErrorLabel" CornerRadius="10" Padding="0" Grid.Column="0" Grid.Row="11" BackgroundColor="#ffd9d9">
@@ -106,5 +106,8 @@
                 <Label VerticalOptions="Center" HorizontalOptions="Center" Text="ERROR. User with this data not found"></Label>
             </Frame>
         </Grid>
+        <StackLayout x:Name="Loading" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center">
+            <ffimageloading:CachedImage Source="https://i.gifer.com/VAyR.gif"/>
+        </StackLayout>
     </AbsoluteLayout>
 </ContentPage>

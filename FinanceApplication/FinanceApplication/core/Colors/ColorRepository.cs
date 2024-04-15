@@ -1,7 +1,5 @@
 ﻿using FinanceApp.classes;
-using FinanceApp.classes.Wallets;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -26,9 +24,6 @@ namespace FinanceApplication.core.Colors
             {
                 string color = await response.Content.ReadAsStringAsync();
                 Colorss result = JsonConvert.DeserializeObject<Colorss>(color);
-                Console.WriteLine("----------- цвет");
-                Console.WriteLine(result);
-                Console.WriteLine("----------- цвет");
                 return result;
             }
             else
@@ -48,16 +43,7 @@ namespace FinanceApplication.core.Colors
             if (response.IsSuccessStatusCode)
             {
                 string ColorsJson = await response.Content.ReadAsStringAsync();
-                Console.WriteLine("---");
-                Console.WriteLine(ColorsJson);
-                Console.WriteLine("---");
                 List<Colorss> colors = JsonConvert.DeserializeObject<List<Colorss>>(ColorsJson);
-                Console.WriteLine("----------- цвет");
-                foreach (Colorss color in colors)
-                {
-                    Console.WriteLine(color);
-                }
-                Console.WriteLine("----------- цвет");
                 return colors;
             }
             else

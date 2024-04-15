@@ -1,4 +1,5 @@
 ﻿using Server.Operations;
+using Server.Wallets;
 using SQLite;
 
 namespace FinanceAppl.Operations
@@ -15,17 +16,23 @@ namespace FinanceAppl.Operations
             OperationsDB.CreateTable<Operation>();
         }
 
-        public bool SaveOperation(Operation wallet)
+        public bool SaveOperation(Operation Operatarion)
         {
-            if (OperationsDB.Insert(wallet) != 0) return true;
+            if (OperationsDB.Insert(Operatarion) != 0) return true;
             else return false;
         }
 
 
         public List<Operation> SearchByUserID(int userId)
         {
-            List<Operation> UsersOperationsList = OperationsDB.Table<Operation>().Where(u => u.UserID == userId).ToList();
-            return UsersOperationsList;
+            List<Operation> UserOperationsList = OperationsDB.Table<Operation>().Where(u => u.UserID == userId).ToList();
+            Console.WriteLine("-----операции");
+            foreach (var a in UserOperationsList)
+                Console.WriteLine(a);
+            Console.WriteLine("-----операции");
+
+            return UserOperationsList;
         }
+
     }
 }

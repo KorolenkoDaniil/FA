@@ -19,7 +19,6 @@ namespace Server.Colors
         public Colorss SearchById(int colorId)
         {
             Colorss foundUser = ColorDB.Table<Colorss>().FirstOrDefault(u => u.ColorId == colorId);
-            Console.WriteLine(foundUser.ToString() + "  цвет");
             return foundUser;
         }
 

@@ -24,6 +24,11 @@ namespace Server.Wallets
         public List<Wallet> SearchByUserID(int userId)
         {
             List<Wallet> UsersWalletList = WalletDB.Table<Wallet>().Where(u => u.UserId == userId).ToList();
+            Console.WriteLine("-----кошельки");
+            foreach (var a in UsersWalletList)
+                Console.WriteLine(a);
+            Console.WriteLine("-----кошельки");
+
             return UsersWalletList;
         }
 

@@ -20,8 +20,15 @@ namespace Server.Models.Categories1
 
         public List<Category> SearchByUserID(int userId)
         {
-            List<Category> UsersOperationsList = CategoriesDB.Table<Category>().Where(u => u.UserId == userId).ToList();
-            return UsersOperationsList;
+            List<Category> UserscategoryList = CategoriesDB.Table<Category>().Where(u => u.UserId == userId).ToList();
+            Console.WriteLine("-----категории");
+            foreach (var category in UserscategoryList)
+            {
+                Console.WriteLine(category);
+            }
+            Console.WriteLine("-----категории");
+
+            return UserscategoryList;
         }
     }
 }

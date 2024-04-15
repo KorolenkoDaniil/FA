@@ -17,8 +17,9 @@ namespace Server.Wallets
 
 
         public Wallet () { }
-        public Wallet (int userid, string name, string type, decimal amount, int colorId, bool include, int iconid)
+        public Wallet (int walletId, int userid, string name, string type, decimal amount, int colorId, bool include, int iconid)
         {
+            WalletId = walletId;
             UserId = userid;
             Name = name;
             Type = type;

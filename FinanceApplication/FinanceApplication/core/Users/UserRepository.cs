@@ -24,11 +24,8 @@ namespace FinanceApp.classes.Users
                 User user = JsonConvert.DeserializeObject<User>(answer);
                 return user;
             }
-            else
-            {
-                Console.WriteLine($"Ошибка при получении данных: {response.StatusCode}");
-                return null;
-            }
+            else return null;
+            
         }
 
         public async static Task<User> AuthoriseUser(string email, string password)

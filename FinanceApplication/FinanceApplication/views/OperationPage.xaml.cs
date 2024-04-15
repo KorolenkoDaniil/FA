@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using FinanceApp.classes;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace FinanceApplication.views
@@ -6,9 +7,11 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OperationPage : ContentPage
     {
-        public OperationPage()
+        Context context = new Context();
+        public OperationPage(Context context)
         {
             InitializeComponent();
+            this.context = context;
         }
     }
 }

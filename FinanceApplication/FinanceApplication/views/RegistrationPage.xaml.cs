@@ -17,22 +17,27 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegistrationPage : ContentPage
     {
-        public RegistrationPage()
+        Context context = new Context();
+        public RegistrationPage(Context context)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+            this.context = context;
             BindingContext = this;
             ErrorLabel.IsVisible = false;
             BadRequestLabel.IsVisible = false;
+            Loading.IsVisible = false;
         }
 
         private async void CancelClicked(object sender, EventArgs e) => await Navigation.PopAsync();
         
         private async void CreateClicked(object sender, EventArgs e)
         {
-            Regex regex = new Regex(@"@gmail.com");
+            CanselButton.IsEnabled = false;
+            CreateButton.IsEnabled = false;
+            Loading.IsVisible = true;
 
-            Console.WriteLine("точка 1");
+            Regex regex = new Regex(@"@gmail.com");
 
             if (string.IsNullOrEmpty(entryEmail.Text) || string.IsNullOrEmpty(entryNickname.Text) ||
                 string.IsNullOrEmpty(entryPass1.Text) || string.IsNullOrEmpty(entryPass2.Text)) { ErrorLabel.IsVisible = true; return; }
@@ -42,69 +47,61 @@ namespace FinanceApplication.views
 
             else
             {
-                Context.ChangeUser(await UserRepository.SaveUser(new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, 1)));
-                Context.ChangeTheme(await ColorRepository.GetColor(1));
+                context.ChangeUser(await UserRepository.SaveUser(new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, 1)));
+                context.ChangeTheme(await ColorRepository.GetColor(1));
             }
 
-            Console.WriteLine("точка 2");
-
-
-            if (Context.User != null)
+            if (context.User != null)
             {
                 List<Wallet> wallets = new List<Wallet>
                 {
-                    new Wallet(Context.User.UserId, "кошелек 1", "денежные средства", 0, Context.User.UserId % 20, true),
-                    new Wallet(Context.User.UserId, "кошелек 2", "сберегательный счет", 0, Context.User.UserId % 20, true)
+                    new Wallet(context.User.UserId, "кошелек 1", "денежные средства", 0, 5, true),
+                    new Wallet(context.User.UserId, "кошелек 2", "сберегательный счет", 0, 6, true)
                 };
 
-                Console.WriteLine("точка 3");
 
                 List<Task<bool>> saveTasks = wallets.Select(wallet => WalletRepository.SaveWallet(wallet)).ToList();
 
                 bool[] results = await Task.WhenAll(saveTasks);
 
-                if (results.All(result => result)) Console.WriteLine("Все кошельки успешно сохранены.");
-                else { Console.WriteLine("Не все кошельки были успешно сохранены."); return; }
-                
-                
-                Console.WriteLine("точка 4");
+                if (results.All(result => result)) { }
+                else return; 
+               
 
-
-                Context.SetWalletsCollection(wallets);
-
+                context.SetWalletsCollection(await WalletRepository.GetWallets(context.User.UserId));
 
                 List<Category> categories = new List<Category>
                 {
-                    new Category("категория 1", Context.User.UserId, 2),
-                    new Category("категория 2", Context.User.UserId, 3),
-                    new Category("категория 3", Context.User.UserId, 4),
-                    new Category("категория 4", Context.User.UserId, 5),
-                    new Category("категория 5", Context.User.UserId, 6),
+                    new Category("категория 1", context.User.UserId, 2),
+                    new Category("категория 2", context.User.UserId, 3),
+                    new Category("категория 3", context.User.UserId, 4),
+                    new Category("категория 4", context.User.UserId, 5),
+                    new Category("категория 5", context.User.UserId, 6),
                 };
-
-                Context.SetCategoryCollection(categories);
 
 
                 List<Task<bool>> saveTasksC = categories.Select(category => CategoryRepository.SaveCategory(category)).ToList();
 
-                Console.WriteLine("точка 5");
-
                 bool[] resultsC = await Task.WhenAll(saveTasks);
 
-                if (resultsC.All(result => result)) Console.WriteLine("Все  успешно сохранены.");
-                else { Console.WriteLine("Не все категории были успешно сохранены."); return; }
+                if (resultsC.All(result => result)) { }
+                else return;
 
+                context.SetCategoryCollection(await CategoryRepository.GetCategorys(context.User.UserId));
 
+                foreach (var a in context.Wallets)
+                {
+                    Console.WriteLine(a.WalletId);
+                }
 
+                Console.WriteLine(context.User);
 
                 List<Operation> operations = new List<Operation>
                 {
-                    new Operation(Context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, Context.Wallets[0].WalletId + 1, Context.Categories[0].Name, "qq" ),
-                    new Operation(Context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, Context.Wallets[0].WalletId + 1, Context.Categories[0].Name, "qq" ),
-                    new Operation(Context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, Context.Wallets[0].WalletId + 1, Context.Categories[0].Name, "qq" ),
+                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
+                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[1].WalletId, context.Categories[1].Name, "qq" ),
+                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[1].WalletId, context.Categories[0].Name, "qq" ),
                 };
-
-                Console.WriteLine("точка 6");
 
                 List<Task<bool>> saveTasks1 = operations.Select(o => OperationRepository.SaveOperation(o)).ToList();
 
@@ -113,15 +110,21 @@ namespace FinanceApplication.views
                 if (results1.All(result => result)) Console.WriteLine("Все  успешно сохранены.");
                 else { Console.WriteLine("Не все категории были успешно сохранены."); return; }
 
-                Console.WriteLine("точка 7");
+                context.SetOperationsCollection(await OperationRepository.GetOperations(context.User.UserId));
 
-                Context.SetOperationsCollection(operations);
-
-
-                await Navigation.PushAsync(new ListPage(DateTime.Now));
+                await Navigation.PushAsync(new ListPage(DateTime.Now, context));
             }
-            else BadRequestLabel.IsVisible = true; return; 
-           
+            else BadRequestLabel.IsVisible = true;            
+            Loading.IsVisible = false;
+
+
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+            {
+                CanselButton.IsEnabled = true;
+                CreateButton.IsEnabled = true;
+                return false;
+            });
+
         }
     }
 }

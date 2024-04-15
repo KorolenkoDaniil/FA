@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="FinanceApplication.views.AuthorisationPage">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -63,7 +63,7 @@
             </Frame>
 
             <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="7">
-                <Button Style="{StaticResource ButtonStyle}" Text="Log In" Clicked="LogInClicked"/>
+                <Button x:Name="LogInButton" Style="{StaticResource ButtonStyle}" Text="Log In" Clicked="LogInClicked"/>
             </Frame>
 
             <Label Text="Or use csocial medis" HorizontalOptions="Center" TextColor="Black" FontSize="14" FontFamily="OpenSans-Regular" Grid.Column="0" Grid.Row="9"/>
@@ -76,5 +76,8 @@
                 <Label VerticalOptions="Center" HorizontalOptions="Center" Text="ERROR. User with this data not found"></Label>
             </Frame>
         </Grid>
+        <StackLayout x:Name="Loading" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center">
+            <ffimageloading:CachedImage Source="https://i.gifer.com/VAyR.gif"/>
+        </StackLayout>
     </AbsoluteLayout>
 </ContentPage>

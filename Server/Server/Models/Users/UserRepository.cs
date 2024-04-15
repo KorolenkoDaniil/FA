@@ -18,7 +18,6 @@ namespace Server.Users
         {
 
             UserDB.Insert(user);
-            Console.WriteLine("точка 3");
             User foundUser = UserDB.Table<User>().FirstOrDefault(u => u.Email == user.Email);
             return foundUser.UserId;
         }

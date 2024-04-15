@@ -10,10 +10,13 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CardPage : ContentPage
     {
-        public CardPage()
+        Context context = new Context();
+
+        public CardPage(Context context)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+            this.context = context;
             ShowCards();
             BindingContext = this;
         }
@@ -21,13 +24,12 @@ namespace FinanceApplication.views
         public void ShowCards()
         {
             Console.WriteLine("----------- новая таблица карт и цвета");
-            foreach (Wallet w in Context.Wallets)
+            foreach (Wallet w in context.Wallets)
             {
                 Console.WriteLine(w.Name);
             }
-            var walletsWithColors = from wallet in Context.Wallets
-                              join color in Context.Colors on wallet.ColorId equals color.ColorId
-                           
+            var walletsWithColors = from wallet in context.Wallets
+                              join color in context.Colors on wallet.ColorId equals color.ColorId
                               select new
                               {
                                   WalletId = wallet.WalletId,
@@ -53,7 +55,7 @@ namespace FinanceApplication.views
 
         private async void ToCardPage(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CardPage());
+            await Navigation.PushAsync(new CardPage(context));
         }
     }
 }
