@@ -27,7 +27,13 @@ namespace FinanceApp.classes
             return true;
         }
 
-        public static bool ValidateId(int value)
+        public static bool ValidateIdAndIntegers(int value)
+        {
+            if (value < 0) return false;
+            return true;
+        }
+
+        public static bool ValidateSum(decimal value)
         {
             if (value < 0) return false;
             return true;
