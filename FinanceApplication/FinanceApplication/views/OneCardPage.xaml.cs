@@ -1,4 +1,7 @@
-﻿using Xamarin.Forms;
+﻿using FinanceApp.classes;
+using FinanceApplication.core;
+
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace FinanceApplication.views
@@ -6,9 +9,13 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class OneCardPage : ContentPage
 	{
-		public OneCardPage ()
+        Context context;
+        ExtendedWallet wallet;
+        public OneCardPage (ExtendedWallet wallet, Context context)
 		{
 			InitializeComponent ();
-		}
+            this.context = context;
+            this.wallet = wallet;
+        }
 	}
 }

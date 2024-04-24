@@ -35,6 +35,11 @@ namespace FinanceApplication.views
         {
             CanselButton.IsEnabled = false;
             CreateButton.IsEnabled = false;
+            entryEmail.IsEnabled = false;
+            entryNickname.IsEnabled = false;
+            entryPass1.IsEnabled = false;
+            entryPass2.IsEnabled = false;
+
             Loading.IsVisible = true;
 
             Regex regex = new Regex(@"@gmail.com");
@@ -60,13 +65,10 @@ namespace FinanceApplication.views
                 };
 
 
-                List<Task<bool>> saveTasks = wallets.Select(wallet => WalletRepository.SaveWallet(wallet)).ToList();
+                List<Task<Wallet>> saveTasks = wallets.Select(wallet => WalletRepository.SaveWallet(wallet)).ToList();
 
-                bool[] results = await Task.WhenAll(saveTasks);
-
-                if (results.All(result => result)) { }
-                else return; 
-               
+                if (saveTasks.Any(wallet => wallet == null))
+                    return;
 
                 context.SetWalletsCollection(await WalletRepository.GetWallets(context.User.UserId));
 
@@ -80,9 +82,9 @@ namespace FinanceApplication.views
                 };
 
 
-                List<Task<bool>> saveTasksC = categories.Select(category => CategoryRepository.SaveCategory(category)).ToList();
+                List<Task<bool>> saveTasksCategories = categories.Select(category => CategoryRepository.SaveCategory(category)).ToList();
 
-                bool[] resultsC = await Task.WhenAll(saveTasks);
+                bool[] resultsC = await Task.WhenAll(saveTasksCategories);
 
                 if (resultsC.All(result => result)) { }
                 else return;
@@ -94,17 +96,17 @@ namespace FinanceApplication.views
                     Console.WriteLine(a.WalletId);
                 }
 
-                Console.WriteLine(context.User);
+                //Console.WriteLine(context.User);
 
-                List<Operation> operations = new List<Operation>
-                {
-                    new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
-                    new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[1].Name, "qq" ),
-                    new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[0].Name, "qq" ),
-                };
+                //List<Operation> operations = new List<Operation>
+                //{
+                //    new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
+                //    new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[1].Name, "qq" ),
+                //    new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[0].Name, "qq" ),
+                //};
 
             
-                context.SetOperationsCollection(await OperationRepository.GetOperations(context.User.UserId));
+                //context.SetOperationsCollection(await OperationRepository.GetOperations(context.User.UserId));
 
                 await Navigation.PushAsync(new ListPage(DateTime.Now, context));
             }
@@ -116,6 +118,10 @@ namespace FinanceApplication.views
             {
                 CanselButton.IsEnabled = true;
                 CreateButton.IsEnabled = true;
+                entryEmail.IsEnabled = true;
+                entryNickname.IsEnabled = true;
+                entryPass1.IsEnabled = true;
+                entryPass2.IsEnabled = true;
                 return false;
             });
 

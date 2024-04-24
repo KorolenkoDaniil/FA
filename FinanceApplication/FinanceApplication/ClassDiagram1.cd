@@ -45,15 +45,8 @@
   <Class Name="FinanceApplication.views.NewOperationPage" Collapsed="true">
     <Position X="6.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACBCAAAAAAAABAAAAAAAAAgAAAgAAAAAAAQQAAAAA=</HashCode>
+      <HashCode>AAACBCAAAAAAAABAAAAAAAAAgAAAgAAAAgAAQQAAAAA=</HashCode>
       <FileName>views\NewOperationPage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.OneCardPage" Collapsed="true">
-    <Position X="9" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>views\OneCardPage.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinanceApplication.views.OperationsPerDay" Collapsed="true">

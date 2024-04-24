@@ -30,8 +30,6 @@ namespace FinanceApplication.views
             imageConverter.Source = ImageSource.FromResource("FinanceApplication.icons.converter.png");
             date.Text = newPeriod.ToString("d");
             ShowOperations(newPeriod);
-            total.Text = $"$ {totalBalance}";
-            Console.WriteLine(context.Color.LightMode);
             PlusButton.BackgroundColor = Color.FromHex(context.Color.LightMode);
         }
 
@@ -55,12 +53,8 @@ namespace FinanceApplication.views
                                                         WalletName = wallet.Name,
                                                         WalletType = wallet.Type,
                                                     }).ToList();
-            totalBalance = ListOperations.Where(operation => operation.Profit).Sum(operation => operation.Sum);
-            Console.WriteLine(totalBalance);
-            totalBalance -= ListOperations.Where(operation => !operation.Profit).Sum(operation => operation.Sum);
-            Console.WriteLine(totalBalance);
 
-
+         
 
             List<string> uniqueDates = ListOperations
                 .Where(o => DateTime.Parse(o.Date).Month == DateTime.Now.Month)
@@ -78,7 +72,13 @@ namespace FinanceApplication.views
                     ListOperations.Where(operation => operation.Date == date).ToList()
                 );
                 days.Add(day);
+                //totalBalance += day.profitSum;
+
             }
+
+            totalBalance = ListOperations.Sum(operation => operation.Sum) - ListOperations.Where(operation => !operation.Profit).Sum(operation => operation.Sum);
+            total.Text = $"$ {totalBalance}";
+
 
             OperationsCollection.ItemsSource = days;
         }

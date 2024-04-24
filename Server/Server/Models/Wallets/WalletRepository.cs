@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Server.Operations;
+using SQLite;
 
 namespace Server.Wallets
 {
@@ -14,10 +15,12 @@ namespace Server.Wallets
             WalletDB.CreateTable<Wallet>();
         }
 
-        public bool Savewallet(Wallet wallet)
+        public Wallet Savewallet(Wallet wallet)
         {
-            if (WalletDB.Insert(wallet) != 0) return true;
-            else return false;
+            if (WalletDB.Insert(wallet) != 0)
+                return wallet;
+            else
+                return null;  
         }
 
 

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinanceApplication.views.NewCardPage">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TextOpenSans" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontFamily" Value="OpenSans-Regular"/>
+            </Style>
+            <Style x:Key="Month" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontFamily" Value="OpenSans-Regular"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout x:Name="IncomePage" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" BackgroundColor="White">
+        <Frame CornerRadius="30" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".5, .2, .9, .7" BackgroundColor="#FFF7EC">
+            <StackLayout>
+                <Label Text="новый кошелек" FontSize="Large" TextColor="Black" HorizontalTextAlignment="Center"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".16*"/>
+                        <RowDefinition Height=".16*"/>
+                        <RowDefinition Height=".16*"/>
+
+                        <RowDefinition Height=".16*"/>
+                        <RowDefinition Height=".16*"/>
+                        <RowDefinition Height=".16*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".1*"/>
+                        <ColumnDefinition Width=".9*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Image x:Name="sumImage" Grid.Column="0" Grid.Row="0" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+                    <Image x:Name="walletImage" Grid.Column="0" Grid.Row="1" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+                    <Image x:Name="cathegoryImage" Grid.Column="0" Grid.Row="2" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+                    <Image x:Name="descriptionImage" Grid.Column="0" Grid.Row="3" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+                    <CheckBox x:Name="CheckboxOfInclude" Grid.Column="0" Grid.Row="4" HorizontalOptions="Center" VerticalOptions="Center"></CheckBox>
+
+
+                    <Entry x:Name="EntryName" Keyboard="Text" Placeholder="название нового кошелька" PlaceholderColor="#8f8f8f" FontSize="Medium" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
+                    <Picker x:Name="PickerType" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
+                    <!--<Picker x:Name="CathegoryPick" Grid.Row="2" Grid.Column="1" TextColor="Black"/>-->
+                    <Entry x:Name="EntrySum" Keyboard="Numeric"  Placeholder="остаток средств" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
+                    <Label Grid.Row="4" Grid.Column="1" TextColor="Black" Text="включить в общий баланс"/>
+
+                    <Grid Grid.Column="1" Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".45*"/>
+                            <ColumnDefinition Width=".1*"/>
+                            <ColumnDefinition Width=".45*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <Button x:Name="Cancel" Clicked="Cancel_Clicked" Text="Отмена" Grid.Row="0" Grid.Column="0"></Button>
+                        <Button x:Name="Create" Clicked="Create_Clicked" Text="Создать" Grid.Row="0" Grid.Column="2"></Button>
+                    </Grid>
+
+                </Grid>
+            </StackLayout>
+        </Frame>
+    </AbsoluteLayout>
+</ContentPage>

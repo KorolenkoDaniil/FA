@@ -30,6 +30,8 @@ namespace FinanceApplication.views
         private async void LogInClicked(object sender, EventArgs e)
         {
             LogInButton.IsEnabled = false;
+            entryPass1.IsEnabled = false;
+            entryEmail.IsEnabled = false;
             Loading.IsVisible = true;
 
             Regex regex = new Regex(@"@gmail.com");
@@ -51,7 +53,8 @@ namespace FinanceApplication.views
             }
 
             Loading.IsVisible = false;
-
+            entryPass1.IsEnabled = true;
+            entryEmail.IsEnabled = true;
 
             Device.StartTimer(TimeSpan.FromSeconds(3), () =>
             {

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using FinanceApplication.core.Operations;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -11,7 +12,7 @@ namespace FinanceApp.classes.Wallets
     {
         private static readonly HttpClient httpClient = new HttpClient();
 
-        public async static Task<bool> SaveWallet(Wallet newWallet)
+        public async static Task<Wallet> SaveWallet(Wallet newWallet)
         {
             string walletJson = JsonConvert.SerializeObject(newWallet);
             var content = new StringContent(walletJson, Encoding.UTF8, "application/json");
@@ -22,9 +23,11 @@ namespace FinanceApp.classes.Wallets
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.IsSuccessStatusCode);
-                return true;
+                string walletJSON = await response.Content.ReadAsStringAsync();
+                Wallet userWallet = JsonConvert.DeserializeObject<Wallet>(walletJSON);
+                return userWallet;
             }
-            else return false;
+            else return null;
         }
 
         public async static Task<List<Wallet>> GetWallets(int userId)

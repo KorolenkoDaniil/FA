@@ -18,6 +18,18 @@ namespace FinanceApp.classes
 
         public bool monthPeriod = true;
 
+        public List<string> WalletTypes = new List<string>
+        {
+            "Денежные средства",
+            "Сберегательный счет",
+            "Расчетный счет",
+            "Пенсионный счет",
+            "Дебетовая карта",
+            "Копилка",
+            "Криптовалютный кошелек",
+            "кредитная карта"
+        };
+
 
         public void ChangeTheme(Colorss color) => Color = color;
         public void ChangeUser(User user) => User = user;

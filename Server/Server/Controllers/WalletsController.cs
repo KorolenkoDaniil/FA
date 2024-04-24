@@ -1,5 +1,6 @@
 ﻿using FinanceAppl.Operations;
 using Microsoft.AspNetCore.Mvc;
+using Server.Operations;
 using Server.Wallets;
 
 namespace Server.Controllers
@@ -14,12 +15,13 @@ namespace Server.Controllers
         public WalletRepository WalletsRepository = new WalletRepository();
 
         [HttpPost]
-        public IActionResult RegisterAWallet([FromBody] Wallet wallet)
+        public async Task<IActionResult> RegisterAWallet([FromBody] Wallet wallet)
         {
-            Console.WriteLine(wallet);
-            if (WalletsRepository.Savewallet(wallet)) return Ok();
+            Wallet savedWallet = WalletsRepository.Savewallet(wallet);
+            if (savedWallet != null) return Ok(savedWallet);
             else return BadRequest();
         }
+
 
         [HttpPost]
         public List<Wallet> GetWallets(string id)

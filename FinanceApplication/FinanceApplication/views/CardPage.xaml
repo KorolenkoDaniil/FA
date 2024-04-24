@@ -46,7 +46,7 @@
             <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="2" FontSize="32" Text="$00.00"/>
 
 
-            <CollectionView Grid.Row="3" Grid.Column="0" x:Name="CardsCollection">
+            <CollectionView Grid.Row="3" Grid.Column="0" x:Name="CardsCollection" SelectionChanged="OnItemSelected" SelectionMode="Single">
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
                         <StackLayout>
@@ -116,5 +116,13 @@
                 </Grid>
             </Frame>
         </Grid>
-        </AbsoluteLayout>
+
+        <Frame x:Name="PlusButton" BackgroundColor="Transparent" Padding="0" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".9, .9, 50, 50" CornerRadius="30">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToNewCardPage"/>
+            </Frame.GestureRecognizers>
+            <Label Text="+" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center" />
+        </Frame>
+
+    </AbsoluteLayout>
 </ContentPage>

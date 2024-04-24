@@ -4,7 +4,6 @@ using FinanceApplication.core.Category;
 using FinanceApplication.core.Operations;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,6 +13,8 @@ namespace FinanceApplication.views
     public partial class NewOperationPage : ContentPage
     {
         Context context = new Context();
+        bool income = true;
+
         public NewOperationPage(Context context)
         {
             InitializeComponent();
@@ -56,6 +57,7 @@ namespace FinanceApplication.views
         {
             SelectionPage.IsVisible = false;
             ConsumptionPage.IsVisible = true;
+            income = true;
         }
 
         private void buttonToIncomePage(object sender, EventArgs e)
@@ -63,7 +65,7 @@ namespace FinanceApplication.views
             SelectionPage.IsVisible = false;
             IncomePage.IsVisible = true;
             EntrySum.Focus();
-
+            income = false;
         }
 
         private async void ToCardPage(object sender, EventArgs e) =>

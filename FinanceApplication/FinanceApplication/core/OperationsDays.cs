@@ -1,8 +1,6 @@
-﻿using FinanceApplication.core.Operations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FinanceApplication.core
 {
@@ -22,8 +20,9 @@ namespace FinanceApplication.core
         {
             this.date = date;
             Operations = operations;
-            profitSum = operations.Where(o => o.Profit).Sum(o => o.Sum);
-            expenses = operations.Where(o => !o.Profit).Sum(o => o.Sum);
+ 
+            profitSum = Operations.Where(o => o.Profit).Sum(o => o.Sum);
+            expenses = Operations.Where(o => o.Profit == false).Sum(o => o.Sum);
             Console.WriteLine(profitSum + $"доходы дня {date}");
             Console.WriteLine(expenses + $"расходы дня {date}");
         }
