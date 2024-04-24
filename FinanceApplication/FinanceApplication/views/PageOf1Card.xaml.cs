@@ -1,17 +1,20 @@
-﻿using FinanceApp.classes;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace FinanceApplication.views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OperationPage : ContentPage
+    public partial class PageOf1Card : ContentPage
     {
-        Context context = new Context();
-        public OperationPage(Context context)
+        public PageOf1Card()
         {
             InitializeComponent();
-            this.context = context;
         }
     }
 }

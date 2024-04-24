@@ -74,11 +74,11 @@
                         <Image x:Name="dateImage" Grid.Column="0" Grid.Row="4" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
 
 
-                        <Entry x:Name="EntrySum" Keyboard="Numeric" Placeholder="сумма" PlaceholderColor="#8f8f8f" FontSize="Medium" Grid.Row="0" Grid.Column="1"/> 
-                        <Picker x:Name="WalletPicker" Grid.Row="1" Grid.Column="1"/>
-                        <Picker x:Name="CathegoryPicker" Grid.Row="2" Grid.Column="1"/>
-                        <Entry x:Name="EntryDescription" Placeholder="подробности" PlaceholderColor="#8f8f8f" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
-                        <DatePicker x:Name="Datepicker" TextColor="#8f8f8f" Grid.Row="4" Grid.Column="1"/>
+                        <Entry x:Name="EntrySum" Keyboard="Numeric" Placeholder="сумма" PlaceholderColor="#8f8f8f" FontSize="Medium" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
+                        <Picker x:Name="WalletPicker" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
+                        <Picker x:Name="CathegoryPicker" Grid.Row="2" Grid.Column="1" TextColor="Black"/>
+                        <Entry x:Name="EntryDescription" Placeholder="подробности" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
+                        <DatePicker x:Name="Datepicker" Grid.Row="4" Grid.Column="1" TextColor="Black"/>
 
                         <Grid Grid.Column="1" Grid.Row="5"> 
                             <Grid.ColumnDefinitions>
@@ -89,7 +89,7 @@
 
 
                             <Button x:Name="Cancel" Clicked="Cancel_Clicked" Text="Отмена" Grid.Row="0" Grid.Column="0"></Button>
-                            <Button x:Name="Create" Clicked="Create_Clicked" Text="Создать" Grid.Row="0" Grid.Column="1"></Button>
+                            <Button x:Name="Create" Clicked="Create_Clicked" Text="Создать" Grid.Row="0" Grid.Column="2"></Button>
                         </Grid>
 
                     </Grid>

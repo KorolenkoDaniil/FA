@@ -14,12 +14,13 @@ namespace Server.Controllers
         public OperationRepository OperationsRepository = new OperationRepository();
 
         [HttpPost]
-        public IActionResult RegisterOperation([FromBody] Operation operation)
+        public async Task<IActionResult> RegisterOperation([FromBody] Operation operation)
         {
-            Console.WriteLine(operation);
-            if (OperationsRepository.SaveOperation(operation)) return Ok();
+            Operation savedOperation = OperationsRepository.SaveOperation(operation);
+            if (savedOperation != null) return Ok(savedOperation);
             else return BadRequest();
         }
+
 
         [HttpPost]
         public List<Operation> GetOperations(string id)

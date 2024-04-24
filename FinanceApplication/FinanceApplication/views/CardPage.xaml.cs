@@ -1,5 +1,6 @@
 ﻿using FinanceApp.classes;
 using FinanceApp.classes.Wallets;
+using FinanceApplication.core;
 using System;
 using System.Linq;
 using Xamarin.Forms;
@@ -17,6 +18,11 @@ namespace FinanceApplication.views
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             this.context = context;
+            imageCard.Source = ImageSource.FromResource("FinanceApplication.icons.card.png");
+            imageCathegory.Source = ImageSource.FromResource("FinanceApplication.icons.categories.png");
+            imageList.Source = ImageSource.FromResource("FinanceApplication.icons.list.png");
+            imageDiagram.Source = ImageSource.FromResource("FinanceApplication.icons.diagram.png");
+            imageConverter.Source = ImageSource.FromResource("FinanceApplication.icons.converter.png");
             ShowCards();
             BindingContext = this;
         }
@@ -56,6 +62,18 @@ namespace FinanceApplication.views
         private async void ToCardPage(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CardPage(context));
+        }
+
+        private async void OnItemSelected(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedItem = e.CurrentSelection.FirstOrDefault() as Wallet;
+
+            if (selectedItem != null)
+            {
+                await Navigation.PushAsync(new PageOf1Card(selectedItem, context));
+            }
+
+            CardsCollection.SelectedItem = null;
         }
     }
 }

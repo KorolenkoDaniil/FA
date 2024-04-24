@@ -13,20 +13,21 @@ namespace FinanceApplication.core.Operations
 
         private static readonly HttpClient httpClient = new HttpClient();
 
-        public async static Task<bool> SaveOperation(Operation newOperation)
+        public async static Task<Operation> SaveOperation(Operation newOperation)
         {
             string OperationJson = JsonConvert.SerializeObject(newOperation);
             var content = new StringContent(OperationJson, Encoding.UTF8, "application/json");
 
-            Console.WriteLine(newOperation);
             HttpResponseMessage response = await httpClient.PostAsync(Links.SaveOperation, content);
 
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.IsSuccessStatusCode);
-                return true;
+                string OperationsJson = await response.Content.ReadAsStringAsync();
+                Operation userOperation = JsonConvert.DeserializeObject<Operation>(OperationsJson);
+                return userOperation;
             }
-            else return false;
+            else return null;
         }
 
         public async static Task<List<Operation>> GetOperations(int userId)

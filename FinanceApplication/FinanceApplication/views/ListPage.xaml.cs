@@ -1,4 +1,5 @@
 ﻿using FinanceApp.classes;
+using FinanceApplication.core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,16 @@ using Xamarin.Forms.Xaml;
 namespace FinanceApplication.views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ListPage : ContentPage
-	{
+    public partial class ListPage : ContentPage
+    {
         Context context = new Context();
         public decimal totalBalance = 0;
+        List<OperationsDays> days = new List<OperationsDays>();
 
-        public ListPage (DateTime newPeriod, Context context)
-		{
-			InitializeComponent ();
+
+        public ListPage(DateTime newPeriod, Context context)
+        {
+            InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             this.context = context;
             BindingContext = this;
@@ -32,132 +35,76 @@ namespace FinanceApplication.views
             PlusButton.BackgroundColor = Color.FromHex(context.Color.LightMode);
         }
 
-    
+
         private void ShowOperations(DateTime newPeriod)
         {
-            Console.WriteLine("---------- новая таблица");
 
-
-            string month = ConvertFromIntToStringMonth(newPeriod.Month);
-            int year = newPeriod.Year;
-
-            if (context.monthPeriod) MonthSelection(month, year);
-            else YearSelection(year);
-
-        }
-
-        public void MonthSelection(string month, int year)
-        {
-            var operations1 = from operation in context.Operations
-                              join cathegory in context.Categories on operation.Cathegory equals cathegory.Name
-                              join wallet in context.Wallets on operation.WalletId equals wallet.WalletId
-                              where operation.Month == month && operation.Year == year
-                              select new
-                              {
-                                  Id = operation.Id,
-                                  UserId = cathegory.UserId,
-                                  Day = operation.Day,
-                                  Month = operation.Month,
-                                  Year = operation.Year,
-                                  Profit = operation.Profit,
-                                  Sum = operation.Sum,
-                                  WalletId = operation.WalletId,
-                                  Cathegory = cathegory.Name,
-                                  Description = operation.Description,
-                                  WalletName = wallet.Name,
-                                  WalletType = wallet.Type,
-                              };
-
-            totalBalance = operations1.Sum(op => op.Sum);
-
-            Console.WriteLine("----------- новая таблица");
-            foreach (var op in operations1)
-            {
-                Console.WriteLine($"{op.Id} {op.UserId} {op.Day} {op.Month} {op.Year} {op.Profit} {op.Sum} {op.WalletId} {op.Cathegory} {op.Description} {op.WalletName} {op.WalletType}");
-            }
-            Console.WriteLine("----------- сумма");
+            List<OperationResult> ListOperations = (from operation in context.Operations
+                                                    join cathegory in context.Categories on operation.Cathegory equals cathegory.Name
+                                                    join wallet in context.Wallets on operation.WalletId equals wallet.WalletId
+                                                    select new OperationResult
+                                                    {
+                                                        Id = operation.Id,
+                                                        UserId = cathegory.UserId,
+                                                        Profit = operation.Profit,
+                                                        Date = operation.Date,
+                                                        Sum = operation.Sum,
+                                                        WalletId = operation.WalletId,
+                                                        Cathegory = cathegory.Name,
+                                                        Description = operation.Description,
+                                                        WalletName = wallet.Name,
+                                                        WalletType = wallet.Type,
+                                                    }).ToList();
+            totalBalance = ListOperations.Where(operation => operation.Profit).Sum(operation => operation.Sum);
+            Console.WriteLine(totalBalance);
+            totalBalance -= ListOperations.Where(operation => !operation.Profit).Sum(operation => operation.Sum);
             Console.WriteLine(totalBalance);
 
-            OperationsCollection.ItemsSource = operations1;
-        }
 
-        public void YearSelection(int year)
-        {
-           var operations1 = from operation in context.Operations
-                          join cathegory in context.Categories on operation.Cathegory equals cathegory.Name
-                          join wallet in context.Wallets on operation.WalletId equals wallet.WalletId
-                          where operation.Year == year
-                          select new
-                          {
-                              Id = operation.Id,
-                              UserId = cathegory.UserId,
-                              Day = operation.Day,
-                              Month = operation.Month,
-                              Year = operation.Year,
-                              Profit = operation.Profit,
-                              Sum = operation.Sum,
-                              WalletId = operation.WalletId,
-                              Cathegory = cathegory.Name,
-                              Description = operation.Description,
-                              WalletName = wallet.Name,
-                              WalletType = wallet.Type,
-                          };
-            foreach (var op in operations1)
+
+            List<string> uniqueDates = ListOperations
+                .Where(o => DateTime.Parse(o.Date).Month == DateTime.Now.Month)
+                .Select(o => o.Date)
+                .Distinct()
+                .ToList();
+
+            days = new List<OperationsDays>();
+
+
+            foreach (string date in uniqueDates)
             {
-                Console.WriteLine($"{op.Id} {op.UserId} {op.Day} {op.Month} {op.Year} {op.Profit} {op.Sum} {op.WalletId} {op.Cathegory} {op.Description} {op.WalletName} {op.WalletType}");
-                totalBalance += op.Sum;
+                OperationsDays day = new OperationsDays(
+                    DateTime.Parse(date),
+                    ListOperations.Where(operation => operation.Date == date).ToList()
+                );
+                days.Add(day);
             }
-            Console.WriteLine("----------- новая таблица");
-            Console.WriteLine("----------- сумма");
-            Console.WriteLine(totalBalance);
-            Console.WriteLine("----------- сумма");
 
-
-            OperationsCollection.ItemsSource = operations1;
+            OperationsCollection.ItemsSource = days;
         }
 
-
+             
 
         private async void ToCardPage(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CardPage(context));
         }
 
-        private void OnItemSelected(object sender, SelectionChangedEventArgs e)
+        private async void OnItemSelected(object sender, SelectionChangedEventArgs e)
         {
+            var selectedItem = e.CurrentSelection.FirstOrDefault() as OperationsDays;
 
+            if (selectedItem != null)
+            {
+                await Navigation.PushAsync(new OperationsPerDay(selectedItem, context));
+            }
+
+            OperationsCollection.SelectedItem = null;
         }
 
         private async void ToDatePage(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new DatePage(context));
-        }
-
-
-       private string ConvertFromIntToStringMonth(int monthNumber)
-        {
-
-            Dictionary<int, string> months = new Dictionary<int, string>
-            {
-                {1, "январь"},
-                {2, "февраль"},
-                {3, "март"},
-                {4, "апрель"},
-                {5, "май"},
-                {6, "июнь"},
-                {7, "июль"},
-                {8, "август"},
-                {9, "сентябрь"},
-                {10, "октябрь"},
-                {11, "ноябрь"},
-                {12, "декабрь"},
-        };
-
-            if (months.TryGetValue(monthNumber, out string monthName))
-            {
-                return monthName;
-            }
-            else { return null; }
         }
 
         private async void ToNewOperationPage(object sender, EventArgs e)

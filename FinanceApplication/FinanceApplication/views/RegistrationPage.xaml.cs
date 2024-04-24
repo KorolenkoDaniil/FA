@@ -98,18 +98,12 @@ namespace FinanceApplication.views
 
                 List<Operation> operations = new List<Operation>
                 {
-                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
-                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[1].WalletId, context.Categories[1].Name, "qq" ),
-                    new Operation(context.User.UserId, DateTime.Now.Day, DateTime.Now.ToString("MMMM"), DateTime.Now.Year, true, 10, context.Wallets[1].WalletId, context.Categories[0].Name, "qq" ),
+                    new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
+                    new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[1].Name, "qq" ),
+                    new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[0].Name, "qq" ),
                 };
 
-                List<Task<bool>> saveTasks1 = operations.Select(o => OperationRepository.SaveOperation(o)).ToList();
-
-                bool[] results1 = await Task.WhenAll(saveTasks1);
-
-                if (results1.All(result => result)) Console.WriteLine("Все  успешно сохранены.");
-                else { Console.WriteLine("Не все категории были успешно сохранены."); return; }
-
+            
                 context.SetOperationsCollection(await OperationRepository.GetOperations(context.User.UserId));
 
                 await Navigation.PushAsync(new ListPage(DateTime.Now, context));

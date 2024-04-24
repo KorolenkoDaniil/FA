@@ -84,15 +84,15 @@
 
             <Label Style="{StaticResource TextOpenSans}" Text="Spending calendar" Grid.Column="0" Grid.Row="5" Margin="15, 0, 15, 0" VerticalOptions="Center"/>
 
-            <CollectionView Grid.Row="6" Grid.Column="0" x:Name="OperationsCollection">
+            <CollectionView Grid.Row="6" Grid.Column="0" x:Name="OperationsCollection" SelectionMode="Single" SelectionChanged="OnItemSelected"> 
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
                         <StackLayout>
                             <Frame BackgroundColor="White" Margin="10, 12, 10, 0">
                                 <StackLayout>
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" HeightRequest="45" Padding="0,0,0,0">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="45" Padding="0,0,0,0">
                                         <Label Text="{Binding Day}" WidthRequest="35" Style="{StaticResource TextOpenSans}" FontAttributes="Bold" FontSize="Title"/>
-                                        <Grid >
+                                        <Grid HorizontalOptions="FillAndExpand">
                                             <Grid.ColumnDefinitions Padding="0">
                                                 <ColumnDefinition Width=".3*" />
                                                 <ColumnDefinition Width=".6*" />
@@ -102,11 +102,11 @@
                                                 <RowDefinition Height=".5*"/>
                                                 <RowDefinition Height=".5*"/>
                                             </Grid.RowDefinitions>
-                                            <Label Text="{Binding Year}" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}" FontSize="Default"/>
+                                            <Label Text="{Binding WeekDay}" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}" FontSize="Default"/>
                                             <Label Text="{Binding Month}" Grid.Column="0" Grid.Row="1" Style="{StaticResource TextOpenSans}" FontSize="Default"/>
 
-                                            <Label Text="{Binding WalletName}" Grid.Column="1" Grid.Row="0" Style="{StaticResource TextOpenSans}" FontSize="Default"/>
-                                            <Label Text="{Binding WalletType}" Grid.Column="1" Grid.Row="1" Style="{StaticResource TextOpenSans}" FontSize="Default"/>
+                                            <Label Text="{Binding profitSum}" TextColor="GreenYellow" Grid.Column="1" Grid.Row="0" Style="{StaticResource TextOpenSans}" FontSize="Default"/>
+                                            <Label Text="{Binding expenses}" Grid.Column="1" TextColor="Red" Grid.Row="1" Style="{StaticResource TextOpenSans}" FontSize="Default"/>
 
                                             <Label x:Name="sum" Style="{StaticResource TextOpenSans}" Text="{Binding Sum, StringFormat='${0}'}" HorizontalOptions="End" Grid.Row="0" Grid.Column="2" VerticalTextAlignment="Center"/>
                                         </Grid>

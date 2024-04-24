@@ -16,10 +16,13 @@ namespace FinanceAppl.Operations
             OperationsDB.CreateTable<Operation>();
         }
 
-        public bool SaveOperation(Operation Operatarion)
+
+        public Operation SaveOperation(Operation operation)
         {
-            if (OperationsDB.Insert(Operatarion) != 0) return true;
-            else return false;
+            if (OperationsDB.Insert(operation) != 0)
+                return operation;
+            else
+                return null;
         }
 
 

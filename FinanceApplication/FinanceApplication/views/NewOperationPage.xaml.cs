@@ -1,5 +1,6 @@
 ﻿using FinanceApp.classes;
 using FinanceApp.classes.Wallets;
+using FinanceApplication.core.Category;
 using FinanceApplication.core.Operations;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,13 @@ namespace FinanceApplication.views
 
             WalletPicker.ItemsSource = walletsNames;
 
+            List<string> CategoriesNames = new List<string>();
+            foreach (Category category in context.Categories)
+                CategoriesNames.Add(category.Name);
+
+
+            CathegoryPicker.ItemsSource = CategoriesNames;
+
         }
 
         private void buttonTochangePage(object sender, EventArgs e)
@@ -67,25 +75,23 @@ namespace FinanceApplication.views
         private async void Cancel_Clicked(object sender, EventArgs e) => await Navigation.PopAsync();
         
 
-        private async Task<bool> Create_Clicked(object sender, EventArgs e)
+        private async void Create_Clicked(object sender, EventArgs e)
         {
-            if (!Validator.ValidateSum(decimal.Parse(EntrySum.Text))) return false;
-            if (!Validator.ValidateName(WalletPicker.SelectedItem.ToString(), 40)) return false;
-            if (!Validator.ValidateName(CathegoryPicker.SelectedItem.ToString(), 40)) return false;
+            if (!Validator.ValidateSum(decimal.Parse(EntrySum.Text))) return;
+            if (!Validator.ValidateName(WalletPicker.SelectedItem.ToString(), 40)) return ;
+            if (!Validator.ValidateName(CathegoryPicker.SelectedItem.ToString(), 40)) return;
+
+            DateTime date = Datepicker.Date;
 
             Operation newOperation = new Operation(
-                context.User.UserId, Datepicker.Date.Day, Datepicker.Date.Month.ToString("MMMM"), Datepicker.Date.Year,
-                true, decimal.Parse(EntrySum.Text), WalletPicker.SelectedIndex + 1,  
-                CathegoryPicker.SelectedItem.ToString(), EntryDescription.Text);
+                context.User.UserId, date.ToString("d"), true, decimal.Parse(EntrySum.Text), context.Wallets[WalletPicker.SelectedIndex].WalletId, CathegoryPicker.SelectedItem.ToString(), EntryDescription.Text);
 
-            bool isSend = await OperationRepository.SaveOperation(newOperation);
-            if (isSend)
+            Operation isSend = await OperationRepository.SaveOperation(newOperation);
+            if (isSend != null)
             {
-
-                await Navigation.PopAsync();
-                return true;
+                context.Operations.Add(isSend);
+                await Navigation.PushAsync(new ListPage(DateTime.Now, context));
             }
-            return false;
         }
     }
 }
