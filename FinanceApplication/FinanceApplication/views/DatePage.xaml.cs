@@ -1,4 +1,5 @@
 ﻿using FinanceApp.classes;
+using FinanceApplication.icons;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,13 +18,13 @@ namespace FinanceApplication.views
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             this.context = context;
-            imageCard.Source = ImageSource.FromResource("FinanceApplication.icons.card.png");
-            imageCathegory.Source = ImageSource.FromResource("FinanceApplication.icons.categories.png");
-            imageList.Source = ImageSource.FromResource("FinanceApplication.icons.list.png");
-            imageDiagram.Source = ImageSource.FromResource("FinanceApplication.icons.diagram.png");
-            imageConverter.Source = ImageSource.FromResource("FinanceApplication.icons.converter.png");
-            LRow2.Source = ImageSource.FromResource("FinanceApplication.icons.Rrow.png");
-            LRow1.Source = ImageSource.FromResource("FinanceApplication.icons.LRow.png");
+            imageCard.Source = ImageSource.FromResource(Icons.Iconspath[2]);
+            imageCathegory.Source = ImageSource.FromResource(Icons.Iconspath[3]);
+            imageList.Source = ImageSource.FromResource(Icons.Iconspath[8]);
+            imageDiagram.Source = ImageSource.FromResource(Icons.Iconspath[6]);
+            imageConverter.Source = ImageSource.FromResource(Icons.Iconspath[4]);
+            LRow2.Source = ImageSource.FromResource(Icons.Iconspath[11]);
+            LRow1.Source = ImageSource.FromResource(Icons.Iconspath[9]);
             YearLabel.Text = DateTime.Now.ToString("yyyy");
             DateOnButton.Text = DateTime.Now.ToString("d");
         }
@@ -35,7 +36,7 @@ namespace FinanceApplication.views
             YearLabel.Text = (--year).ToString();
 
             DateTime DateFromButton = DateTime.Parse(DateOnButton.Text);
-            Console.WriteLine(DateFromButton);
+            //Console.WriteLine(DateFromButton);
             DateFromButton = DateFromButton.AddYears(-1);
             DateOnButton.Text = DateFromButton.ToString();
         }
@@ -46,17 +47,12 @@ namespace FinanceApplication.views
             YearLabel.Text = (++year).ToString();
 
             DateTime DateFromButton = DateTime.Parse(DateOnButton.Text);
-            Console.WriteLine(DateFromButton);
+            //Console.WriteLine(DateFromButton);
             DateFromButton = DateFromButton.AddYears(1);
             DateOnButton.Text = DateFromButton.ToString();
         }
 
-        private async void ToCardPage(object sender, EventArgs e) =>
-            await Navigation.PushAsync(new CardPage(context));
-
-        private async void ToListPage(object sender, EventArgs e) =>
-            await Navigation.PushAsync(new ListPage(DateTime.Now, context));
-
+   
         public static int ConvertMonthNameToNumber(string monthName)
         {
             Dictionary<string, int> months = new Dictionary<string, int>
@@ -102,6 +98,12 @@ namespace FinanceApplication.views
             context.monthPeriod = false;
             await Navigation.PushAsync(new ListPage(DateTime.Now, context));
         }
+
+        private async void ToCardPage(object sender, EventArgs e) => await Navigation.PushAsync(new CardPage(context));
+        private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage(context));
+        private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage(DateTime.Now, context));
+        private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage(context));
+        private async void ToConverterPage(object sender, EventArgs e) => await Navigation.PushAsync(new ConverterPage(context));
 
     }
 }

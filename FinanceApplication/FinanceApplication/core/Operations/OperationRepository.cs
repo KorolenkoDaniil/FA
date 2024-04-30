@@ -19,15 +19,19 @@ namespace FinanceApplication.core.Operations
             var content = new StringContent(OperationJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await httpClient.PostAsync(Links.SaveOperation, content);
-
+            Console.WriteLine("кропка   14");
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine(response.IsSuccessStatusCode);
+                //Console.WriteLine(response.IsSuccessStatusCode);
                 string OperationsJson = await response.Content.ReadAsStringAsync();
                 Operation userOperation = JsonConvert.DeserializeObject<Operation>(OperationsJson);
                 return userOperation;
             }
-            else return null;
+            else
+            {
+                Console.WriteLine("кропка   15");
+                return null;
+            }
         }
 
         public async static Task<List<Operation>> GetOperations(int userId)
@@ -36,7 +40,7 @@ namespace FinanceApplication.core.Operations
             {
                 {"id", userId.ToString()}
             };
-
+            Console.WriteLine("кропка   16");
             FormUrlEncodedContent form = new FormUrlEncodedContent(userData);
             HttpResponseMessage response = await httpClient.PostAsync(Links.GetOperations, form);
 
@@ -44,17 +48,18 @@ namespace FinanceApplication.core.Operations
             {
                 string OperationsJson = await response.Content.ReadAsStringAsync();
                 List<Operation> userOperations = JsonConvert.DeserializeObject<List<Operation>>(OperationsJson);
-                Console.WriteLine("----------- операция");
-                foreach (Operation Operation in userOperations)
-                {
-                    Console.WriteLine(Operation);
-                }
-                Console.WriteLine("----------- операция");
-
+                //Console.WriteLine("----------- операция");
+                //foreach (Operation Operation in userOperations)
+                //{
+                //    Console.WriteLine(Operation);
+                //}
+                //Console.WriteLine("----------- операция");
+                Console.WriteLine("кропка   17");
                 return userOperations;
             }
             else
             {
+                Console.WriteLine("кропка   18");
                 return null;
             }
         }

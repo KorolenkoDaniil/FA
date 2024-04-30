@@ -12,19 +12,27 @@ namespace FinanceApplication.core.Category
     {
         private static readonly HttpClient httpClient = new HttpClient();
 
-        public async static Task<bool> SaveCategory(Category newCategory)
+        public async static Task<Category> SaveCategory(Category newCategory)
         {
             string CategoryJson = JsonConvert.SerializeObject(newCategory);
             var content = new StringContent(CategoryJson, Encoding.UTF8, "application/json");
 
-            Console.WriteLine(newCategory);
+            //Console.WriteLine(newCategory);
+            Console.WriteLine("кропка   9");
             HttpResponseMessage response = await httpClient.PostAsync(Links.SaveCategory, content);
 
             if (response.IsSuccessStatusCode)
             {
-                return true;
+                string categoryJSON = await response.Content.ReadAsStringAsync();
+                Category userCategory = JsonConvert.DeserializeObject<Category>(categoryJSON);
+                Console.WriteLine("кропка   10");
+                return userCategory;
             }
-            else return false;
+            else
+            {
+                Console.WriteLine("кропка   11");
+                return null;
+            }
         }
 
         public async static Task<List<Category>> GetCategorys(int userId)
@@ -34,29 +42,41 @@ namespace FinanceApplication.core.Category
                 {"id", userId.ToString()}
             };
 
-            FormUrlEncodedContent form = new FormUrlEncodedContent(userData);
-            HttpResponseMessage response = await httpClient.PostAsync(Links.GetCategories, form);
-
-            if (response.IsSuccessStatusCode)
+            List<Category> userCategories = null;
+            try
             {
-                string CategoriessJson = await response.Content.ReadAsStringAsync();
-                List<Category> userCategories = JsonConvert.DeserializeObject<List<Category>>(CategoriessJson);
+                FormUrlEncodedContent form = new FormUrlEncodedContent(userData);
+                HttpResponseMessage response = await httpClient.PostAsync(Links.GetCategories, form);
 
-                Console.WriteLine(CategoriessJson);
 
-                Console.WriteLine("-----категории");
-                foreach (var categories in userCategories)
+                if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine(categories);
-                }
-                Console.WriteLine("-----категории");
+                    Console.WriteLine("кропка   12");
+                    string CategoriessJson = await response.Content.ReadAsStringAsync();
+                    userCategories = JsonConvert.DeserializeObject<List<Category>>(CategoriessJson);
 
-                return userCategories;
+                    Console.WriteLine(CategoriessJson);
+
+                    Console.WriteLine("-----категории");
+                    foreach (Category categories in userCategories)
+                    {
+                        Console.WriteLine(categories);
+                    }
+                    Console.WriteLine("-----категории");
+
+                    return userCategories;
+                }
+                else
+                {
+                    Console.WriteLine("кропка   13");
+                    return null;
+                }
             }
-            else
+            catch (ArgumentException)
             {
-                return null;
+
             }
+            return userCategories;
         }
     }
 }

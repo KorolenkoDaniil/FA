@@ -47,7 +47,7 @@
                     <Entry x:Name="EntryName" Keyboard="Text" Placeholder="название нового кошелька" PlaceholderColor="#8f8f8f" FontSize="Medium" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
                     <Picker x:Name="PickerType" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
                     <!--<Picker x:Name="CathegoryPick" Grid.Row="2" Grid.Column="1" TextColor="Black"/>-->
-                    <Entry x:Name="EntrySum" Keyboard="Numeric"  Placeholder="остаток средств" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
+                    <Entry x:Name="EntrySum" Keyboard="Numeric"  Placeholder="остаток средств" Text="0" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
                     <Label Grid.Row="4" Grid.Column="1" TextColor="Black" Text="включить в общий баланс"/>
 
                     <Grid Grid.Column="1" Grid.Row="5">

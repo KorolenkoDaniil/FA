@@ -16,6 +16,8 @@
     <None Remove="icons\calendar2.png" />
     <None Remove="icons\card.png" />
     <None Remove="icons\categories.png" />
+    <None Remove="icons\Check-circle.png" />
+    <None Remove="icons\Circle-xmark.png" />
     <None Remove="icons\converter.png" />
     <None Remove="icons\Description.png" />
     <None Remove="icons\diagram.png" />
@@ -27,6 +29,11 @@
     <None Remove="icons\settings.png" />
     <None Remove="icons\trashCan.png" />
     <None Remove="icons\URow.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="icons\Check-circle.png" />
+    <EmbeddedResource Include="icons\Circle-xmark.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,10 +64,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="views\CategoriesPage.xaml.cs">
+      <DependentUpon>CategoriesPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="views\AuthorisationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="views\CardPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\CategoriesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\CategoryPagePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="views\ConverterPage.xaml">

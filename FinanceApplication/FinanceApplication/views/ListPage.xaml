@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FinanceApplication.views.ListPage">
-    
+
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -25,23 +25,29 @@
                 <RowDefinition Height=".385*"/>
                 <RowDefinition Height=".07*"/>
                 <RowDefinition Height=".065*"/>
-                
+
             </Grid.RowDefinitions>
 
             <Frame Grid.Column="0" Grid.Row="0" Padding="0, 10, 0, 10">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width=".05*"/>
-                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition Width=".35*"/>
                         <ColumnDefinition Width=".45*"/>
                         <ColumnDefinition Width=".1*"/>
+                        <ColumnDefinition Width=".05*"/>
                     </Grid.ColumnDefinitions>
 
                     <Label Text="Transactions" Grid.Column="1"  VerticalOptions="Center" Grid.Row="0" Style="{StaticResource TextOpenSans}" />
 
-                    <Button x:Name="date" CornerRadius="25" BackgroundColor="#F4F4F4" Grid.Column="2" Grid.Row="0" Padding="0" HorizontalOptions="End" FontSize="Micro" TextColor="Black" VerticalOptions="Center" Text="" Clicked="ToDatePage"></Button>
+                    <Button x:Name="date" CornerRadius="25" BackgroundColor="#F4F4F4" Grid.Column="2" Grid.Row="0" Padding="0" HorizontalOptions="End" FontSize="Micro" TextColor="Black" VerticalOptions="Center" Text="" Clicked="ToDatePage"/>
 
-                    <!--<Image Grid.Row="0" Grid.Column="2">-->
+                    <Image x:Name="Settings" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="3">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToSettingsPage" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
                 </Grid>
             </Frame>
 
@@ -65,8 +71,8 @@
                     <Label Style="{StaticResource TextOpenSans}" Text="$500" HorizontalOptions="End" Grid.Row="0" Grid.Column="2" VerticalTextAlignment="Center" TextColor="#20CB3B"/>
                 </Grid>
             </Frame>
-            
-            
+
+
             <Frame Grid.Column="0" Grid.Row="4" Padding="10" Margin="15, 0, 15, 0" CornerRadius="10">
                 <Grid Padding="0,0,10,0">
                     <Grid.ColumnDefinitions>
@@ -84,7 +90,7 @@
 
             <Label Style="{StaticResource TextOpenSans}" Text="Spending calendar" Grid.Column="0" Grid.Row="5" Margin="15, 0, 15, 0" VerticalOptions="Center"/>
 
-            <CollectionView Grid.Row="6" Grid.Column="0" x:Name="OperationsCollection" SelectionMode="Single" SelectionChanged="OnItemSelected"> 
+            <CollectionView Grid.Row="6" Grid.Column="0" x:Name="OperationsCollection" SelectionMode="Single" SelectionChanged="OnItemSelected">
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
                         <StackLayout>
@@ -133,32 +139,32 @@
 
                     <Image x:Name="imageCathegory" Grid.Column="1" Grid.Row="0">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCardPage" />
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCategoriesPage" />
                         </Image.GestureRecognizers>
                     </Image>
 
                     <Image x:Name="imageList" Grid.Column="2" Grid.Row="0">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCardPage" />
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToListPage" />
                         </Image.GestureRecognizers>
                     </Image>
 
                     <Image x:Name="imageDiagram" Grid.Column="3" Grid.Row="0">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCardPage" />
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToDiagramPage" />
                         </Image.GestureRecognizers>
                     </Image>
 
                     <Image x:Name="imageConverter" Grid.Column="4" Grid.Row="0">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCardPage" />
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToConverterPage" />
                         </Image.GestureRecognizers>
                     </Image>
 
 
                 </Grid>
             </Frame>
-            
+
         </Grid>
         <Frame x:Name="PlusButton" BackgroundColor="Transparent" Padding="0" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".9, .9, 50, 50" CornerRadius="30">
             <Frame.GestureRecognizers>

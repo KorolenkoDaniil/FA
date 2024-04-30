@@ -1,5 +1,6 @@
 ﻿using FinanceApp.classes;
 using FinanceApplication.core;
+using FinanceApplication.icons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,14 +24,16 @@ namespace FinanceApplication.views
             this.context = context;
             BindingContext = this;
             NoOperations.IsVisible = false;
-            imageCard.Source = ImageSource.FromResource("FinanceApplication.icons.card.png");
-            imageCathegory.Source = ImageSource.FromResource("FinanceApplication.icons.categories.png");
-            imageList.Source = ImageSource.FromResource("FinanceApplication.icons.list.png");
-            imageDiagram.Source = ImageSource.FromResource("FinanceApplication.icons.diagram.png");
-            imageConverter.Source = ImageSource.FromResource("FinanceApplication.icons.converter.png");
+            imageCard.Source = ImageSource.FromResource(Icons.Iconspath[2]);
+            imageCathegory.Source = ImageSource.FromResource(Icons.Iconspath[3]);
+            imageList.Source = ImageSource.FromResource(Icons.Iconspath[8]);
+            imageDiagram.Source = ImageSource.FromResource(Icons.Iconspath[6]);
+            imageConverter.Source = ImageSource.FromResource(Icons.Iconspath[4]);
+            Settings.Source = ImageSource.FromResource("FinanceApplication.icons.settings.png");
             date.Text = newPeriod.ToString("d");
             ShowOperations(newPeriod);
             PlusButton.BackgroundColor = Color.FromHex(context.Color.LightMode);
+            Console.WriteLine("кропка  24");
         }
 
 
@@ -53,8 +56,10 @@ namespace FinanceApplication.views
                                                         WalletName = wallet.Name,
                                                         WalletType = wallet.Type,
                                                     }).ToList();
+            Console.WriteLine("кропка   25");
+            totalBalance = ListOperations.Sum(operation => operation.Sum) - ListOperations.Where(operation => !operation.Profit).Sum(operation => operation.Sum);
 
-         
+
 
             List<string> uniqueDates = ListOperations
                 .Where(o => DateTime.Parse(o.Date).Month == DateTime.Now.Month)
@@ -63,7 +68,7 @@ namespace FinanceApplication.views
                 .ToList();
 
             days = new List<OperationsDays>();
-
+            Console.WriteLine("кропка   26");
 
             foreach (string date in uniqueDates)
             {
@@ -72,23 +77,14 @@ namespace FinanceApplication.views
                     ListOperations.Where(operation => operation.Date == date).ToList()
                 );
                 days.Add(day);
-                //totalBalance += day.profitSum;
-
             }
 
-            totalBalance = ListOperations.Sum(operation => operation.Sum) - ListOperations.Where(operation => !operation.Profit).Sum(operation => operation.Sum);
             total.Text = $"$ {totalBalance}";
+            Console.WriteLine("кропка   27");
 
-
-            OperationsCollection.ItemsSource = days;
+            OperationsCollection.ItemsSource = days.OrderByDescending(day => day.date);
         }
-
-             
-
-        private async void ToCardPage(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new CardPage(context));
-        }
+    
 
         private async void OnItemSelected(object sender, SelectionChangedEventArgs e)
         {
@@ -107,9 +103,12 @@ namespace FinanceApplication.views
             await Navigation.PushAsync(new DatePage(context));
         }
 
-        private async void ToNewOperationPage(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new NewOperationPage(context));
-        }
+        private async void ToNewOperationPage(object sender, EventArgs e) => await Navigation.PushAsync(new NewOperationPage(context));
+        private async void ToCardPage(object sender, EventArgs e) => await Navigation.PushAsync(new CardPage(context));
+        private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage(context));
+        private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage(DateTime.Now, context));
+        private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage(context));
+        private async void ToConverterPage(object sender, EventArgs e) => await Navigation.PushAsync(new ConverterPage(context));
+        private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsPage(context));
     }
 }

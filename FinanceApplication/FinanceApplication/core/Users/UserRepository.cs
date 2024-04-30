@@ -43,9 +43,9 @@ namespace FinanceApp.classes.Users
             {
                 string answer = await response.Content.ReadAsStringAsync();
                 User user = JsonConvert.DeserializeObject<User>(answer);
-                Console.WriteLine("-------------смена пользователя");
-                Console.WriteLine(user);
-                Console.WriteLine("-------------смена пользователя");
+                //Console.WriteLine("-------------смена пользователя");
+                //Console.WriteLine(user);
+                //Console.WriteLine("-------------смена пользователя");
                 return user;
             }
             else

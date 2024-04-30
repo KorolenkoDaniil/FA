@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FinanceApplication.views.CardPage">
+             x:Class="FinanceApplication.views.CategoriesPage">
 
 
     <ContentPage.Resources>
@@ -13,73 +13,57 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-
     <AbsoluteLayout BackgroundColor="#F5F5F5" Padding="0">
         <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height=".08*"/>
                 <RowDefinition Height=".08*"/>
                 <RowDefinition Height=".08*"/>
-                <RowDefinition Height=".695*"/>
+                <RowDefinition Height=".07*"/>
+                <RowDefinition Height=".07*"/>
+                <RowDefinition Height=".1*"/>
+                <RowDefinition Height=".385*"/>
+                <RowDefinition Height=".07*"/>
                 <RowDefinition Height=".065*"/>
+
             </Grid.RowDefinitions>
 
-            <Frame Grid.Column="0" Grid.Row="0" Padding="15">
+            <Frame Grid.Column="0" Grid.Row="0" Padding="0, 10, 0, 10">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".5*"/>
-                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition Width=".05*"/>
+                        <ColumnDefinition Width=".35*"/>
+                        <ColumnDefinition Width=".45*"/>
                         <ColumnDefinition Width=".1*"/>
+                        <ColumnDefinition Width=".05*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="Cards" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}"/>
+                    <Label Text="Categories" Grid.Column="1"  VerticalOptions="Center" Grid.Row="0" Style="{StaticResource TextOpenSans}" />
+                    
+                    <Image x:Name="Settings" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="3">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToSettingsPage" />
+                        </Image.GestureRecognizers>
+                    </Image>
 
-                    <Frame CornerRadius="30" BackgroundColor="#F4F4F4" Grid.Column="1" Grid.Row="0" Padding="0">
-                        <Label HorizontalOptions="Center" VerticalOptions="Center" Text="20, July, 2024" Style="{StaticResource TextOpenSans}"></Label>
-                    </Frame>
-
-                    <!--<Image Grid.Row="0" Grid.Column="2">-->
                 </Grid>
             </Frame>
 
-            <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="1" VerticalOptions="End" FontSize="Medium" Text="Total balance on cards"/>
-            <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="2" x:Name="CardsSum" FontSize="32"/>
-
-
-            <CollectionView Grid.Row="3" Grid.Column="0" x:Name="CardsCollection" SelectionChanged="OnItemSelected" SelectionMode="Single">
+            <CollectionView Grid.Row="6" Grid.Column="0" x:Name="CategoriesCollection" SelectionMode="Single" SelectionChanged="OnItemSelected">
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
                         <StackLayout>
-                            <Frame Margin="15, 15, 15, 15" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="20" BackgroundColor="{Binding LightMode}" >
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height=".1*"/>
-                                        <RowDefinition Height=".1*"/>
-                                        <RowDefinition Height=".3*"/>
-                                        <RowDefinition Height=".2*"/>
-                                        <RowDefinition Height=".2*"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width=".5*"/>
-                                        <ColumnDefinition Width=".5*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Text="{Binding Name}" Style="{StaticResource TextOpenSans}" TextColor="{Binding LightText}" Grid.Column="0" Grid.Row="0"/>
-                                    <Label Text="{Binding Type}" Style="{StaticResource TextOpenSans}" FontSize="Small" TextColor="#a3a3a3" Grid.Column="0" Grid.Row="1"/>
-
-                                    <AbsoluteLayout Grid.Column="0" Grid.Row="2">
-                                        <Frame BackgroundColor="Gray" CornerRadius="10" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, .4, .8 "/>
-                                    </AbsoluteLayout>
-                                    <Label Text="Increase" Style="{StaticResource TextOpenSans}" TextColor="{Binding LightText}" Grid.Column="0" Grid.Row="3"/>
-                                    <Label Text="Expenses" Style="{StaticResource TextOpenSans}" TextColor="{Binding LightText}" Grid.Column="0" Grid.Row="4"/>
-                                </Grid>
+                            <Frame BackgroundColor="White" Margin="10, 12, 10, 0">
+                                <StackLayout>
+        
+                                </StackLayout>
                             </Frame>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Frame BackgroundColor="White" Grid.Row="4" Grid.Column="0" Padding="3">
+            <Frame BackgroundColor="White" Grid.Row="8" Grid.Column="0" Padding="3">
                 <Grid>
 
                     <Image x:Name="imageCard" Grid.Column="0" Grid.Row="0">
@@ -112,13 +96,14 @@
                         </Image.GestureRecognizers>
                     </Image>
 
+
                 </Grid>
             </Frame>
-        </Grid>
 
+        </Grid>
         <Frame x:Name="PlusButton" BackgroundColor="Transparent" Padding="0" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".9, .9, 50, 50" CornerRadius="30">
             <Frame.GestureRecognizers>
-                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToNewCardPage"/>
+                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToNewCategoryPage" />
             </Frame.GestureRecognizers>
             <Label Text="+" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center" />
         </Frame>

@@ -14,9 +14,14 @@ namespace Server.Models.Categories1
             CategoriesDB.CreateTable<Category>();
         }
 
-        public bool SaveCategory(Category category) => CategoriesDB.Insert(category) != 0;
+        public Category SaveCategory(Category category) 
+        {
+            if (CategoriesDB.Insert(category) != 0)
+                return category;
+            else
+                return null;
+        }
         
-
 
         public List<Category> SearchByUserID(int userId)
         {

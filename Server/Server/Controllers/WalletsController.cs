@@ -15,7 +15,7 @@ namespace Server.Controllers
         public WalletRepository WalletsRepository = new WalletRepository();
 
         [HttpPost]
-        public async Task<IActionResult> RegisterAWallet([FromBody] Wallet wallet)
+        public IActionResult RegisterAWallet([FromBody] Wallet wallet)
         {
             Wallet savedWallet = WalletsRepository.Savewallet(wallet);
             if (savedWallet != null) return Ok(savedWallet);

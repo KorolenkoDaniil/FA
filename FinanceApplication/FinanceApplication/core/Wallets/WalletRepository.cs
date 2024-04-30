@@ -1,5 +1,4 @@
-﻿using FinanceApplication.core.Operations;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -17,21 +16,26 @@ namespace FinanceApp.classes.Wallets
             string walletJson = JsonConvert.SerializeObject(newWallet);
             var content = new StringContent(walletJson, Encoding.UTF8, "application/json");
 
-            Console.WriteLine(newWallet);
+            //Console.WriteLine(newWallet);
             HttpResponseMessage response = await httpClient.PostAsync(Links.SaveWallet, content);
-
+            Console.WriteLine("кропка   19");
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine(response.IsSuccessStatusCode);
+                //Console.WriteLine(response.IsSuccessStatusCode);
                 string walletJSON = await response.Content.ReadAsStringAsync();
                 Wallet userWallet = JsonConvert.DeserializeObject<Wallet>(walletJSON);
                 return userWallet;
             }
-            else return null;
+            else
+            {
+                Console.WriteLine("кропка   20");
+                return null;
+            }
         }
 
         public async static Task<List<Wallet>> GetWallets(int userId)
         {
+            Console.WriteLine("кропка   21");
             Dictionary<string, string> userData = new Dictionary<string, string>
         {
             {"id", userId.ToString()}
@@ -42,18 +46,20 @@ namespace FinanceApp.classes.Wallets
 
             if (response.IsSuccessStatusCode)
             {
+                Console.WriteLine("кропка   22");
                 string walletsJson = await response.Content.ReadAsStringAsync();
                 List<Wallet> userWallets = JsonConvert.DeserializeObject<List<Wallet>>(walletsJson);
-                Console.WriteLine("----------- кошелек");
-                foreach (Wallet wallet in userWallets)
-                {
-                    Console.WriteLine(wallet);
-                }
-                Console.WriteLine("----------- кошелек");
+                //Console.WriteLine("----------- кошелек");
+                //foreach (Wallet wallet in userWallets)
+                //{
+                    //Console.WriteLine(wallet);
+                //}
+                //Console.WriteLine("----------- кошелек");
                 return userWallets;
             }
             else
             {
+                Console.WriteLine("кропка   23");
                 return null;
             }
         }

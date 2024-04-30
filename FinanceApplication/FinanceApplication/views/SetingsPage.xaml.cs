@@ -1,14 +1,23 @@
-﻿using Xamarin.Forms;
+﻿using FinanceApp.classes;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace FinanceApplication.views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SetingsPage : ContentPage
+    public partial class SettingsPage : ContentPage
     {
-        public SetingsPage()
+        Context context;
+
+        public SettingsPage(Context context)
         {
             InitializeComponent();
+            this.context = context;
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

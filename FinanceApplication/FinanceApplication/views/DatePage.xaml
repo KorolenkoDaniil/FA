@@ -114,7 +114,6 @@
 
             <Frame BackgroundColor="White" Grid.Row="4" Grid.Column="0" Padding="3">
                 <Grid>
-
                     <Image x:Name="imageCard" Grid.Column="0" Grid.Row="0">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCardPage" />
@@ -123,7 +122,7 @@
 
                     <Image x:Name="imageCathegory" Grid.Column="1" Grid.Row="0">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCardPage" />
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCategoriesPage" />
                         </Image.GestureRecognizers>
                     </Image>
 
@@ -135,16 +134,15 @@
 
                     <Image x:Name="imageDiagram" Grid.Column="3" Grid.Row="0">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCardPage" />
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToDiagramPage" />
                         </Image.GestureRecognizers>
                     </Image>
 
                     <Image x:Name="imageConverter" Grid.Column="4" Grid.Row="0">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToCardPage" />
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToConverterPage" />
                         </Image.GestureRecognizers>
                     </Image>
-
 
                 </Grid>
             </Frame>

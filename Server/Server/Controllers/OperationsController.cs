@@ -14,7 +14,7 @@ namespace Server.Controllers
         public OperationRepository OperationsRepository = new OperationRepository();
 
         [HttpPost]
-        public async Task<IActionResult> RegisterOperation([FromBody] Operation operation)
+        public IActionResult RegisterOperation([FromBody] Operation operation)
         {
             Operation savedOperation = OperationsRepository.SaveOperation(operation);
             if (savedOperation != null) return Ok(savedOperation);

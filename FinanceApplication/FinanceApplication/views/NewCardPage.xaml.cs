@@ -2,6 +2,7 @@
 using FinanceApp.classes.Wallets;
 using FinanceApplication.core;
 using FinanceApplication.core.Operations;
+using FinanceApplication.icons;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -19,29 +20,28 @@ namespace FinanceApplication.views
 
             NavigationPage.SetHasNavigationBar(this, false);
 
-            sumImage.Source = ImageSource.FromResource("FinanceApplication.icons.URow.png");
-            walletImage.Source = ImageSource.FromResource("FinanceApplication.icons.card.png");
-            cathegoryImage.Source = ImageSource.FromResource("FinanceApplication.icons.categories.png");
-            descriptionImage.Source = ImageSource.FromResource("FinanceApplication.icons.Description.png");
-            //dateImage.Source = ImageSource.FromResource("FinanceApplication.icons.URow.png");
+            sumImage.Source = ImageSource.FromResource(Icons.Iconspath[11]);
+            walletImage.Source = ImageSource.FromResource(Icons.Iconspath[2]);
+            cathegoryImage.Source = ImageSource.FromResource(Icons.Iconspath[3]);
+            descriptionImage.Source = ImageSource.FromResource(Icons.Iconspath[5]);
+            //dateImage.Source = ImageSource.FromResource(Icons.Iconspath[11]);
 
 
             PickerType.ItemsSource = context.WalletTypes;
         }
 
-
         private async void Cancel_Clicked(object sender, EventArgs e) => await Navigation.PopAsync();
-
 
         private async void Create_Clicked(object sender, EventArgs e)
         {
-            //if (!Validator.ValidateSum(decimal.Parse(EntrySum.Text))) return;
-            //if (!Validator.ValidateName(WalletPicker.SelectedItem.ToString(), 40)) return;
-            //if (!Validator.ValidateName(CathegoryPicker.SelectedItem.ToString(), 40)) return;
+            if (string.IsNullOrEmpty(EntryName.Text)) return;
+            if (PickerType.SelectedItem == null) return;
 
-            //DateTime date = Datepicker.Date;
+            decimal sum = 0;
 
-            //int userid, string name, string type, decimal amount, int colorID, bool include
+            if (!decimal.TryParse(EntrySum.Text, out sum)) return; 
+
+
 
             Random random = new Random();
 
@@ -49,10 +49,7 @@ namespace FinanceApplication.views
                 context.User.UserId, EntryName.Text, context.WalletTypes[PickerType.SelectedIndex], decimal.Parse(EntrySum.Text), random.Next(0, 10), CheckboxOfInclude.IsChecked);
 
             Wallet isSend = await WalletRepository.SaveWallet(newWallet);
-            Console.WriteLine("-------------------------------новый кошелек");
-            Console.WriteLine(isSend);
-            Console.WriteLine("-------------------------------новый кошелек");
-
+           
             if (isSend != null)
             {
                 context.Wallets.Add(isSend);

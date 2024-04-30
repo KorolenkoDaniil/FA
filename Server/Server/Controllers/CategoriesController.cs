@@ -15,7 +15,8 @@ namespace Server.Controllers
         [HttpPost]
         public IActionResult RegisterCategory([FromBody] Category category)
         {
-            if (CategoriesRepository.SaveCategory(category)) return Ok();
+            Category savedCathegory = CategoriesRepository.SaveCategory(category);
+            if (savedCathegory != null) return Ok(savedCathegory);
             else return BadRequest();
         }
         [HttpPost]

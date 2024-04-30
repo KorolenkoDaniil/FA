@@ -2,6 +2,7 @@
 using FinanceApp.classes.Wallets;
 using FinanceApplication.core.Category;
 using FinanceApplication.core.Operations;
+using FinanceApplication.icons;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -24,11 +25,19 @@ namespace FinanceApplication.views
             ConsumptionPage.IsVisible = false;
             TransferPage.IsVisible = false;
 
-            sumImage.Source = ImageSource.FromResource("FinanceApplication.icons.URow.png");
-            walletImage.Source = ImageSource.FromResource("FinanceApplication.icons.card.png");
-            cathegoryImage.Source = ImageSource.FromResource("FinanceApplication.icons.categories.png");
-            descriptionImage.Source = ImageSource.FromResource("FinanceApplication.icons.Description.png");
-            dateImage.Source = ImageSource.FromResource("FinanceApplication.icons.URow.png");
+            sumImage.Source = ImageSource.FromResource(Icons.Iconspath[11]);
+            walletImage.Source = ImageSource.FromResource(Icons.Iconspath[2]);
+            cathegoryImage.Source = ImageSource.FromResource(Icons.Iconspath[3]);
+            descriptionImage.Source = ImageSource.FromResource(Icons.Iconspath[5]);
+            dateImage.Source = ImageSource.FromResource(Icons.Iconspath[11]);
+
+            sumImageС.Source = ImageSource.FromResource(Icons.Iconspath[11]);
+            walletImageС.Source = ImageSource.FromResource(Icons.Iconspath[2]);
+            cathegoryImageС.Source = ImageSource.FromResource(Icons.Iconspath[3]);
+            descriptionImageС.Source = ImageSource.FromResource(Icons.Iconspath[5]);
+            dateImageС.Source = ImageSource.FromResource(Icons.Iconspath[11]);
+
+
 
 
             List<string> walletsNames = new List<string>();
@@ -79,14 +88,37 @@ namespace FinanceApplication.views
 
         private async void Create_Clicked(object sender, EventArgs e)
         {
-            if (!Validator.ValidateSum(decimal.Parse(EntrySum.Text))) return;
-            if (!Validator.ValidateName(WalletPicker.SelectedItem.ToString(), 40)) return ;
-            if (!Validator.ValidateName(CathegoryPicker.SelectedItem.ToString(), 40)) return;
 
+            if (WalletPicker.SelectedItem == null || CathegoryPicker.SelectedItem == null)
+                return;
+
+            decimal sum = 0;
+
+            if (!decimal.TryParse(EntrySum.Text, out sum)) return;
+
+
+            CreateOperation(true, sum);
+        }
+
+        private async void Create_ClickedС(object sender, EventArgs e)
+        {
+
+            if (WalletPicker.SelectedItem == null || CathegoryPicker.SelectedItem == null)
+                return;
+
+            decimal sum = 0;
+
+            if (!decimal.TryParse(EntrySum.Text, out sum)) return;
+
+            CreateOperation(false, sum);
+        }
+
+        private async void CreateOperation(bool include, decimal sum)
+        {
             DateTime date = Datepicker.Date;
 
             Operation newOperation = new Operation(
-                context.User.UserId, date.ToString("d"), true, decimal.Parse(EntrySum.Text), context.Wallets[WalletPicker.SelectedIndex].WalletId, CathegoryPicker.SelectedItem.ToString(), EntryDescription.Text);
+                context.User.UserId, date.ToString("d"), include, sum, context.Wallets[WalletPicker.SelectedIndex].WalletId, CathegoryPicker.SelectedItem.ToString(), EntryDescription.Text);
 
             Operation isSend = await OperationRepository.SaveOperation(newOperation);
             if (isSend != null)

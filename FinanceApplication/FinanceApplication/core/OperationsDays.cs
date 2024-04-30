@@ -23,8 +23,8 @@ namespace FinanceApplication.core
  
             profitSum = Operations.Where(o => o.Profit).Sum(o => o.Sum);
             expenses = Operations.Where(o => o.Profit == false).Sum(o => o.Sum);
-            Console.WriteLine(profitSum + $"доходы дня {date}");
-            Console.WriteLine(expenses + $"расходы дня {date}");
+            //Console.WriteLine(profitSum + $"доходы дня {date}");
+            //Console.WriteLine(expenses + $"расходы дня {date}");
         }
     }
 }

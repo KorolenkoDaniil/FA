@@ -50,10 +50,16 @@
 
             <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="3" Margin="0">
                 <StackLayout>
-                    <Label Style="{StaticResource Text1}" Text="Email" Margin="10, 0,0,0" Grid.Column="0" Grid.Row="0"/>
-                    <Entry x:Name="entryEmail"  Keyboard="Email" TextColor="Black" Margin="10, 0, 0, 0" Grid.Column="0" Grid.Row="1"/>
+                    <Label Style="{StaticResource Text1}" Text="Email" Margin="10, 0,0,0" />
+                    <StackLayout Orientation="Horizontal">
+                        <Entry x:Name="entryEmail" TextChanged="emailChaged"  Keyboard="Email" TextColor="Black" WidthRequest="0.9" HorizontalOptions="FillAndExpand" Margin="10, 0, 0, 0"/>
+                        <Image x:Name="CheckImage" HeightRequest="15" WidthRequest="15"/>
+                    </StackLayout>
                 </StackLayout>
             </Frame>
+
+
+
 
             <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="5">
                 <StackLayout>
