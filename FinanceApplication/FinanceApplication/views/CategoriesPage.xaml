@@ -55,7 +55,14 @@
                         <StackLayout>
                             <Frame BackgroundColor="White" Margin="10, 12, 10, 0">
                                 <StackLayout>
-        
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width=".25*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image x:Name="CategoriIcon" Grid.Row="0" Grid.Column="0"/>
+                                        <Label Text="{Binding Name}" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
+                                    </Grid>
                                 </StackLayout>
                             </Frame>
                         </StackLayout>

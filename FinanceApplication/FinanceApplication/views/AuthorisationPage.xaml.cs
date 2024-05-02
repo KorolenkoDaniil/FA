@@ -40,6 +40,7 @@ namespace FinanceApplication.views
                 entryPass1.IsEnabled = false;
                 entryEmail.IsEnabled = false;
                 Loading.IsVisible = true;
+                BadRequestLabel.IsVisible = false;
 
                 if (!Validator.ValidateString(entryEmail.Text, 20) || !Validator.ValidateString(entryPass1.Text, 15)) { ErrorLabel.IsVisible = true; return; }
                 else if (!regex.IsMatch(entryEmail.Text)) { ErrorLabel.IsVisible = true; return; }
@@ -59,6 +60,7 @@ namespace FinanceApplication.views
             }
             catch (Exception ex)
             {
+                BadRequestLabel.IsVisible = true;
                 await Console.Out.WriteLineAsync("----------------");
                 await Console.Out.WriteLineAsync(ex.Message);
                 await Console.Out.WriteLineAsync("----------------");
