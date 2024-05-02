@@ -67,7 +67,7 @@
                 <StackLayout>
                     <Label Style="{StaticResource Text1}" Text="Email" Margin="10, 0,0,0" />
                     <StackLayout Orientation="Horizontal">
-                        <Entry x:Name="entryEmail" TextChanged="emailChaged"  Keyboard="Email" TextColor="Black" WidthRequest="0.9" HorizontalOptions="FillAndExpand" Margin="10, 0, 0, 0"/>
+                        <Entry x:Name="entryEmail" Focused="entryEmail_Focused" Unfocused="entryEmail_Unfocused" Keyboard="Email" TextColor="Black" WidthRequest="0.9" HorizontalOptions="FillAndExpand" Margin="10, 0, 0, 0"/>
                         <Image x:Name="CheckImage" HeightRequest="15" WidthRequest="15"/>
                     </StackLayout>
                 </StackLayout>

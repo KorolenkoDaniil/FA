@@ -33,7 +33,8 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width=".1*"/>
-                        <ColumnDefinition Width=".9*"/>
+                        <ColumnDefinition Width=".85*"/>
+                        <ColumnDefinition Width=".05*"/>
                     </Grid.ColumnDefinitions>
 
 
@@ -44,11 +45,15 @@
                     <CheckBox x:Name="CheckboxOfInclude" Grid.Column="0" Grid.Row="4" HorizontalOptions="Center" VerticalOptions="Center"></CheckBox>
 
 
-                    <Entry x:Name="EntryName" Keyboard="Text" Placeholder="название нового кошелька" PlaceholderColor="#8f8f8f" FontSize="Medium" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
-                    <Picker x:Name="PickerType" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
+                    <Entry x:Name="EntryName" Focused="EntryName_Focused" Unfocused="EntryName_Unfocused" Keyboard="Text" Placeholder="название нового кошелька" PlaceholderColor="#8f8f8f" FontSize="14" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
+                    <Picker x:Name="PickerType" Focused="PickerType_Focused" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
                     <!--<Picker x:Name="CathegoryPick" Grid.Row="2" Grid.Column="1" TextColor="Black"/>-->
-                    <Entry x:Name="EntrySum" Keyboard="Numeric"  Placeholder="остаток средств" Text="0" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
+                    <Entry x:Name="EntrySum" Focused="EntrySum_Focused" Unfocused="EntrySum_Unfocused" Keyboard="Numeric" Placeholder="остаток средств" Text="0" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
                     <Label Grid.Row="4" Grid.Column="1" TextColor="Black" Text="включить в общий баланс"/>
+
+                    <Image x:Name="xmark1" Grid.Row="0" Grid.Column="2"/>
+                    <Image x:Name="xmark3" Grid.Row="1" Grid.Column="2"/>
+                    <Image x:Name="xmark2" Grid.Row="3" Grid.Column="2"/>
 
                     <Grid Grid.Column="1" Grid.Row="5">
                         <Grid.ColumnDefinitions>

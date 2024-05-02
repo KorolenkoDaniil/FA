@@ -65,7 +65,7 @@ namespace FinanceApplication.views
             }
             finally
             {
-                Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+                Device.StartTimer(TimeSpan.FromSeconds(1), () =>
                 {
                     Loading.IsVisible = false; // Добавьте эту строку
                     LogInButton.IsEnabled = true;
@@ -77,17 +77,15 @@ namespace FinanceApplication.views
             }
         }
 
-        private void emailChaged(object sender, TextChangedEventArgs e)
-        {
+        private void entryEmail_Focused(object sender, FocusEventArgs e) => CheckImage.IsVisible = false;
 
-            if (regex.IsMatch(entryEmail.Text)) 
-            {
+        private void entryEmail_Unfocused(object sender, FocusEventArgs e)
+        {
+            CheckImage.IsVisible = true;
+            if (regex.IsMatch(entryEmail.Text) && entryEmail.Text.Length <= 40)
                 CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[15]);
-            }
             else
-            {
                 CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
-            }
         }
     }
 }

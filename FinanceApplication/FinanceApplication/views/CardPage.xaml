@@ -70,8 +70,8 @@
                                     <AbsoluteLayout Grid.Column="0" Grid.Row="2">
                                         <Frame BackgroundColor="Gray" CornerRadius="10" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, .4, .8 "/>
                                     </AbsoluteLayout>
-                                    <Label Text="Increase" Style="{StaticResource TextOpenSans}" TextColor="{Binding LightText}" Grid.Column="0" Grid.Row="3"/>
-                                    <Label Text="Expenses" Style="{StaticResource TextOpenSans}" TextColor="{Binding LightText}" Grid.Column="0" Grid.Row="4"/>
+                                    <Label Text="Amount of money" Style="{StaticResource TextOpenSans}" TextColor="{Binding Amount}" Grid.Column="0" Grid.Row="3"/>
+                                    <Label Text="{Binding Amount, StringFormat='${0}'}" HorizontalOptions="End" Style="{StaticResource TextOpenSans}" TextColor="{Binding Amount}" Grid.Column="1" Grid.Row="3"/>
                                 </Grid>
                             </Frame>
                         </StackLayout>

@@ -28,21 +28,16 @@ namespace FinanceApplication.views
             ShowCards();
             BindingContext = this;
             PlusButton.BackgroundColor = Color.FromHex(context.Color.LightMode);
-
         }
 
         public void ShowCards()
         {
-            //Console.WriteLine("----------- новая таблица карт и цвета");
-            //foreach (Wallet w in context.Wallets)
-            //{
-            //    Console.WriteLine(w.Name);
-            //}
             List<ExtendedWallet> walletsWithColors = (from wallet in context.Wallets
                               join color in context.Colors on wallet.ColorId equals color.ColorId
                               select new ExtendedWallet
                               {
                                   WalletId = wallet.WalletId,
+                                  Include = wallet.Include,
                                   UserId = wallet.UserId,
                                   Name = wallet.Name,
                                   Type = wallet.Type,
@@ -53,12 +48,11 @@ namespace FinanceApplication.views
                                   LightText = color.LightText
                               }).ToList();
 
-            //foreach (var wallet in walletsWithColors)
-            //{
-            //    Console.WriteLine($"{wallet.WalletId} {wallet.UserId}  {wallet.Type} {wallet.Amount} {wallet.DarkMode} {wallet.LightMode} {wallet.DarkText} {wallet.LightText}");
-            //}
-            //Console.WriteLine("----------- новая таблица карт и цвета");
-            CardsSum.Text = "$" + context.Wallets.Where(wallet => wallet.Include).Sum(wallet => wallet.Amount).ToString();
+            foreach(ExtendedWallet wallet in walletsWithColors)
+            {
+                wallet.Amount = context.Operations.Where(operation => operation.WalletId == wallet.WalletId && operation.Profit).Sum(o => o.Sum) - context.Operations.Where(operation => operation.WalletId == wallet.WalletId && !operation.Profit).Sum(o => o.Sum); ;
+            }
+            CardsSum.Text = "$" + walletsWithColors.Where(wallet => wallet.Include).Sum(wa => wa.Amount);
             CardsCollection.ItemsSource = walletsWithColors;
         }
 

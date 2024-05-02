@@ -66,7 +66,8 @@
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width=".1*"/>
-                            <ColumnDefinition Width=".9*"/>
+                            <ColumnDefinition Width=".85*"/>
+                            <ColumnDefinition Width=".05*"/>
                         </Grid.ColumnDefinitions>
 
 
@@ -77,11 +78,16 @@
                         <Image x:Name="dateImage" Grid.Column="0" Grid.Row="4" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
 
 
-                        <Entry x:Name="EntrySum" Keyboard="Numeric" Placeholder="сумма" PlaceholderColor="#8f8f8f" FontSize="Medium" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
-                        <Picker x:Name="WalletPicker" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
-                        <Picker x:Name="CathegoryPicker" Grid.Row="2" Grid.Column="1" TextColor="Black"/>
-                        <Entry x:Name="EntryDescription" Placeholder="подробности" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
+                        <Entry x:Name="EntrySum" Focused="EntrySum_Focused" Unfocused="EntrySum_Unfocused" Keyboard="Numeric" Placeholder="сумма" PlaceholderColor="#8f8f8f" FontSize="Medium" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
+                        <Picker x:Name="WalletPicker" Focused="WalletPicker_Focused" Unfocused="WalletPicker_Unfocused" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
+                        <Picker x:Name="CathegoryPicker" Focused="CathegoryPicker_Focused" Unfocused="CathegoryPicker_Unfocused" Grid.Row="2" Grid.Column="1" TextColor="Black"/>
+                        <Entry x:Name="EntryDescription" Focused="EntryDescription_Focused" Unfocused="EntryDescription_Unfocused" Placeholder="подробности" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
                         <DatePicker x:Name="Datepicker" Grid.Row="4" Grid.Column="1" TextColor="Black"/>
+
+                        <Image x:Name="xmarkIncome0" Grid.Row="0" Grid.Column="2"/>
+                        <Image x:Name="xmarkIncome1" Grid.Row="1" Grid.Column="2"/>
+                        <Image x:Name="xmarkIncome2" Grid.Row="2" Grid.Column="2"/>
+                        <Image x:Name="xmarkIncome3" Grid.Row="3" Grid.Column="2"/>
 
                         <Grid Grid.Column="1" Grid.Row="5"> 
                             <Grid.ColumnDefinitions>
@@ -117,7 +123,8 @@
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width=".1*"/>
-                            <ColumnDefinition Width=".9*"/>
+                            <ColumnDefinition Width=".85*"/>
+                            <ColumnDefinition Width=".05*"/>
                         </Grid.ColumnDefinitions>
 
 
@@ -127,12 +134,16 @@
                         <Image x:Name="descriptionImageС" Grid.Column="0" Grid.Row="3" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
                         <Image x:Name="dateImageС" Grid.Column="0" Grid.Row="4" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
 
-
-                        <Entry x:Name="EntrySumС" Keyboard="Numeric" Placeholder="сумма" PlaceholderColor="#8f8f8f" FontSize="Medium" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
-                        <Picker x:Name="WalletPickerС" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
-                        <Picker x:Name="CathegoryPickerС" Grid.Row="2" Grid.Column="1" TextColor="Black"/>
-                        <Entry x:Name="EntryDescriptionС" Placeholder="подробности" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
+                        <Entry x:Name="EntrySumС" Focused="EntrySumС_Focused" Unfocused="EntrySumС_Unfocused" Keyboard="Numeric" Placeholder="сумма" PlaceholderColor="#8f8f8f" FontSize="Medium" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
+                        <Picker x:Name="WalletPickerС" Focused="WalletPickerС_Focused" Unfocused="WalletPickerС_Unfocused" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
+                        <Picker x:Name="CathegoryPickerС" Focused="CathegoryPickerС_Focused" Unfocused="CathegoryPickerС_Unfocused" Grid.Row="2" Grid.Column="1" TextColor="Black"/>
+                        <Entry x:Name="EntryDescriptionС" Focused="EntryDescriptionС_Focused" Unfocused="EntryDescriptionС_Unfocused" Placeholder="подробности" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
                         <DatePicker x:Name="DatepickerС" Grid.Row="4" Grid.Column="1" TextColor="Black"/>
+
+                        <Image x:Name="xmarkConsume0" Grid.Row="0" Grid.Column="2"/>
+                        <Image x:Name="xmarkConsume1" Grid.Row="1" Grid.Column="2"/>
+                        <Image x:Name="xmarkConsume2" Grid.Row="2" Grid.Column="2"/>
+                        <Image x:Name="xmarkConsume3" Grid.Row="3" Grid.Column="2"/>
 
                         <Grid Grid.Column="1" Grid.Row="5">
                             <Grid.ColumnDefinitions>
@@ -142,8 +153,8 @@
                             </Grid.ColumnDefinitions>
 
 
-                            <Button x:Name="CancelС" Clicked="Cancel_Clicked" Text="Отмена" Grid.Row="0" Grid.Column="0"></Button>
-                            <Button x:Name="CreateС" Clicked="Create_ClickedС" Text="Создать" Grid.Row="0" Grid.Column="2"></Button>
+                            <Button x:Name="CancelС" Clicked="Cancel_Clicked" Text="Отмена" Grid.Row="0" Grid.Column="0"/>
+                            <Button x:Name="CreateС" Clicked="Create_ClickedС" Text="Создать" Grid.Row="0" Grid.Column="2"/>
                         </Grid>
 
                     </Grid>

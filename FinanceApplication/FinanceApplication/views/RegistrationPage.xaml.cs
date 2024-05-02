@@ -30,7 +30,7 @@ namespace FinanceApplication.views
             ErrorLabel.IsVisible = false;
             BadRequestLabel.IsVisible = false;
             Loading.IsVisible = false;
-            CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
+            //CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
 
         }
 
@@ -44,7 +44,6 @@ namespace FinanceApplication.views
             entryNickname.IsEnabled = false;
             entryPass1.IsEnabled = false;
             entryPass2.IsEnabled = false;
-            Console.WriteLine("кропка   1");
             Loading.IsVisible = true;
 
             Regex regex = new Regex(@"@gmail.com$");
@@ -137,17 +136,17 @@ namespace FinanceApplication.views
             }
         }
 
+        private void entryEmail_Focused(object sender, FocusEventArgs e) => CheckImage.IsVisible = false;
 
-        private void emailChaged(object sender, TextChangedEventArgs e)
+        private void entryEmail_Unfocused(object sender, FocusEventArgs e)
         {
-
-            if (!regex.IsMatch(entryEmail.Text) || entryEmail.Width > 40)
-            {
-                CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
-            }
-            else 
+            if (regex.IsMatch(entryEmail.Text) && entryEmail.Text.Length <= 40)
             {
                 CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[15]);
+            }
+            else
+            {
+                CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
             }
         }
     }
