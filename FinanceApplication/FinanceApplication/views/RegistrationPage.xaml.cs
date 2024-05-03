@@ -46,10 +46,6 @@ namespace FinanceApplication.views
             entryPass2.IsEnabled = false;
             Loading.IsVisible = true;
             BadRequestLabel.IsVisible = false;
-
-
-            Regex regex = new Regex(@"@gmail.com$");
-
             try
             {
                 if (!Validator.ValidateString(entryEmail.Text, 40) || !Validator.ValidateString(entryNickname.Text, 15) ||

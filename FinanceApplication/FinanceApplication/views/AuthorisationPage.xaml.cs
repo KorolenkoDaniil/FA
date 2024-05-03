@@ -58,9 +58,7 @@ namespace FinanceApplication.views
                     else BadRequestLabel.IsVisible = true;
                 }
             }
-            catch 
-            {
-            }
+            catch BadRequestLabel.IsVisible = true;
             finally
             {
                 Device.StartTimer(TimeSpan.FromSeconds(1), () =>
