@@ -1,4 +1,5 @@
-﻿using Server.Operations;
+﻿using Server.Models.Categories1;
+using Server.Operations;
 using Server.Wallets;
 using SQLite;
 
@@ -19,12 +20,15 @@ namespace FinanceAppl.Operations
 
         public Operation SaveOperation(Operation operation)
         {
-            if (OperationsDB.Insert(operation) != 0)
-                return operation;
-            else
-                return null;
-        }
+            var existingOperation = OperationsDB.Table<Operation>().FirstOrDefault(oper => oper.Id == operation.Id);
 
+            if(existingOperation != null)
+                OperationsDB.Update(operation);
+            else
+                OperationsDB.Insert(operation);
+
+            return OperationsDB.Table<Operation>().FirstOrDefault(oper => oper.Id == operation.Id);
+        }
 
         public List<Operation> SearchByUserID(int userId)
         {
