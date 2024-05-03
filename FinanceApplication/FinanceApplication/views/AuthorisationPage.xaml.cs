@@ -40,6 +40,7 @@ namespace FinanceApplication.views
                 entryPass1.IsEnabled = false;
                 entryEmail.IsEnabled = false;
                 Loading.IsVisible = true;
+                BadRequestLabel.IsVisible = false;
 
                 if (!Validator.ValidateString(entryEmail.Text, 20) || !Validator.ValidateString(entryPass1.Text, 15)) { ErrorLabel.IsVisible = true; return; }
                 else if (!regex.IsMatch(entryEmail.Text)) { ErrorLabel.IsVisible = true; return; }
@@ -57,11 +58,9 @@ namespace FinanceApplication.views
                     else BadRequestLabel.IsVisible = true;
                 }
             }
-            catch (Exception ex)
+            catch 
             {
-                await Console.Out.WriteLineAsync("----------------");
-                await Console.Out.WriteLineAsync(ex.Message);
-                await Console.Out.WriteLineAsync("----------------");
+                BadRequestLabel.IsVisible = true;
             }
             finally
             {
@@ -82,10 +81,10 @@ namespace FinanceApplication.views
         private void entryEmail_Unfocused(object sender, FocusEventArgs e)
         {
             CheckImage.IsVisible = true;
-            if (regex.IsMatch(entryEmail.Text) && entryEmail.Text.Length <= 40)
-                CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[15]);
-            else
+            if (!Validator.ValidateString(entryEmail.Text, 40) || !regex.IsMatch(entryEmail.Text))
                 CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
+            else
+                CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[15]);
         }
     }
 }

@@ -15,12 +15,17 @@ namespace Server.Wallets
             WalletDB.CreateTable<Wallet>();
         }
 
+ 
         public Wallet Savewallet(Wallet wallet)
         {
-            if (WalletDB.Insert(wallet) != 0)
-                return wallet;
+            var existingWallet = WalletDB.Table<Wallet>().FirstOrDefault(wallet => wallet.WalletId == wallet.WalletId);
+
+            if (existingWallet != null)
+                WalletDB.Update(wallet);
             else
-                return null;  
+                WalletDB.Insert(wallet);
+
+            return WalletDB.Table<Wallet>().FirstOrDefault(wallet => wallet.WalletId == wallet.WalletId);
         }
 
 

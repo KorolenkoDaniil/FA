@@ -45,6 +45,7 @@ namespace FinanceApplication.views
             entryPass1.IsEnabled = false;
             entryPass2.IsEnabled = false;
             Loading.IsVisible = true;
+            BadRequestLabel.IsVisible = false;
 
             Regex regex = new Regex(@"@gmail.com$");
 
@@ -118,7 +119,7 @@ namespace FinanceApplication.views
             }
             catch
             {
-
+                BadRequestLabel.IsVisible = true;
             }
             finally
             {

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinanceApplication.views.NewCategoryPage">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TextOpenSans" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontFamily" Value="OpenSans-Regular"/>
+            </Style>
+            <Style x:Key="Month" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontFamily" Value="OpenSans-Regular"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <AbsoluteLayout BackgroundColor="White">
+
+        <AbsoluteLayout x:Name="IncomePage" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" BackgroundColor="White">
+            <Frame CornerRadius="30" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".5, .2, .9, .5" BackgroundColor="#FFF7EC">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="Категория" FontSize="Large" VerticalOptions="Center" TextColor="Black"/>
+                        <Frame x:Name="CategoryImage" WidthRequest="20" HeightRequest="40" CornerRadius="40"/>
+                    </StackLayout>
+                    
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height=".28*"/>
+                            <RowDefinition Height=".28*"/>
+                            <RowDefinition Height=".28*"/>
+                            <RowDefinition Height=".16*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".1*"/>
+                            <ColumnDefinition Width=".85*"/>
+                            <ColumnDefinition Width=".05*"/>
+                        </Grid.ColumnDefinitions>
+
+                        
+                        <Image x:Name="CathegoryImage" Grid.Column="0" Grid.Row="0" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Image x:Name="IconImage" Grid.Column="0" Grid.Row="1" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Image x:Name="ColorImage" Grid.Column="0" Grid.Row="2" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+
+                        <Entry x:Name="EntryCategoryName" TextChanged="EntryCategoryName_TextChanged" Focused="EntryCategoryName_focused" Unfocused='EntryCategoryName_Unfocused' Keyboard="Default" Placeholder="название категории" PlaceholderColor="#8f8f8f" FontSize="Medium" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
+
+                        <Button x:Name="ImagePicker" VerticalOptions="Center" Grid.Row="1" Grid.Column="1" Text="выбрать иконку" Clicked="TapGestureRecognizer_Tapped" TextColor="Black" BackgroundColor="Transparent"/>
+                        <Button x:Name="ColorPicker" VerticalOptions="Center" Text="выбрать цвет" Grid.Row="2" Grid.Column="1" Clicked="TapGestureRecognizer_Tapped_1" TextColor="Black" BackgroundColor="Transparent"/>
+
+                  
+                        <Image x:Name="xmarkCategoryName" Grid.Row="0" Grid.Column="2"/>
+
+
+                        <Grid Grid.Column="1" Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".45*"/>
+                                <ColumnDefinition Width=".1*"/>
+                                <ColumnDefinition Width=".45*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="Cancel" Clicked="Cancel_Clicked" Text="Отмена" Grid.Row="0" Grid.Column="0"></Button>
+                            <Button x:Name="CreateSave" Clicked="Create_Clicked" Text="Создать" Grid.Row="0" Grid.Column="2"></Button>
+                        </Grid>
+
+                    </Grid>
+                </StackLayout>
+            </Frame>
+        </AbsoluteLayout>
+    </AbsoluteLayout>
+</ContentPage>

@@ -14,14 +14,19 @@ namespace Server.Models.Categories1
             CategoriesDB.CreateTable<Category>();
         }
 
-        public Category SaveCategory(Category category) 
+        public Category SaveCategory(Category category)
         {
-            if (CategoriesDB.Insert(category) != 0)
-                return category;
+            var existingCategory = CategoriesDB.Table<Category>().FirstOrDefault(cat => cat.CategoryId == category.CategoryId);
+
+            if (existingCategory != null)
+                CategoriesDB.Update(category);
             else
-                return null;
+                CategoriesDB.Insert(category);
+            
+            return CategoriesDB.Table<Category>().FirstOrDefault(cat => cat.CategoryId == category.CategoryId);
         }
-        
+
+
 
         public List<Category> SearchByUserID(int userId)
         {

@@ -16,46 +16,58 @@
     <AbsoluteLayout BackgroundColor="#F5F5F5" Padding="0">
         <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
             <Grid.RowDefinitions>
+                <RowDefinition Height=".18*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height=".08*"/>
-                <RowDefinition Height=".08*"/>
-                <RowDefinition Height=".08*"/>
-                <RowDefinition Height=".07*"/>
-                <RowDefinition Height=".07*"/>
-                <RowDefinition Height=".1*"/>
-                <RowDefinition Height=".385*"/>
-                <RowDefinition Height=".07*"/>
-                <RowDefinition Height=".065*"/>
-
             </Grid.RowDefinitions>
 
             <Frame Grid.Column="0" Grid.Row="0" Padding="0, 10, 0, 10">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".05*"/>
-                        <ColumnDefinition Width=".35*"/>
-                        <ColumnDefinition Width=".45*"/>
-                        <ColumnDefinition Width=".1*"/>
-                        <ColumnDefinition Width=".05*"/>
-                    </Grid.ColumnDefinitions>
+                <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".05*"/>
+                            <ColumnDefinition Width=".35*"/>
+                            <ColumnDefinition Width=".45*"/>
+                            <ColumnDefinition Width=".1*"/>
+                            <ColumnDefinition Width=".05*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Label Text="Categories" Grid.Column="1"  VerticalOptions="Center" Grid.Row="0" Style="{StaticResource TextOpenSans}" />
-                    
-                    <Image x:Name="Settings" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="3">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToSettingsPage" />
-                        </Image.GestureRecognizers>
-                    </Image>
+                        <Label Text="Categories" Grid.Column="1"  VerticalOptions="Center" Grid.Row="0" Style="{StaticResource TextOpenSans}" />
 
-                </Grid>
+                        <Image x:Name="Settings" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="3">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToSettingsPage" />
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                    </Grid>
+                    <Grid Margin="0" Padding="0">
+                        <Grid.ColumnDefinitions Margin="0">
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".5*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="Доходы" Grid.Column="0" HorizontalTextAlignment="Center" VerticalOptions="Center" Grid.Row="1" TextColor="Black" FontAttributes="Bold"/>
+                        <Label Text="Расходы" Grid.Column="1" HorizontalTextAlignment="Center" VerticalOptions="Center" Grid.Row="1" TextColor="Black" FontAttributes="Bold"/>
+
+                    </Grid>
+                </StackLayout>
             </Frame>
 
-            <CollectionView Grid.Row="6" Grid.Column="0" x:Name="CategoriesCollection" SelectionMode="Single" SelectionChanged="OnItemSelected">
+            <CollectionView Grid.Row="1" Grid.Column="0" x:Name="CategoriesCollection" SelectionMode="Single" SelectionChanged="OnItemSelected">
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
                         <StackLayout>
                             <Frame BackgroundColor="White" Margin="10, 12, 10, 0">
                                 <StackLayout>
-        
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width=".25*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image x:Name="CategoriIcon" Grid.Row="0" Grid.Column="0"/>
+                                        <Label Text="{Binding Name}" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
+                                    </Grid>
                                 </StackLayout>
                             </Frame>
                         </StackLayout>
@@ -63,7 +75,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Frame BackgroundColor="White" Grid.Row="8" Grid.Column="0" Padding="3">
+            <Frame BackgroundColor="White" Grid.Row="2" Grid.Column="0" Padding="3">
                 <Grid>
 
                     <Image x:Name="imageCard" Grid.Column="0" Grid.Row="0">
@@ -101,9 +113,11 @@
             </Frame>
 
         </Grid>
+        
+        
         <Frame x:Name="PlusButton" BackgroundColor="Transparent" Padding="0" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".9, .9, 50, 50" CornerRadius="30">
             <Frame.GestureRecognizers>
-                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToNewCategoryPage" />
+                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"/>
             </Frame.GestureRecognizers>
             <Label Text="+" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center" />
         </Frame>

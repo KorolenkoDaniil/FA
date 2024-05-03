@@ -17,12 +17,16 @@ namespace FinanceApplication.views
         {
             InitializeComponent();
             this.context = context;
+            NavigationPage.SetHasNavigationBar(this, false);
             imageCard.Source = ImageSource.FromResource(Icons.Iconspath[2]);
             imageCathegory.Source = ImageSource.FromResource(Icons.Iconspath[3]); ;
             imageList.Source = ImageSource.FromResource(Icons.Iconspath[8]);
             imageDiagram.Source = ImageSource.FromResource(Icons.Iconspath[6]);
             imageConverter.Source = ImageSource.FromResource(Icons.Iconspath[4]);
             Settings.Source = ImageSource.FromResource(Icons.Iconspath[12]);
+
+            CategoriesCollection.ItemsSource = context.Categories;
+            PlusButton.BackgroundColor = Color.FromHex(context.Color.LightMode);
         }
 
 
@@ -32,12 +36,13 @@ namespace FinanceApplication.views
 
             if (selectedItem != null)
             {
-                //await Navigation.PushAsync(new OneCardPage(selectedItem, context));
+                await Navigation.PushAsync(new NewCategoryPage(context, selectedItem));
             }
 
             CategoriesCollection.SelectedItem = null;
         }
 
+ 
 
         private async void ToNewCategoryPage(object sender, EventArgs e) => await Navigation.PushAsync(new NewOperationPage(context));
         private async void ToCardPage(object sender, EventArgs e) => await Navigation.PushAsync(new CardPage(context));
@@ -46,5 +51,7 @@ namespace FinanceApplication.views
         private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage(context));
         private async void ToConverterPage(object sender, EventArgs e) => await Navigation.PushAsync(new ConverterPage(context));
         private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsPage(context));
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e) => await Navigation.PushAsync(new NewCategoryPage(context));
+       
     }
 }
