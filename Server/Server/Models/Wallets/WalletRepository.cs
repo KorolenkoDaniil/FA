@@ -15,19 +15,26 @@ namespace Server.Wallets
             WalletDB.CreateTable<Wallet>();
         }
 
- 
-        public Wallet Savewallet(Wallet wallet)
-        {
-            var existingWallet = WalletDB.Table<Wallet>().FirstOrDefault(wallet => wallet.WalletId == wallet.WalletId);
 
+        public Wallet SaveWallet(Wallet wallet)
+        {
+            Console.WriteLine("!!!" + wallet);
+            var existingWallet = WalletDB.Table<Wallet>().FirstOrDefault(w => w.WalletId == wallet.WalletId);
             if (existingWallet != null)
                 WalletDB.Update(wallet);
             else
                 WalletDB.Insert(wallet);
-
-            return WalletDB.Table<Wallet>().FirstOrDefault(wallet => wallet.WalletId == wallet.WalletId);
+            return WalletDB.Table<Wallet>().FirstOrDefault(w => w.WalletId == wallet.WalletId);
         }
 
+        public bool DeleteWallet(Wallet wallet)
+        {
+            int delete = WalletDB.Delete(wallet);
+            if (delete != -1)
+                return true;
+            else
+                return false;
+        }
 
         public List<Wallet> SearchByUserID(int userId)
         {

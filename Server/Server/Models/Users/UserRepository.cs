@@ -17,9 +17,10 @@ namespace Server.Users
         public int SaveUser(User user)
         {
 
-            UserDB.Insert(user);
             User foundUser = UserDB.Table<User>().FirstOrDefault(u => u.Email == user.Email);
-            return foundUser.UserId;
+            if (foundUser == null)
+                UserDB.Insert(user);
+            return UserDB.Table<User>().FirstOrDefault(u => u.Email == user.Email).UserId;
         }
 
         public User SearchByEmailAndPassword(string email, string password)

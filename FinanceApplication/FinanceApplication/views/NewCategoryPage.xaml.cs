@@ -1,4 +1,5 @@
 ﻿using FinanceApp.classes;
+using FinanceApp.classes.Wallets;
 using FinanceApplication.core.Category;
 using FinanceApplication.icons;
 using System;
@@ -15,6 +16,7 @@ namespace FinanceApplication.views
         Category category;
         //Image selectedImage;
         Random random = new Random();
+        bool delete;
 
         public NewCategoryPage(Context context)
         {
@@ -25,6 +27,8 @@ namespace FinanceApplication.views
             category.UserId = context.User.UserId;
             category.ColorId = random.Next(0, context.Colors.Count - 1);
             CreateSave.Text = "создать";
+            Cancel.Text = "отмена";
+            delete = false;
             CategoryImage.BackgroundColor = Color.FromHex(context.Colors.FirstOrDefault(color => color.ColorId == category.ColorId).LightMode);
         }
 
@@ -36,6 +40,8 @@ namespace FinanceApplication.views
             this.category = category;
             CategoryImage.BackgroundColor = Color.FromHex(context.Colors.First(color => color.ColorId == category.ColorId).LightMode);
             CreateSave.Text = "Сохранить";
+            Cancel.Text = "удалить";
+            delete = true;
             EntryCategoryName.Text = category.Name;
         }
 
@@ -55,8 +61,22 @@ namespace FinanceApplication.views
             xmarkCategoryName.IsVisible = false;
         }
 
-        private async void Cancel_Clicked(object sender, EventArgs e) =>
-            await Navigation.PushAsync(new CategoriesPage(context));
+        private async void Cancel_Clicked(object sender, EventArgs e) 
+        {
+            if (!delete) await Navigation.PushAsync(new CardPage(context));
+            else
+            {
+                Cancel.IsEnabled = false;
+                CreateSave.IsEnabled = false;
+                int index = context.Categories.FindIndex(cat => cat.CategoryId == category.CategoryId);
+                //await WalletRepository.DeleteWallet(context.Wallets[index]);
+                await CategoryRepository.DeleteCategory(context.Categories[index]);
+                context.Categories.Remove(context.Categories[index]);
+                await Navigation.PushAsync(new CategoriesPage(context));
+            }
+            Cancel.IsEnabled = true;
+            CreateSave.IsEnabled = true;
+        }
         private void EntryCategoryName_focused(object sender, FocusEventArgs e) => xmarkCategoryName.IsVisible = false;
         private void EntryCategoryName_Unfocused(object sender, FocusEventArgs e) => xmarkCategoryName.IsVisible = EntryCategoryName.Text.Length > 20;
         private async void Create_Clicked(object sender, EventArgs e)

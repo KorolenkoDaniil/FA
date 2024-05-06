@@ -32,6 +32,10 @@ namespace FinanceApp.classes.Wallets
             //IconId = iconid;
         }
 
+        public Wallet (int WalletId, int userid, string name, string type, decimal amount, int colorID, bool include): this(userid, name,  type,  amount,  colorID, include){
+           this.WalletId = WalletId;
+        }
+
   
         public override string ToString() => $"{WalletId} {UserId} {Name} {Type} {Amount} цве {ColorId} {Include}";
 

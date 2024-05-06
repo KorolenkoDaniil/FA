@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Server.Models.Categories1;
+using Server.Wallets;
 
 namespace Server.Controllers
 {
@@ -19,6 +20,18 @@ namespace Server.Controllers
             if (savedCathegory != null) return Ok(savedCathegory);
             else return BadRequest();
         }
+
+        [HttpPost]
+        public IActionResult DaleteCategory([FromBody] Category category)
+        {
+            bool delete = CategoriesRepository.DeleteCategory(category);
+            if (delete != null) return Ok();
+            else return BadRequest();
+        }
+
+
+
+
         [HttpPost]
         public List<Category> GetCategories(string id)
         {

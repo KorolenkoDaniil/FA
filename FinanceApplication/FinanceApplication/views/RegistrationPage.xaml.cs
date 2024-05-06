@@ -28,14 +28,39 @@ namespace FinanceApplication.views
             this.context = context;
             BindingContext = this;
             ErrorLabel.IsVisible = false;
-            //BadRequestLabel.IsVisible = false;
+            BadRequestLabel.IsVisible = false;
             Loading.IsVisible = false;
             //CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
 
         }
 
-
         private async void CreateClicked(object sender, EventArgs e)
+        {
+            DisableControls();
+            try
+            {
+                if (!ValidateInputs()) return;
+                await SaveUserAndChangeTheme();
+                if (context.User != null)
+                {
+                    await HandleWallets();
+                    await HandleCategories();
+                    await HandleOperations();
+                    await Navigation.PushAsync(new ListPage(DateTime.Now, context));
+                }
+                else BadRequestLabel.IsVisible = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("=============" + ex.Message);
+            }
+            finally
+            {
+                EnableControlsAfterDelay();
+            }
+        }
+
+        private void DisableControls()
         {
             CanselButton.IsEnabled = false;
             CreateButton.IsEnabled = false;
@@ -44,94 +69,92 @@ namespace FinanceApplication.views
             entryPass1.IsEnabled = false;
             entryPass2.IsEnabled = false;
             Loading.IsVisible = true;
-            //BadRequestLabel.IsVisible = false;
-            try
-            {
-                if (!Validator.ValidateString(entryEmail.Text, 40) || !Validator.ValidateString(entryNickname.Text, 15) ||
-                    !Validator.ValidateString(entryPass1.Text, 15) || !Validator.ValidateString(entryPass2.Text, 15)) { ErrorLabel.IsVisible = true; return; }
-
-                else if (!string.Equals(entryPass1.Text, entryPass2.Text)) { ErrorLabel.IsVisible = true; return; }
-                else if (!regex.IsMatch(entryEmail.Text)) { ErrorLabel.IsVisible = true; return; }
-                else
-                {
-                    context.ChangeUser(await UserRepository.SaveUser(new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, 1)));
-                    context.ChangeTheme(await ColorRepository.GetColor(1));
-                }
-
-                Console.WriteLine("кропка   2");
-                if (context.User != null)
-                {
-                    List<Wallet> wallets = new List<Wallet>
-                {
-                    new Wallet(context.User.UserId, "кошелек 1", "Денежные средства", 0, 5, true),
-                    new Wallet(context.User.UserId, "кошелек 2", "Сберегательный счет", 0, 6, true)
-                };
-
-
-                    List<Task<Wallet>> saveTasks = wallets.Select(wallet => WalletRepository.SaveWallet(wallet)).ToList();
-
-                    if (saveTasks.Any(wallet => wallet == null))
-                        return;
-                    context.SetWalletsCollection(await WalletRepository.GetWallets(context.User.UserId));
-
-                    List<Category> categories = new List<Category>
-                {
-                    new Category("категория 1", context.User.UserId, 2),
-                    new Category("категория 2", context.User.UserId, 3),
-                    new Category("категория 3", context.User.UserId, 4),
-                    new Category("категория 4", context.User.UserId, 5),
-                    new Category("категория 5", context.User.UserId, 6),
-                };
-
-
-                    List<Task<Category>> saveTasksCategories = categories.Select(category => CategoryRepository.SaveCategory(category)).ToList();
-
-                    if (saveTasksCategories.Any(category => category == null))
-                        return;
-
-                    Console.WriteLine("кропка   4");
-                    context.SetCategoryCollection(await CategoryRepository.GetCategorys(context.User.UserId));
-
-                    foreach (var a in context.Wallets)
-                    {
-                        Console.WriteLine(a.WalletId);
-                    }
-
-                    Console.WriteLine(context.User);
-
-                    List<Operation> operations = new List<Operation>
-                {
-                    new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
-                    new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[1].Name, "qq" ),
-                    new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[0].Name, "qq" ),
-                };
-
-
-                    context.SetOperationsCollection(await OperationRepository.GetOperations(context.User.UserId));
-
-                    await Navigation.PushAsync(new ListPage(DateTime.Now, context));
-                }
-                //else BadRequestLabel.IsVisible = true;
-            }
-            catch
-            {
-                //BadRequestLabel.IsVisible = true;
-            }
-            finally
-            {
-                Device.StartTimer(TimeSpan.FromSeconds(3), () =>
-                {
-                    Loading.IsVisible = false;
-                    CanselButton.IsEnabled = true;
-                    CreateButton.IsEnabled = true;
-                    entryEmail.IsEnabled = true;
-                    entryNickname.IsEnabled = true;
-                    entryPass1.IsEnabled = true;
-                    entryPass2.IsEnabled = true;
-                    return false;
-                });
-            }
+            BadRequestLabel.IsVisible = false;
         }
+
+        private bool ValidateInputs()
+        {
+            if (!Validator.ValidateString(entryEmail.Text, 40) || !Validator.ValidateString(entryNickname.Text, 15) ||
+                !Validator.ValidateString(entryPass1.Text, 15) || !Validator.ValidateString(entryPass2.Text, 15))
+            {
+                ErrorLabel.IsVisible = true;
+                return false;
+            }
+            else if (!string.Equals(entryPass1.Text, entryPass2.Text))
+            {
+                ErrorLabel.IsVisible = true;
+                return false;
+            }
+            else if (!regex.IsMatch(entryEmail.Text))
+            {
+                ErrorLabel.IsVisible = true;
+                return false;
+            }
+            return true;
+        }
+
+        private async Task SaveUserAndChangeTheme()
+        {
+            context.ChangeUser(await UserRepository.SaveUser(new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, 1)));
+            context.ChangeTheme(await ColorRepository.GetColor(1));
+        }
+
+        private async Task HandleWallets()
+        {
+            List<Wallet> wallets = new List<Wallet>
+    {
+        new Wallet(context.User.UserId, "кошелек 1", "Денежные средства", 0, 5, true),
+        new Wallet(context.User.UserId, "кошелек 2", "Сберегательный счет", 0, 6, true)
+    };
+            List<Task<Wallet>> saveTasks = wallets.Select(wallet => WalletRepository.SaveWallet(wallet)).ToList();
+            if (saveTasks.Any(wallet => wallet == null))
+                return;
+            context.SetWalletsCollection(await WalletRepository.GetWallets(context.User.UserId));
+        }
+
+        private async Task HandleCategories()
+        {
+            List<Category> categories = new List<Category>
+    {
+        new Category("категория 1", context.User.UserId, 2),
+        new Category("категория 2", context.User.UserId, 3),
+        new Category("категория 3", context.User.UserId, 4),
+        new Category("категория 4", context.User.UserId, 5),
+        new Category("категория 5", context.User.UserId, 6),
+    };
+            List<Task<Category>> saveTasksCategories = categories.Select(category => CategoryRepository.SaveCategory(category)).ToList();
+            if (saveTasksCategories.Any(category => category == null))
+                return;
+            context.SetCategoryCollection(await CategoryRepository.GetCategorys(context.User.UserId));
+        }
+
+        private async Task HandleOperations()
+        {
+            List<Operation> operations = new List<Operation>
+    {
+        new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
+        new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[1].Name, "qq" ),
+        new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[0].Name, "qq" ),
+    };
+            context.SetOperationsCollection(await OperationRepository.GetOperations(context.User.UserId));
+        }
+
+        private void EnableControlsAfterDelay()
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+            {
+                Loading.IsVisible = false;
+                CanselButton.IsEnabled = true;
+                CreateButton.IsEnabled = true;
+                entryEmail.IsEnabled = true;
+                entryNickname.IsEnabled = true;
+                entryPass1.IsEnabled = true;
+                entryPass2.IsEnabled = true;
+                return false;
+            });
+        }
+
+
 
         private void entryEmail_Focused(object sender, FocusEventArgs e) => CheckImage.IsVisible = false;
 
@@ -150,134 +173,4 @@ namespace FinanceApplication.views
         private async void CancelClicked(object sender, EventArgs e) => await Navigation.PopAsync();
 
     }
-
-
-
-    //private async void CreateClicked(object sender, EventArgs e)
-    //{
-    //    // Disable all controls
-    //    ToggleControls(false);
-
-    //    try
-    //    {
-    //        // Validate inputs
-    //        if (!ValidateInputs()) return;
-
-    //        // Save user and update theme
-    //        await SaveUserAndUpdateTheme();
-
-    //        // If user is null, show error and return
-    //        if (context.User == null)
-    //        { 
-    //            BadRequestLabel.IsVisible = true;
-    //            return;
-    //        }
-
-    //        // Save wallets and categories
-    //        await SaveWalletsAndCategories();
-
-    //        // Save operations
-    //        await SaveOperations();
-
-    //        // Navigate to new page
-    //        await Navigation.PushAsync(new ListPage(DateTime.Now, context));
-    //    }
-    //    catch
-    //    {
-    //        BadRequestLabel.IsVisible = true;
-    //    }
-    //    finally
-    //    {
-    //        // Enable all controls after 3 seconds
-    //        Device.StartTimer(TimeSpan.FromSeconds(3), () =>
-    //        {
-    //            ToggleControls(true);
-    //            return false; // return false to stop timer
-    //        });
-    //    }
-    //}
-
-    //private void ToggleControls(bool isEnabled)
-    //{
-    //    CanselButton.IsEnabled = isEnabled;
-    //    CreateButton.IsEnabled = isEnabled;
-    //    entryEmail.IsEnabled = isEnabled;
-    //    entryNickname.IsEnabled = isEnabled;
-    //    entryPass1.IsEnabled = isEnabled;
-    //    entryPass2.IsEnabled = isEnabled;
-    //    Loading.IsVisible = !isEnabled;
-    //    BadRequestLabel.IsVisible = false;
-    //}
-
-    //private bool ValidateInputs()
-    //{
-    //    if (!Validator.ValidateString(entryEmail.Text, 40) || !Validator.ValidateString(entryNickname.Text, 15) ||
-    //        !Validator.ValidateString(entryPass1.Text, 15) || !Validator.ValidateString(entryPass2.Text, 15))
-    //    {
-    //        ErrorLabel.IsVisible = true;
-    //        return false;
-    //    }
-
-    //    if (!string.Equals(entryPass1.Text, entryPass2.Text))
-    //    {
-    //        ErrorLabel.IsVisible = true;
-    //        return false;
-    //    }
-
-    //    if (!regex.IsMatch(entryEmail.Text))
-    //    {
-    //        ErrorLabel.IsVisible = true;
-    //        return false;
-    //    }
-
-    //    return true;
-    //}
-
-    //private async Task SaveUserAndUpdateTheme()
-    //{
-    //    context.ChangeUser(await UserRepository.SaveUser(new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, 1)));
-    //    context.ChangeTheme(await ColorRepository.GetColor(1));
-    //}
-
-    //private async Task SaveWalletsAndCategories()
-    //{
-    //    List<Wallet> wallets = new List<Wallet>
-    //    {
-    //        new Wallet(context.User.UserId, "кошелек 1", "Денежные средства", 0, 5, true),
-    //        new Wallet(context.User.UserId, "кошелек 2", "Сберегательный счет", 0, 6, true)
-    //    };
-
-    //    await Task.WhenAll(wallets.Select(wallet => WalletRepository.SaveWallet(wallet)));
-
-    //    context.SetWalletsCollection(await WalletRepository.GetWallets(context.User.UserId));
-
-    //    List<Category> categories = new List<Category>
-    //    {
-    //        new Category("категория 1", context.User.UserId, 2),
-    //        new Category("категория 2", context.User.UserId, 3),
-    //        new Category("категория 3", context.User.UserId, 4),
-    //        new Category("категория 4", context.User.UserId, 5),
-    //        new Category("категория 5", context.User.UserId, 6),
-    //    };
-
-    //    await Task.WhenAll(categories.Select(category => CategoryRepository.SaveCategory(category)));
-
-    //    context.SetCategoryCollection(await CategoryRepository.GetCategorys(context.User.UserId));
-    //}
-
-    //private async Task SaveOperations()
-    //{
-    //    List<Operation> operations = new List<Operation>
-    //    {
-    //        new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
-    //        new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[1].Name, "qq" ),
-    //        new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[0].Name, "qq" ),
-    //    };
-
-    //    await Task.WhenAll(operations.Select(operation => OperationRepository.SaveOperation(operation)));
-
-    //    context.SetOperationsCollection(await OperationRepository.GetOperations(context.User.UserId));
-    //}
-
-
 }

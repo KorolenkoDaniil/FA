@@ -29,6 +29,20 @@ namespace FinanceApplication.core.Category
             else return null;
         }
 
+        public async static Task<bool> DeleteCategory(Category newCategory)
+        {
+            string CategoryJson = JsonConvert.SerializeObject(newCategory);
+            var content = new StringContent(CategoryJson, Encoding.UTF8, "application/json");
+
+            //Console.WriteLine(newCategory);
+            HttpResponseMessage response = await httpClient.PostAsync(Links.DaleteCategory, content);
+
+            if (response.IsSuccessStatusCode)
+                return true;
+            else 
+                return false;
+        }
+
         public async static Task<List<Category>> GetCategorys(int userId)
         {
             Dictionary<string, string> userData = new Dictionary<string, string>
