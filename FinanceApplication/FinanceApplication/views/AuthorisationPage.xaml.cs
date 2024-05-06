@@ -35,7 +35,7 @@ namespace FinanceApplication.views
         {
             try
             {
-             
+
                 LogInButton.IsEnabled = false;
                 entryPass1.IsEnabled = false;
                 entryEmail.IsEnabled = false;
@@ -58,7 +58,7 @@ namespace FinanceApplication.views
                     else BadRequestLabel.IsVisible = true;
                 }
             }
-            catch BadRequestLabel.IsVisible = true;
+            catch { BadRequestLabel.IsVisible = true; }
             finally
             {
                 Device.StartTimer(TimeSpan.FromSeconds(1), () =>

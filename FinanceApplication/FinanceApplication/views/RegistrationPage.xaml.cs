@@ -30,7 +30,7 @@ namespace FinanceApplication.views
             ErrorLabel.IsVisible = false;
             BadRequestLabel.IsVisible = false;
             Loading.IsVisible = false;
-            //CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
+            CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
 
         }
 
@@ -64,8 +64,8 @@ namespace FinanceApplication.views
                 {
                     List<Wallet> wallets = new List<Wallet>
                 {
-                    new Wallet(context.User.UserId, "кошелек 1", "денежные средства", 0, 5, true),
-                    new Wallet(context.User.UserId, "кошелек 2", "сберегательный счет", 0, 6, true)
+                    new Wallet(context.User.UserId, "Кошелек 1", context.WalletTypes[0], 0, 5, true),
+                    new Wallet(context.User.UserId, "Кошелек 2", context.WalletTypes[1], 0, 6, true)
                 };
 
 
@@ -77,11 +77,11 @@ namespace FinanceApplication.views
 
                     List<Category> categories = new List<Category>
                 {
-                    new Category("категория 1", context.User.UserId, 2),
-                    new Category("категория 2", context.User.UserId, 3),
-                    new Category("категория 3", context.User.UserId, 4),
-                    new Category("категория 4", context.User.UserId, 5),
-                    new Category("категория 5", context.User.UserId, 6),
+                    new Category("Категория 1", context.User.UserId, 2),
+                    new Category("Категория 2", context.User.UserId, 3),
+                    new Category("Категория 3", context.User.UserId, 4),
+                    new Category("Категория 4", context.User.UserId, 5),
+                    new Category("Категория 5", context.User.UserId, 6),
                 };
 
 

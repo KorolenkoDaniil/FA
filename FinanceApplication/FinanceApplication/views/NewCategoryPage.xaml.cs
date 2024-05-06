@@ -1,6 +1,5 @@
 ﻿using FinanceApp.classes;
 using FinanceApplication.core.Category;
-using FinanceApplication.core.Colors;
 using FinanceApplication.icons;
 using System;
 using System.Linq;
@@ -17,17 +16,6 @@ namespace FinanceApplication.views
         //Image selectedImage;
         Random random = new Random();
 
-        public NewCategoryPage(Context context, Category category)
-        {
-            InitializeComponent();
-            ShowImages();
-            this.context = context;
-            this.category = category;
-            CategoryImage.BackgroundColor = Color.FromHex(context.Colors.First(color => color.ColorId == category.ColorId).LightMode);
-            CreateSave.Text = "Сохранить";
-            EntryCategoryName.Text = category.Name;
-        }
-
         public NewCategoryPage(Context context)
         {
             InitializeComponent();
@@ -39,6 +27,18 @@ namespace FinanceApplication.views
             CreateSave.Text = "создать";
             CategoryImage.BackgroundColor = Color.FromHex(context.Colors.FirstOrDefault(color => color.ColorId == category.ColorId).LightMode);
         }
+
+        public NewCategoryPage(Context context, Category category)
+        {
+            InitializeComponent();
+            ShowImages();
+            this.context = context;
+            this.category = category;
+            CategoryImage.BackgroundColor = Color.FromHex(context.Colors.First(color => color.ColorId == category.ColorId).LightMode);
+            CreateSave.Text = "Сохранить";
+            EntryCategoryName.Text = category.Name;
+        }
+
 
         private void EntryCategoryName_TextChanged(object sender, TextChangedEventArgs e)
         {

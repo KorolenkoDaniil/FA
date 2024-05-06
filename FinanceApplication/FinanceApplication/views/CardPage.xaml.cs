@@ -13,7 +13,7 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CardPage : ContentPage
     {
-        Context context = new Context();
+        Context context;
 
         public CardPage(Context context)
         {
@@ -45,7 +45,8 @@ namespace FinanceApplication.views
                                   DarkMode = color.DarkMode,
                                   LightMode = color.LightMode,
                                   DarkText = color.DarkText,
-                                  LightText = color.LightText
+                                  LightText = color.LightText,
+                                  context = context
                               }).ToList();
 
             foreach(ExtendedWallet wallet in walletsWithColors)
@@ -67,7 +68,7 @@ namespace FinanceApplication.views
 
             if (selectedItem != null)
             {
-                await Navigation.PushAsync(new OneCardPage(selectedItem, context));
+                await Navigation.PushAsync(new NewCardPage(context, selectedItem));
             }
 
             CardsCollection.SelectedItem = null;

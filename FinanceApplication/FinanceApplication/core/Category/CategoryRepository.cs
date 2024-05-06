@@ -18,21 +18,15 @@ namespace FinanceApplication.core.Category
             var content = new StringContent(CategoryJson, Encoding.UTF8, "application/json");
 
             //Console.WriteLine(newCategory);
-            Console.WriteLine("кропка   9");
             HttpResponseMessage response = await httpClient.PostAsync(Links.SaveCategory, content);
 
             if (response.IsSuccessStatusCode)
             {
                 string categoryJSON = await response.Content.ReadAsStringAsync();
                 Category userCategory = JsonConvert.DeserializeObject<Category>(categoryJSON);
-                Console.WriteLine("кропка   10");
                 return userCategory;
             }
-            else
-            {
-                Console.WriteLine("кропка   11");
-                return null;
-            }
+            else return null;
         }
 
         public async static Task<List<Category>> GetCategorys(int userId)
@@ -51,7 +45,6 @@ namespace FinanceApplication.core.Category
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("кропка   12");
                     string CategoriessJson = await response.Content.ReadAsStringAsync();
                     userCategories = JsonConvert.DeserializeObject<List<Category>>(CategoriessJson);
 
@@ -66,11 +59,8 @@ namespace FinanceApplication.core.Category
 
                     return userCategories;
                 }
-                else
-                {
-                    Console.WriteLine("кропка   13");
-                    return null;
-                }
+                else return null;
+                
             }
             catch (ArgumentException)
             {
