@@ -114,9 +114,9 @@
             <Frame x:Name="ErrorLabel" CornerRadius="10" Padding="0" Grid.Column="0" Grid.Row="11" BackgroundColor="#ffd9d9">
                 <Label VerticalOptions="Center" HorizontalOptions="Center" Text="ERROR. Please check your email and password"></Label>
             </Frame>
-            <Frame x:Name="BadRequestLabel" CornerRadius="10" Padding="0" Grid.Column="0" Grid.Row="11" BackgroundColor="#ffd9d9">
+            <!--<Frame x:Name="BadRequestLabel" CornerRadius="10" Padding="0" Grid.Column="0" Grid.Row="11" BackgroundColor="#ffd9d9">
                 <Label VerticalOptions="Center" HorizontalOptions="Center" Text="ERROR. User with this data not found"></Label>
-            </Frame>
+            </Frame>-->
         </Grid>
         <StackLayout x:Name="Loading" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center">
             <ffimageloading:CachedImage Source="https://i.gifer.com/VAyR.gif"/>

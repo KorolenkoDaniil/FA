@@ -28,14 +28,13 @@ namespace FinanceApplication.views
             this.context = context;
             BindingContext = this;
             ErrorLabel.IsVisible = false;
-            BadRequestLabel.IsVisible = false;
+            //BadRequestLabel.IsVisible = false;
             Loading.IsVisible = false;
-            CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
+            //CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
 
         }
 
-        private async void CancelClicked(object sender, EventArgs e) => await Navigation.PopAsync();
-        
+
         private async void CreateClicked(object sender, EventArgs e)
         {
             CanselButton.IsEnabled = false;
@@ -45,7 +44,7 @@ namespace FinanceApplication.views
             entryPass1.IsEnabled = false;
             entryPass2.IsEnabled = false;
             Loading.IsVisible = true;
-            BadRequestLabel.IsVisible = false;
+            //BadRequestLabel.IsVisible = false;
             try
             {
                 if (!Validator.ValidateString(entryEmail.Text, 40) || !Validator.ValidateString(entryNickname.Text, 15) ||
@@ -64,8 +63,8 @@ namespace FinanceApplication.views
                 {
                     List<Wallet> wallets = new List<Wallet>
                 {
-                    new Wallet(context.User.UserId, "Кошелек 1", context.WalletTypes[0], 0, 5, true),
-                    new Wallet(context.User.UserId, "Кошелек 2", context.WalletTypes[1], 0, 6, true)
+                    new Wallet(context.User.UserId, "кошелек 1", "Денежные средства", 0, 5, true),
+                    new Wallet(context.User.UserId, "кошелек 2", "Сберегательный счет", 0, 6, true)
                 };
 
 
@@ -77,11 +76,11 @@ namespace FinanceApplication.views
 
                     List<Category> categories = new List<Category>
                 {
-                    new Category("Категория 1", context.User.UserId, 2),
-                    new Category("Категория 2", context.User.UserId, 3),
-                    new Category("Категория 3", context.User.UserId, 4),
-                    new Category("Категория 4", context.User.UserId, 5),
-                    new Category("Категория 5", context.User.UserId, 6),
+                    new Category("категория 1", context.User.UserId, 2),
+                    new Category("категория 2", context.User.UserId, 3),
+                    new Category("категория 3", context.User.UserId, 4),
+                    new Category("категория 4", context.User.UserId, 5),
+                    new Category("категория 5", context.User.UserId, 6),
                 };
 
 
@@ -112,11 +111,11 @@ namespace FinanceApplication.views
 
                     await Navigation.PushAsync(new ListPage(DateTime.Now, context));
                 }
-                else BadRequestLabel.IsVisible = true;
+                //else BadRequestLabel.IsVisible = true;
             }
             catch
             {
-                BadRequestLabel.IsVisible = true;
+                //BadRequestLabel.IsVisible = true;
             }
             finally
             {
@@ -147,5 +146,138 @@ namespace FinanceApplication.views
                 CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
             }
         }
+
+        private async void CancelClicked(object sender, EventArgs e) => await Navigation.PopAsync();
+
     }
+
+
+
+    //private async void CreateClicked(object sender, EventArgs e)
+    //{
+    //    // Disable all controls
+    //    ToggleControls(false);
+
+    //    try
+    //    {
+    //        // Validate inputs
+    //        if (!ValidateInputs()) return;
+
+    //        // Save user and update theme
+    //        await SaveUserAndUpdateTheme();
+
+    //        // If user is null, show error and return
+    //        if (context.User == null)
+    //        { 
+    //            BadRequestLabel.IsVisible = true;
+    //            return;
+    //        }
+
+    //        // Save wallets and categories
+    //        await SaveWalletsAndCategories();
+
+    //        // Save operations
+    //        await SaveOperations();
+
+    //        // Navigate to new page
+    //        await Navigation.PushAsync(new ListPage(DateTime.Now, context));
+    //    }
+    //    catch
+    //    {
+    //        BadRequestLabel.IsVisible = true;
+    //    }
+    //    finally
+    //    {
+    //        // Enable all controls after 3 seconds
+    //        Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+    //        {
+    //            ToggleControls(true);
+    //            return false; // return false to stop timer
+    //        });
+    //    }
+    //}
+
+    //private void ToggleControls(bool isEnabled)
+    //{
+    //    CanselButton.IsEnabled = isEnabled;
+    //    CreateButton.IsEnabled = isEnabled;
+    //    entryEmail.IsEnabled = isEnabled;
+    //    entryNickname.IsEnabled = isEnabled;
+    //    entryPass1.IsEnabled = isEnabled;
+    //    entryPass2.IsEnabled = isEnabled;
+    //    Loading.IsVisible = !isEnabled;
+    //    BadRequestLabel.IsVisible = false;
+    //}
+
+    //private bool ValidateInputs()
+    //{
+    //    if (!Validator.ValidateString(entryEmail.Text, 40) || !Validator.ValidateString(entryNickname.Text, 15) ||
+    //        !Validator.ValidateString(entryPass1.Text, 15) || !Validator.ValidateString(entryPass2.Text, 15))
+    //    {
+    //        ErrorLabel.IsVisible = true;
+    //        return false;
+    //    }
+
+    //    if (!string.Equals(entryPass1.Text, entryPass2.Text))
+    //    {
+    //        ErrorLabel.IsVisible = true;
+    //        return false;
+    //    }
+
+    //    if (!regex.IsMatch(entryEmail.Text))
+    //    {
+    //        ErrorLabel.IsVisible = true;
+    //        return false;
+    //    }
+
+    //    return true;
+    //}
+
+    //private async Task SaveUserAndUpdateTheme()
+    //{
+    //    context.ChangeUser(await UserRepository.SaveUser(new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, 1)));
+    //    context.ChangeTheme(await ColorRepository.GetColor(1));
+    //}
+
+    //private async Task SaveWalletsAndCategories()
+    //{
+    //    List<Wallet> wallets = new List<Wallet>
+    //    {
+    //        new Wallet(context.User.UserId, "кошелек 1", "Денежные средства", 0, 5, true),
+    //        new Wallet(context.User.UserId, "кошелек 2", "Сберегательный счет", 0, 6, true)
+    //    };
+
+    //    await Task.WhenAll(wallets.Select(wallet => WalletRepository.SaveWallet(wallet)));
+
+    //    context.SetWalletsCollection(await WalletRepository.GetWallets(context.User.UserId));
+
+    //    List<Category> categories = new List<Category>
+    //    {
+    //        new Category("категория 1", context.User.UserId, 2),
+    //        new Category("категория 2", context.User.UserId, 3),
+    //        new Category("категория 3", context.User.UserId, 4),
+    //        new Category("категория 4", context.User.UserId, 5),
+    //        new Category("категория 5", context.User.UserId, 6),
+    //    };
+
+    //    await Task.WhenAll(categories.Select(category => CategoryRepository.SaveCategory(category)));
+
+    //    context.SetCategoryCollection(await CategoryRepository.GetCategorys(context.User.UserId));
+    //}
+
+    //private async Task SaveOperations()
+    //{
+    //    List<Operation> operations = new List<Operation>
+    //    {
+    //        new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
+    //        new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[1].Name, "qq" ),
+    //        new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[0].Name, "qq" ),
+    //    };
+
+    //    await Task.WhenAll(operations.Select(operation => OperationRepository.SaveOperation(operation)));
+
+    //    context.SetOperationsCollection(await OperationRepository.GetOperations(context.User.UserId));
+    //}
+
+
 }
