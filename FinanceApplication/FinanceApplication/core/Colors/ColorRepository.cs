@@ -38,6 +38,7 @@ namespace FinanceApplication.core.Colors
        
 
             FormUrlEncodedContent form = new FormUrlEncodedContent(EmptyDictionary);
+
             HttpResponseMessage response = await client.PostAsync(Links.GetColors, form);
 
             if (response.IsSuccessStatusCode)
