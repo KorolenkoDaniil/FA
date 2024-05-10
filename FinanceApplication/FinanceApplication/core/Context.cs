@@ -16,7 +16,7 @@ namespace FinanceApp.classes
         public List<Category> Categories { get; private set; }
         public List<Operation> Operations { get; private set; }
         public List<Colorss> Colors { get; private set; }
-        public Currency currencyRate {  get; private set; }
+        //public Currency currencyRate {  get; private set; }
 
         public bool monthPeriod = true;
 
@@ -38,6 +38,6 @@ namespace FinanceApp.classes
         public void SetCategoryCollection(List<Category> categories) => Categories = categories;
         public void SetOperationsCollection(List<Operation> operations) => Operations = operations;
         public void SetColorsCollection(List<Colorss> colors) => Colors = colors;
-        public void SetNewCurrencyRate(Currency currency) => currencyRate = currency;
+        //public void SetNewCurrencyRate(Currency currency) => currencyRate = currency;
     }
 }

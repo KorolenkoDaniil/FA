@@ -1,6 +1,7 @@
 ﻿using FinanceApp.classes;
 using FinanceApp.classes.Wallets;
 using FinanceApplication.core;
+using FinanceApplication.core.Currency;
 using FinanceApplication.icons;
 using System;
 using System.Collections.Generic;
@@ -79,6 +80,10 @@ namespace FinanceApplication.views
         private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage(context));
         private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage(DateTime.Now, context));
         private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage(context));
-        private async void ToConverterPage(object sender, EventArgs e) => await Navigation.PushAsync(new ConverterPage(context));
+        private async void ToConverterPage(object sender, EventArgs e)
+        {
+            Currency currencyRates = await CurrencyRepository.GetCurrency();
+            await Navigation.PushAsync(new ConverterPage(context, currencyRates));
+        }
     }
 }

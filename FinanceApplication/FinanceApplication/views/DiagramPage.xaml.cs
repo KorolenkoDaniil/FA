@@ -1,6 +1,9 @@
 ﻿using FinanceApp.classes;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using OxyPlot.Axes;
+using OxyPlot.Series;
+using OxyPlot;
 
 namespace FinanceApplication.views
 {
@@ -9,13 +12,12 @@ namespace FinanceApplication.views
 	{
         Context context = new Context();
 
-        public DiagramPage (Context context)
-		{
-			InitializeComponent ();
+        public DiagramPage(Context context)
+        {
+            InitializeComponent();
             this.context = context;
+
+
         }
-
-
-
-	}
+    }
 }

@@ -111,8 +111,8 @@ namespace FinanceApplication.views
         private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage(context));
         private async void ToConverterPage(object sender, EventArgs e)
         {
-            context.SetNewCurrencyRate(await CurrencyRepository.GetCurrency());
-            await Navigation.PushAsync(new ConverterPage(context));
+            Currency currencyRates = await CurrencyRepository.GetCurrency();
+            await Navigation.PushAsync(new ConverterPage(context, currencyRates));
         }
         private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsPage(context));
     }
