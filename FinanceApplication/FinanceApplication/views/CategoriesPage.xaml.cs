@@ -1,5 +1,6 @@
 ﻿using FinanceApp.classes;
 using FinanceApplication.core.Category;
+using FinanceApplication.core.Currency;
 using FinanceApplication.icons;
 using System;
 using System.Linq;
@@ -48,7 +49,11 @@ namespace FinanceApplication.views
         private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage(context));
         private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage(DateTime.Now, context));
         private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage(context));
-        private async void ToConverterPage(object sender, EventArgs e) => await Navigation.PushAsync(new ConverterPage(context));
+        private async void ToConverterPage(object sender, EventArgs e) 
+        {
+            Currency currencyRates = await CurrencyRepository.GetCurrency();
+            await Navigation.PushAsync(new ConverterPage(context, currencyRates));
+        } 
         private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsPage(context));
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e) => await Navigation.PushAsync(new NewCategoryPage(context));
        

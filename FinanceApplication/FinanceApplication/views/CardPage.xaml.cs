@@ -1,6 +1,7 @@
 ﻿using FinanceApp.classes;
 using FinanceApp.classes.Wallets;
 using FinanceApplication.core;
+using FinanceApplication.core.Currency;
 using FinanceApplication.icons;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CardPage : ContentPage
     {
-        Context context = new Context();
+        Context context;
 
         public CardPage(Context context)
         {
@@ -45,7 +46,8 @@ namespace FinanceApplication.views
                                   DarkMode = color.DarkMode,
                                   LightMode = color.LightMode,
                                   DarkText = color.DarkText,
-                                  LightText = color.LightText
+                                  LightText = color.LightText,
+                                  context = context
                               }).ToList();
 
             foreach(ExtendedWallet wallet in walletsWithColors)
@@ -67,7 +69,7 @@ namespace FinanceApplication.views
 
             if (selectedItem != null)
             {
-                await Navigation.PushAsync(new OneCardPage(selectedItem, context));
+                await Navigation.PushAsync(new NewCardPage(context, selectedItem));
             }
 
             CardsCollection.SelectedItem = null;
@@ -78,6 +80,10 @@ namespace FinanceApplication.views
         private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage(context));
         private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage(DateTime.Now, context));
         private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage(context));
-        private async void ToConverterPage(object sender, EventArgs e) => await Navigation.PushAsync(new ConverterPage(context));
+        private async void ToConverterPage(object sender, EventArgs e)
+        {
+            Currency currencyRates = await CurrencyRepository.GetCurrency();
+            await Navigation.PushAsync(new ConverterPage(context, currencyRates));
+        }
     }
 }

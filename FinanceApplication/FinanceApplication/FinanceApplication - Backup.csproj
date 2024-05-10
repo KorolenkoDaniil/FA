@@ -1,0 +1,123 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <ProduceReferenceAssemblyInOutDir>true</ProduceReferenceAssemblyInOutDir>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icons\calendar.png" />
+    <None Remove="icons\calendar2.png" />
+    <None Remove="icons\card.png" />
+    <None Remove="icons\categories.png" />
+    <None Remove="icons\Check-circle.png" />
+    <None Remove="icons\Circle-xmark.png" />
+    <None Remove="icons\converter.png" />
+    <None Remove="icons\Description.png" />
+    <None Remove="icons\diagram.png" />
+    <None Remove="icons\DRow.png" />
+    <None Remove="icons\list.png" />
+    <None Remove="icons\LRow.png" />
+    <None Remove="icons\OIG1.png" />
+    <None Remove="icons\Rrow.png" />
+    <None Remove="icons\settings.png" />
+    <None Remove="icons\trashCan.png" />
+    <None Remove="icons\URow.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="icons\Check-circle.png" />
+    <EmbeddedResource Include="icons\Circle-xmark.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="icons\calendar.png" />
+    <EmbeddedResource Include="icons\calendar2.png" />
+    <EmbeddedResource Include="icons\card.png" />
+    <EmbeddedResource Include="icons\categories.png" />
+    <EmbeddedResource Include="icons\converter.png" />
+    <EmbeddedResource Include="icons\Description.png" />
+    <EmbeddedResource Include="icons\diagram.png" />
+    <EmbeddedResource Include="icons\DRow.png" />
+    <EmbeddedResource Include="icons\list.png" />
+    <EmbeddedResource Include="icons\LRow.png" />
+    <EmbeddedResource Include="icons\OIG1.png" />
+    <EmbeddedResource Include="icons\Rrow.png" />
+    <EmbeddedResource Include="icons\settings.png" />
+    <EmbeddedResource Include="icons\trashCan.png" />
+    <EmbeddedResource Include="icons\URow.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="OxyPlot.Xamarin.Forms" Version="2.1.0" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.6" />
+    <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2662" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="views\CategoriesPage.xaml.cs">
+      <DependentUpon>CategoriesPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="views\AuthorisationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\CardPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\CategoriesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\CategoryPagePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\ColorPickerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\ConverterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\DatePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\DiagramPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\IconPickerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\ListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\NewCardPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\NewCategoryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\NewOperationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\OperationsPerDay.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\RegistrationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\SetingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

@@ -55,14 +55,7 @@
 
             <Image Grid.Column="0" Grid.Row="1"/>
 
-            <!--<Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="2" Margin="0">
-                <StackLayout>
-                    <Label Style="{StaticResource Text1}" Text="Email" Margin="10, 0,0,0" Grid.Column="0" Grid.Row="0"/>
-                    <Entry x:Name="entryEmail" Keyboard="Email" TextColor="Black" Margin="10, 0, 0, 0" Grid.Column="0" Grid.Row="1"/>
-                </StackLayout>
-            </Frame>-->
-
-
+     
             <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="2" Margin="0">
                 <StackLayout>
                     <Label Style="{StaticResource Text1}" Text="Email" Margin="10, 0,0,0" />

@@ -16,9 +16,7 @@ namespace FinanceApp.classes.Wallets
             string walletJson = JsonConvert.SerializeObject(newWallet);
             var content = new StringContent(walletJson, Encoding.UTF8, "application/json");
 
-            //Console.WriteLine(newWallet);
             HttpResponseMessage response = await httpClient.PostAsync(Links.SaveWallet, content);
-            Console.WriteLine("кропка   19");
             if (response.IsSuccessStatusCode)
             {
                 //Console.WriteLine(response.IsSuccessStatusCode);
@@ -28,9 +26,20 @@ namespace FinanceApp.classes.Wallets
             }
             else
             {
-                Console.WriteLine("кропка   20");
                 return null;
             }
+        }
+
+        public async static Task<bool> DeleteWallet(Wallet newWallet)
+        {
+            string walletJson = JsonConvert.SerializeObject(newWallet);
+            var content = new StringContent(walletJson, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await httpClient.PostAsync(Links.DeleteWallet, content);
+            if (response.IsSuccessStatusCode)
+                return true;
+            else
+               return false; 
         }
 
         public async static Task<List<Wallet>> GetWallets(int userId)

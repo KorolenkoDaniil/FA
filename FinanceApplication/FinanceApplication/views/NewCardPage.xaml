@@ -20,7 +20,10 @@
     <AbsoluteLayout x:Name="IncomePage" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" BackgroundColor="White">
         <Frame CornerRadius="30" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".5, .2, .9, .7" BackgroundColor="#FFF7EC">
             <StackLayout>
-                <Label Text="новый кошелек" FontSize="Large" TextColor="Black" HorizontalTextAlignment="Center"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="новый кошелек" FontSize="Large" TextColor="Black" HorizontalTextAlignment="Center"/>
+                    <Frame x:Name="WalletImage1" WidthRequest="20" HeightRequest="40" CornerRadius="40"/>
+                </StackLayout>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height=".16*"/>
@@ -45,11 +48,28 @@
                     <CheckBox x:Name="CheckboxOfInclude" Grid.Column="0" Grid.Row="4" HorizontalOptions="Center" VerticalOptions="Center"></CheckBox>
 
 
-                    <Entry x:Name="EntryName" Focused="EntryName_Focused" Unfocused="EntryName_Unfocused" Keyboard="Text" Placeholder="название нового кошелька" PlaceholderColor="#8f8f8f" FontSize="14" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
+                    <Entry x:Name="EntryName" TextChanged="EntryName_TextChanged" Focused="EntryName_Focused" Unfocused="EntryName_Unfocused" Keyboard="Text" Placeholder="название нового кошелька" PlaceholderColor="#8f8f8f" FontSize="14" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
                     <Picker x:Name="PickerType" Focused="PickerType_Focused" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
-                    <!--<Picker x:Name="CathegoryPick" Grid.Row="2" Grid.Column="1" TextColor="Black"/>-->
-                    <Entry x:Name="EntrySum" Focused="EntrySum_Focused" Unfocused="EntrySum_Unfocused" Keyboard="Numeric" Placeholder="остаток средств" Text="0" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
-                    <Label Grid.Row="4" Grid.Column="1" TextColor="Black" Text="включить в общий баланс"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".1*"/>
+                            <ColumnDefinition Width=".4*"/>
+                            <ColumnDefinition Width=".1*"/>
+                            <ColumnDefinition Width=".4*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Row="0" Grid.Column="0"/>
+                        <Image Grid.Row="0" Grid.Column="2"/>
+
+                        <Button x:Name="IconButton" Clicked="IconButton_Clicked" Text="выбрать иконку" Grid.Row="0" Grid.Column="1" />
+                        <Button x:Name="ColorButton" Clicked="ColorButton_Clicked" Text="выбрать цвет" Grid.Row="0" Grid.Column="3"/>
+
+                    </Grid>
+                    
+                    
+                    <Entry x:Name="EntrySum" TextChanged="EntrySum_TextChanged" Focused="EntrySum_Focused" Unfocused="EntrySum_Unfocused" Keyboard="Numeric" Placeholder="остаток средств" Text="0" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
+                    <Label Grid.Row="4" Grid.Column="1" VerticalOptions="Center" TextColor="Black" Text="включить в общий баланс"/>
 
                     <Image x:Name="xmark1" Grid.Row="0" Grid.Column="2"/>
                     <Image x:Name="xmark3" Grid.Row="1" Grid.Column="2"/>

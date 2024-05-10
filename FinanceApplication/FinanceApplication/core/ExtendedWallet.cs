@@ -1,4 +1,8 @@
-﻿namespace FinanceApplication.core
+﻿using FinanceApp.classes;
+using FinanceApplication.core.Colors;
+using System.Linq;
+
+namespace FinanceApplication.core
 {
     public class ExtendedWallet
     {
@@ -12,5 +16,18 @@
         public string LightMode { get; set; }
         public string DarkText { get; set; }
         public string LightText { get; set; }
+        public int ColorId { get; set; }
+        public Context context { get; set; }
+
+
+        public void ChangeColors()
+        {
+            Colorss color = context.Colors.FirstOrDefault(col => col.ColorId == ColorId);
+            DarkMode = color.DarkMode;
+            LightMode = color.LightMode;
+            DarkText = color.DarkText;
+            LightMode = color.LightMode;
+     
+        }
     }
 }

@@ -1,36 +1,50 @@
-﻿
-//using Microsoft.Extensions.Caching.Memory;
-//using System.Globalization;
-//using System.Text;
-//using System.Xml.Linq;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 
-//namespace Server.Models
-//{
-//    //public class CurrencyService : BackgroundService
-//    //{
-//    //    private readonly IMemoryCache memoryCache;
+namespace Server.Models
+{
+    public static class CurrencyService
+    {
+        private static readonly HttpClient httpClient = new HttpClient();
+        private static System.Timers.Timer timer;
 
-//    //    public CurrencyService(IMemoryCache memoryCache)
-//    //    {
-//    //        this.memoryCache = memoryCache;
-//    //    }
+        public static Currency currencyRate;
 
-//        //protected override Task ExecuteAsync(CancellationToken stoppingToken)
-//        //{
-//        //    while (!stoppingToken.IsCancellationRequested)
-//        //    {
-//        //        Thread.CurrentThread.CurrentCulture = new CultureInfo("ru_Ru");
+        public static async Task Start()
+        {
+            await ExecuteAsync();
+            Console.WriteLine(currencyRate);
+            timer = new System.Timers.Timer(3600000); // Corrected interval
+            timer.Elapsed += async (sender, e) => await ExecuteAsync();
+            timer.Start();
+        }
 
-//        //        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-//        //        XDocument xml = XDocument.Load("www.cbr.ru/scripts/XML_daily.asp");
-
-//        //        CurrencyConverter currencyConverter = new CurrencyConverter();
-//        //        currencyConverter.USD = Convert.ToDecimal(xml.Elements("ValCurs").Elements("Valute").FirstOrDefault(x=>x.Element("NumCode").Value=="840").Elements("Value").FirstOrDefault().Value);
-//        //        currencyConverter.EUR = Convert.ToDecimal(xml.Elements("ValCurs").Elements("Valute").FirstOrDefault(x=>x.Element("NumCode").Value=="978").Elements("Value").FirstOrDefault().Value);
-//        //        currencyConverter.UAH = Convert.ToDecimal(xml.Elements("ValCurs").Elements("Valute").FirstOrDefault(x=>x.Element("NumCode").Value=="980").Elements("Value").FirstOrDefault().Value);
-
-//        //    }
-//        //}
-//    }
-//}
+        public static async Task<Currency> ExecuteAsync()
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync("https://belarusbank.by/api/kursExchange");
+                response.EnsureSuccessStatusCode();
+                string ExchangeRateJSON = await response.Content.ReadAsStringAsync();
+                List<Currency> rates = JsonConvert.DeserializeObject<List<Currency>>(ExchangeRateJSON);
+                if (rates.Count > 0)
+                {
+                    currencyRate = rates[0];
+                    Console.WriteLine(rates[0]);
+                }
+                else
+                {
+                    Console.WriteLine("No exchange rates found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching exchange rates: {ex.Message}");
+            }
+            return currencyRate;
+        }
+    }
+}

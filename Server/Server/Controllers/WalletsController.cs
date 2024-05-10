@@ -17,7 +17,7 @@ namespace Server.Controllers
         [HttpPost]
         public IActionResult RegisterAWallet([FromBody] Wallet wallet)
         {
-            Wallet savedWallet = WalletsRepository.Savewallet(wallet);
+            Wallet savedWallet = WalletsRepository.SaveWallet(wallet);
             if (savedWallet != null) return Ok(savedWallet);
             else return BadRequest();
         }
@@ -28,6 +28,15 @@ namespace Server.Controllers
         {
             return WalletsRepository.SearchByUserID(int.Parse(id));
         }
+
+        [HttpPost]
+        public IActionResult DeleteWallet([FromBody] Wallet wallet)
+        {
+            bool delete = WalletsRepository.DeleteWallet(wallet);
+            if (delete) return Ok();
+            else return BadRequest();
+        }
+
 
     }
 }

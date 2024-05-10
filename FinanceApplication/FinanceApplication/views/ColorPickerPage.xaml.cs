@@ -1,5 +1,7 @@
 ﻿using System;
 using FinanceApp.classes;
+using FinanceApp.classes.Wallets;
+using FinanceApplication.core;
 using FinanceApplication.core.Category;
 using FinanceApplication.core.Colors;
 using Xamarin.Forms;
@@ -12,6 +14,7 @@ namespace FinanceApplication.views
     {
         Context context;
         Category category;
+        ExtendedWallet wallet;
         int objectForColorise;
 
         public ColorPickerPage(Context context, Category category)
@@ -21,6 +24,15 @@ namespace FinanceApplication.views
             this.category = category;
             CreateButtons();
         }
+
+        public ColorPickerPage(Context context, ExtendedWallet wallet)
+        {
+            objectForColorise = 2;
+            this.context = context;
+            this.wallet = wallet;
+            CreateButtons();
+        }
+
         public void CreateButtons()
         {
             InitializeComponent();
@@ -58,9 +70,9 @@ namespace FinanceApplication.views
 
         private void NewButton_Clicked(object sender, EventArgs e)
         {
-            Console.WriteLine("кнопка проверяется_-------------------------------");
             if (sender is Button button){
                 if (objectForColorise == 1) ColoriseCategory(button);     
+                if (objectForColorise == 2) ColoriseCard(button);     
             }
         }
 
@@ -68,6 +80,13 @@ namespace FinanceApplication.views
         {
             category.ColorId = int.Parse(button.Text);
             await Navigation.PushAsync(new NewCategoryPage(context, category));
+        }
+
+        private async void ColoriseCard(Button button)
+        {
+            wallet.ColorId = int.Parse(button.Text);
+            wallet.ChangeColors();
+            await Navigation.PushAsync(new  NewCardPage(context, wallet));
         }
     }
 }

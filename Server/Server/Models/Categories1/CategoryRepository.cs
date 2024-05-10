@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Server.Wallets;
+using SQLite;
 
 namespace Server.Models.Categories1
 {
@@ -26,6 +27,15 @@ namespace Server.Models.Categories1
             return CategoriesDB.Table<Category>().FirstOrDefault(cat => cat.CategoryId == category.CategoryId);
         }
 
+
+        public bool DeleteCategory(Category category)
+        {
+            int delete = CategoriesDB.Delete(category);
+            if (delete != -1)
+                return true;
+            else
+                return false;
+        }
 
 
         public List<Category> SearchByUserID(int userId)
