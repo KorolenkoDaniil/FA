@@ -1,6 +1,7 @@
 ﻿using FinanceApp.classes;
 using FinanceApplication.core.Colors;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace FinanceApplication.core
 {
@@ -17,6 +18,8 @@ namespace FinanceApplication.core
         public string DarkText { get; set; }
         public string LightText { get; set; }
         public int ColorId { get; set; }
+        public int IconId { get; set; }
+        public ImageSource WalletIconPath { get; set; }
         public Context context { get; set; }
 
 

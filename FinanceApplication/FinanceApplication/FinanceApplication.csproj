@@ -12,16 +12,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="icons\calendar.png" />
-    <None Remove="icons\calendar2.png" />
-    <None Remove="icons\card.png" />
-    <None Remove="icons\categories.png" />
-    <None Remove="icons\Check-circle.png" />
-    <None Remove="icons\Circle-xmark.png" />
-    <None Remove="icons\converter.png" />
-    <None Remove="icons\Description.png" />
-    <None Remove="icons\diagram.png" />
-    <None Remove="icons\DRow.png" />
+    <None Remove="icons\CategoriesIcons\free-icon-font-baby-carriage-6955514.png" />
+    <None Remove="icons\CategoriesIcons\free-icon-font-bus-7407080.png" />
+    <None Remove="icons\CategoriesIcons\free-icon-font-car-mechanic-7407113.png" />
+    <None Remove="icons\CategoriesIcons\free-icon-font-gamepad-5528002.png" />
+    <None Remove="icons\CategoriesIcons\free-icon-font-graduation-cap-3914110.png" />
+    <None Remove="icons\CategoriesIcons\free-icon-font-home-3917033.png" />
+    <None Remove="icons\CategoriesIcons\free-icon-font-mug-hot-alt-7409435.png" />
+    <None Remove="icons\CategoriesIcons\free-icon-font-salad-12007638.png" />
+    <None Remove="icons\CategoriesIcons\free-icon-font-subscription-13085534.png" />
     <None Remove="icons\list.png" />
     <None Remove="icons\LRow.png" />
     <None Remove="icons\OIG1.png" />
@@ -29,6 +28,29 @@
     <None Remove="icons\settings.png" />
     <None Remove="icons\trashCan.png" />
     <None Remove="icons\URow.png" />
+    <None Remove="icons\WalletsIcons\free-icon-font-bank-3914993.png" />
+    <None Remove="icons\WalletsIcons\free-icon-font-cc-visa-6422268.png" />
+    <None Remove="icons\WalletsIcons\free-icon-font-credit-card-3916663.png" />
+    <None Remove="icons\WalletsIcons\free-icon-font-piggy-bank-7653269.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="icons\WalletsIcons\free-icon-font-bank-3914993.png" />
+    <EmbeddedResource Include="icons\WalletsIcons\free-icon-font-cc-visa-6422268.png" />
+    <EmbeddedResource Include="icons\WalletsIcons\free-icon-font-credit-card-3916663.png" />
+    <EmbeddedResource Include="icons\WalletsIcons\free-icon-font-piggy-bank-7653269.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="icons\CategoriesIcons\free-icon-font-baby-carriage-6955514.png" />
+    <EmbeddedResource Include="icons\CategoriesIcons\free-icon-font-bus-7407080.png" />
+    <EmbeddedResource Include="icons\CategoriesIcons\free-icon-font-car-mechanic-7407113.png" />
+    <EmbeddedResource Include="icons\CategoriesIcons\free-icon-font-gamepad-5528002.png" />
+    <EmbeddedResource Include="icons\CategoriesIcons\free-icon-font-graduation-cap-3914110.png" />
+    <EmbeddedResource Include="icons\CategoriesIcons\free-icon-font-home-3917033.png" />
+    <EmbeddedResource Include="icons\CategoriesIcons\free-icon-font-mug-hot-alt-7409435.png" />
+    <EmbeddedResource Include="icons\CategoriesIcons\free-icon-font-salad-12007638.png" />
+    <EmbeddedResource Include="icons\CategoriesIcons\free-icon-font-subscription-13085534.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,6 +77,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="OxyPlot.Xamarin.Forms" Version="2.1.0" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.6" />
@@ -84,9 +107,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="views\CategoriesPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="views\CategoryPagePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="views\ColorPickerPage.xaml">

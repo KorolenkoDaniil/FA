@@ -19,5 +19,9 @@ namespace FinanceApplication.views
         {
 
         }
+
+        private void ChangeMode(object sender, System.EventArgs e) => 
+            context.User.AppModeWhite = !context.User.AppModeWhite;
+        
     }
 }

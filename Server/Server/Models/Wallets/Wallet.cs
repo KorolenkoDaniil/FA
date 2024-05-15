@@ -13,11 +13,11 @@ namespace Server.Wallets
         public decimal Amount { get; set; }
         public int ColorId { get; set; }
         public bool Include { get; set; }
-        //public int IconId { get; set; }
+        public int IconId { get; set; }
 
 
         public Wallet () { }
-        public Wallet (int walletId, int userid, string name, string type, decimal amount, int colorId, bool include)
+        public Wallet (int walletId, int userid, string name, string type, decimal amount, int colorId, bool include, int iconId)
         {
             WalletId = walletId;
             UserId = userid;
@@ -26,7 +26,7 @@ namespace Server.Wallets
             Amount = amount;
             ColorId = colorId;
             Include = include;
-            //IconId = iconid;
+            IconId = iconId;
         }
         public override string ToString() => $"{WalletId} {UserId} {Name} {Type} {Amount} {ColorId} {Include}";
 

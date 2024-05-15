@@ -63,10 +63,16 @@
                                         <ColumnDefinition Width=".5*"/>
                                         <ColumnDefinition Width=".5*"/>
                                     </Grid.ColumnDefinitions>
-
                                     <Label Text="{Binding Name}" Style="{StaticResource TextOpenSans}" TextColor="{Binding LightText}" Grid.Column="0" Grid.Row="0"/>
                                     <Label Text="{Binding Type}" Style="{StaticResource TextOpenSans}" FontSize="Small" TextColor="#a3a3a3" Grid.Column="0" Grid.Row="1"/>
 
+                                    <AbsoluteLayout Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
+                                        <Frame  Padding="15" CornerRadius="35" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".9, .3, 60, 60" BackgroundColor="Transparent" BorderColor="White">
+                                            <Image Source="{Binding Path=WalletIconPath}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                                        </Frame>
+                                    </AbsoluteLayout>
+                                   
+                                    
                                     <AbsoluteLayout Grid.Column="0" Grid.Row="2">
                                         <Frame BackgroundColor="Gray" CornerRadius="10" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, .4, .8 "/>
                                     </AbsoluteLayout>

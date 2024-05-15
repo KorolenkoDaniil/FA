@@ -7,12 +7,14 @@
         public string Email { get;  set; }
         public string Password { get; set; }
         public int ColorId { get; set; }
-        public User(string name, string email, string password, int colorid)
+        public bool AppModeWhite { get; set; }
+        public User(string name, string email, string password, int colorid, bool appMode)
         {
             NickName = name;
             Email = email;
             Password = password;
             ColorId = colorid;
+            AppModeWhite = appMode;
         }
 
         public User () { }

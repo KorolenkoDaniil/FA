@@ -24,17 +24,17 @@ namespace FinanceApplication.views
             this.context = context;
             BindingContext = this;
             NoOperations.IsVisible = false;
-            
+
             imageCard.Source = ImageSource.FromResource(Icons.Iconspath[2]);
             imageCathegory.Source = ImageSource.FromResource(Icons.Iconspath[3]);
             imageList.Source = ImageSource.FromResource(Icons.Iconspath[8]);
             imageDiagram.Source = ImageSource.FromResource(Icons.Iconspath[6]);
             imageConverter.Source = ImageSource.FromResource(Icons.Iconspath[4]);
+            //aa.Source = ImageSource.FromResource(Icons.CategoriesIcons[1]);
             Settings.Source = ImageSource.FromResource("FinanceApplication.icons.settings.png");
             date.Text = newPeriod.ToString("d");
             ShowOperations(newPeriod);
             PlusButton.BackgroundColor = Color.FromHex(context.Color.LightMode);
-            Console.WriteLine("кропка  24");
         }
 
 
@@ -57,7 +57,6 @@ namespace FinanceApplication.views
                                                         WalletName = wallet.Name,
                                                         WalletType = wallet.Type,
                                                     }).ToList();
-            Console.WriteLine("кропка   25");
             totalBalance = ListOperations.Sum(operation => operation.Sum) - ListOperations.Where(operation => !operation.Profit).Sum(operation => operation.Sum);
 
 
@@ -69,7 +68,6 @@ namespace FinanceApplication.views
                 .ToList();
 
             days = new List<OperationsDays>();
-            Console.WriteLine("кропка   26");
 
             foreach (string date in uniqueDates)
             {
@@ -83,6 +81,7 @@ namespace FinanceApplication.views
             total.Text = $"$ {totalBalance}";
             Console.WriteLine("кропка   27");
 
+            if (days.Count == 0) NoOperations.IsVisible = true;
             OperationsCollection.ItemsSource = days.OrderByDescending(day => day.date);
         }
     

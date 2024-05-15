@@ -89,7 +89,7 @@
             </Frame>
 
             <Label Style="{StaticResource TextOpenSans}" Text="Spending calendar" Grid.Column="0" Grid.Row="5" Margin="15, 0, 15, 0" VerticalOptions="Center"/>
-
+ 
             <CollectionView Grid.Row="6" Grid.Column="0" x:Name="OperationsCollection" SelectionMode="Single" SelectionChanged="OnItemSelected">
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
@@ -124,10 +124,11 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Frame x:Name="NoOperations"  Grid.Row="7" Grid.Column="0" Padding="0">
-                <Label Text="you have no operations yet" TextColor="Black"/>
-            </Frame>
 
+            <Frame x:Name="NoOperations"  BackgroundColor="Transparent" Margin="0"  VerticalOptions="Center" Grid.Row="6" Grid.Column="0" Padding="0" HorizontalOptions="Center" HeightRequest="50" CornerRadius="30" WidthRequest="300" BorderColor="#e67070">
+                <Label Text="за выбранный период нету операций" TextColor="#e67070"  VerticalOptions="Center" HorizontalOptions="Center" />
+            </Frame>
+            
             <Frame BackgroundColor="White" Grid.Row="8" Grid.Column="0" Padding="3">
                 <Grid>
 
@@ -160,8 +161,6 @@
                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToConverterPage" />
                         </Image.GestureRecognizers>
                     </Image>
-
-
                 </Grid>
             </Frame>
 
@@ -171,6 +170,7 @@
                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToNewOperationPage" />
             </Frame.GestureRecognizers>
             <Label Text="+" FontSize="24" VerticalOptions="Center" HorizontalOptions="Center" />
+            <!--<Image x:Name="aa"/>-->
         </Frame>
 
     </AbsoluteLayout>

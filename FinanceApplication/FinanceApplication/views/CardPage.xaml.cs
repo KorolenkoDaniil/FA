@@ -34,29 +34,31 @@ namespace FinanceApplication.views
         public void ShowCards()
         {
             List<ExtendedWallet> walletsWithColors = (from wallet in context.Wallets
-                              join color in context.Colors on wallet.ColorId equals color.ColorId
-                              select new ExtendedWallet
-                              {
-                                  WalletId = wallet.WalletId,
-                                  Include = wallet.Include,
-                                  UserId = wallet.UserId,
-                                  Name = wallet.Name,
-                                  Type = wallet.Type,
-                                  Amount = wallet.Amount,
-                                  DarkMode = color.DarkMode,
-                                  LightMode = color.LightMode,
-                                  DarkText = color.DarkText,
-                                  LightText = color.LightText,
-                                  context = context
-                              }).ToList();
+                                                      join color in context.Colors on wallet.ColorId equals color.ColorId
+                                                      select new ExtendedWallet
+                                                      {
+                                                          WalletId = wallet.WalletId,
+                                                          Include = wallet.Include,
+                                                          UserId = wallet.UserId,
+                                                          Name = wallet.Name,
+                                                          Type = wallet.Type,
+                                                          Amount = wallet.Amount,
+                                                          DarkMode = color.DarkMode,
+                                                          LightMode = color.LightMode,
+                                                          DarkText = color.DarkText,
+                                                          LightText = color.LightText,
+                                                          context = context,
+                                                          IconId = wallet.IconId,
+                                                          WalletIconPath = ImageSource.FromResource(Icons.WalletsIcons[wallet.IconId])
+                                                      }).ToList();
 
-            foreach(ExtendedWallet wallet in walletsWithColors)
-            {
+            foreach (ExtendedWallet wallet in walletsWithColors)
                 wallet.Amount = context.Operations.Where(operation => operation.WalletId == wallet.WalletId && operation.Profit).Sum(o => o.Sum) - context.Operations.Where(operation => operation.WalletId == wallet.WalletId && !operation.Profit).Sum(o => o.Sum); ;
-            }
+            
             CardsSum.Text = "$" + walletsWithColors.Where(wallet => wallet.Include).Sum(wa => wa.Amount);
             CardsCollection.ItemsSource = walletsWithColors;
         }
+
 
         private async void ToNewCardPage(object sender, EventArgs e)
         {

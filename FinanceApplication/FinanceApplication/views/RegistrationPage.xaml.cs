@@ -1,4 +1,5 @@
-﻿using FinanceApp.classes;
+﻿using Android.Graphics.Drawables;
+using FinanceApp.classes;
 using FinanceApp.classes.Users;
 using FinanceApp.classes.Wallets;
 using FinanceApplication.core.Category;
@@ -95,7 +96,7 @@ namespace FinanceApplication.views
 
         private async Task SaveUserAndChangeTheme()
         {
-            context.ChangeUser(await UserRepository.SaveUser(new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, 1)));
+            context.ChangeUser(await UserRepository.SaveUser(new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, 1, true)));
             context.ChangeTheme(await ColorRepository.GetColor(1));
         }
 
@@ -103,8 +104,8 @@ namespace FinanceApplication.views
         {
             List<Wallet> wallets = new List<Wallet>
     {
-        new Wallet(context.User.UserId, "кошелек 1", "Денежные средства", 0, 5, true),
-        new Wallet(context.User.UserId, "кошелек 2", "Сберегательный счет", 0, 6, true)
+        new Wallet(context.User.UserId, "кошелек 1", "Денежные средства", 0, 5, true, 1),
+        new Wallet(context.User.UserId, "кошелек 2", "Сберегательный счет", 0, 6, true, 3)
     };
             List<Task<Wallet>> saveTasks = wallets.Select(wallet => WalletRepository.SaveWallet(wallet)).ToList();
             if (saveTasks.Any(wallet => wallet == null))
@@ -116,11 +117,11 @@ namespace FinanceApplication.views
         {
             List<Category> categories = new List<Category>
     {
-        new Category("категория 1", context.User.UserId, 2),
-        new Category("категория 2", context.User.UserId, 3),
-        new Category("категория 3", context.User.UserId, 4),
-        new Category("категория 4", context.User.UserId, 5),
-        new Category("категория 5", context.User.UserId, 6),
+        new Category("категория 1", context.User.UserId, 2, 0),
+        new Category("категория 2", context.User.UserId, 3, 1),
+        new Category("категория 3", context.User.UserId, 4, 2),
+        new Category("категория 4", context.User.UserId, 5, 3),
+        new Category("категория 5", context.User.UserId, 6, 4),
     };
             List<Task<Category>> saveTasksCategories = categories.Select(category => CategoryRepository.SaveCategory(category)).ToList();
             if (saveTasksCategories.Any(category => category == null))

@@ -1,10 +1,13 @@
-﻿using FinanceApp.classes;
+﻿using Android.Service.QuickAccessWallet;
+using FinanceApp.classes;
 using FinanceApp.classes.Wallets;
 using FinanceApplication.core;
+using FinanceApplication.core.Category;
 using FinanceApplication.icons;
 using System;
 using System.Linq;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace FinanceApplication.views
@@ -36,7 +39,6 @@ namespace FinanceApplication.views
             PickerType.SelectedItem = context.WalletTypes[0];
             resave = false;
         }
-
         public NewCardPage(Context context, ExtendedWallet wallet)
         {
             InitializeComponent();
@@ -70,12 +72,18 @@ namespace FinanceApplication.views
             xmark3.IsVisible = false;
         }
 
-
+ 
         private async void Cancel_Clicked(object sender, EventArgs e)
         {
             if (!delete) await Navigation.PushAsync(new CardPage(context));
             else
             {
+                if (context.Wallets.Count == 1)
+                {
+                    AlertButton_Clicked();
+                    return;
+                }
+
                 Cancel.IsEnabled = false;
                 Create.IsEnabled = false;
                 int index = context.Wallets.FindIndex(wal => wal.WalletId == wallet.WalletId);
@@ -89,27 +97,47 @@ namespace FinanceApplication.views
         private void EntryName_Focused(object sender, FocusEventArgs e) { }
         private void PickerType_Focused(object sender, FocusEventArgs e) { }
         private void IconButton_Clicked(object sender, EventArgs e) { }
-        private async void ColorButton_Clicked(object sender, EventArgs e) { }
+        private void ColorButton_Clicked(object sender, EventArgs e) { }
         private void EntryName_TextChanged(object sender, TextChangedEventArgs e) { }
         private void EntrySum_TextChanged(object sender, TextChangedEventArgs e) { }
         private void EntryName_Unfocused(object sender, FocusEventArgs e) { }
         private void EntrySum_Focused(object sender, FocusEventArgs e) { }
         private void EntrySum_Unfocused(object sender, FocusEventArgs e) { }
+
+
+        public void Resave(Category category)
+        {
+            int index = context.Categories.IndexOf(category);
+            if (index != -1)
+            {
+                context.Categories[index] = category;
+                return;
+            }
+            context.Categories.Add(category);
+        }
+
         private async void Create_Clicked(object sender, EventArgs e)
         {
+          
+
             ValidationBeforeSaving();
 
-            Wallet newWallet = new Wallet(wallet.WalletId, context.User.UserId, EntryName.Text, context.WalletTypes[PickerType.SelectedIndex], sum, wallet.ColorId, CheckboxOfInclude.IsChecked);
+            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+            {
+                EntrySum.IsEnabled = false;
+                ColorButton.IsEnabled = false;
+                IconButton.IsEnabled = false;
+                PickerType.IsEnabled = false;
+                EntryName.IsEnabled = false;
+                CheckboxOfInclude.IsEnabled = false;
+                return false;
+            });
 
-            Wallet isSend = await WalletRepository.SaveWallet(newWallet);
-
-            if (isSend != null)
-            { 
-                if (resave) Resave(isSend);
-                else context.Wallets.Add(isSend);
-                await Navigation.PushAsync(new CardPage(context));
-            }
+            Wallet isSend = await WalletRepository.SaveWallet(new Wallet(wallet.WalletId, context.User.UserId, EntryName.Text, context.WalletTypes[PickerType.SelectedIndex], sum, wallet.ColorId, CheckboxOfInclude.IsChecked, wallet.IconId));
+            Resave(isSend);
+            await Navigation.PushAsync(new CardPage(context));
         }
+        
 
         private void ValidationBeforeSaving()
         {
@@ -127,13 +155,20 @@ namespace FinanceApplication.views
 
         public void Resave(Wallet wallet)
         {
-            int index = context.Wallets.FindIndex(wal => wal.WalletId == wallet.WalletId);
+            int index = context.Wallets.IndexOf(wallet);
             if (index != -1)
             {
                 context.Wallets[index] = wallet;
+                return;
             }
+            context.Wallets.Add(wallet);
         }
 
 
+        private async void AlertButton_Clicked()
+        {
+            await DisplayAlert("Последний кошелек", "кошелек не может быть удален,\nтк он последний", "ОK");
+            await Navigation.PushAsync(new CardPage(context));
+        }
     }
 }

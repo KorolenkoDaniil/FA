@@ -5,6 +5,7 @@ using FinanceApplication.core.Operations;
 using FinanceApplication.icons;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -101,6 +102,7 @@ namespace FinanceApplication.views
             if (WalletPicker.SelectedItem == null || CathegoryPicker.SelectedItem == null)
                 return;
 
+        
             if (!decimal.TryParse(EntrySum.Text, out sum)) return;
 
 
@@ -120,6 +122,12 @@ namespace FinanceApplication.views
 
         private async void CreateOperation(bool include, decimal sum)
         {
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+               
+                return false;
+            });
+
             DateTime date = Datepicker.Date;
             Console.WriteLine("-----2");
             Operation newOperation = new Operation(

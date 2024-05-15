@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinanceApp.classes.Wallets;
+using System;
 
 namespace FinanceApplication.core.Operations
 {
@@ -27,6 +28,7 @@ namespace FinanceApplication.core.Operations
         }
 
         public override string ToString() => $"{Id} {UserID} {Date} {Profit} {Sum} id кошелька {WalletId} id категории {Cathegory} {Description}";
+        public override bool Equals(object obj) => obj is Operation operation && operation.Id == Id;
 
 
     }

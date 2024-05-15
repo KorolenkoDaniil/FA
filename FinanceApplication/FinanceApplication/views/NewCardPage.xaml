@@ -45,7 +45,7 @@
                     <Image x:Name="walletImage" Grid.Column="0" Grid.Row="1" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
                     <Image x:Name="cathegoryImage" Grid.Column="0" Grid.Row="2" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
                     <Image x:Name="descriptionImage" Grid.Column="0" Grid.Row="3" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
-                    <CheckBox x:Name="CheckboxOfInclude" Grid.Column="0" Grid.Row="4" HorizontalOptions="Center" VerticalOptions="Center"></CheckBox>
+                    <CheckBox x:Name="CheckboxOfInclude" Grid.Column="0" Grid.Row="4" IsChecked="True" HorizontalOptions="Center" VerticalOptions="Center"></CheckBox>
 
 
                     <Entry x:Name="EntryName" TextChanged="EntryName_TextChanged" Focused="EntryName_Focused" Unfocused="EntryName_Unfocused" Keyboard="Text" Placeholder="название нового кошелька" PlaceholderColor="#8f8f8f" FontSize="14" Grid.Row="0" Grid.Column="1" TextColor="Black"/>

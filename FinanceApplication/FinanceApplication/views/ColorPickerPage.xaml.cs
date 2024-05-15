@@ -13,11 +13,11 @@ namespace FinanceApplication.views
     public partial class ColorPickerPage : ContentPage
     {
         Context context;
-        Category category;
+        ExtendedCategory category;
         ExtendedWallet wallet;
         int objectForColorise;
 
-        public ColorPickerPage(Context context, Category category)
+        public ColorPickerPage(Context context, ExtendedCategory category)
         {
             objectForColorise = 1;
             this.context = context;

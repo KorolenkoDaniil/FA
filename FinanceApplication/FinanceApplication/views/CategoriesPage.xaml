@@ -22,8 +22,8 @@
             </Grid.RowDefinitions>
 
             <Frame Grid.Column="0" Grid.Row="0" Padding="0, 10, 0, 10">
-                <StackLayout>
-                    <Grid>
+                <StackLayout Padding="0">
+                    <!--<Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width=".05*"/>
                             <ColumnDefinition Width=".35*"/>
@@ -50,7 +50,7 @@
                         <Label Text="Доходы" Grid.Column="0" HorizontalTextAlignment="Center" VerticalOptions="Center" Grid.Row="1" TextColor="Black" FontAttributes="Bold"/>
                         <Label Text="Расходы" Grid.Column="1" HorizontalTextAlignment="Center" VerticalOptions="Center" Grid.Row="1" TextColor="Black" FontAttributes="Bold"/>
 
-                    </Grid>
+                    </Grid>-->
                 </StackLayout>
             </Frame>
 
@@ -59,16 +59,21 @@
                     <DataTemplate>
                         <StackLayout>
                             <Frame BackgroundColor="White" Margin="10, 12, 10, 0">
-                                <StackLayout>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width=".25*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Image x:Name="CategoriIcon" Grid.Row="0" Grid.Column="0"/>
-                                        <Label Text="{Binding Name}" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
-                                    </Grid>
-                                </StackLayout>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width=".25*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <AbsoluteLayout  Grid.Row="0" Grid.Column="0">
+                                        <Frame Padding="10" CornerRadius="35" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".9, .3, 40, 40" BackgroundColor="Transparent" BorderColor="White">
+                                            <Image Source="{Binding Path=IconSource}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                                        </Frame>
+                                    </AbsoluteLayout>
+
+                                    <Label Text="{Binding Name}" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
+                                </Grid>
                             </Frame>
                         </StackLayout>
                     </DataTemplate>
