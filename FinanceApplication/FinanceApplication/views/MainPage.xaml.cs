@@ -23,8 +23,9 @@ namespace FinanceApplication
             {
                 context.SetColorsCollection(await ColorRepository.GetColors());
             }
-            catch 
-            { 
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -35,8 +36,9 @@ namespace FinanceApplication
                 await Navigation.PushAsync(new RegistrationPage(context));
                 await ColorRepository.GetColor(1);
             }
-            catch 
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
             }
         }
 

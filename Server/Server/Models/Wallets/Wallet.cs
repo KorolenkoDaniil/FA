@@ -28,7 +28,7 @@ namespace Server.Wallets
             Include = include;
             IconId = iconId;
         }
-        public override string ToString() => $"{WalletId} {UserId} {Name} {Type} {Amount} {ColorId} {Include}";
+        public override string ToString() => $"{WalletId} {UserId} {Name} {Type} {Amount} {ColorId} {Include} IconId {IconId} ";
 
     }
 }

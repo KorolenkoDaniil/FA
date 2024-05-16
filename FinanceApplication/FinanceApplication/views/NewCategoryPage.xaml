@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FinanceApplication.views.NewCategoryPage">
 
@@ -25,7 +24,11 @@
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <Label Text="Категория" FontSize="Large" VerticalOptions="Center" TextColor="Black"/>
-                        <Frame x:Name="CategoryImage" WidthRequest="20" HeightRequest="40" CornerRadius="40"/>
+                        <AbsoluteLayout>
+                            <Frame x:Name="CategoryImage" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 45, 45" CornerRadius="40" Padding="10">
+                                <Image x:Name="categoryIcon" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                            </Frame>
+                        </AbsoluteLayout>
                     </StackLayout>
                     
                     <Grid>
@@ -59,11 +62,13 @@
                         <Grid Grid.Column="1" Grid.Row="3">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width=".45*"/>
-                                <ColumnDefinition Width=".1*"/>
-                                <ColumnDefinition Width=".45*"/>
+                                <ColumnDefinition Width=".05*"/>
+                                <ColumnDefinition Width=".5*"/>
                             </Grid.ColumnDefinitions>
-                            <Button x:Name="Cancel" Clicked="Cancel_Clicked" Text="Отмена" Grid.Row="0" Grid.Column="0"></Button>
-                            <Button x:Name="CreateSave" Clicked="Create_Clicked" Text="Создать" Grid.Row="0" Grid.Column="2"></Button>
+
+                            <Button x:Name="Cancel" Clicked="Cancel_Clicked" Text="Отмена" Grid.Row="0" Grid.Column="0" FontSize="Small" TextColor="Black" CornerRadius="30" BackgroundColor="Transparent" BorderColor="Black" BorderWidth="1"/>
+                            <Button x:Name="CreateSave" Clicked="Create_Clicked" Text="Создать" Grid.Row="0" Grid.Column="2" FontSize="Small" TextColor="Black" CornerRadius="30" BackgroundColor="Transparent" BorderColor="Black" BorderWidth="1"/>
+ 
                         </Grid>
 
                     </Grid>

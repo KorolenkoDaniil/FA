@@ -1,9 +1,7 @@
 ﻿using FinanceApp.classes;
-using FinanceApp.classes.Wallets;
 using FinanceApplication.core;
 using FinanceApplication.core.Category;
 using FinanceApplication.icons;
-using Org.Apache.Http.Cookies;
 using System;
 using System.Linq;
 using Xamarin.Forms;
@@ -27,11 +25,13 @@ namespace FinanceApplication.views
             category = new ExtendedCategory();
             category.UserId = context.User.UserId;
             category.ColorId = random.Next(0, context.Colors.Count - 1);
+            category.IconId = random.Next(0, Icons.CategoriesIcons.Length - 1);
             CreateSave.Text = "создать";
             Cancel.Text = "отмена";
             delete = false;
 
             CategoryImage.BackgroundColor = Color.FromHex(context.Colors.FirstOrDefault(color => color.ColorId == category.ColorId).LightMode);
+            categoryIcon.Source = Icons.CategoriesIcons[category.IconId];
         }
 
         public NewCategoryPage(Context context, ExtendedCategory category)
@@ -41,6 +41,7 @@ namespace FinanceApplication.views
             this.context = context;
             this.category = category;
             CategoryImage.BackgroundColor = Color.FromHex(context.Colors.First(color => color.ColorId == category.ColorId).LightMode);
+            categoryIcon.Source = category.IconSource;
             CreateSave.Text = "Сохранить";
             Cancel.Text = "удалить";
             delete = true;
@@ -64,7 +65,7 @@ namespace FinanceApplication.views
 
         private async void Cancel_Clicked(object sender, EventArgs e)
         {
-            if (!delete) await Navigation.PushAsync(new CardPage(context));
+            if (!delete) await Navigation.PushAsync(new CategoriesPage(context));
             else
             {
                 if (context.Categories.Count == 1)
@@ -105,7 +106,7 @@ namespace FinanceApplication.views
                 return false;
             });
 
-            Category isSend = await CategoryRepository.SaveCategory(new Category(EntryCategoryName.Text, context.User.UserId, category.ColorId, category.IconId, category.CategoryId));
+            Category isSend = await CategoryRepository.SaveCategory(new Category(EntryCategoryName.Text, context.User.UserId, category.ColorId, category.IconId, category.CategoryId, category.IsProfit));
             Resave(isSend);
             await Navigation.PushAsync(new CategoriesPage(context));
         }
@@ -141,7 +142,7 @@ namespace FinanceApplication.views
         private async void AlertButton_Clicked()
         {
             await DisplayAlert("Последняя категория", "категория не может быть удалена,\nтк она последняя", "ОK");
-            await Navigation.PushAsync(new CardPage(context));
+            await Navigation.PushAsync(new CategoriesPage(context));
         }
 
     }

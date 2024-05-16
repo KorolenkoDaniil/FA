@@ -22,7 +22,7 @@ namespace FinanceApplication.views
 
             List<ExtendedCategory> extendedCategories = (from category in context.Categories
                                                          join color in context.Colors on category.ColorId equals color.ColorId
-                                                         select new ExtendedCategory(category.Name, color.DarkMode, color.LightMode, category.IconId, category.CategoryId, context.User.UserId, category.ColorId)).ToList();
+                                                         select new ExtendedCategory(category.Name, color.DarkMode, color.LightMode, category.IconId, category.CategoryId, context.User.UserId, category.ColorId, category.IsProfit)).ToList();
 
             List<ChartEntry> entries = new List<ChartEntry>();
 

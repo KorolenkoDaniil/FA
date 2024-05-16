@@ -21,6 +21,10 @@ namespace FinanceApplication.views
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             this.context = context;
+            for (int i = 0; i < context.Wallets.Count; i++)
+            {
+                Console.WriteLine(context.Wallets[i]);
+            }
             imageCard.Source = ImageSource.FromResource(Icons.Iconspath[2]);
             imageCathegory.Source = ImageSource.FromResource(Icons.Iconspath[3]);;
             imageList.Source = ImageSource.FromResource(Icons.Iconspath[8]);
@@ -33,6 +37,16 @@ namespace FinanceApplication.views
 
         public void ShowCards()
         {
+            for (int i = 0; i < context.Wallets.Count; i++)
+            {
+                Console.WriteLine(context.Wallets[i]);
+            }
+
+            foreach (var item in context.Colors)
+            {
+                Console.WriteLine(item);   
+            }
+
             List<ExtendedWallet> walletsWithColors = (from wallet in context.Wallets
                                                       join color in context.Colors on wallet.ColorId equals color.ColorId
                                                       select new ExtendedWallet
@@ -45,16 +59,17 @@ namespace FinanceApplication.views
                                                           Amount = wallet.Amount,
                                                           DarkMode = color.DarkMode,
                                                           LightMode = color.LightMode,
-                                                          DarkText = color.DarkText,
-                                                          LightText = color.LightText,
                                                           context = context,
                                                           IconId = wallet.IconId,
+                                                          ColorId = wallet.ColorId,
                                                           WalletIconPath = ImageSource.FromResource(Icons.WalletsIcons[wallet.IconId])
                                                       }).ToList();
 
             foreach (ExtendedWallet wallet in walletsWithColors)
+            {
                 wallet.Amount = context.Operations.Where(operation => operation.WalletId == wallet.WalletId && operation.Profit).Sum(o => o.Sum) - context.Operations.Where(operation => operation.WalletId == wallet.WalletId && !operation.Profit).Sum(o => o.Sum); ;
-            
+                Console.WriteLine(wallet);
+            }
             CardsSum.Text = "$" + walletsWithColors.Where(wallet => wallet.Include).Sum(wa => wa.Amount);
             CardsCollection.ItemsSource = walletsWithColors;
         }

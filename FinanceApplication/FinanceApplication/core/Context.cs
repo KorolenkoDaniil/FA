@@ -16,7 +16,6 @@ namespace FinanceApp.classes
         public List<Category> Categories { get; private set; }
         public List<Operation> Operations { get; private set; }
         public List<Colorss> Colors { get; private set; }
-        //public Currency currencyRate {  get; private set; }
 
         public bool monthPeriod = true;
 

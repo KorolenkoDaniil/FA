@@ -30,16 +30,16 @@
                 <RowDefinition Height=".1*"/>
                 <RowDefinition Height=".1*"/>
 
-                <RowDefinition Height=".1*"/>
+                <RowDefinition Height=".12*"/>
                 <RowDefinition Height=".01*"/>
 
-                <RowDefinition Height=".1*"/>
+                <RowDefinition Height=".12*"/>
                 <RowDefinition Height=".06*"/>
 
-                <RowDefinition Height=".1*"/>
+                <RowDefinition Height=".12*"/>
                 <RowDefinition Height=".01*"/>
 
-                <RowDefinition Height=".1*"/>
+                <RowDefinition Height=".12*"/>
                 <RowDefinition Height=".01*"/>
 
                 <RowDefinition Height=".13*"/>
@@ -59,10 +59,10 @@
             <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="2" Margin="0">
                 <StackLayout>
                     <Label Style="{StaticResource Text1}" Text="Email" Margin="10, 0,0,0" />
-                    <StackLayout Orientation="Horizontal">
-                        <Entry x:Name="entryEmail" Focused="entryEmail_Focused" Unfocused="entryEmail_Unfocused" Keyboard="Email" TextColor="Black" WidthRequest="0.9" HorizontalOptions="FillAndExpand" Margin="10, 0, 0, 0"/>
-                        <Image x:Name="CheckImage" HeightRequest="15" WidthRequest="15"/>
-                    </StackLayout>
+                    <AbsoluteLayout Padding="0" Margin="0">
+                        <Entry x:Name="entryEmail" Focused="entryEmail_Focused" Unfocused="entryEmail_Unfocused" Keyboard="Email" TextColor="Black" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 1, .9, 1" Margin="10, 0, 0, 0"/>
+                        <Image x:Name="CheckImage" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".95, .5, 15, 15" Margin="0"/>
+                    </AbsoluteLayout>
                 </StackLayout>
             </Frame>
 
@@ -70,7 +70,7 @@
             <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="4">
                 <StackLayout>
                     <Label Style="{StaticResource Text1}" Text="Nickname" Margin="10, 0,0,0"/>
-                    <Entry x:Name="entryNickname"  TextColor="Black" Margin="10, 0,0,0"/>
+                    <Entry x:Name="entryNickname" TextColor="Black" Margin="10, 0,0,0"/>
                 </StackLayout>
             </Frame>
 

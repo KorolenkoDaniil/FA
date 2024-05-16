@@ -11,6 +11,7 @@ namespace Server.Models.Categories1
         public int UserId { get; set; }
         public int ColorId { get; set; }
         public int IconId { get; set; }
+        public bool IsProfit { get; set; }
 
         public Category(int categoryId, string name, int userId, int colorId, int iconId)
         {

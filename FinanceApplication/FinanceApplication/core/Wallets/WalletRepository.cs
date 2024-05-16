@@ -19,7 +19,6 @@ namespace FinanceApp.classes.Wallets
             HttpResponseMessage response = await httpClient.PostAsync(Links.SaveWallet, content);
             if (response.IsSuccessStatusCode)
             {
-                //Console.WriteLine(response.IsSuccessStatusCode);
                 string walletJSON = await response.Content.ReadAsStringAsync();
                 Wallet userWallet = JsonConvert.DeserializeObject<Wallet>(walletJSON);
                 return userWallet;

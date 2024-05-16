@@ -21,36 +21,43 @@
                 <RowDefinition Height=".08*"/>
             </Grid.RowDefinitions>
 
-            <Frame Grid.Column="0" Grid.Row="0" Padding="0, 10, 0, 10">
+            <Frame Grid.Column="0" Grid.Row="0" Padding="0, 10, 0, 0">
                 <StackLayout Padding="0">
-                    <!--<Grid>
+                    <Grid Margin="0" Padding="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width=".05*"/>
-                            <ColumnDefinition Width=".35*"/>
-                            <ColumnDefinition Width=".45*"/>
+                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width=".1*"/>
                             <ColumnDefinition Width=".05*"/>
                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height=".35*"/>
+                            <RowDefinition Height=".65*"/>
+                        </Grid.RowDefinitions>
 
-                        <Label Text="Categories" Grid.Column="1"  VerticalOptions="Center" Grid.Row="0" Style="{StaticResource TextOpenSans}" />
+                        <Label Text="Категории" Grid.Column="1"  VerticalOptions="Center" Grid.Row="0" Style="{StaticResource TextOpenSans}" />
 
-                        <Image x:Name="Settings" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="3">
+                        <Image x:Name="Settings" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="2">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToSettingsPage" />
                             </Image.GestureRecognizers>
                         </Image>
 
+                        <StackLayout Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Padding="0">
+                            <Grid Margin="0" Padding="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width=".01*"/>
+                                    <ColumnDefinition Width=".485*"/>
+                                    <ColumnDefinition Width=".01*"/>
+                                    <ColumnDefinition Width=".485*"/>
+                                    <ColumnDefinition Width=".01*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Row="0" Grid.Column="1" Text="Доходов" BackgroundColor="Transparent" TextColor="Black" Clicked="Button_enrease_Clicked"/>
+                                <Button Grid.Row="0" Grid.Column="3" Text="Расходов" BackgroundColor="Transparent" TextColor="Black" Clicked="Button_consume_Clicked_1"/>
+                            </Grid>
+                        </StackLayout>
                     </Grid>
-                    <Grid Margin="0" Padding="0">
-                        <Grid.ColumnDefinitions Margin="0">
-                            <ColumnDefinition Width=".5*"/>
-                            <ColumnDefinition Width=".5*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Label Text="Доходы" Grid.Column="0" HorizontalTextAlignment="Center" VerticalOptions="Center" Grid.Row="1" TextColor="Black" FontAttributes="Bold"/>
-                        <Label Text="Расходы" Grid.Column="1" HorizontalTextAlignment="Center" VerticalOptions="Center" Grid.Row="1" TextColor="Black" FontAttributes="Bold"/>
-
-                    </Grid>-->
                 </StackLayout>
             </Frame>
 
@@ -67,12 +74,12 @@
 
 
                                     <AbsoluteLayout  Grid.Row="0" Grid.Column="0">
-                                        <Frame Padding="10" CornerRadius="35" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".9, .3, 40, 40" BackgroundColor="Transparent" BorderColor="White">
+                                        <Frame Padding="10" CornerRadius="35" AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="{Binding LightMode}" AbsoluteLayout.LayoutBounds=".9, .3, 40, 40" BorderColor="Black">
                                             <Image Source="{Binding Path=IconSource}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
                                         </Frame>
                                     </AbsoluteLayout>
 
-                                    <Label Text="{Binding Name}" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
+                                    <Label Text="{Binding Name}" Grid.Row="0" Grid.Column="1" TextColor="Black" VerticalOptions="Center"/>
                                 </Grid>
                             </Frame>
                         </StackLayout>

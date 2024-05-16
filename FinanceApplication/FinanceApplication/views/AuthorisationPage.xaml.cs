@@ -58,14 +58,6 @@ namespace FinanceApplication.views
                     else BadRequestLabel.IsVisible = true;
                 }
             }
-//<<<<<<< HEAD
-//            catch
-//            {
-//                BadRequestLabel.IsVisible = true;
-//            }
-//=======
-//            catch { BadRequestLabel.IsVisible = true; }
-//>>>>>>> \
             finally
             {
                 Device.StartTimer(TimeSpan.FromSeconds(1), () =>

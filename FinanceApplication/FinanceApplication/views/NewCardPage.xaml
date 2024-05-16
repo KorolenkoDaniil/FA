@@ -21,8 +21,12 @@
         <Frame CornerRadius="30" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".5, .2, .9, .7" BackgroundColor="#FFF7EC">
             <StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="новый кошелек" FontSize="Large" TextColor="Black" HorizontalTextAlignment="Center"/>
-                    <Frame x:Name="WalletImage1" WidthRequest="20" HeightRequest="40" CornerRadius="40"/>
+                    <Label Text="новый кошелек" FontSize="Large" TextColor="Black" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                    <AbsoluteLayout>
+                        <Frame x:Name="WalletImage" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 45, 45" CornerRadius="40" Padding="10">
+                            <Image x:Name="walletIcon" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                        </Frame>
+                    </AbsoluteLayout>
                 </StackLayout>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -51,6 +55,9 @@
                     <Entry x:Name="EntryName" TextChanged="EntryName_TextChanged" Focused="EntryName_Focused" Unfocused="EntryName_Unfocused" Keyboard="Text" Placeholder="название нового кошелька" PlaceholderColor="#8f8f8f" FontSize="14" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
                     <Picker x:Name="PickerType" Focused="PickerType_Focused" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
 
+                    <Image x:Name="xmarkWalletName" Grid.Row="0" Grid.Column="2"/>
+
+
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width=".1*"/>
@@ -78,13 +85,14 @@
                     <Grid Grid.Column="1" Grid.Row="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width=".45*"/>
-                            <ColumnDefinition Width=".1*"/>
-                            <ColumnDefinition Width=".45*"/>
+                            <ColumnDefinition Width=".05*"/>
+                            <ColumnDefinition Width=".5*"/>
                         </Grid.ColumnDefinitions>
-
-
-                        <Button x:Name="Cancel" Clicked="Cancel_Clicked" Text="Отмена" Grid.Row="0" Grid.Column="0"></Button>
-                        <Button x:Name="Create" Clicked="Create_Clicked" Text="Создать" Grid.Row="0" Grid.Column="2"></Button>
+                        
+                        
+                        
+                        <Button x:Name="Cancel" Clicked="Cancel_Clicked" FontSize="Small" Text="Отмена" TextColor="Black" Grid.Row="0" Grid.Column="0" CornerRadius="30" BackgroundColor="Transparent" BorderColor="Black" BorderWidth="1"/>
+                        <Button x:Name="Create" Clicked="Create_Clicked" FontSize="Small" Text="Создать" TextColor="Black" Grid.Row="0" Grid.Column="2" CornerRadius="30" BackgroundColor="Transparent" BorderColor="Black" BorderWidth="1" Margin="0"/>
                     </Grid>
 
                 </Grid>

@@ -13,10 +13,11 @@ namespace FinanceApplication.core
         public string LightMode { get; set; }
         public decimal CategorySum { get; set; }
         public int IconId { get; set; }
+        public bool IsProfit { get; set; }
         public ImageSource IconSource { get; set; }
 
         public ExtendedCategory() { }
-        public ExtendedCategory( string name, string darkMode, string lightMode, int iconId, int categoryId, int userId, int colorId)
+        public ExtendedCategory( string name, string darkMode, string lightMode, int iconId, int categoryId, int userId, int colorId, bool isProfit)
         {
             Name = name;
             DarkMode = darkMode;
@@ -26,6 +27,7 @@ namespace FinanceApplication.core
             CategoryId = categoryId;
             UserId = userId;
             ColorId = colorId;
+            IsProfit = isProfit;
         }
 
         public override string ToString()

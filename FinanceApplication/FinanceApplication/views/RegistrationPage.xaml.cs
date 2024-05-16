@@ -31,8 +31,7 @@ namespace FinanceApplication.views
             ErrorLabel.IsVisible = false;
             BadRequestLabel.IsVisible = false;
             Loading.IsVisible = false;
-            //CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
-
+            CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
         }
 
         private async void CreateClicked(object sender, EventArgs e)
@@ -104,8 +103,8 @@ namespace FinanceApplication.views
         {
             List<Wallet> wallets = new List<Wallet>
     {
-        new Wallet(context.User.UserId, "кошелек 1", "Денежные средства", 0, 5, true, 1),
-        new Wallet(context.User.UserId, "кошелек 2", "Сберегательный счет", 0, 6, true, 3)
+        new Wallet(context.User.UserId, "кошелек 1", "Денежные средства", 0, 1, true, 1),
+        new Wallet(context.User.UserId, "кошелек 2", "Сберегательный счет", 0, 2, true, 3)
     };
             List<Task<Wallet>> saveTasks = wallets.Select(wallet => WalletRepository.SaveWallet(wallet)).ToList();
             if (saveTasks.Any(wallet => wallet == null))
@@ -117,11 +116,12 @@ namespace FinanceApplication.views
         {
             List<Category> categories = new List<Category>
     {
-        new Category("категория 1", context.User.UserId, 2, 0),
-        new Category("категория 2", context.User.UserId, 3, 1),
-        new Category("категория 3", context.User.UserId, 4, 2),
-        new Category("категория 4", context.User.UserId, 5, 3),
-        new Category("категория 5", context.User.UserId, 6, 4),
+        new Category("категория 1", context.User.UserId, 2, 0, true),
+        new Category("категория 2", context.User.UserId, 3, 1, true),
+        new Category("категория 3", context.User.UserId, 4, 2, true),
+        new Category("категория 4", context.User.UserId, 5, 3, false),
+        new Category("категория 5", context.User.UserId, 6, 4, false),
+        new Category("категория 6", context.User.UserId, 6, 4, false),
     };
             List<Task<Category>> saveTasksCategories = categories.Select(category => CategoryRepository.SaveCategory(category)).ToList();
             if (saveTasksCategories.Any(category => category == null))
@@ -155,20 +155,16 @@ namespace FinanceApplication.views
             });
         }
 
-
-
         private void entryEmail_Focused(object sender, FocusEventArgs e) => CheckImage.IsVisible = false;
+
 
         private void entryEmail_Unfocused(object sender, FocusEventArgs e)
         {
-            if (regex.IsMatch(entryEmail.Text) && entryEmail.Text.Length <= 40)
-            {
-                CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[15]);
-            }
-            else
-            {
+            CheckImage.IsVisible = true;
+            if (!Validator.ValidateString(entryEmail.Text, 40) || !regex.IsMatch(entryEmail.Text))
                 CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
-            }
+            else
+                CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[15]);
         }
 
         private async void CancelClicked(object sender, EventArgs e) => await Navigation.PopAsync();
