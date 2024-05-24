@@ -20,11 +20,16 @@ namespace FinanceApplication.core
         {
             this.date = date;
             Operations = operations;
- 
+
+            foreach (var item in operations)
+            {
+                Console.WriteLine(item);
+            }
+
             profitSum = Operations.Where(o => o.Profit).Sum(o => o.Sum);
-            expenses = Operations.Where(o => o.Profit == false).Sum(o => o.Sum);
-            //Console.WriteLine(profitSum + $"доходы дня {date}");
-            //Console.WriteLine(expenses + $"расходы дня {date}");
+            expenses = Operations.Where(o => !o.Profit).Sum(o => o.Sum);
+            Console.WriteLine(profitSum + $"доходы дня {date}");
+            Console.WriteLine(expenses + $"расходы дня {date}");
         }
     }
 }

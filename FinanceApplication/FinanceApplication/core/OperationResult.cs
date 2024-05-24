@@ -10,4 +10,9 @@
     public string Description { get; set; }
     public string WalletName { get; set; }
     public string WalletType { get; set; }
+
+    public override string ToString()
+    {
+        return $"Id {Id} UserId  {UserId} Profit {Profit} Date {Date} Sum {Sum} WalletId {WalletId} Cathegory {Cathegory} Description {Description} WalletName {WalletName} WalletType {WalletType}";
+    }
 }

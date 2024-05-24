@@ -1,8 +1,6 @@
 ﻿using System;
 using FinanceApp.classes;
-using FinanceApp.classes.Wallets;
 using FinanceApplication.core;
-using FinanceApplication.core.Category;
 using FinanceApplication.core.Colors;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

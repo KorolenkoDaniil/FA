@@ -1,220 +1,129 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="FinanceApplication.core.Category.Category" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="5.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAAAAAAgAEAAAAAAwAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAACAAAAAAAAggEgAAAAAwAAAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>core\Category\Category.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinanceApplication.core.Category.CategoryRepository" Collapsed="true">
-    <Position X="2.25" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAgBAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAgAgBAAAAAAAAAAA=</HashCode>
       <FileName>core\Category\CategoryRepository.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinanceApplication.core.Colors.ColorRepository" Collapsed="true">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAABAAAAAA=</HashCode>
       <FileName>core\Colors\ColorRepository.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinanceApplication.core.Colors.Colorss" Collapsed="true">
-    <Position X="5.75" Y="0.5" Width="1.5" />
+    <Position X="5.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAACAAAQAQAAAAEAAAAAAQAAAAAAAAEAAAAEAAAAAA=</HashCode>
       <FileName>core\Colors\Colorss.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FinanceApplication.core.Operations.Operation" Collapsed="true">
-    <Position X="5.75" Y="4.5" Width="1.5" />
+  <Class Name="FinanceApplication.core.Currency.Currency" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQADAAAAAAAgAAAEAAAAAAgCAAAAAAABAAAAAAAAAAQ=</HashCode>
+      <HashCode>gAASEAAAAAAAAGAUAAIAAAAAACAABACgAAAgAGAAAAA=</HashCode>
+      <FileName>core\Currency\Currency.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinanceApplication.core.Currency.CurrencyRepository" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAACA=</HashCode>
+      <FileName>core\Currency\CurrencyRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinanceApplication.core.Operations.Operation" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQADAAAAAAAgAAAEgAAAAAgCAAAAAAABAAAAAAAAAAQ=</HashCode>
       <FileName>core\Operations\Operation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinanceApplication.core.Operations.OperationRepository" Collapsed="true">
-    <Position X="7.5" Y="4.5" Width="1.5" />
+    <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAgAAAAACAAAAAA=</HashCode>
       <FileName>core\Operations\OperationRepository.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinanceApp.classes.Users.User" Collapsed="true">
-    <Position X="4" Y="8.5" Width="1.5" />
+    <Position X="5.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAACAAAAAEAAAAAAgAAAAAAAECAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAACAAAACAAAAAEAAAAAAgAAEAAAAECAAAAAAAAAAA=</HashCode>
       <FileName>core\Users\User.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinanceApp.classes.Users.UserRepository" Collapsed="true">
-    <Position X="5.75" Y="8.5" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAA=</HashCode>
       <FileName>core\Users\UserRepository.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinanceApp.classes.Wallets.Wallet" Collapsed="true">
-    <Position X="0.5" Y="12.5" Width="1.5" />
+    <Position X="5.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABCAAAAAAAAAAEAAAACAyAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAABCAAAAAAAAAgEgAAACAyAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>core\Wallets\Wallet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinanceApp.classes.Wallets.WalletRepository" Collapsed="true">
-    <Position X="0.5" Y="4.5" Width="1.5" />
+    <Position X="0.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAABAAAAEAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAgAAABAAAAEAAAAAAAAgAAAAAAAAAAAA=</HashCode>
       <FileName>core\Wallets\WalletRepository.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinanceApp.classes.Context" Collapsed="true">
-    <Position X="7.5" Y="0.5" Width="1.5" />
+    <Position X="8.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABABACEAAAAQgAAAAABCBAAAAAEAAAABAAgEAAAAA=</HashCode>
       <FileName>core\Context.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinanceApp.classes.Links" Collapsed="true">
-    <Position X="4" Y="4.5" Width="1.5" />
+    <Position X="3" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAABAAAAEABAQAQAACBAAAACAAEAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAgAAIBAAAAEABAQAQAACBAAAACAAEACA=</HashCode>
       <FileName>core\Links.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FinanceApp.classes.Validator" Collapsed="true">
-    <Position X="7.5" Y="8.5" Width="1.5" />
+  <Class Name="FinanceApplication.core.ExtendedCategory" Collapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAgAAIAAAACAAAgAAAAAAAAAAAAA=</HashCode>
-      <FileName>core\Validator.cs</FileName>
+      <HashCode>AAAACAAAYAQAAggEAAAAAAwAAAAAAgABAAAAAAAAAAA=</HashCode>
+      <FileName>core\ExtendedCategory.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinanceApplication.core.ExtendedWallet" Collapsed="true">
-    <Position X="2.25" Y="4.5" Width="1.5" />
+    <Position X="10.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAQAQAAAAAAAAAAAyAAAAAAAAEAQAAEAAAAAA=</HashCode>
+      <HashCode>AAADCAAAQAQAgggEAAAACAyAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>core\ExtendedWallet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FinanceApplication.core.OperationsDays" Collapsed="true">
-    <Position X="2.25" Y="8.5" Width="1.5" />
+    <Position X="10.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAACJAAAAAAAAAAAAAAAAAAAAAAEAACAAQEAAAA=</HashCode>
       <FileName>core\OperationsDays.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OperationResult" Collapsed="true">
-    <Position X="0.5" Y="8.5" Width="1.5" />
+    <Position X="10.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gQADAAAAAAAgAAAAAAAAAAgCAAAAAAABAAAgAAAAAAQ=</HashCode>
       <FileName>core\OperationResult.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.AuthorisationPage" Collapsed="true">
-    <Position X="16.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
-      <FileName>views\AuthorisationPage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.CardPage" Collapsed="true">
-    <Position X="18" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>IABGACAAAAAAAAAAAAIABAAAAAAAEAAAAAAAQAAAAAA=</HashCode>
-      <FileName>views\CardPage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.CategoriesPage" Collapsed="true">
-    <Position X="19.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AABGACAAAAAAAAAAAAoAAAAAAAAAEABAAAAAQAAAAAA=</HashCode>
-      <FileName>views\CategoriesPage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.CategoryPagePage" Collapsed="true">
-    <Position X="21.5" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>views\CategoryPagePage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.ConverterPage" Collapsed="true">
-    <Position X="16.25" Y="4.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>views\ConverterPage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.DatePage" Collapsed="true">
-    <Position X="18" Y="4.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AABGACQAEAAAAAAQAAIAAAAAAAAAEAAAAAAAwIAAAAA=</HashCode>
-      <FileName>views\DatePage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.DiagramPage" Collapsed="true">
-    <Position X="19.75" Y="4.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>views\DiagramPage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.ListPage" Collapsed="true">
-    <Position X="21.5" Y="4.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>EABGACAAAAABAAAAAAIBAAAAEAAAEABAAAAAQEAAAAA=</HashCode>
-      <FileName>views\ListPage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.NewCardPage" Collapsed="true">
-    <Position X="18" Y="8.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAgAAAgAAAAAAAAAAAAAA=</HashCode>
-      <FileName>views\NewCardPage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.NewOperationPage" Collapsed="true">
-    <Position X="19.75" Y="8.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACBCAAAAAAAABAAAAAAAAAgAAAgAAAAgAAQQAAAAA=</HashCode>
-      <FileName>views\NewOperationPage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.OneCardPage" Collapsed="true">
-    <Position X="21.5" Y="8.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>views\OneCardPage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.OperationsPerDay" Collapsed="true">
-    <Position X="16.25" Y="12.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>views\OperationsPerDay.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.RegistrationPage" Collapsed="true">
-    <Position X="18" Y="12.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAIAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
-      <FileName>views\RegistrationPage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.views.SettingsPage" Collapsed="true">
-    <Position X="19.75" Y="12.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
-      <FileName>views\SetingsPage.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FinanceApplication.MainPage" Collapsed="true">
-    <Position X="16.25" Y="8.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACEAAAAAAAAAAAAAAAAAAAAAAAAACAAEAAAAAAAAA=</HashCode>
-      <FileName>views\MainPage.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -21,9 +21,11 @@
     <None Remove="icons\CategoriesIcons\free-icon-font-mug-hot-alt-7409435.png" />
     <None Remove="icons\CategoriesIcons\free-icon-font-salad-12007638.png" />
     <None Remove="icons\CategoriesIcons\free-icon-font-subscription-13085534.png" />
+    <None Remove="icons\IconOfIcon.png" />
     <None Remove="icons\list.png" />
     <None Remove="icons\LRow.png" />
     <None Remove="icons\OIG1.png" />
+    <None Remove="icons\palette.png" />
     <None Remove="icons\Rrow.png" />
     <None Remove="icons\settings.png" />
     <None Remove="icons\trashCan.png" />
@@ -35,6 +37,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="icons\IconOfIcon.png" />
+    <EmbeddedResource Include="icons\palette.png" />
     <EmbeddedResource Include="icons\WalletsIcons\free-icon-font-bank-3914993.png" />
     <EmbeddedResource Include="icons\WalletsIcons\free-icon-font-cc-visa-6422268.png" />
     <EmbeddedResource Include="icons\WalletsIcons\free-icon-font-credit-card-3916663.png" />

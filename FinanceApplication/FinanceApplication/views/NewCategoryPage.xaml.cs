@@ -56,9 +56,9 @@ namespace FinanceApplication.views
         private void ShowImages()
         {
             NavigationPage.SetHasNavigationBar(this, false);
-            CathegoryImage.Source = ImageSource.FromResource(Icons.Iconspath[11]);
-            IconImage.Source = ImageSource.FromResource(Icons.Iconspath[2]);
-            ColorImage.Source = ImageSource.FromResource(Icons.Iconspath[3]);
+            CathegoryImage.Source = ImageSource.FromResource(Icons.Iconspath[3]);
+            IconImage.Source = ImageSource.FromResource(Icons.Iconspath[18]);
+            ColorImage.Source = ImageSource.FromResource(Icons.Iconspath[17]);
             xmarkCategoryName.Source = ImageSource.FromResource(Icons.Iconspath[16]);
             xmarkCategoryName.IsVisible = false;
         }
@@ -100,9 +100,12 @@ namespace FinanceApplication.views
         {
             ValidationBeforeSaving();
 
-            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(4), () =>
             {
-                //дописать блокировку кнопок
+                CreateSave.IsEnabled = false;
+                Cancel.IsEnabled = false;
+                ColorPicker.IsEnabled = false;
+                ImagePicker.IsEnabled = false;
                 return false;
             });
 
@@ -132,9 +135,9 @@ namespace FinanceApplication.views
         }
 
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new IconPickerPage(context, category));
         }
 
         private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e) => await Navigation.PushAsync(new ColorPickerPage(context, category));

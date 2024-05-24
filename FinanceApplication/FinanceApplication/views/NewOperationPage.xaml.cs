@@ -5,7 +5,6 @@ using FinanceApplication.core.Operations;
 using FinanceApplication.icons;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -27,17 +26,17 @@ namespace FinanceApplication.views
             ConsumptionPage.IsVisible = false;
             TransferPage.IsVisible = false;
 
-            sumImage.Source = ImageSource.FromResource(Icons.Iconspath[11]);
+            sumImage.Source = ImageSource.FromResource(Icons.Iconspath[14]);
             walletImage.Source = ImageSource.FromResource(Icons.Iconspath[2]);
             cathegoryImage.Source = ImageSource.FromResource(Icons.Iconspath[3]);
             descriptionImage.Source = ImageSource.FromResource(Icons.Iconspath[5]);
-            dateImage.Source = ImageSource.FromResource(Icons.Iconspath[11]);
+            dateImage.Source = ImageSource.FromResource(Icons.Iconspath[1]);
 
-            sumImageС.Source = ImageSource.FromResource(Icons.Iconspath[11]);
+            sumImageС.Source = ImageSource.FromResource(Icons.Iconspath[7]);
             walletImageС.Source = ImageSource.FromResource(Icons.Iconspath[2]);
             cathegoryImageС.Source = ImageSource.FromResource(Icons.Iconspath[3]);
             descriptionImageС.Source = ImageSource.FromResource(Icons.Iconspath[5]);
-            dateImageС.Source = ImageSource.FromResource(Icons.Iconspath[11]);
+            dateImageС.Source = ImageSource.FromResource(Icons.Iconspath[1]);
 
             xmarkConsume0.Source = xmarkConsume1.Source = xmarkConsume2.Source = xmarkConsume3.Source = ImageSource.FromResource(Icons.Iconspath[16]);
             xmarkConsume0.IsVisible = xmarkConsume1.IsVisible = xmarkConsume2.IsVisible = xmarkConsume3.IsVisible = false;
@@ -96,42 +95,55 @@ namespace FinanceApplication.views
         private async void Cancel_Clicked(object sender, EventArgs e) => await Navigation.PopAsync();
 
 
+
+
         private void Create_Clicked(object sender, EventArgs e)
         {
 
             if (WalletPicker.SelectedItem == null || CathegoryPicker.SelectedItem == null)
                 return;
 
-        
+
             if (!decimal.TryParse(EntrySum.Text, out sum)) return;
 
+            DateTime date = Datepicker.Date;
 
-            CreateOperation(true, sum);
+            CreateOperation(true, sum, context.Wallets[WalletPicker.SelectedIndex].WalletId, CathegoryPicker.SelectedItem.ToString(), EntryDescription.Text, date.ToString("d"));
         }
+
+
 
         private void Create_ClickedС(object sender, EventArgs e)
         {
-            if (WalletPicker.SelectedItem == null || CathegoryPicker.SelectedItem == null)
+            if (WalletPickerС.SelectedItem == null || CathegoryPickerС.SelectedItem == null)
                 return;
 
             Console.WriteLine("-----1");
-            if (!decimal.TryParse(EntrySum.Text, out sum)) return;
+            if (!decimal.TryParse(EntrySumС.Text, out sum)) return;
 
-            CreateOperation(false, sum);
+            DateTime date = DatepickerС.Date;
+
+            CreateOperation(false, sum, context.Wallets[WalletPickerС.SelectedIndex].WalletId, CathegoryPickerС.SelectedItem.ToString(), EntryDescriptionС.Text, date.ToString("d"));
         }
 
-        private async void CreateOperation(bool include, decimal sum)
+
+
+
+        private async void CreateOperation(bool include, decimal sum, int walletpickerIndex, string selectedCategory, string description, string stringdate)
         {
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-               
+                Cancel.IsEnabled = false;
+                Create.IsEnabled = false;
+                CreateС.IsEnabled = false;
+                CancelС.IsEnabled = false;
                 return false;
             });
 
-            DateTime date = Datepicker.Date;
+            
             Console.WriteLine("-----2");
             Operation newOperation = new Operation(
-                context.User.UserId, date.ToString("d"), include, sum, context.Wallets[WalletPicker.SelectedIndex].WalletId, CathegoryPicker.SelectedItem.ToString(), EntryDescription.Text);
+                context.User.UserId, stringdate, include, sum, walletpickerIndex, selectedCategory, description);
 
             Operation isSend = await OperationRepository.SaveOperation(newOperation);
             if (isSend != null)
@@ -155,7 +167,11 @@ namespace FinanceApplication.views
         private void CathegoryPickerС_Focused(object sender, FocusEventArgs e) => xmarkConsume2.IsVisible = false;
         private void CathegoryPickerС_Unfocused(object sender, FocusEventArgs e) => xmarkConsume2.IsVisible = CathegoryPickerС.SelectedItem == null;
         private void EntryDescriptionС_Focused(object sender, FocusEventArgs e) => xmarkConsume3.IsVisible = false;
-        private void EntryDescriptionС_Unfocused(object sender, FocusEventArgs e) => xmarkConsume3.IsVisible = EntryDescriptionС.Text.Length > 35;
+        private void EntryDescriptionС_Unfocused(object sender, FocusEventArgs e) {
+            if (string.IsNullOrEmpty(EntryDescriptionС.Text))
+                return;
+                xmarkConsume3.IsVisible = EntryDescriptionС.Text.Length > 35;
+        }
 
 
         private void EntrySum_Focused(object sender, FocusEventArgs e) => xmarkIncome0.IsVisible = false;

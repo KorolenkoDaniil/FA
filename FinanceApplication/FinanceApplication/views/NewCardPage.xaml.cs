@@ -62,11 +62,17 @@ namespace FinanceApplication.views
         }
         public void CodeFromConstructions()
         {
-            NavigationPage.SetHasNavigationBar(this, false); sumImage.Source = ImageSource.FromResource(Icons.Iconspath[11]);
-            walletImage.Source = ImageSource.FromResource(Icons.Iconspath[2]); cathegoryImage.Source = ImageSource.FromResource(Icons.Iconspath[3]);
-            descriptionImage.Source = ImageSource.FromResource(Icons.Iconspath[5]); xmark1.Source = ImageSource.FromResource(Icons.Iconspath[16]);
-            xmark2.Source = ImageSource.FromResource(Icons.Iconspath[16]); xmark3.Source = ImageSource.FromResource(Icons.Iconspath[16]);
-            xmark1.IsVisible = false; xmark2.IsVisible = false;
+            NavigationPage.SetHasNavigationBar(this, false); 
+            sumImage.Source = ImageSource.FromResource(Icons.Iconspath[11]);
+            walletImage.Source = ImageSource.FromResource(Icons.Iconspath[2]); 
+            colorImage.Source = ImageSource.FromResource(Icons.Iconspath[17]);
+            descriptionImage.Source = ImageSource.FromResource(Icons.Iconspath[5]);
+            IconImage.Source = ImageSource.FromResource(Icons.Iconspath[18]);
+            xmark1.Source = ImageSource.FromResource(Icons.Iconspath[16]);
+            xmark2.Source = ImageSource.FromResource(Icons.Iconspath[16]); 
+            xmark3.Source = ImageSource.FromResource(Icons.Iconspath[16]);
+            xmark1.IsVisible = false; 
+            xmark2.IsVisible = false;
             xmark3.IsVisible = false;
         }
 
@@ -89,8 +95,12 @@ namespace FinanceApplication.views
         }
         private void EntryName_Focused(object sender, FocusEventArgs e) { }
         private void PickerType_Focused(object sender, FocusEventArgs e) { }
-        private void IconButton_Clicked(object sender, EventArgs e) { }
-        private void ColorButton_Clicked(object sender, EventArgs e) { }
+        private async void IconButton_Clicked(object sender, EventArgs e) =>
+            await Navigation.PushAsync(new IconPickerPage(context, wallet));
+
+        private async void ColorButton_Clicked(object sender, EventArgs e) =>
+            await Navigation.PushAsync(new ColorPickerPage(context, wallet));
+
         private void EntryName_TextChanged(object sender, TextChangedEventArgs e) { }
         private void EntrySum_TextChanged(object sender, TextChangedEventArgs e) { }
         private void EntryName_Unfocused(object sender, FocusEventArgs e) { }
@@ -110,9 +120,12 @@ namespace FinanceApplication.views
 
             ValidationBeforeSaving();
             Device.StartTimer(TimeSpan.FromSeconds(2), () => {
-                EntrySum.IsEnabled = false; ColorButton.IsEnabled = false;
-                IconButton.IsEnabled = false; PickerType.IsEnabled = false;
-                EntryName.IsEnabled = false; CheckboxOfInclude.IsEnabled = false;
+                EntrySum.IsEnabled = false; 
+                ColorButton.IsEnabled = false;
+                IconButton.IsEnabled = false; 
+                PickerType.IsEnabled = false;
+                EntryName.IsEnabled = false; 
+                CheckboxOfInclude.IsEnabled = false;
                 return false;
             });
             Wallet isSend = await WalletRepository.SaveWallet(new Wallet(wallet.WalletId, context.User.UserId, EntryName.Text, context.WalletTypes[PickerType.SelectedIndex], sum, wallet.ColorId, CheckboxOfInclude.IsChecked, wallet.IconId));

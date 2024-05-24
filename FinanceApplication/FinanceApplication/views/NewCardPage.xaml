@@ -30,13 +30,14 @@
                 </StackLayout>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height=".16*"/>
-                        <RowDefinition Height=".16*"/>
-                        <RowDefinition Height=".16*"/>
+                        <RowDefinition Height=".14*"/>
+                        <RowDefinition Height=".14*"/>
+                        <RowDefinition Height=".14*"/>
 
-                        <RowDefinition Height=".16*"/>
-                        <RowDefinition Height=".16*"/>
-                        <RowDefinition Height=".16*"/>
+                        <RowDefinition Height=".14*"/>
+                        <RowDefinition Height=".14*"/>
+                        <RowDefinition Height=".14*"/>
+                        <RowDefinition Height=".14*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width=".1*"/>
@@ -45,11 +46,12 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <Image x:Name="sumImage" Grid.Column="0" Grid.Row="0" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
-                    <Image x:Name="walletImage" Grid.Column="0" Grid.Row="1" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
-                    <Image x:Name="cathegoryImage" Grid.Column="0" Grid.Row="2" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
-                    <Image x:Name="descriptionImage" Grid.Column="0" Grid.Row="3" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"></Image>
-                    <CheckBox x:Name="CheckboxOfInclude" Grid.Column="0" Grid.Row="4" IsChecked="True" HorizontalOptions="Center" VerticalOptions="Center"></CheckBox>
+                    <Image x:Name="sumImage" Grid.Column="0" Grid.Row="0" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Image x:Name="walletImage" Grid.Column="0" Grid.Row="1" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Image x:Name="IconImage" Grid.Column="0" Grid.Row="2" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Image x:Name="colorImage" Grid.Column="0" Grid.Row="3" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Image x:Name="descriptionImage" Grid.Column="0" Grid.Row="4" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <CheckBox x:Name="CheckboxOfInclude" Grid.Column="0" Grid.Row="5" IsChecked="True" HorizontalOptions="Center" VerticalOptions="Center"/>
 
 
                     <Entry x:Name="EntryName" TextChanged="EntryName_TextChanged" Focused="EntryName_Focused" Unfocused="EntryName_Unfocused" Keyboard="Text" Placeholder="название нового кошелька" PlaceholderColor="#8f8f8f" FontSize="14" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
@@ -58,31 +60,19 @@
                     <Image x:Name="xmarkWalletName" Grid.Row="0" Grid.Column="2"/>
 
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".1*"/>
-                            <ColumnDefinition Width=".4*"/>
-                            <ColumnDefinition Width=".1*"/>
-                            <ColumnDefinition Width=".4*"/>
-                        </Grid.ColumnDefinitions>
+                    <Button x:Name="IconButton" BackgroundColor="Transparent" TextColor="Black" Clicked="IconButton_Clicked" Text="выбрать иконку" Grid.Row="2" Grid.Column="1" />
 
-                        <Image Grid.Row="0" Grid.Column="0"/>
-                        <Image Grid.Row="0" Grid.Column="2"/>
+                    <Button x:Name="ColorButton" BackgroundColor="Transparent" TextColor="Black" Clicked="ColorButton_Clicked" Text="выбрать цвет" Grid.Row="3" Grid.Column="1" />
 
-                        <Button x:Name="IconButton" Clicked="IconButton_Clicked" Text="выбрать иконку" Grid.Row="0" Grid.Column="1" />
-                        <Button x:Name="ColorButton" Clicked="ColorButton_Clicked" Text="выбрать цвет" Grid.Row="0" Grid.Column="3"/>
-
-                    </Grid>
                     
-                    
-                    <Entry x:Name="EntrySum" TextChanged="EntrySum_TextChanged" Focused="EntrySum_Focused" Unfocused="EntrySum_Unfocused" Keyboard="Numeric" Placeholder="остаток средств" Text="0" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="3" Grid.Column="1"/>
-                    <Label Grid.Row="4" Grid.Column="1" VerticalOptions="Center" TextColor="Black" Text="включить в общий баланс"/>
+                    <Entry x:Name="EntrySum" TextChanged="EntrySum_TextChanged" Focused="EntrySum_Focused" Unfocused="EntrySum_Unfocused" Keyboard="Numeric" Placeholder="остаток средств" Text="0" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="4" Grid.Column="1"/>
+                    <Label Grid.Row="5" Grid.Column="1" VerticalOptions="Center" TextColor="Black" Text="включить в общий баланс"/>
 
                     <Image x:Name="xmark1" Grid.Row="0" Grid.Column="2"/>
                     <Image x:Name="xmark3" Grid.Row="1" Grid.Column="2"/>
                     <Image x:Name="xmark2" Grid.Row="3" Grid.Column="2"/>
 
-                    <Grid Grid.Column="1" Grid.Row="5">
+                    <Grid Grid.Column="1" Grid.Row="6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width=".45*"/>
                             <ColumnDefinition Width=".05*"/>

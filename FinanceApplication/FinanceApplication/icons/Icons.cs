@@ -22,6 +22,8 @@ namespace FinanceApplication.icons
             "FinanceApplication.icons.URow.png", 
             "FinanceApplication.icons.Check-circle.png", //15
             "FinanceApplication.icons.Circle-xmark.png", 
+            "FinanceApplication.icons.palette.png",
+            "FinanceApplication.icons.IconOfIcon.png", //18
         };
 
         public static string[] WalletsIcons = new string[]
