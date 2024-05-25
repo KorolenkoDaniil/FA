@@ -22,14 +22,23 @@ namespace FinanceApplication.views
 
             List<ExtendedCategory> extendedCategories = (from category in context.Categories
                                                          join color in context.Colors on category.ColorId equals color.ColorId
-                                                         select new ExtendedCategory(category.Name, color.DarkMode, color.LightMode, category.IconId, category.CategoryId, context.User.UserId, category.ColorId, category.IsProfit)).ToList();
+                                                         select new ExtendedCategory(category.Name, color.DarkMode, category.IconId, category.CategoryId, context.User.UserId, category.ColorId, category.IsProfit)).ToList();
+
+
+            foreach (var item in extendedCategories)
+            {
+                Console.WriteLine(item);
+                item.CategorySum = context.Operations.Where(categ => categ.Cathegory == item.Name && categ.Profit).Sum(u => u.Sum) - context.Operations.Where(categ => categ.Cathegory == item.Name && !categ.Profit).Sum(u => u.Sum);
+
+            }
+
 
             List<ChartEntry> entries = new List<ChartEntry>();
 
             foreach (ExtendedCategory category in extendedCategories)
 
                 entries.Add(new ChartEntry((float)category.CategorySum) {
-                    Color = SKColor.Parse(category.LightMode),
+                    Color = SKColor.Parse(category.DarkMode),
                     Label = category.Name,
                 } 
            );
@@ -37,7 +46,11 @@ namespace FinanceApplication.views
             foreach (ChartEntry item in entries)
             {
                 StackLayout legendItem = new StackLayout { Orientation = StackOrientation.Horizontal };
-                BoxView colorBax = new BoxView { WidthRequest = 10, HeightRequest = 10, Color = item.Color.ToFormsColor() };
+                BoxView colorBax = new BoxView { 
+                    WidthRequest = 10, 
+                    HeightRequest = 10, 
+                    Color = item.Color.ToFormsColor() 
+                };
                 Label label = new Label { Text = item.Label, TextColor = Color.Black };
 
                 legendItem.Children.Add(colorBax);

@@ -153,8 +153,8 @@
                             </Grid.ColumnDefinitions>
 
 
-                            <Button x:Name="CancelС" Clicked="Cancel_Clicked" FontSize="Small" Text="Отмена" TextColor="Black" Grid.Row="0" Grid.Column="0" CornerRadius="30" BorderColor="Black" BorderWidth="1"/>
-                            <Button x:Name="CreateС" Clicked="Create_ClickedС" FontSize="Small" Text="Создать" TextColor="Black" Grid.Row="0" Grid.Column="2" CornerRadius="30" BorderColor="Black" BorderWidth="1" Margin="0"/>
+                            <Button x:Name="CancelС" Clicked="Cancel_Clicked" FontSize="Small" Text="Отмена" TextColor="Black" Grid.Row="0" Grid.Column="0"  BackgroundColor="Transparent" CornerRadius="30" BorderColor="Black" BorderWidth="1"/>
+                            <Button x:Name="CreateС" Clicked="Create_ClickedС" FontSize="Small" Text="Создать" TextColor="Black" Grid.Row="0" Grid.Column="2"  BackgroundColor="Transparent" CornerRadius="30" BorderColor="Black" BorderWidth="1" Margin="0"/>
                         </Grid>
 
                     </Grid>

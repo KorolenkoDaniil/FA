@@ -50,7 +50,7 @@
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
                         <StackLayout>
-                            <Frame Margin="15, 15, 15, 15" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="20" BackgroundColor="{Binding LightMode}" >
+                            <Frame Margin="15, 15, 15, 15" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="20" BackgroundColor="{Binding DarkMode}" >
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height=".1*"/>
@@ -63,7 +63,7 @@
                                         <ColumnDefinition Width=".5*"/>
                                         <ColumnDefinition Width=".5*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Text="{Binding Name}" Style="{StaticResource TextOpenSans}" TextColor="{Binding LightText}" Grid.Column="0" Grid.Row="0"/>
+                                    <Label Text="{Binding Name}" Style="{StaticResource TextOpenSans}" TextColor="Black" Grid.Column="0" Grid.Row="0"/>
                                     <Label Text="{Binding Type}" Style="{StaticResource TextOpenSans}" FontSize="Small" TextColor="#a3a3a3" Grid.Column="0" Grid.Row="1"/>
 
                                     <AbsoluteLayout Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">

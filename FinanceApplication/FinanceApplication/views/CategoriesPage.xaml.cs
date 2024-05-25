@@ -30,14 +30,14 @@ namespace FinanceApplication.views
             imageDiagram.Source = ImageSource.FromResource(Icons.Iconspath[6]);
             imageConverter.Source = ImageSource.FromResource(Icons.Iconspath[4]);
             Settings.Source = ImageSource.FromResource(Icons.Iconspath[12]);
-            PlusButton.BackgroundColor = Color.FromHex(context.Color.LightMode);
+            PlusButton.BackgroundColor = Color.FromHex(context.Color.DarkMode);
         }
 
         public void ShowCategories()
         {
             ListExtendedCategories = (from category in context.Categories
                                                         join color in context.Colors on category.ColorId equals color.ColorId
-                                                        select new ExtendedCategory(category.Name, color.DarkMode, color.LightMode, category.IconId, category.CategoryId, context.User.UserId, category.ColorId, category.IsProfit)).ToList();
+                                                        select new ExtendedCategory(category.Name, color.DarkMode, category.IconId, category.CategoryId, context.User.UserId, category.ColorId, category.IsProfit)).ToList();
 
 
             Console.WriteLine("------------------------новые категории");

@@ -74,7 +74,7 @@
 
 
                                     <AbsoluteLayout  Grid.Row="0" Grid.Column="0">
-                                        <Frame Padding="10" CornerRadius="35" AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="{Binding LightMode}" AbsoluteLayout.LayoutBounds=".9, .3, 40, 40" BorderColor="Black">
+                                        <Frame Padding="10" CornerRadius="35" AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="{Binding DarkMode}" AbsoluteLayout.LayoutBounds=".9, .3, 40, 40" BorderColor="Black">
                                             <Image Source="{Binding Path=IconSource}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
                                         </Frame>
                                     </AbsoluteLayout>

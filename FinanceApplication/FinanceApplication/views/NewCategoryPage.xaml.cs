@@ -30,7 +30,7 @@ namespace FinanceApplication.views
             Cancel.Text = "отмена";
             delete = false;
 
-            CategoryImage.BackgroundColor = Color.FromHex(context.Colors.FirstOrDefault(color => color.ColorId == category.ColorId).LightMode);
+            CategoryImage.BackgroundColor = Color.FromHex(context.Colors.FirstOrDefault(color => color.ColorId == category.ColorId).DarkMode);
             categoryIcon.Source = Icons.CategoriesIcons[category.IconId];
         }
 
@@ -40,7 +40,7 @@ namespace FinanceApplication.views
             ShowImages();
             this.context = context;
             this.category = category;
-            CategoryImage.BackgroundColor = Color.FromHex(context.Colors.First(color => color.ColorId == category.ColorId).LightMode);
+            CategoryImage.BackgroundColor = Color.FromHex(context.Colors.First(color => color.ColorId == category.ColorId).DarkMode);
             categoryIcon.Source = category.IconSource;
             CreateSave.Text = "Сохранить";
             Cancel.Text = "удалить";

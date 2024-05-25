@@ -41,8 +41,8 @@ namespace FinanceApplication.views
             {
                 Button newButton = new Button();
                 newButton.Text = color.ColorId.ToString();
-                newButton.TextColor = Color.FromHex(color.LightMode);
-                newButton.BackgroundColor = Color.FromHex(color.LightMode);
+                newButton.TextColor = Color.Transparent;
+                newButton.BackgroundColor = Color.FromHex(color.DarkMode);
                 newButton.WidthRequest = 40;
                 newButton.HeightRequest = 40;
                 newButton.CornerRadius = 20; 

@@ -32,7 +32,12 @@ namespace FinanceApplication.views
             imageConverter.Source = ImageSource.FromResource(Icons.Iconspath[4]);
             ShowCards();
             BindingContext = this;
-            PlusButton.BackgroundColor = Color.FromHex(context.Color.LightMode);
+
+            Console.WriteLine("(((((((((((((((((((((((((");
+            Console.WriteLine($"{context.Color.DarkMode}");
+            Console.WriteLine("(((((((((((((((((((((((((");
+
+            PlusButton.BackgroundColor = Color.FromHex(context.Color.DarkMode);
         }
 
         public void ShowCards()
@@ -58,7 +63,6 @@ namespace FinanceApplication.views
                                                           Type = wallet.Type,
                                                           Amount = wallet.Amount,
                                                           DarkMode = color.DarkMode,
-                                                          LightMode = color.LightMode,
                                                           context = context,
                                                           IconId = wallet.IconId,
                                                           ColorId = wallet.ColorId,

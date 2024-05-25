@@ -31,7 +31,7 @@ namespace FinanceApplication.views
             delete = false; 
             wallet.ColorId = random.Next(0, context.Colors.Count - 1);
             int IconId = random.Next(0, Icons.WalletsIcons.Length - 1);
-            WalletImage.BackgroundColor = Color.FromHex(context.Colors.FirstOrDefault(color => color.ColorId == wallet.ColorId).LightMode);
+            WalletImage.BackgroundColor = Color.FromHex(context.Colors.FirstOrDefault(color => color.ColorId == wallet.ColorId).DarkMode);
             PickerType.ItemsSource = context.WalletTypes;
             PickerType.SelectedItem = context.WalletTypes[0];
             wallet.IconId = IconId;
@@ -57,7 +57,7 @@ namespace FinanceApplication.views
             EntryName.Text = wallet.Name; 
             int index = context.WalletTypes.IndexOf(wallet.Type);
             PickerType.SelectedIndex = index; 
-            WalletImage.BackgroundColor = Color.FromHex(wallet.LightMode);
+            WalletImage.BackgroundColor = Color.FromHex(wallet.DarkMode);
             delete = true;
         }
         public void CodeFromConstructions()

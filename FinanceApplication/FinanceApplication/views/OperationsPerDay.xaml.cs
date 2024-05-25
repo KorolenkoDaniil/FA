@@ -16,6 +16,11 @@ namespace FinanceApplication.views
 			InitializeComponent ();
 			this.dayOperations = dayOperations;
 			this.context = context;
-		}
+			//OperationsCollectionPerDay.ItemsSource = dayOperations.Operations;
+        }
+
+
+
+
 	}
 }

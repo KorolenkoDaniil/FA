@@ -34,7 +34,7 @@ namespace FinanceApplication.views
             Settings.Source = ImageSource.FromResource("FinanceApplication.icons.settings.png");
             date.Text = newPeriod.ToString("d");
             ShowOperations(newPeriod);
-            PlusButton.BackgroundColor = Color.FromHex(context.Color.LightMode);
+            PlusButton.BackgroundColor = Color.FromHex(context.Color.DarkMode);
         }
 
 

@@ -2,11 +2,59 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FinanceApplication.views.OperationsPerDay">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TextOpenSans" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontFamily" Value="OpenSans-Regular"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <AbsoluteLayout BackgroundColor="#F5F5F5" Padding="0">
+        <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".08*"/>
+                <RowDefinition Height=".08*"/>
+                <RowDefinition Height=".08*"/>
+                <RowDefinition Height=".695*"/>
+                <RowDefinition Height=".065*"/>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Column="0" Grid.Row="0" Padding="15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".5*"/>
+                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition Width=".1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Operations" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}"/>
+
+                    <Frame CornerRadius="30" BackgroundColor="#F4F4F4" Grid.Column="1" Grid.Row="0" Padding="0">
+                        <Label HorizontalOptions="Center" VerticalOptions="Center" Text="20, July, 2024" Style="{StaticResource TextOpenSans}"></Label>
+                    </Frame>
+                </Grid>
+            </Frame>
+
+
+            <!--<CollectionView Grid.Row="6" Grid.Column="0" x:Name="OperationsCollectionPerDay" SelectionMode="Single" SelectionChanged="OnItemSelected">
+                <CollectionView.ItemTemplate >
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame BackgroundColor="White" Margin="10, 12, 10, 0">
+                                <StackLayout>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="45" Padding="0,0,0,0">
+                                        
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+        </Grid>
+    </AbsoluteLayout>
 </ContentPage>

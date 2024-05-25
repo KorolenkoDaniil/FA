@@ -1,6 +1,9 @@
-﻿using FinanceApp.classes;
+﻿using Android.Content;
+using FinanceApp.classes;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -45,6 +48,13 @@ namespace FinanceApplication.core.Colors
             {
                 string ColorsJson = await response.Content.ReadAsStringAsync();
                 List<Colorss> colors = JsonConvert.DeserializeObject<List<Colorss>>(ColorsJson);
+                
+                foreach (var item in colors)
+                {
+                    Console.WriteLine(item);
+                }
+
+
                 return colors;
             }
             else
