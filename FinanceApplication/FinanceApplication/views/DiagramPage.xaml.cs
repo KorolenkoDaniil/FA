@@ -14,24 +14,13 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DiagramPage : ContentPage
 	{
-        Context context = new Context();
-        public DiagramPage(Context context)
+        public DiagramPage()
         {
             InitializeComponent();
-            this.context = context;
 
-            List<ExtendedCategory> extendedCategories = (from category in context.Categories
-                                                         join color in context.Colors on category.ColorId equals color.ColorId
-                                                         select new ExtendedCategory(category.Name, color.DarkMode, category.IconId, category.CategoryId, context.User.UserId, category.ColorId, category.IsProfit)).ToList();
-
-
-            foreach (var item in extendedCategories)
-            {
-                Console.WriteLine(item);
-                item.CategorySum = context.Operations.Where(categ => categ.Cathegory == item.Name && categ.Profit).Sum(u => u.Sum) - context.Operations.Where(categ => categ.Cathegory == item.Name && !categ.Profit).Sum(u => u.Sum);
-
-            }
-
+            List<ExtendedCategory> extendedCategories = (from category in Context.Categories
+                                                         join color in Context.Colors on category.ColorId equals color.ColorId
+                                                         select new ExtendedCategory(category.Name, color.DarkMode, category.IconId, category.CategoryId, Context.User.UserId, category.ColorId, category.IsProfit)).ToList();
 
             List<ChartEntry> entries = new List<ChartEntry>();
 
@@ -58,7 +47,7 @@ namespace FinanceApplication.views
 
                 CategoriesLegend.Children.Add(legendItem);
 
-                Console.WriteLine($"цвет {item.Color}  лэбл {item.ValueLabel}  лэйбл1 {item.Label}  {item.Value}");
+                Console.WriteLine($"цвет {item.Color}  лэбл {item.ValueLabel}  лэйбл1 {item.Label} {item.Value}");
             }
 
 

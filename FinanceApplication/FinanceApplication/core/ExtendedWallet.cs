@@ -1,4 +1,5 @@
 ﻿using FinanceApp.classes;
+using FinanceApp.classes.Wallets;
 using FinanceApplication.core.Colors;
 using FinanceApplication.icons;
 using System.Linq;
@@ -18,10 +19,8 @@ namespace FinanceApplication.core
         public int ColorId { get; set; }
         public int IconId { get; set; }
         public ImageSource WalletIconPath { get; set; }
-        public Context context { get; set; }
-
         public ExtendedWallet() { }
-        public ExtendedWallet(int walletId, int userId, string name, string type, bool include, decimal amount, string darkMode, int colorId, int iconId, Context context)
+        public ExtendedWallet(int walletId, int userId, string name, string type, bool include, decimal amount, string darkMode, int colorId, int iconId)
         {
             WalletId = walletId;
             UserId = userId;
@@ -32,8 +31,8 @@ namespace FinanceApplication.core
             DarkMode = darkMode;
             ColorId = colorId;
             IconId = iconId;
-            WalletIconPath = ImageSource.FromResource(Icons.WalletsIcons[IconId]); ;
-            this.context = context;
+            WalletIconPath = Icons.WalletsIcons[IconId];
+            CalculateSum();
         }
 
         public override string ToString()
@@ -43,8 +42,12 @@ namespace FinanceApplication.core
 
         public void ChangeColors()
         {
-            Colorss color = context.Colors.FirstOrDefault(col => col.ColorId == ColorId);
+            Colorss color = Context.Colors.FirstOrDefault(col => col.ColorId == ColorId);
             DarkMode = color.DarkMode;
         }
+
+        public void CalculateSum() => 
+           Amount = Context.Operations.Where(operation => operation.WalletId == WalletId && operation.Profit).Sum(o => o.Sum) - Context.Operations.Where(operation => operation.WalletId == WalletId && !operation.Profit).Sum(o => o.Sum);
+        
     }
 }

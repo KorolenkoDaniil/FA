@@ -1,5 +1,4 @@
-﻿using Android.Service.QuickAccessWallet;
-using FinanceApp.classes;
+﻿using FinanceApp.classes;
 using FinanceApp.classes.Wallets;
 using FinanceApplication.core;
 using FinanceApplication.core.Category;
@@ -14,51 +13,48 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewCardPage : ContentPage
     {
-        Context context;
         ExtendedWallet wallet; 
         Random random = new Random();
         bool delete;
         decimal sum = 0;
-        public NewCardPage(Context context)
+        public NewCardPage()
         {
             InitializeComponent(); 
-            this.context = context;
-            PickerType.ItemsSource = context.WalletTypes;
+            PickerType.ItemsSource = Context.WalletTypes;
             wallet = new ExtendedWallet();
             CodeFromConstructions();
             Create.Text = "Создать"; 
             Cancel.Text = "Отмена";
             delete = false; 
-            wallet.ColorId = random.Next(0, context.Colors.Count - 1);
+            wallet.ColorId = random.Next(0, Context.Colors.Count - 1);
             int IconId = random.Next(0, Icons.WalletsIcons.Length - 1);
-            WalletImage.BackgroundColor = Color.FromHex(context.Colors.FirstOrDefault(color => color.ColorId == wallet.ColorId).DarkMode);
-            PickerType.ItemsSource = context.WalletTypes;
-            PickerType.SelectedItem = context.WalletTypes[0];
+            WalletImage.BackgroundColor = Color.FromHex(Context.Colors.FirstOrDefault(color => color.ColorId == wallet.ColorId).DarkMode);
+            PickerType.ItemsSource = Context.WalletTypes;
+            PickerType.SelectedItem = Context.WalletTypes[0];
             wallet.IconId = IconId;
 
-            wallet.UserId = context.User.UserId;
-
-            Console.WriteLine("$$$$$$$$$$$$$$");
-            Console.WriteLine(wallet);
-            Console.WriteLine("$$$$$$$$$$$$$$");
+            wallet.UserId = Context.User.UserId;
 
             walletIcon.Source = ImageSource.FromResource(Icons.WalletsIcons[IconId]);
 
         }
-        public NewCardPage(Context context, ExtendedWallet wallet)
+        public NewCardPage(ExtendedWallet wallet)
         {
             InitializeComponent();
-            PickerType.ItemsSource = context.WalletTypes;
-            this.context = context; 
+            PickerType.ItemsSource = Context.WalletTypes;
             this.wallet = wallet;
             CodeFromConstructions();
             Create.Text = "Сохранить"; 
             Cancel.Text = "Удалить";
-            EntryName.Text = wallet.Name; 
-            int index = context.WalletTypes.IndexOf(wallet.Type);
+            EntryName.Text = wallet.Name;
+            walletIcon.Source = wallet.WalletIconPath;
+            int index = Context.WalletTypes.IndexOf(wallet.Type);
             PickerType.SelectedIndex = index; 
             WalletImage.BackgroundColor = Color.FromHex(wallet.DarkMode);
             delete = true;
+            Top.Text = "";
+            EntrySum.Text = wallet.Amount.ToString();
+            CheckboxOfInclude.IsChecked = wallet.Include;
         }
         public void CodeFromConstructions()
         {
@@ -78,90 +74,109 @@ namespace FinanceApplication.views
 
         private async void Cancel_Clicked(object sender, EventArgs e)
         {
-            if (!delete) await Navigation.PushAsync(new CardPage(context));
+            if (!delete) await Navigation.PushAsync(new CardPage());
             else
             {
-                if (context.Wallets.Count == 1)
+                if (Context.Wallets.Count == 1)
                 {
                     AlertButton_Clicked();
                     return;
                 }
                 Cancel.IsEnabled = false;
-                Create.IsEnabled = false; int index = context.Wallets.FindIndex(wal => wal.WalletId == wallet.WalletId);
-                await WalletRepository.DeleteWallet(context.Wallets[index]); context.Wallets.Remove(context.Wallets[index]);
-                await Navigation.PushAsync(new CardPage(context));
+                Create.IsEnabled = false; 
+                int index = Context.Wallets.FindIndex(wal => wal.WalletId == wallet.WalletId);
+                await WalletRepository.DeleteWallet(Context.Wallets[index]); 
+                Context.Wallets.Remove(Context.Wallets[index]);
+                await Navigation.PushAsync(new CardPage());
             }
-            Cancel.IsEnabled = true; Create.IsEnabled = true;
+            Cancel.IsEnabled = true; 
+            Create.IsEnabled = true;
         }
-        private void EntryName_Focused(object sender, FocusEventArgs e) { }
         private void PickerType_Focused(object sender, FocusEventArgs e) { }
         private async void IconButton_Clicked(object sender, EventArgs e) =>
-            await Navigation.PushAsync(new IconPickerPage(context, wallet));
+            await Navigation.PushAsync(new IconPickerPage(wallet));
 
         private async void ColorButton_Clicked(object sender, EventArgs e) =>
-            await Navigation.PushAsync(new ColorPickerPage(context, wallet));
+            await Navigation.PushAsync(new ColorPickerPage(wallet));
 
         private void EntryName_TextChanged(object sender, TextChangedEventArgs e) { }
         private void EntrySum_TextChanged(object sender, TextChangedEventArgs e) { }
-        private void EntryName_Unfocused(object sender, FocusEventArgs e) { }
-        private void EntrySum_Focused(object sender, FocusEventArgs e) { }
-        private void EntrySum_Unfocused(object sender, FocusEventArgs e) { }
+        private void EntryName_Focused(object sender, FocusEventArgs e) 
+        {
+            xmark1.IsVisible = false;
+        }
+        private void EntrySum_Focused(object sender, FocusEventArgs e) 
+        {
+            xmark3.IsVisible = false;
+        }
         public void Resave(Category category)
         {
-            int index = context.Categories.IndexOf(category);
+
+            int index = Context.Categories.IndexOf(category);
             if (index != -1)
             {
-                context.Categories[index] = category; return;
+                Context.Categories[index] = category;
+                return;
             }
-            context.Categories.Add(category);
+            Context.Categories.Add(category);
         }
         private async void Create_Clicked(object sender, EventArgs e)
         {
 
-            ValidationBeforeSaving();
-            Device.StartTimer(TimeSpan.FromSeconds(2), () => {
-                EntrySum.IsEnabled = false; 
-                ColorButton.IsEnabled = false;
-                IconButton.IsEnabled = false; 
-                PickerType.IsEnabled = false;
-                EntryName.IsEnabled = false; 
-                CheckboxOfInclude.IsEnabled = false;
-                return false;
-            });
-            Wallet isSend = await WalletRepository.SaveWallet(new Wallet(wallet.WalletId, context.User.UserId, EntryName.Text, context.WalletTypes[PickerType.SelectedIndex], sum, wallet.ColorId, CheckboxOfInclude.IsChecked, wallet.IconId));
-            Console.WriteLine("%%%%%%%%%%%%%%%%%111");
-            Console.WriteLine(isSend);
-            Console.WriteLine("%%%%%%%%%%%%%%%%%111");
-            Resave(isSend); 
-            await Navigation.PushAsync(new CardPage(context));
+            if (ValidationBeforeSaving())
+            {
+
+                Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+                {
+                    EntrySum.IsEnabled = false;
+                    ColorButton.IsEnabled = false;
+                    IconButton.IsEnabled = false;
+                    PickerType.IsEnabled = false;
+                    EntryName.IsEnabled = false;
+                    CheckboxOfInclude.IsEnabled = false;
+                    return false;
+                });
+                Wallet isSend = await WalletRepository.SaveWallet(new Wallet(wallet.WalletId, Context.User.UserId, EntryName.Text, Context.WalletTypes[PickerType.SelectedIndex], sum, wallet.ColorId, CheckboxOfInclude.IsChecked, wallet.IconId));
+                Resave(isSend);
+                await Navigation.PushAsync(new CardPage());
+            }
+            else return;
         }
-        private void ValidationBeforeSaving()
+        private bool ValidationBeforeSaving()
         {
-            if (!Validator.ValidateString(EntryName.Text, 15)) return; if (PickerType.SelectedItem == null)
+            if (!Validator.ValidateString(EntryName.Text, 15))
+            {
+                xmark1.IsVisible = true;
+                return false;
+            }
+            if (PickerType.SelectedItem == null)
             {
                 xmark3.IsVisible = true;
-                return;
+                return false;
             }
-            if (!decimal.TryParse(EntrySum.Text, out sum)) return;
-            if (sum > 10000) return;
+            if (!decimal.TryParse(EntrySum.Text, out sum) || string.IsNullOrEmpty(EntrySum.Text) || sum > 10000)
+            {
+                xmark3.IsVisible = true;
+                return false;
+            }
+            return true;
         }
         public void Resave(Wallet wallet)
         {
-            int index = context.Wallets.IndexOf(wallet);
-            Console.WriteLine("%%%%%%%%%%%%%%%%%");
-            Console.WriteLine(wallet);
-            Console.WriteLine("%%%%%%%%%%%%%%%%%");
+            int index = Context.Wallets.IndexOf(wallet);
 
             if (index != -1)
             {
-                context.Wallets[index] = wallet; return;
+                Context.Wallets[index] = wallet; 
+                return;
             }
-            context.Wallets.Add(wallet);
+            Context.Wallets.Add(wallet);
+
         }
 
         private async void AlertButton_Clicked()
         {
-            await DisplayAlert("Последний кошелек", "кошелек не может быть удален,\nтк он последний", "ОK"); await Navigation.PushAsync(new CardPage(context));
+            await DisplayAlert("Последний кошелек", "кошелек не может быть удален,\nтк он последний", "ОK"); await Navigation.PushAsync(new CardPage());
         }
     }
 }

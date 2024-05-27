@@ -9,14 +9,11 @@ namespace FinanceApplication.views
 	public partial class OperationsPerDay : ContentPage
 	{
 		OperationsDays dayOperations;
-		Context context;
 
-        public OperationsPerDay (OperationsDays dayOperations, Context context)
+        public OperationsPerDay (OperationsDays dayOperations)
 		{
 			InitializeComponent ();
 			this.dayOperations = dayOperations;
-			this.context = context;
-			//OperationsCollectionPerDay.ItemsSource = dayOperations.Operations;
         }
 
 

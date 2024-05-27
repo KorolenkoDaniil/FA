@@ -15,15 +15,12 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AuthorisationPage : ContentPage
     {
-        Context context = new Context();
-            
         private Regex regex = new Regex(@"@gmail.com$");
 
-        public AuthorisationPage(Context context)
+        public AuthorisationPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            this.context = context;
             BindingContext = this;
             ErrorLabel.IsVisible = false;
             BadRequestLabel.IsVisible = false;
@@ -42,18 +39,24 @@ namespace FinanceApplication.views
                 Loading.IsVisible = true;
                 BadRequestLabel.IsVisible = false;
 
-                if (!Validator.ValidateString(entryEmail.Text, 20) || !Validator.ValidateString(entryPass1.Text, 15)) { ErrorLabel.IsVisible = true; return; }
-                else if (!regex.IsMatch(entryEmail.Text)) { ErrorLabel.IsVisible = true; return; }
+                if (!Validator.ValidateString(entryEmail.Text, 20) || !Validator.ValidateString(entryPass1.Text, 15)) { ErrorLabel.IsVisible = true; 
+                    return; 
+                }
+                else if (!regex.IsMatch(entryEmail.Text)) 
+                { 
+                    ErrorLabel.IsVisible = true; 
+                    return;
+                }
                 else
                 {
-                    context.ChangeUser(await UserRepository.AuthoriseUser(entryEmail.Text, entryPass1.Text));
-                    if (context.User != null)
+                    Context.ChangeUser(await UserRepository.AuthoriseUser(entryEmail.Text, entryPass1.Text));
+                    if (Context.User != null)
                     {
-                        context.ChangeTheme(await ColorRepository.GetColor(context.User.ColorId));
-                        context.SetWalletsCollection(await WalletRepository.GetWallets(context.User.UserId));
-                        context.SetCategoryCollection(await CategoryRepository.GetCategorys(context.User.UserId));
-                        context.SetOperationsCollection(await OperationRepository.GetOperations(context.User.UserId));
-                        await Navigation.PushAsync(new ListPage(DateTime.Now, context));
+                        Context.ChangeTheme(await ColorRepository.GetColor( Context.User.ColorId));
+                        Context.SetWalletsCollection(await WalletRepository.GetWallets(Context.User.UserId));
+                        Context.SetCategoryCollection(await CategoryRepository.GetCategorys(Context.User.UserId));
+                        Context.SetOperationsCollection(await OperationRepository.GetOperations(Context.User.UserId));
+                        await Navigation.PushAsync(new ListPage(DateTime.Now));
                     }
                     else BadRequestLabel.IsVisible = true;
                 }

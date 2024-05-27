@@ -13,15 +13,13 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewOperationPage : ContentPage
     {
-        Context context = new Context();
         bool income = true;
         decimal sum = 0;
 
-        public NewOperationPage(Context context)
+        public NewOperationPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            this.context = context;
             IncomePage.IsVisible = false;
             ConsumptionPage.IsVisible = false;
             TransferPage.IsVisible = false;
@@ -45,7 +43,7 @@ namespace FinanceApplication.views
             xmarkIncome0.IsVisible = xmarkIncome1.IsVisible = xmarkIncome2.IsVisible = xmarkIncome3.IsVisible = false;
 
             List<string> walletsNames = new List<string>();
-            foreach (Wallet wallet in context.Wallets)
+            foreach (Wallet wallet in Context.Wallets)
                 walletsNames.Add(wallet.Name);
 
 
@@ -55,7 +53,7 @@ namespace FinanceApplication.views
             WalletPickerС.SelectedItem = walletsNames[0];
 
             List<string> CategoriesNames = new List<string>();
-            foreach (Category category in context.Categories)
+            foreach (Category category in Context.Categories)
                 CategoriesNames.Add(category.Name);
 
 
@@ -87,10 +85,10 @@ namespace FinanceApplication.views
         }
 
         private async void ToCardPage(object sender, EventArgs e) =>
-         await Navigation.PushAsync(new CardPage(context));
+         await Navigation.PushAsync(new CardPage());
 
         private async void ToListPage(object sender, EventArgs e) =>
-            await Navigation.PushAsync(new ListPage(DateTime.Now, context));
+            await Navigation.PushAsync(new ListPage(DateTime.Now));
 
         private async void Cancel_Clicked(object sender, EventArgs e) => await Navigation.PopAsync();
 
@@ -104,11 +102,11 @@ namespace FinanceApplication.views
                 return;
 
 
-            if (!decimal.TryParse(EntrySum.Text, out sum)) return;
+            if (!decimal.TryParse(EntrySum.Text, out sum) || sum == 0) return;
 
             DateTime date = Datepicker.Date;
 
-            CreateOperation(true, sum, context.Wallets[WalletPicker.SelectedIndex].WalletId, CathegoryPicker.SelectedItem.ToString(), EntryDescription.Text, date.ToString("d"));
+            CreateOperation(true, sum, Context.Wallets[WalletPicker.SelectedIndex].WalletId, CathegoryPicker.SelectedItem.ToString(), EntryDescription.Text, date.ToString("d"));
         }
 
 
@@ -119,11 +117,11 @@ namespace FinanceApplication.views
                 return;
 
             Console.WriteLine("-----1");
-            if (!decimal.TryParse(EntrySumС.Text, out sum)) return;
+            if (!decimal.TryParse(EntrySumС.Text, out sum) || sum == 0) return;
 
             DateTime date = DatepickerС.Date;
 
-            CreateOperation(false, sum, context.Wallets[WalletPickerС.SelectedIndex].WalletId, CathegoryPickerС.SelectedItem.ToString(), EntryDescriptionС.Text, date.ToString("d"));
+            CreateOperation(false, sum, Context.Wallets[WalletPickerС.SelectedIndex].WalletId, CathegoryPickerС.SelectedItem.ToString(), EntryDescriptionС.Text, date.ToString("d"));
         }
 
 
@@ -143,14 +141,14 @@ namespace FinanceApplication.views
             
             Console.WriteLine("-----2");
             Operation newOperation = new Operation(
-                context.User.UserId, stringdate, include, sum, walletpickerIndex, selectedCategory, description);
+                Context.User.UserId, stringdate, include, sum, walletpickerIndex, selectedCategory, description);
 
             Operation isSend = await OperationRepository.SaveOperation(newOperation);
             if (isSend != null)
             {
                 Console.WriteLine("-----3");
-                context.Operations.Add(isSend);
-                await Navigation.PushAsync(new ListPage(DateTime.Now, context));
+                Context.Operations.Add(isSend);
+                await Navigation.PushAsync(new ListPage(DateTime.Now));
             }
         }
 

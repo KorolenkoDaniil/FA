@@ -10,47 +10,46 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ColorPickerPage : ContentPage
     {
-        Context context;
         ExtendedCategory category;
         ExtendedWallet wallet;
-        int objectForColorise;
 
-        public ColorPickerPage(Context context, ExtendedCategory category)
-        {
-            objectForColorise = 1;
-            this.context = context;
-            this.category = category;
-            CreateButtons();
-        }
-
-        public ColorPickerPage(Context context, ExtendedWallet wallet)
-        {
-            objectForColorise = 2;
-            this.context = context;
-            this.wallet = wallet;
-            CreateButtons();
-        }
-
-        public void CreateButtons()
+        public ColorPickerPage(ExtendedCategory category)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+
+            this.category = category;
+            CreateCategoryButtons();
+        }
+
+        public ColorPickerPage(ExtendedWallet wallet)
+        {
+            InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+
+            this.wallet = wallet;
+            CreateCardButtons();
+        }
+
+        public void CreateCategoryButtons()
+        {
             int column = 0, row = 0;
 
-            foreach (Colorss color in context.Colors)
+            foreach (Colorss color in Context.Colors)
             {
-                Button newButton = new Button();
-                newButton.Text = color.ColorId.ToString();
-                newButton.TextColor = Color.Transparent;
-                newButton.BackgroundColor = Color.FromHex(color.DarkMode);
-                newButton.WidthRequest = 40;
-                newButton.HeightRequest = 40;
-                newButton.CornerRadius = 20; 
+                Button newButton = new Button
+                {
+                    Text = color.ColorId.ToString(),
+                    TextColor = Color.Transparent,
+                    BackgroundColor = Color.FromHex(color.DarkMode),
+                    WidthRequest = 40,
+                    HeightRequest = 40,
+                    CornerRadius = 20,
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center
+                };
 
-                newButton.HorizontalOptions = LayoutOptions.Center;
-                newButton.VerticalOptions = LayoutOptions.Center;
-
-                newButton.Clicked += NewButton_Clicked;
+                newButton.Clicked += ColoriseCategory;
 
                 Grid.SetRow(newButton, row);
                 Grid.SetColumn(newButton, column);
@@ -66,25 +65,57 @@ namespace FinanceApplication.views
             }
         }
 
-        private void NewButton_Clicked(object sender, EventArgs e)
+        public void CreateCardButtons()
         {
-            if (sender is Button button){
-                if (objectForColorise == 1) ColoriseCategory(button);     
-                if (objectForColorise == 2) ColoriseCard(button);     
+            int column = 0, row = 0;
+
+            foreach (Colorss color in Context.Colors)
+            {
+                Button newButton = new Button
+                {
+                    Text = color.ColorId.ToString(),
+                    TextColor = Color.Transparent,
+                    BackgroundColor = Color.FromHex(color.DarkMode),
+                    WidthRequest = 40,
+                    HeightRequest = 40,
+                    CornerRadius = 20,
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center
+                };
+
+                newButton.Clicked += ColoriseCard;
+
+                Grid.SetRow(newButton, row);
+                Grid.SetColumn(newButton, column);
+                ColorGrid.Children.Add(newButton);
+
+                column++;
+
+                if (column == 4)
+                {
+                    column = 0;
+                    row++;
+                }
             }
         }
 
-        private async void ColoriseCategory(Button button)
+        private async void ColoriseCategory(object sender, EventArgs e)
         {
-            category.ColorId = int.Parse(button.Text);
-            await Navigation.PushAsync(new NewCategoryPage(context, category));
+            if (sender is Button button)
+            {
+                category.ColorId = int.Parse(button.Text);
+                await Navigation.PushAsync(new NewCategoryPage(category));
+            }
         }
 
-        private async void ColoriseCard(Button button)
+        private async void ColoriseCard(object sender, EventArgs e)
         {
-            wallet.ColorId = int.Parse(button.Text);
-            wallet.ChangeColors();
-            await Navigation.PushAsync(new  NewCardPage(context, wallet));
+            if (sender is Button button)
+            {
+                wallet.ColorId = int.Parse(button.Text);
+                wallet.ChangeColors();
+                await Navigation.PushAsync(new NewCardPage(wallet));
+            }
         }
     }
 }

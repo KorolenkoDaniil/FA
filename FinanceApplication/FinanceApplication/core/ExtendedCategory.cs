@@ -1,4 +1,6 @@
-﻿using FinanceApplication.icons;
+﻿using FinanceApp.classes;
+using FinanceApplication.icons;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace FinanceApplication.core
@@ -16,7 +18,7 @@ namespace FinanceApplication.core
         public ImageSource IconSource { get; set; }
 
         public ExtendedCategory() { }
-        public ExtendedCategory( string name, string darkMode, int iconId, int categoryId, int userId, int colorId, bool isProfit)
+        public ExtendedCategory(string name, string darkMode, int iconId, int categoryId, int userId, int colorId, bool isProfit)
         {
             Name = name;
             DarkMode = darkMode;
@@ -26,7 +28,13 @@ namespace FinanceApplication.core
             UserId = userId;
             ColorId = colorId;
             IsProfit = isProfit;
+            CalculateSum();
         }
+
+
+        public void CalculateSum() => 
+            CategorySum = Context.Operations.Where(categ => categ.Cathegory == Name && categ.Profit).Sum(u => u.Sum) - Context.Operations.Where(categ => categ.Cathegory == Name && !categ.Profit).Sum(u => u.Sum);
+        
 
         public override string ToString()
         {

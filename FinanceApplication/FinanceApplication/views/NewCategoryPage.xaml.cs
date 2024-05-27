@@ -12,35 +12,34 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewCategoryPage : ContentPage
     {
-        Context context;
         ExtendedCategory category;
         Random random = new Random();
         bool delete;
+        bool profit;
 
-        public NewCategoryPage(Context context)
+        public NewCategoryPage(bool profit)
         {
             InitializeComponent();
             ShowImages();
-            this.context = context;
             category = new ExtendedCategory();
-            category.UserId = context.User.UserId;
-            category.ColorId = random.Next(0, context.Colors.Count - 1);
+            category.UserId = Context.User.UserId;
+            category.ColorId = random.Next(0, Context.Colors.Count - 1);
             category.IconId = random.Next(0, Icons.CategoriesIcons.Length - 1);
             CreateSave.Text = "создать";
             Cancel.Text = "отмена";
             delete = false;
-
-            CategoryImage.BackgroundColor = Color.FromHex(context.Colors.FirstOrDefault(color => color.ColorId == category.ColorId).DarkMode);
-            categoryIcon.Source = Icons.CategoriesIcons[category.IconId];
+            //category.IsProfit = profit;
+            this.profit = profit;
+            CategoryImage.BackgroundColor = Color.FromHex(Context.Colors.FirstOrDefault(color => color.ColorId == category.ColorId).DarkMode);
+            categoryIcon.Source = ImageSource.FromResource(Icons.CategoriesIcons[category.IconId]);
         }
 
-        public NewCategoryPage(Context context, ExtendedCategory category)
+        public NewCategoryPage(ExtendedCategory category)
         {
             InitializeComponent();
             ShowImages();
-            this.context = context;
             this.category = category;
-            CategoryImage.BackgroundColor = Color.FromHex(context.Colors.First(color => color.ColorId == category.ColorId).DarkMode);
+            CategoryImage.BackgroundColor = Color.FromHex(Context.Colors.First(color => color.ColorId == category.ColorId).DarkMode);
             categoryIcon.Source = category.IconSource;
             CreateSave.Text = "Сохранить";
             Cancel.Text = "удалить";
@@ -65,10 +64,10 @@ namespace FinanceApplication.views
 
         private async void Cancel_Clicked(object sender, EventArgs e)
         {
-            if (!delete) await Navigation.PushAsync(new CategoriesPage(context));
+            if (!delete) await Navigation.PushAsync(new CategoriesPage());
             else
             {
-                if (context.Categories.Count == 1)
+                if (Context.Categories.Count == 1)
                 {
                     AlertButton_Clicked();
                     return;
@@ -76,10 +75,10 @@ namespace FinanceApplication.views
 
                 Cancel.IsEnabled = false;
                 CreateSave.IsEnabled = false;
-                int index = context.Categories.FindIndex(cat => cat.CategoryId == category.CategoryId);
-                await CategoryRepository.DeleteCategory(context.Categories[index]);
-                context.Categories.Remove(context.Categories[index]);
-                await Navigation.PushAsync(new CategoriesPage(context));
+                int index = Context.Categories.FindIndex(cat => cat.CategoryId == category.CategoryId);
+                await CategoryRepository.DeleteCategory(Context.Categories[index]);
+                Context.Categories.Remove(Context.Categories[index]);
+                await Navigation.PushAsync(new CategoriesPage());
             }
             Cancel.IsEnabled = true;
             CreateSave.IsEnabled = true;
@@ -109,9 +108,9 @@ namespace FinanceApplication.views
                 return false;
             });
 
-            Category isSend = await CategoryRepository.SaveCategory(new Category(EntryCategoryName.Text, context.User.UserId, category.ColorId, category.IconId, category.CategoryId, category.IsProfit));
+            Category isSend = await CategoryRepository.SaveCategory(new Category(EntryCategoryName.Text, Context.User.UserId, category.ColorId, category.IconId, category.CategoryId, profit));
             Resave(isSend);
-            await Navigation.PushAsync(new CategoriesPage(context));
+            await Navigation.PushAsync(new CategoriesPage());
         }
 
         private void ValidationBeforeSaving()
@@ -125,27 +124,27 @@ namespace FinanceApplication.views
 
         public void Resave(Category category)
         {
-            int index = context.Categories.IndexOf(category);
+            int index = Context.Categories.IndexOf(category);
             if (index != -1)
             {
-                context.Categories[index] = category;
+                Context.Categories[index] = category;
                 return;
             }
-            context.Categories.Add(category);
+            Context.Categories.Add(category);
         }
 
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new IconPickerPage(context, category));
+            await Navigation.PushAsync(new IconPickerPage(category));
         }
 
-        private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e) => await Navigation.PushAsync(new ColorPickerPage(context, category));
+        private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e) => await Navigation.PushAsync(new ColorPickerPage(category));
 
         private async void AlertButton_Clicked()
         {
             await DisplayAlert("Последняя категория", "категория не может быть удалена,\nтк она последняя", "ОK");
-            await Navigation.PushAsync(new CategoriesPage(context));
+            await Navigation.PushAsync(new CategoriesPage());
         }
 
     }

@@ -3,7 +3,6 @@ using FinanceApplication.core.Currency;
 using FinanceApplication.icons;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,13 +11,11 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DatePage : ContentPage
     {
-        Context context = new Context();
 
-        public DatePage(Context context)
+        public DatePage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            this.context = context;
             imageCard.Source = ImageSource.FromResource(Icons.Iconspath[2]);
             imageCathegory.Source = ImageSource.FromResource(Icons.Iconspath[3]);
             imageList.Source = ImageSource.FromResource(Icons.Iconspath[8]);
@@ -37,7 +34,6 @@ namespace FinanceApplication.views
             YearLabel.Text = (--year).ToString();
 
             DateTime DateFromButton = DateTime.Parse(DateOnButton.Text);
-            //Console.WriteLine(DateFromButton);
             DateFromButton = DateFromButton.AddYears(-1);
             DateOnButton.Text = DateFromButton.ToString();
         }
@@ -48,7 +44,6 @@ namespace FinanceApplication.views
             YearLabel.Text = (++year).ToString();
 
             DateTime DateFromButton = DateTime.Parse(DateOnButton.Text);
-            //Console.WriteLine(DateFromButton);
             DateFromButton = DateFromButton.AddYears(1);
             DateOnButton.Text = DateFromButton.ToString();
         }
@@ -87,27 +82,27 @@ namespace FinanceApplication.views
             if (sender is Button button)
             {
                 DateTime newPeriod = new DateTime(int.Parse(YearLabel.Text), ConvertMonthNameToNumber(button.Text), 1);
-                await Navigation.PushAsync(new ListPage(newPeriod, context));
+                await Navigation.PushAsync(new ListPage(newPeriod));
             }
         }
 
-        private void monthTrue(object sender, EventArgs e) => context.monthPeriod = true;
+        private void monthTrue(object sender, EventArgs e) => Context.monthPeriod = true;
             
   
         private async void monthFalse(object sender, EventArgs e)
         {
-            context.monthPeriod = false;
-            await Navigation.PushAsync(new ListPage(DateTime.Now, context));
+            Context.monthPeriod = false;
+            await Navigation.PushAsync(new ListPage(DateTime.Now));
         }
 
-        private async void ToCardPage(object sender, EventArgs e) => await Navigation.PushAsync(new CardPage(context));
-        private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage(context));
-        private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage(DateTime.Now, context));
-        private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage(context));
+        private async void ToCardPage(object sender, EventArgs e) => await Navigation.PushAsync(new CardPage());
+        private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage());
+        private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage(DateTime.Now));
+        private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage());
         private async void ToConverterPage(object sender, EventArgs e)
         {
             Currency currencyRates = await CurrencyRepository.GetCurrency();
-            await Navigation.PushAsync(new ConverterPage(context, currencyRates));
+            await Navigation.PushAsync(new ConverterPage(currencyRates));
         }
 
     }

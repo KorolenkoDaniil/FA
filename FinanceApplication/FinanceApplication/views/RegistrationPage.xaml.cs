@@ -1,5 +1,4 @@
-﻿using Android.Graphics.Drawables;
-using FinanceApp.classes;
+﻿using FinanceApp.classes;
 using FinanceApp.classes.Users;
 using FinanceApp.classes.Wallets;
 using FinanceApplication.core.Category;
@@ -19,14 +18,11 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegistrationPage : ContentPage
     {
-        Context context = new Context();
-
         private Regex regex = new Regex(@"@gmail.com$");
-        public RegistrationPage(Context context)
+        public RegistrationPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            this.context = context;
             BindingContext = this;
             ErrorLabel.IsVisible = false;
             BadRequestLabel.IsVisible = false;
@@ -41,12 +37,12 @@ namespace FinanceApplication.views
             {
                 if (!ValidateInputs()) return;
                 await SaveUserAndChangeTheme();
-                if (context.User != null)
+                if (Context.User != null)
                 {
                     await HandleWallets();
                     await HandleCategories();
                     await HandleOperations();
-                    await Navigation.PushAsync(new ListPage(DateTime.Now, context));
+                    await Navigation.PushAsync(new ListPage(DateTime.Now));
                 }
                 else BadRequestLabel.IsVisible = true;
             }
@@ -95,49 +91,49 @@ namespace FinanceApplication.views
 
         private async Task SaveUserAndChangeTheme()
         {
-            context.ChangeUser(await UserRepository.SaveUser(new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, 1, true)));
-            context.ChangeTheme(await ColorRepository.GetColor(1));
+            Context.ChangeUser(await UserRepository.SaveUser(new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, 1, true)));
+            Context.ChangeTheme(await ColorRepository.GetColor(1));
         }
 
         private async Task HandleWallets()
         {
             List<Wallet> wallets = new List<Wallet>
     {
-        new Wallet(context.User.UserId, "кошелек 1", "Денежные средства", 0, 1, true, 1),
-        new Wallet(context.User.UserId, "кошелек 2", "Сберегательный счет", 0, 2, true, 3)
+        new Wallet(Context.User.UserId, "кошелек 1", "Денежные средства", 0, 1, true, 1),
+        new Wallet(Context.User.UserId, "кошелек 2", "Сберегательный счет", 0, 2, true, 3)
     };
             List<Task<Wallet>> saveTasks = wallets.Select(wallet => WalletRepository.SaveWallet(wallet)).ToList();
             if (saveTasks.Any(wallet => wallet == null))
                 return;
-            context.SetWalletsCollection(await WalletRepository.GetWallets(context.User.UserId));
+            Context.SetWalletsCollection(await WalletRepository.GetWallets(Context.User.UserId));
         }
 
         private async Task HandleCategories()
         {
             List<Category> categories = new List<Category>
     {
-        new Category("категория 1", context.User.UserId, 2, 0, true),
-        new Category("категория 2", context.User.UserId, 3, 1, true),
-        new Category("категория 3", context.User.UserId, 4, 2, true),
-        new Category("категория 4", context.User.UserId, 5, 3, false),
-        new Category("категория 5", context.User.UserId, 6, 4, false),
-        new Category("категория 6", context.User.UserId, 6, 4, false),
+        new Category("категория 1", Context.User.UserId, 2, 0, true),
+        new Category("категория 2", Context.User.UserId, 3, 1, true),
+        new Category("категория 3", Context.User.UserId, 4, 2, true),
+        new Category("категория 4", Context.User.UserId, 5, 3, false),
+        new Category("категория 5", Context.User.UserId, 6, 4, false),
+        new Category("категория 6", Context.User.UserId, 6, 4, false),
     };
             List<Task<Category>> saveTasksCategories = categories.Select(category => CategoryRepository.SaveCategory(category)).ToList();
             if (saveTasksCategories.Any(category => category == null))
                 return;
-            context.SetCategoryCollection(await CategoryRepository.GetCategorys(context.User.UserId));
+            Context.SetCategoryCollection(await CategoryRepository.GetCategorys(Context.User.UserId));
         }
 
         private async Task HandleOperations()
         {
-            List<Operation> operations = new List<Operation>
-    {
-        new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[0].WalletId, context.Categories[0].Name, "qq" ),
-        new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[1].Name, "qq" ),
-        new Operation(context.User.UserId, DateTime.Now.ToString("d"), true, 10, context.Wallets[1].WalletId, context.Categories[0].Name, "qq" ),
-    };
-            context.SetOperationsCollection(await OperationRepository.GetOperations(context.User.UserId));
+    //        List<Operation> operations = new List<Operation>
+    //{
+    //    new Operation(Context.User.UserId, DateTime.Now.ToString("d"), true, 10, Context.Wallets[0].WalletId, Context.Categories[0].Name, "qq" ),
+    //    new Operation(Context.User.UserId, DateTime.Now.ToString("d"), true, 10, Context.Wallets[1].WalletId, Context.Categories[1].Name, "qq" ),
+    //    new Operation(Context.User.UserId, DateTime.Now.ToString("d"), true, 10, Context.Wallets[1].WalletId, Context.Categories[0].Name, "qq" ),
+    //};
+            Context.SetOperationsCollection(await OperationRepository.GetOperations(Context.User.UserId));
         }
 
         private void EnableControlsAfterDelay()
@@ -162,9 +158,9 @@ namespace FinanceApplication.views
         {
             CheckImage.IsVisible = true;
             if (!Validator.ValidateString(entryEmail.Text, 40) || !regex.IsMatch(entryEmail.Text))
-                CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
+                CheckImage.Source = Icons.Iconspath[16];
             else
-                CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[15]);
+                CheckImage.Source = Icons.Iconspath[15];
         }
 
         private async void CancelClicked(object sender, EventArgs e) => await Navigation.PopAsync();

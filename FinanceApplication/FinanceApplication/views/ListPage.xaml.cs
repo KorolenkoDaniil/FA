@@ -13,15 +13,13 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListPage : ContentPage
     {
-        Context context = new Context();
         public decimal totalBalance = 0;
         List<OperationsDays> days = new List<OperationsDays>();
 
-        public ListPage(DateTime newPeriod, Context context)
+        public ListPage(DateTime newPeriod)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            this.context = context;
             BindingContext = this;
             NoOperations.IsVisible = false;
 
@@ -30,20 +28,19 @@ namespace FinanceApplication.views
             imageList.Source = ImageSource.FromResource(Icons.Iconspath[8]);
             imageDiagram.Source = ImageSource.FromResource(Icons.Iconspath[6]);
             imageConverter.Source = ImageSource.FromResource(Icons.Iconspath[4]);
-            //aa.Source = ImageSource.FromResource(Icons.CategoriesIcons[1]);
             Settings.Source = ImageSource.FromResource("FinanceApplication.icons.settings.png");
             date.Text = newPeriod.ToString("d");
             ShowOperations(newPeriod);
-            PlusButton.BackgroundColor = Color.FromHex(context.Color.DarkMode);
+            PlusButton.BackgroundColor = Color.FromHex(Context.Color.DarkMode);
         }
 
 
         private void ShowOperations(DateTime newPeriod)
         {
 
-            List<OperationResult> ListOperations = (from operation in context.Operations
-                                                    join cathegory in context.Categories on operation.Cathegory equals cathegory.Name
-                                                    join wallet in context.Wallets on operation.WalletId equals wallet.WalletId
+            List<OperationResult> ListOperations = (from operation in Context.Operations
+                                                    join cathegory in Context.Categories on operation.Cathegory equals cathegory.Name
+                                                    join wallet in Context.Wallets on operation.WalletId equals wallet.WalletId
                                                     select new OperationResult
                                                     {
                                                         Id = operation.Id,
@@ -79,7 +76,6 @@ namespace FinanceApplication.views
             }
 
             total.Text = $"$ {totalBalance}";
-            Console.WriteLine("кропка   27");
 
             if (days.Count == 0) NoOperations.IsVisible = true;
             OperationsCollection.ItemsSource = days.OrderByDescending(day => day.date);
@@ -92,7 +88,7 @@ namespace FinanceApplication.views
 
             if (selectedItem != null)
             {
-                await Navigation.PushAsync(new OperationsPerDay(selectedItem, context));
+                await Navigation.PushAsync(new OperationsPerDay(selectedItem));
             }
 
             OperationsCollection.SelectedItem = null;
@@ -100,19 +96,19 @@ namespace FinanceApplication.views
 
         private async void ToDatePage(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new DatePage(context));
+            await Navigation.PushAsync(new DatePage());
         }
 
-        private async void ToNewOperationPage(object sender, EventArgs e) => await Navigation.PushAsync(new NewOperationPage(context));
-        private async void ToCardPage(object sender, EventArgs e) => await Navigation.PushAsync(new CardPage(context));
-        private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage(context));
-        private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage(DateTime.Now, context));
-        private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage(context));
+        private async void ToNewOperationPage(object sender, EventArgs e) => await Navigation.PushAsync(new NewOperationPage());
+        private async void ToCardPage(object sender, EventArgs e) => await Navigation.PushAsync(new CardPage());
+        private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage());
+        private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage(DateTime.Now));
+        private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage());
         private async void ToConverterPage(object sender, EventArgs e)
         {
             Currency currencyRates = await CurrencyRepository.GetCurrency();
-            await Navigation.PushAsync(new ConverterPage(context, currencyRates));
+            await Navigation.PushAsync(new ConverterPage(currencyRates));
         }
-        private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsPage(context));
+        private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsPage());
     }
 }

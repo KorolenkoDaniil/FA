@@ -1,200 +1,136 @@
-﻿using FinanceApp.classes;
-using FinanceApplication.core.Currency;
+﻿using FinanceApplication.core.Currency;
 using FinanceApplication.icons;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static System.Math;
 
 namespace FinanceApplication.views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ConverterPage : ContentPage
     {
-        Context context = new Context();
         Currency currencyRates;
+        bool isUpdating = false;
 
-        public ConverterPage(Context context, Currency currency)
+        public ConverterPage(Currency currency)
         {
             InitializeComponent();
-            this.context = context;
             currencyRates = currency;
             NavigationPage.SetHasNavigationBar(this, false);
+            InitializeIcons();
+            UpdateCurrencyValues(1);
+            InitializeEventHandlers();
+        }
+
+        private void InitializeIcons()
+        {
             imageCard.Source = ImageSource.FromResource(Icons.Iconspath[2]);
-            imageCathegory.Source = ImageSource.FromResource(Icons.Iconspath[3]); ;
+            imageCathegory.Source = ImageSource.FromResource(Icons.Iconspath[3]);
             imageList.Source = ImageSource.FromResource(Icons.Iconspath[8]);
             imageDiagram.Source = ImageSource.FromResource(Icons.Iconspath[6]);
             imageConverter.Source = ImageSource.FromResource(Icons.Iconspath[4]);
-
-            EntryUSD.Text = "1";
-            EntryEUR.Text = currencyRates.ConvertUSDtoEUR(1).ToString();
-            EntryBYN.Text = currencyRates.ConvertUSDtoBYN(1).ToString();
-            EntryRUB.Text = currencyRates.ConvertUSDtoRUB(1).ToString();
-            EntryPLN.Text = currencyRates.ConvertUSDtoPLN(1).ToString();
-            EntryCNY.Text = currencyRates.ConvertUSDtoCNY(1).ToString();
         }
 
-
-        private async void ToCardPage(object sender, EventArgs e) => await Navigation.PushAsync(new CardPage(context));
-        private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage(context));
-        private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage(DateTime.Now, context));
-        private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage(context));
-        private async void ToConverterPage(object sender, EventArgs e)
+        private void InitializeEventHandlers()
         {
-            await Navigation.PushAsync(new ConverterPage(context, currencyRates));
+            EntryUSD.Unfocused += EntryUSD_TextChanged;
+            EntryEUR.Unfocused += EntryEUR_TextChanged;
+            EntryBYN.Unfocused += EntryBYN_TextChanged;
+            EntryRUB.Unfocused += EntryRUB_TextChanged;
+            EntryPLN.Unfocused += EntryPLN_TextChanged;
+            EntryCNY.Unfocused += EntryCNY_TextChanged;
         }
-        private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsPage(context));
 
-  
-        private void EntryUSD_Unfocused(object sender, FocusEventArgs e)
+        private void UpdateCurrencyValues(decimal value)
         {
-            if (string.IsNullOrEmpty(EntryUSD.Text)) return;
-            try
-            {
-                decimal USD = 0;
-                if (decimal.TryParse(EntryUSD.Text, out USD))
-                {
-                    EntryEUR.Text = currencyRates.ConvertUSDtoEUR(USD).ToString();
-                    EntryBYN.Text = currencyRates.ConvertUSDtoBYN(USD).ToString();
-                    EntryRUB.Text = currencyRates.ConvertUSDtoRUB(USD).ToString();
-                    EntryPLN.Text = currencyRates.ConvertUSDtoPLN(USD).ToString();
-                    EntryCNY.Text = currencyRates.ConvertUSDtoCNY(USD).ToString();
-                }
-                else
-                    ToZero();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            
+            if (isUpdating) return;
+            isUpdating = true;
+
+            EntryEUR.Text = currencyRates.ConvertUSDtoEUR(value).ToString();
+            EntryBYN.Text = currencyRates.ConvertUSDtoBYN(value).ToString();
+            EntryRUB.Text = currencyRates.ConvertUSDtoRUB(value).ToString();
+            EntryPLN.Text = currencyRates.ConvertUSDtoPLN(value).ToString();
+            EntryCNY.Text = currencyRates.ConvertUSDtoCNY(value).ToString();
+
+            isUpdating = false;
         }
 
-        private void EntryEUR_Unfocused(object sender, FocusEventArgs e)
+        private void EntryUSD_TextChanged(object sender, FocusEventArgs e)
         {
-            if (string.IsNullOrEmpty(EntryEUR.Text)) return;
-            try
+            Console.WriteLine("текст изменился");
+            if (isUpdating) return;
+            if (decimal.TryParse(EntryUSD.Text, out decimal USD) && USD != 0)
             {
-                decimal EUR = 0;
-                if (decimal.TryParse(EntryEUR.Text, out EUR))
-                {
-                    EUR = currencyRates.ConvertEURtoUSD(EUR);
-
-                    EntryUSD.Text = EUR.ToString();
-                    EntryBYN.Text = currencyRates.ConvertUSDtoBYN(EUR).ToString();
-                    EntryRUB.Text = currencyRates.ConvertUSDtoRUB(EUR).ToString();
-                    EntryPLN.Text = currencyRates.ConvertUSDtoPLN(EUR).ToString();
-                    EntryCNY.Text = currencyRates.ConvertUSDtoCNY(EUR).ToString();
-                }
-                else
-                    ToZero();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                UpdateCurrencyValues(Abs(USD));
             }
         }
 
-        private void EntryBYN_Unfocused(object sender, FocusEventArgs e)
+        private void EntryEUR_TextChanged(object sender, FocusEventArgs e)
         {
-            if (string.IsNullOrEmpty(EntryBYN.Text)) return;
-            try
+            Console.WriteLine("текст изменился");
+            if (isUpdating) return;
+            if (decimal.TryParse(EntryEUR.Text, out decimal EUR) && EUR != 0)
             {
-                decimal BYN = 0;
-                if (decimal.TryParse(EntryUSD.Text, out BYN))
-                {
-                    BYN = currencyRates.ConvertBYNtoUSD(BYN);
-
-                    EntryUSD.Text = BYN.ToString();
-                    EntryEUR.Text = currencyRates.ConvertUSDtoEUR(BYN).ToString();
-                    EntryRUB.Text = currencyRates.ConvertUSDtoRUB(BYN).ToString();
-                    EntryPLN.Text = currencyRates.ConvertUSDtoPLN(BYN).ToString();
-                    EntryCNY.Text = currencyRates.ConvertUSDtoCNY(BYN).ToString();
-                }
-                else
-                    ToZero();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                decimal convertedUSD = currencyRates.ConvertEURtoUSD(Abs(EUR));
+                EntryUSD.Text = convertedUSD.ToString();
+                UpdateCurrencyValues(convertedUSD);
             }
         }
 
-        private void EntryRUB_Unfocused(object sender, FocusEventArgs e)
+        private void EntryBYN_TextChanged(object sender, FocusEventArgs e)
         {
-            if (string.IsNullOrEmpty(EntryRUB.Text)) return;
-            try
+            Console.WriteLine("текст изменился");
+            if (isUpdating) return;
+            if (decimal.TryParse(EntryBYN.Text, out decimal BYN))
             {
-                decimal RUB = 0;
-                if (decimal.TryParse(EntryUSD.Text, out RUB))
-                {
-                    RUB = currencyRates.ConvertBYNtoUSD(RUB);
-
-                    EntryUSD.Text = RUB.ToString();
-                    EntryEUR.Text = currencyRates.ConvertUSDtoEUR(RUB).ToString();
-                    EntryBYN.Text = currencyRates.ConvertUSDtoBYN(RUB).ToString();
-                    EntryPLN.Text = currencyRates.ConvertUSDtoPLN(RUB).ToString();
-                    EntryCNY.Text = currencyRates.ConvertUSDtoCNY(RUB).ToString();
-                }
-                else
-                    ToZero();
+                decimal convertedUSD = currencyRates.ConvertBYNtoUSD(Abs(BYN));
+                EntryUSD.Text = convertedUSD.ToString();
+                UpdateCurrencyValues(convertedUSD);
             }
-            catch { }
         }
-
-        private void EntryPLN_Unfocused(object sender, FocusEventArgs e)
+        private void EntryRUB_TextChanged(object sender, FocusEventArgs e)
         {
-            if (string.IsNullOrEmpty(EntryPLN.Text)) return;
-            try
+            Console.WriteLine("текст изменился");
+            if (isUpdating) return; // Если уже происходит обновление, выходим
+            if (decimal.TryParse(EntryRUB.Text, out decimal RUB) && RUB != 0)
             {
-                decimal PLN = 0;
-                if (decimal.TryParse(EntryUSD.Text, out PLN))
-                {
-                    PLN = currencyRates.ConvertPLNtoUSD(PLN);
-
-                    EntryUSD.Text = PLN.ToString();
-                    EntryEUR.Text = currencyRates.ConvertUSDtoEUR(PLN).ToString();
-                    EntryBYN.Text = currencyRates.ConvertUSDtoBYN(PLN).ToString();
-                    EntryRUB.Text = currencyRates.ConvertUSDtoRUB(PLN).ToString();
-                    EntryCNY.Text = currencyRates.ConvertUSDtoCNY(PLN).ToString();
-                }
-                else
-                    ToZero();
+                decimal convertedUSD = currencyRates.ConvertRUBtoUSD(Abs(RUB));
+                EntryUSD.Text = convertedUSD.ToString();
+                UpdateCurrencyValues(convertedUSD);
             }
-            catch { }
         }
 
-        private void EntryCNY_Unfocused(object sender, FocusEventArgs e)
+        private void EntryPLN_TextChanged(object sender, FocusEventArgs e)
         {
-            if (string.IsNullOrEmpty(EntryCNY.Text)) return;
-            try
+            if (isUpdating) return; // Если уже происходит обновление, выходим
+            if (decimal.TryParse(EntryPLN.Text, out decimal PLN) && PLN != 0)
             {
-                decimal CNY = 0;
-                if (decimal.TryParse(EntryCNY.Text, out CNY))
-                {
-                    CNY = currencyRates.ConvertCNYtoUSD(CNY);
-
-                    EntryUSD.Text = CNY.ToString();
-
-                    EntryEUR.Text = currencyRates.ConvertUSDtoEUR(CNY).ToString();
-                    EntryBYN.Text = currencyRates.ConvertUSDtoBYN(CNY).ToString();
-                    EntryRUB.Text = currencyRates.ConvertUSDtoRUB(CNY).ToString();
-                    EntryPLN.Text = currencyRates.ConvertUSDtoPLN(CNY).ToString();
-                    //EntryCNY.Text = currencyRates.ConvertUSDtoCNY(CNY).ToString();
-                }
-                else
-                    ToZero();
-                
+                decimal convertedUSD = currencyRates.ConvertPLNtoUSD(Abs(PLN));
+                EntryUSD.Text = convertedUSD.ToString();
+                UpdateCurrencyValues(convertedUSD);
             }
-            catch { }
         }
 
-        public void ToZero()
+        private void EntryCNY_TextChanged(object sender, FocusEventArgs e)
         {
-            EntryUSD.Text = "0";
-            EntryEUR.Text = "0";
-            EntryBYN.Text = "0";
-            EntryRUB.Text = "0";
-            EntryPLN.Text = "0";
-            EntryCNY.Text = "0";
+            if (isUpdating) return; // Если уже происходит обновление, выходим
+            if (decimal.TryParse(EntryCNY.Text, out decimal CNY) && CNY != 0)
+            {
+                decimal convertedUSD = currencyRates.ConvertCNYtoUSD(Abs(CNY));
+                EntryUSD.Text = convertedUSD.ToString();
+                UpdateCurrencyValues(convertedUSD);
+            }
         }
+
+
+        private async void ToNewCategoryPage(object sender, EventArgs e) => await Navigation.PushAsync(new NewOperationPage());
+        private async void ToCardPage(object sender, EventArgs e) => await Navigation.PushAsync(new CardPage());
+        private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage());
+        private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage(DateTime.Now));
+        private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage());
+        private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsPage());
+        
     }
 }

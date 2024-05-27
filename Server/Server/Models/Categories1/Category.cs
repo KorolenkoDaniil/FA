@@ -13,13 +13,14 @@ namespace Server.Models.Categories1
         public int IconId { get; set; }
         public bool IsProfit { get; set; }
 
-        public Category(int categoryId, string name, int userId, int colorId, int iconId)
+        public Category(int categoryId, string name, int userId, int colorId, int iconId, bool IsProfit)
         {
             CategoryId = categoryId;
             Name = name;
             UserId = userId;
             ColorId = colorId;
             IconId = iconId;
+            this.IsProfit = IsProfit;
         }
         public Category() { }
 

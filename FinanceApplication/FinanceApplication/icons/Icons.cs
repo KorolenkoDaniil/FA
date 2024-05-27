@@ -1,4 +1,8 @@
 ﻿
+using System.Linq;
+using Xamarin.Forms;
+using Xamarin.Forms.Internals;
+
 namespace FinanceApplication.icons
 {
     public static class Icons

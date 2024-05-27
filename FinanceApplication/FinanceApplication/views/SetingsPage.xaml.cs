@@ -7,12 +7,9 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        Context context;
-
-        public SettingsPage(Context context)
+        public SettingsPage()
         {
             InitializeComponent();
-            this.context = context;
         }
 
         private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
@@ -21,7 +18,7 @@ namespace FinanceApplication.views
         }
 
         private void ChangeMode(object sender, System.EventArgs e) => 
-            context.User.AppModeWhite = !context.User.AppModeWhite;
+            Context.User.AppModeWhite = !Context.User.AppModeWhite;
         
     }
 }

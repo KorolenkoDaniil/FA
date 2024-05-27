@@ -11,7 +11,6 @@ namespace FinanceApplication
 {
     public partial class MainPage : ContentPage
     {
-        Context context = new Context();
         string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Colors");
 
 
@@ -35,8 +34,8 @@ namespace FinanceApplication
         {
             try
             {
-                context.SetColorsCollection(await ColorRepository.GetColors());
-                SaveColorsToFile(context.Colors);
+                Context.SetColorsCollection(await ColorRepository.GetColors());
+                SaveColorsToFile(Context.Colors);
             }
             catch (Exception ex)
             {
@@ -54,15 +53,15 @@ namespace FinanceApplication
         private void GetColorsFromFile()
         {
             string ColorsFroFile = File.ReadAllText(path);
-            context.SetColorsCollection(JsonConvert.DeserializeObject<List<Colorss>>(ColorsFroFile));
+            Context.SetColorsCollection(JsonConvert.DeserializeObject<List<Colorss>>(ColorsFroFile));
 
-            if (context.Colors.Count == 0)
+            if (Context.Colors.Count == 0)
             {
                 Console.WriteLine("пусто");
             }
 
 
-            foreach (var item in context.Colors)
+            foreach (var item in Context.Colors)
             {
                 Console.WriteLine(item);
             }
@@ -73,8 +72,7 @@ namespace FinanceApplication
         {
             try
             {
-                await Navigation.PushAsync(new RegistrationPage(context));
-                //await ColorRepository.GetColor(1);
+                await Navigation.PushAsync(new RegistrationPage());
             }
             catch (Exception ex)
             {
@@ -84,7 +82,8 @@ namespace FinanceApplication
 
         private async void ToSignInPage(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AuthorisationPage(context));
+            await Navigation.PopAsync();
+            await Navigation.PushAsync(new AuthorisationPage());
         }
     }
 }

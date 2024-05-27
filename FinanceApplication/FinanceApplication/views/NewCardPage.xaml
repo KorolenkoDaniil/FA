@@ -21,7 +21,7 @@
         <Frame CornerRadius="30" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".5, .2, .9, .7" BackgroundColor="#FFF7EC">
             <StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="новый кошелек" FontSize="Large" TextColor="Black" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="Top" Text="новый кошелек" FontSize="Large" TextColor="Black" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
                     <AbsoluteLayout>
                         <Frame x:Name="WalletImage" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 45, 45" CornerRadius="40" Padding="10">
                             <Image x:Name="walletIcon" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
@@ -41,8 +41,8 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width=".1*"/>
-                        <ColumnDefinition Width=".85*"/>
-                        <ColumnDefinition Width=".05*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width=".07*"/>
                     </Grid.ColumnDefinitions>
 
 
@@ -54,7 +54,7 @@
                     <CheckBox x:Name="CheckboxOfInclude" Grid.Column="0" Grid.Row="5" IsChecked="True" HorizontalOptions="Center" VerticalOptions="Center"/>
 
 
-                    <Entry x:Name="EntryName" TextChanged="EntryName_TextChanged" Focused="EntryName_Focused" Unfocused="EntryName_Unfocused" Keyboard="Text" Placeholder="название нового кошелька" PlaceholderColor="#8f8f8f" FontSize="14" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
+                    <Entry x:Name="EntryName" TextChanged="EntryName_TextChanged" Focused="EntryName_Focused" Keyboard="Text" Placeholder="название нового кошелька" PlaceholderColor="#8f8f8f" FontSize="14" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
                     <Picker x:Name="PickerType" Focused="PickerType_Focused" Grid.Row="1" Grid.Column="1" TextColor="Black"/>
 
                     <Image x:Name="xmarkWalletName" Grid.Row="0" Grid.Column="2"/>
@@ -65,12 +65,12 @@
                     <Button x:Name="ColorButton" BackgroundColor="Transparent" TextColor="Black" Clicked="ColorButton_Clicked" Text="выбрать цвет" Grid.Row="3" Grid.Column="1" />
 
                     
-                    <Entry x:Name="EntrySum" TextChanged="EntrySum_TextChanged" Focused="EntrySum_Focused" Unfocused="EntrySum_Unfocused" Keyboard="Numeric" Placeholder="остаток средств" Text="0" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="4" Grid.Column="1"/>
+                    <Entry x:Name="EntrySum" TextChanged="EntrySum_TextChanged" Focused="EntrySum_Focused" Keyboard="Numeric" Placeholder="остаток средств" Text="0" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="4" Grid.Column="1"/>
                     <Label Grid.Row="5" Grid.Column="1" VerticalOptions="Center" TextColor="Black" Text="включить в общий баланс"/>
 
                     <Image x:Name="xmark1" Grid.Row="0" Grid.Column="2"/>
-                    <Image x:Name="xmark3" Grid.Row="1" Grid.Column="2"/>
-                    <Image x:Name="xmark2" Grid.Row="3" Grid.Column="2"/>
+                    <Image x:Name="xmark3" Grid.Row="4" Grid.Column="2"/>
+                    <Image x:Name="xmark2" Grid.Row="4" Grid.Column="2"/>
 
                     <Grid Grid.Column="1" Grid.Row="6">
                         <Grid.ColumnDefinitions>
@@ -78,9 +78,7 @@
                             <ColumnDefinition Width=".05*"/>
                             <ColumnDefinition Width=".5*"/>
                         </Grid.ColumnDefinitions>
-                        
-                        
-                        
+    
                         <Button x:Name="Cancel" Clicked="Cancel_Clicked" FontSize="Small" Text="Отмена" TextColor="Black" Grid.Row="0" Grid.Column="0" CornerRadius="30" BackgroundColor="Transparent" BorderColor="Black" BorderWidth="1"/>
                         <Button x:Name="Create" Clicked="Create_Clicked" FontSize="Small" Text="Создать" TextColor="Black" Grid.Row="0" Grid.Column="2" CornerRadius="30" BackgroundColor="Transparent" BorderColor="Black" BorderWidth="1" Margin="0"/>
                     </Grid>
