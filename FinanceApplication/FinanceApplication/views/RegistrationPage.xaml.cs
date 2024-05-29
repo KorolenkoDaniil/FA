@@ -19,6 +19,7 @@ namespace FinanceApplication.views
     public partial class RegistrationPage : ContentPage
     {
         private Regex regex = new Regex(@"@gmail.com$");
+        public Random random = new Random();
         public RegistrationPage()
         {
             InitializeComponent();
@@ -99,8 +100,8 @@ namespace FinanceApplication.views
         {
             List<Wallet> wallets = new List<Wallet>
     {
-        new Wallet(Context.User.UserId, "кошелек 1", "Денежные средства", 0, 1, true, 1),
-        new Wallet(Context.User.UserId, "кошелек 2", "Сберегательный счет", 0, 2, true, 3)
+        new Wallet(Context.User.UserId, "кошелек 1", "Денежные средства", 0,  random.Next(0, Context.Colors.Count - 1), true, 1),
+        new Wallet(Context.User.UserId, "кошелек 2", "Сберегательный счет", 0,  random.Next(0, Context.Colors.Count - 1), true, 3)
     };
             List<Task<Wallet>> saveTasks = wallets.Select(wallet => WalletRepository.SaveWallet(wallet)).ToList();
             if (saveTasks.Any(wallet => wallet == null))
@@ -112,27 +113,24 @@ namespace FinanceApplication.views
         {
             List<Category> categories = new List<Category>
     {
-        new Category("категория 1", Context.User.UserId, 2, 0, true),
-        new Category("категория 2", Context.User.UserId, 3, 1, true),
-        new Category("категория 3", Context.User.UserId, 4, 2, true),
-        new Category("категория 4", Context.User.UserId, 5, 3, false),
-        new Category("категория 5", Context.User.UserId, 6, 4, false),
-        new Category("категория 6", Context.User.UserId, 6, 4, false),
+        new Category("категория 1", Context.User.UserId, random.Next(0, Context.Colors.Count - 1), 0, true),
+        new Category("категория 2", Context.User.UserId, random.Next(0, Context.Colors.Count - 1), 1, true),
+        new Category("категория 3", Context.User.UserId, random.Next(0, Context.Colors.Count - 1), 2, true),
+        new Category("категория 4", Context.User.UserId, random.Next(0, Context.Colors.Count - 1), 3, false),
+        new Category("категория 5", Context.User.UserId, random.Next(0, Context.Colors.Count - 1), 4, false),
+        new Category("категория 6", Context.User.UserId, random.Next(0, Context.Colors.Count - 1), 4, false),
     };
             List<Task<Category>> saveTasksCategories = categories.Select(category => CategoryRepository.SaveCategory(category)).ToList();
             if (saveTasksCategories.Any(category => category == null))
                 return;
-            Context.SetCategoryCollection(await CategoryRepository.GetCategorys(Context.User.UserId));
+
+            await Task.WhenAll(saveTasksCategories);
+
+            Context.SetCategoryCollection(await CategoryRepository.GetCategories(Context.User.UserId));
         }
 
-        private async Task HandleOperations()
+            private async Task HandleOperations()
         {
-    //        List<Operation> operations = new List<Operation>
-    //{
-    //    new Operation(Context.User.UserId, DateTime.Now.ToString("d"), true, 10, Context.Wallets[0].WalletId, Context.Categories[0].Name, "qq" ),
-    //    new Operation(Context.User.UserId, DateTime.Now.ToString("d"), true, 10, Context.Wallets[1].WalletId, Context.Categories[1].Name, "qq" ),
-    //    new Operation(Context.User.UserId, DateTime.Now.ToString("d"), true, 10, Context.Wallets[1].WalletId, Context.Categories[0].Name, "qq" ),
-    //};
             Context.SetOperationsCollection(await OperationRepository.GetOperations(Context.User.UserId));
         }
 

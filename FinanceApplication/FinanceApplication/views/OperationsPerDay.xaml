@@ -32,10 +32,6 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Text="Operations" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}"/>
-
-                    <Frame CornerRadius="30" BackgroundColor="#F4F4F4" Grid.Column="1" Grid.Row="0" Padding="0">
-                        <Label HorizontalOptions="Center" VerticalOptions="Center" Text="20, July, 2024" Style="{StaticResource TextOpenSans}"></Label>
-                    </Frame>
                 </Grid>
             </Frame>
 

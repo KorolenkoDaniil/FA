@@ -104,7 +104,7 @@ namespace FinanceApplication.views
             if (sender is Button button)
             {
                 category.ColorId = int.Parse(button.Text);
-                await Navigation.PushAsync(new NewCategoryPage(category));
+                await Navigation.PushAsync(new NewCategoryPage(category, true));
             }
         }
 
@@ -114,7 +114,7 @@ namespace FinanceApplication.views
             {
                 wallet.ColorId = int.Parse(button.Text);
                 wallet.ChangeColors();
-                await Navigation.PushAsync(new NewCardPage(wallet));
+                await Navigation.PushAsync(new NewCardPage(wallet, true));
             }
         }
     }

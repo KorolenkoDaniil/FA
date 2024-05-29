@@ -6,6 +6,7 @@ using FinanceApplication.core.Colors;
 using FinanceApplication.core.Operations;
 using FinanceApplication.icons;
 using System;
+using System.IO;
 using System.Text.RegularExpressions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -26,6 +27,9 @@ namespace FinanceApplication.views
             BadRequestLabel.IsVisible = false;
             Loading.IsVisible = false;
             CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
+            //_______________________________________________
+            File.Create();
+            //_______________________________________________
         }
 
         private async void LogInClicked(object sender, EventArgs e)
@@ -54,7 +58,7 @@ namespace FinanceApplication.views
                     {
                         Context.ChangeTheme(await ColorRepository.GetColor( Context.User.ColorId));
                         Context.SetWalletsCollection(await WalletRepository.GetWallets(Context.User.UserId));
-                        Context.SetCategoryCollection(await CategoryRepository.GetCategorys(Context.User.UserId));
+                        Context.SetCategoryCollection(await CategoryRepository.GetCategories(Context.User.UserId));
                         Context.SetOperationsCollection(await OperationRepository.GetOperations(Context.User.UserId));
                         await Navigation.PushAsync(new ListPage(DateTime.Now));
                     }

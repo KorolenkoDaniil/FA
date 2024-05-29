@@ -1,4 +1,6 @@
-﻿public class OperationResult
+﻿using System;
+
+public class OperationResult
 {
     public int Id { get; set; }
     public int UserId { get; set; }

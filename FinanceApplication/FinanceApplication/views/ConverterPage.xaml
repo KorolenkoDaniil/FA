@@ -49,8 +49,8 @@
                     <ColumnDefinition Width=".49*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Row="0" Grid.Column="0" Margin="20, 0, 0, 0" Text="банк покупает" VerticalOptions="End" />
-                <Button Grid.Row="0" Grid.Column="2" Margin="0, 0, 20, 0" Text="банк продает" VerticalOptions="End" />
+                <Button Grid.Row="0" Grid.Column="0" CornerRadius="30" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black" BorderWidth="1" Margin="20, 0, 0, 0" Text="банк покупает" VerticalOptions="End" />
+                <Button Grid.Row="0" Grid.Column="2" CornerRadius="30" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black" BorderWidth="1" Margin="0, 0, 20, 0" Text="банк продает" VerticalOptions="End" />
             </Grid>
 
 

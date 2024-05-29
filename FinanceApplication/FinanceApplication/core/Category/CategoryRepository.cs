@@ -43,7 +43,7 @@ namespace FinanceApplication.core.Category
                 return false;
         }
 
-        public async static Task<List<Category>> GetCategorys(int userId)
+        public async static Task<List<Category>> GetCategories(int userId)
         {
             Dictionary<string, string> userData = new Dictionary<string, string>
             {

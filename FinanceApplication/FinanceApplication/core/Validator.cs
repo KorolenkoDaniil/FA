@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace FinanceApp.classes
+﻿namespace FinanceApp.classes
 {
     internal static class Validator
     {

@@ -13,7 +13,6 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListPage : ContentPage
     {
-        public decimal totalBalance = 0;
         List<OperationsDays> days = new List<OperationsDays>();
 
         public ListPage(DateTime newPeriod)
@@ -29,14 +28,17 @@ namespace FinanceApplication.views
             imageDiagram.Source = ImageSource.FromResource(Icons.Iconspath[6]);
             imageConverter.Source = ImageSource.FromResource(Icons.Iconspath[4]);
             Settings.Source = ImageSource.FromResource("FinanceApplication.icons.settings.png");
-            date.Text = newPeriod.ToString("d");
-            ShowOperations(newPeriod);
+            ShowOperations(DateTime.Today, DateTime.Today);
             PlusButton.BackgroundColor = Color.FromHex(Context.Color.DarkMode);
+            dayButton.BorderColor = Color.FromHex(Context.Color.DarkMode);
         }
 
 
-        private void ShowOperations(DateTime newPeriod)
+
+
+        private void ShowOperations(DateTime start, DateTime end)
         {
+            Console.WriteLine($"-----------------start {start} end {end}");
 
             List<OperationResult> ListOperations = (from operation in Context.Operations
                                                     join cathegory in Context.Categories on operation.Cathegory equals cathegory.Name
@@ -53,16 +55,22 @@ namespace FinanceApplication.views
                                                         Description = operation.Description,
                                                         WalletName = wallet.Name,
                                                         WalletType = wallet.Type,
-                                                    }).ToList();
-            totalBalance = ListOperations.Sum(operation => operation.Sum) - ListOperations.Where(operation => !operation.Profit).Sum(operation => operation.Sum);
+                                                    }).Where(oper => DateTime.Parse(oper.Date) >= start && DateTime.Parse(oper.Date) <= end).ToList();
+
+            foreach (var item in ListOperations)
+            {
+                Console.WriteLine(item);
+            }
+
+            decimal increase = ListOperations.Where(oper => oper.Profit).Sum(operation => operation.Sum), 
+                    consume = ListOperations.Where(oper => !oper.Profit).Sum(operation => operation.Sum);
+
+            totalIncrese.Text = "$" + increase;
+            totalConsume.Text = "$" + consume;
+            total.Text = "$" + (increase - consume);
 
 
-
-            List<string> uniqueDates = ListOperations
-                .Where(o => DateTime.Parse(o.Date).Month == DateTime.Now.Month)
-                .Select(o => o.Date)
-                .Distinct()
-                .ToList();
+            List<string> uniqueDates = ListOperations.Select(o => o.Date).Distinct().ToList();
 
             days = new List<OperationsDays>();
 
@@ -75,12 +83,11 @@ namespace FinanceApplication.views
                 days.Add(day);
             }
 
-            total.Text = $"$ {totalBalance}";
-
             if (days.Count == 0) NoOperations.IsVisible = true;
+            else NoOperations.IsVisible = false;
             OperationsCollection.ItemsSource = days.OrderByDescending(day => day.date);
         }
-    
+
 
         private async void OnItemSelected(object sender, SelectionChangedEventArgs e)
         {
@@ -94,11 +101,7 @@ namespace FinanceApplication.views
             OperationsCollection.SelectedItem = null;
         }
 
-        private async void ToDatePage(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new DatePage());
-        }
-
+      
         private async void ToNewOperationPage(object sender, EventArgs e) => await Navigation.PushAsync(new NewOperationPage());
         private async void ToCardPage(object sender, EventArgs e) => await Navigation.PushAsync(new CardPage());
         private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage());
@@ -110,5 +113,50 @@ namespace FinanceApplication.views
             await Navigation.PushAsync(new ConverterPage(currencyRates));
         }
         private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsPage());
+
+        private void DayButton(object sender, EventArgs e)
+        {
+            ChangeColor();
+            if (sender is Button periodButton)
+            {
+                periodButton.BorderColor = Color.FromHex(Context.Color.DarkMode);
+            }
+            ShowOperations(DateTime.Today, DateTime.Today);
+        }
+        private void WeekButton(object sender, EventArgs e)
+        {
+            ChangeColor();
+            if (sender is Button periodButton)
+            {
+                periodButton.BorderColor = Color.FromHex(Context.Color.DarkMode);
+            }
+            ShowOperations(DateTime.Today.AddDays(-7), DateTime.Today);
+        }
+        private void MonthButton(object sender, EventArgs e)
+        {
+            ChangeColor();
+            if (sender is Button periodButton)
+            {
+                periodButton.BorderColor = Color.FromHex(Context.Color.DarkMode);
+            }
+            ShowOperations(DateTime.Today.AddMonths(-1), DateTime.Today);
+        }
+        private void YearButton(object sender, EventArgs e)
+        {
+            ChangeColor();
+            if (sender is Button periodButton)
+            {
+                periodButton.BorderColor = Color.FromHex(Context.Color.DarkMode);
+            }
+            ShowOperations(DateTime.Today.AddYears(-1), DateTime.Today);
+        }
+
+        private void ChangeColor()
+        {
+            dayButton.BorderColor = Color.Black;
+            weekButton.BorderColor = Color.Black;
+            monthButton.BorderColor = Color.Black;
+            yearButton.BorderColor = Color.Black;
+        }
     }
 }

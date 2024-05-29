@@ -11,6 +11,11 @@ namespace FinanceApplication.core.Currency
         public decimal RUB_in { get; set; }
         public decimal PLN_in { get; set; }
         public decimal CNY_in { get; set; }
+        public decimal USD_out { get; set; }
+        public decimal EUR_out { get; set; }
+        public decimal RUB_out { get; set; }
+        public decimal PLN_out { get; set; }
+        public decimal CNY_out { get; set; }
 
         public decimal ConvertEURtoUSD(decimal sumInEUR) => Round(sumInEUR * EUR_in / USD_in, 3);
         public decimal ConvertUSDtoEUR(decimal sumInUSD) => Round(sumInUSD * USD_in / EUR_in, 3);

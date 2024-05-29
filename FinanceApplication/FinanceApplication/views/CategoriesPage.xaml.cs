@@ -14,6 +14,7 @@ namespace FinanceApplication.views
     public partial class CategoriesPage : ContentPage
     {
         List<ExtendedCategory> ListExtendedCategories;
+
         bool profit = true;
         public CategoriesPage()
         {
@@ -27,6 +28,11 @@ namespace FinanceApplication.views
             imageConverter.Source = ImageSource.FromResource(Icons.Iconspath[4]);
             Settings.Source = ImageSource.FromResource(Icons.Iconspath[12]);
             PlusButton.BackgroundColor = Color.FromHex(Context.Color.DarkMode);
+
+            foreach (var item in Context.Categories)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         public void ShowCategories()
@@ -34,6 +40,11 @@ namespace FinanceApplication.views
             ListExtendedCategories = (from category in Context.Categories
                                       join color in Context.Colors on category.ColorId equals color.ColorId
                                       select new ExtendedCategory(category.Name, color.DarkMode, category.IconId, category.CategoryId, Context.User.UserId, category.ColorId, category.IsProfit)).ToList();
+
+            foreach (var item in ListExtendedCategories)
+            {
+                Console.WriteLine(item);
+            }
 
             CategoriesCollection.ItemsSource = ListExtendedCategories.Where(cat => cat.IsProfit);
         }
@@ -69,7 +80,7 @@ namespace FinanceApplication.views
         private void Button_enrease_Clicked(object sender, EventArgs e)
         {
             CategoriesCollection.ItemsSource = ListExtendedCategories.Where(cat => cat.IsProfit);
-            profit = false;
+            profit = true;
         }
 
 
@@ -77,7 +88,7 @@ namespace FinanceApplication.views
         private void Button_consume_Clicked_1(object sender, EventArgs e)
         {
             CategoriesCollection.ItemsSource = ListExtendedCategories.Where(cat => !cat.IsProfit);
-            profit = true;
+            profit = false;
         }
     }
 }

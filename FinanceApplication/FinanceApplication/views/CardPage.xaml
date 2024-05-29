@@ -34,11 +34,6 @@
 
                     <Label Text="Cards" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}"/>
 
-                    <Frame CornerRadius="30" BackgroundColor="#F4F4F4" Grid.Column="1" Grid.Row="0" Padding="0">
-                        <Label HorizontalOptions="Center" VerticalOptions="Center" Text="20, July, 2024" Style="{StaticResource TextOpenSans}"></Label>
-                    </Frame>
-
-                    <!--<Image Grid.Row="0" Grid.Column="2">-->
                 </Grid>
             </Frame>
 
@@ -54,17 +49,17 @@
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height=".1*"/>
-                                        <RowDefinition Height=".1*"/>
+                                        <RowDefinition Height="40"/>
                                         <RowDefinition Height=".3*"/>
                                         <RowDefinition Height=".2*"/>
-                                        <RowDefinition Height=".2*"/>
+                                        <RowDefinition Height=".1*"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width=".5*"/>
                                         <ColumnDefinition Width=".5*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding Name}" Style="{StaticResource TextOpenSans}" TextColor="Black" Grid.Column="0" Grid.Row="0"/>
-                                    <Label Text="{Binding Type}" Style="{StaticResource TextOpenSans}" FontSize="Small" TextColor="#a3a3a3" Grid.Column="0" Grid.Row="1"/>
+                                    <Label Text="{Binding Type}" Style="{StaticResource TextOpenSans}"  FontSize="Small" Margin="0" TextColor="#a3a3a3" Grid.Column="0" Grid.Row="1"/>
 
                                     <AbsoluteLayout Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
                                         <Frame  Padding="15" CornerRadius="35" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".9, .3, 60, 60" BackgroundColor="Transparent" BorderColor="White">

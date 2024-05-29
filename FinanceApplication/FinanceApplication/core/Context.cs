@@ -4,7 +4,7 @@ using FinanceApplication.core.Category;
 using FinanceApplication.core.Colors;
 using FinanceApplication.core.Operations;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace FinanceApp.classes
 {
@@ -16,10 +16,13 @@ namespace FinanceApp.classes
         public static List<Category> Categories { get; private set; }
         public static List<Operation> Operations { get; private set; }
         public static List<Colorss> Colors { get; private set; }
+        public static decimal IncreaseOperationsSum { get; private set; }
+        public static decimal ConsumeOperationsSum { get; private set; } = 0;
 
         public static bool monthPeriod = true;
+        public static decimal OperationsSum { get; private set; }
 
-        public static List<string> WalletTypes = new List<string>
+        public static string[] WalletTypes = new string[]
         {
             "Денежные средства",
             "Сберегательный счет",
@@ -35,8 +38,18 @@ namespace FinanceApp.classes
         public static void ChangeUser(User user) => User = user;
         public static void SetWalletsCollection(List<Wallet> wallets) => Wallets = wallets;
         public static void SetCategoryCollection(List<Category> categories) => Categories = categories;
-        public static void SetOperationsCollection(List<Operation> operations) => Operations = operations;
+        public static void SetOperationsCollection(List<Operation> operations)
+        {
+            Operations = operations;
+            CalculateIncreaseSum();
+            CalculateConsumeSum();
+        }
         public static void SetColorsCollection(List<Colorss> colors) => Colors = colors;
-        //public void SetNewCurrencyRate(Currency currency) => currencyRate = currency;
+
+        public static void CalculateIncreaseSum() =>
+            IncreaseOperationsSum = Operations.Where(op => op.Profit).Sum(u => u.Sum);
+
+        public static void CalculateConsumeSum() =>
+            ConsumeOperationsSum = Operations.Where(op => !op.Profit).Sum(u => u.Sum);
     }
 }

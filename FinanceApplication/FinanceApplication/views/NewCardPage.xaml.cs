@@ -13,7 +13,7 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewCardPage : ContentPage
     {
-        ExtendedWallet wallet; 
+        ExtendedWallet wallet = new ExtendedWallet(); 
         Random random = new Random();
         bool delete;
         decimal sum = 0;
@@ -56,6 +56,28 @@ namespace FinanceApplication.views
             EntrySum.Text = wallet.Amount.ToString();
             CheckboxOfInclude.IsChecked = wallet.Include;
         }
+
+        public NewCardPage(ExtendedWallet wallet, bool f)
+        {
+            InitializeComponent();
+            PickerType.ItemsSource = Context.WalletTypes;
+            this.wallet = wallet;
+            CodeFromConstructions();
+            Create.Text = "Сохранить";
+            Cancel.Text = "Удалить";
+            if (!string.IsNullOrEmpty(wallet.Name))
+                EntryName.Text = wallet.Name;
+
+            walletIcon.Source = wallet.WalletIconPath;
+
+            int index = Context.WalletTypes.IndexOf(wallet.Type);
+            PickerType.SelectedIndex = index;
+            WalletImage.BackgroundColor = Color.FromHex(wallet.DarkMode);
+            delete = true;
+            if (!string.IsNullOrEmpty(EntrySum.Text))
+                EntrySum.Text = wallet.Amount.ToString();
+            CheckboxOfInclude.IsChecked = wallet.Include;
+        }
         public void CodeFromConstructions()
         {
             NavigationPage.SetHasNavigationBar(this, false); 
@@ -93,8 +115,16 @@ namespace FinanceApplication.views
             Create.IsEnabled = true;
         }
         private void PickerType_Focused(object sender, FocusEventArgs e) { }
-        private async void IconButton_Clicked(object sender, EventArgs e) =>
+
+
+        private async void IconButton_Clicked(object sender, EventArgs e)
+        {
+            wallet.Include = CheckboxOfInclude.IsChecked;
+            //wallet.WalletId 
             await Navigation.PushAsync(new IconPickerPage(wallet));
+        }
+
+
 
         private async void ColorButton_Clicked(object sender, EventArgs e) =>
             await Navigation.PushAsync(new ColorPickerPage(wallet));
@@ -144,7 +174,7 @@ namespace FinanceApplication.views
         }
         private bool ValidationBeforeSaving()
         {
-            if (!Validator.ValidateString(EntryName.Text, 15))
+            if (!Validator.ValidateString(EntryName.Text, 25))
             {
                 xmark1.IsVisible = true;
                 return false;

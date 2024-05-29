@@ -90,7 +90,8 @@ namespace FinanceApplication.views
         private async void ToListPage(object sender, EventArgs e) =>
             await Navigation.PushAsync(new ListPage(DateTime.Now));
 
-        private async void Cancel_Clicked(object sender, EventArgs e) => await Navigation.PopAsync();
+        private async void Cancel_Clicked(object sender, EventArgs e) =>
+            await Navigation.PushAsync(new ListPage(DateTime.Now));
 
 
 

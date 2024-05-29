@@ -16,16 +16,18 @@ namespace FinanceApplication.views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-
             this.category = category;
+            Console.WriteLine("_______________________________________________________________________________1");
             CreateCategoryButtons();
         }
 
         public IconPickerPage(ExtendedWallet wallet)
         {
+
+            Console.WriteLine(wallet + "33333333333333333333333333333333333333333");
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-
+            Console.WriteLine("_______________________________________________________________________________1");
             this.wallet = wallet;
             CreateCardButtons();
         }
@@ -36,7 +38,7 @@ namespace FinanceApplication.views
 
             for (int i = 0; i < Icons.CategoriesIcons.Length; i++)
             {
-                ImageButton newButton = new ImageButton
+                ExtendedImageButton newButton = new ExtendedImageButton
                 {
                     Source = ImageSource.FromResource(Icons.CategoriesIcons[i]),
                     WidthRequest = 55,
@@ -47,7 +49,8 @@ namespace FinanceApplication.views
                     VerticalOptions = LayoutOptions.Center,
                     BackgroundColor = Color.Transparent,
                     BorderWidth = 1,
-                    BorderColor = Color.Black
+                    BorderColor = Color.Black,
+                    id = i
                 };
 
                 newButton.Clicked += ColoriseCategory;
@@ -64,6 +67,7 @@ namespace FinanceApplication.views
                     row++;
                 }
             }
+            Console.WriteLine("_______________________________________________________________________________2");
         }
 
         public void CreateCardButtons()
@@ -101,25 +105,36 @@ namespace FinanceApplication.views
                     row++;
                 }
             }
+
+            Console.WriteLine("_______________________________________________________________________________2");
+
         }
 
         private async void ColoriseCategory(object sender, EventArgs e)
         {
+            Console.WriteLine("_______________________________________________________________________________3");
             if (sender is ExtendedImageButton button)
             {
-                category.IconSource = button.Source;
+                category.IconSource= button.Source;
                 category.IconId = button.id;
-                await Navigation.PushAsync(new NewCategoryPage(category));
+                Console.WriteLine("_______________________________________________________________________________4");
+                Console.WriteLine(category);
+                await Navigation.PushAsync(new NewCategoryPage(category, true));
+                Console.WriteLine("_______________________________________________________________________________5");
             }
         }
 
         private async void ChangeCardIcon(object sender, EventArgs e)
         {
+            Console.WriteLine("_______________________________________________________________________________3");
             if (sender is ExtendedImageButton button)
             {
                 wallet.WalletIconPath = button.Source;
                 wallet.IconId = button.id;
-                await Navigation.PushAsync(new NewCardPage(wallet));
+                Console.WriteLine("_______________________________________________________________________________4");
+                Console.WriteLine(wallet);
+                await Navigation.PushAsync(new NewCardPage(wallet, true));
+                Console.WriteLine("_______________________________________________________________________________5");
             }
         }
     }

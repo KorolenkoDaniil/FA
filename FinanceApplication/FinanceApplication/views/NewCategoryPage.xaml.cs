@@ -47,6 +47,23 @@ namespace FinanceApplication.views
             EntryCategoryName.Text = category.Name;
         }
 
+        public NewCategoryPage(ExtendedCategory category, bool f)
+        {
+            InitializeComponent();
+            ShowImages();
+            this.category = category;
+            CategoryImage.BackgroundColor = Color.FromHex(Context.Colors.First(color => color.ColorId == category.ColorId).DarkMode);
+
+            categoryIcon.Source = category.IconSource;
+
+            CreateSave.Text = "Сохранить";
+            Cancel.Text = "удалить";
+            delete = true;
+
+            if (!string.IsNullOrEmpty(EntryCategoryName.Text))
+                EntryCategoryName.Text = category.Name;
+        }
+
         private void EntryCategoryName_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (EntryCategoryName.Text.Length < 20) category.Name = EntryCategoryName.Text;
