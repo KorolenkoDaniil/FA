@@ -52,8 +52,8 @@
 
                         <Entry x:Name="EntryCategoryName" TextChanged="EntryCategoryName_TextChanged" Focused="EntryCategoryName_focused" Unfocused='EntryCategoryName_Unfocused' Keyboard="Default" Placeholder="название категории" PlaceholderColor="#8f8f8f" FontSize="Medium" Grid.Row="0" Grid.Column="1" TextColor="Black"/>
 
-                        <Button x:Name="ImagePicker" VerticalOptions="Center" Grid.Row="1" Grid.Column="1" Text="выбрать иконку" Clicked="TapGestureRecognizer_Tapped" TextColor="Black" BackgroundColor="Transparent"/>
-                        <Button x:Name="ColorPicker" VerticalOptions="Center" Text="выбрать цвет" Grid.Row="2" Grid.Column="1" Clicked="TapGestureRecognizer_Tapped_1" TextColor="Black" BackgroundColor="Transparent"/>
+                        <Button x:Name="ImagePicker" VerticalOptions="Center" Grid.Row="1" Grid.Column="1" Text="выбрать иконку" Clicked="ToIconPickerPage" TextColor="Black" BackgroundColor="Transparent"/>
+                        <Button x:Name="ColorPicker" VerticalOptions="Center" Text="выбрать цвет" Grid.Row="2" Grid.Column="1" Clicked="ToColorPickerPage" TextColor="Black" BackgroundColor="Transparent"/>
 
                   
                         <Image x:Name="xmarkCategoryName" Grid.Row="0" Grid.Column="2"/>

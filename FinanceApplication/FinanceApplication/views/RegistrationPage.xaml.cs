@@ -43,7 +43,7 @@ namespace FinanceApplication.views
                     await HandleWallets();
                     await HandleCategories();
                     await HandleOperations();
-                    await Navigation.PushAsync(new ListPage(DateTime.Now));
+                    await Navigation.PushAsync(new ListPage());
                 }
                 else BadRequestLabel.IsVisible = true;
             }

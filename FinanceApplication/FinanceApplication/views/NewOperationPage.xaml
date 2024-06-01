@@ -43,7 +43,7 @@
                 <Button Clicked="buttonTochangePage" HorizontalOptions="End" Margin="15" HeightRequest="85" WidthRequest="85" CornerRadius="10" Grid.Column="1" Grid.Row="1"/>
                 <Button Clicked="buttonToIncomePage" HorizontalOptions="End" Margin="15" HeightRequest="85" WidthRequest="85" CornerRadius="10" Grid.Column="1" Grid.Row="2"/>
                 <Button Clicked="buttonToConsumePage" HorizontalOptions="End" Margin="15" HeightRequest="85" WidthRequest="85" CornerRadius="10" Grid.Column="1" Grid.Row="3"/>
-                <Button HorizontalOptions="End" Margin="15" HeightRequest="85" WidthRequest="85" CornerRadius="10" Grid.Column="1" Grid.Row="4"/>
+                <Button Clicked="ToListPage" HorizontalOptions="End" Margin="15" HeightRequest="85" WidthRequest="85" CornerRadius="10" Grid.Column="1" Grid.Row="4"/>
 
             </Grid>
         </AbsoluteLayout>

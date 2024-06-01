@@ -88,49 +88,65 @@ namespace FinanceApplication.views
          await Navigation.PushAsync(new CardPage());
 
         private async void ToListPage(object sender, EventArgs e) =>
-            await Navigation.PushAsync(new ListPage(DateTime.Now));
+            await Navigation.PushAsync(new ListPage());
 
         private async void Cancel_Clicked(object sender, EventArgs e) =>
-            await Navigation.PushAsync(new ListPage(DateTime.Now));
+            await Navigation.PushAsync(new ListPage());
 
+        private bool Validation()
+        {
+            if (WalletPicker.SelectedItem == null || CathegoryPicker.SelectedItem == null)  return false;
+            if (!decimal.TryParse(EntrySum.Text, out sum) || sum < 0 || sum > 10000 )  return false;
+            if (!string.IsNullOrEmpty(EntryDescription.Text))
+            {
+                if (EntryDescription.Text.Length > 30) return false;
+            }
+            
+            return true;
+        }
 
+        private bool ValidationC()
+        {
+            if (WalletPickerС.SelectedItem == null || CathegoryPickerС.SelectedItem == null)
+                return false;
+            if (!decimal.TryParse(EntrySumС.Text, out sum) || sum < 0 || sum > 10000) return false;
+            if (EntryDescriptionС.Text.Length > 30) return false;
 
+            return true;
+        }
 
         private void Create_Clicked(object sender, EventArgs e)
         {
+            if (Validation())
+            {
+                DateTime date = Datepicker.Date;
+                CreateOperation(true, sum, Context.Wallets[WalletPicker.SelectedIndex].WalletId, CathegoryPicker.SelectedItem.ToString(), EntryDescription.Text, date.ToString("d"));
+            }
+            else
+            {
+                IncorrectData();
+            }
 
-            if (WalletPicker.SelectedItem == null || CathegoryPicker.SelectedItem == null)
-                return;
-
-
-            if (!decimal.TryParse(EntrySum.Text, out sum) || sum == 0) return;
-
-            DateTime date = Datepicker.Date;
-
-            CreateOperation(true, sum, Context.Wallets[WalletPicker.SelectedIndex].WalletId, CathegoryPicker.SelectedItem.ToString(), EntryDescription.Text, date.ToString("d"));
         }
-
-
 
         private void Create_ClickedС(object sender, EventArgs e)
         {
-            if (WalletPickerС.SelectedItem == null || CathegoryPickerС.SelectedItem == null)
-                return;
+            if (ValidationC())
+            {
+                DateTime date = DatepickerС.Date;
+                CreateOperation(false, sum, Context.Wallets[WalletPickerС.SelectedIndex].WalletId, CathegoryPickerС.SelectedItem.ToString(), EntryDescriptionС.Text, date.ToString("d"));
+            }
+            else
+            {
+                IncorrectData();
+            }
 
-            Console.WriteLine("-----1");
-            if (!decimal.TryParse(EntrySumС.Text, out sum) || sum == 0) return;
-
-            DateTime date = DatepickerС.Date;
-
-            CreateOperation(false, sum, Context.Wallets[WalletPickerС.SelectedIndex].WalletId, CathegoryPickerС.SelectedItem.ToString(), EntryDescriptionС.Text, date.ToString("d"));
+           
         }
-
-
-
 
         private async void CreateOperation(bool include, decimal sum, int walletpickerIndex, string selectedCategory, string description, string stringdate)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
                 Cancel.IsEnabled = false;
                 Create.IsEnabled = false;
@@ -139,22 +155,20 @@ namespace FinanceApplication.views
                 return false;
             });
 
-            
-            Console.WriteLine("-----2");
             Operation newOperation = new Operation(
                 Context.User.UserId, stringdate, include, sum, walletpickerIndex, selectedCategory, description);
 
             Operation isSend = await OperationRepository.SaveOperation(newOperation);
             if (isSend != null)
             {
-                Console.WriteLine("-----3");
                 Context.Operations.Add(isSend);
-                await Navigation.PushAsync(new ListPage(DateTime.Now));
+                await Navigation.PushAsync(new ListPage());
             }
         }
 
+        private void EntrySumС_Focused(object sender, FocusEventArgs e) =>
+            xmarkConsume0.IsVisible = false;
 
-        private void EntrySumС_Focused(object sender, FocusEventArgs e) => xmarkConsume0.IsVisible = false;
         private void EntrySumС_Unfocused(object sender, FocusEventArgs e)
         {
             xmarkConsume0.IsVisible = !decimal.TryParse(EntrySumС.Text, out sum);
@@ -169,7 +183,7 @@ namespace FinanceApplication.views
         private void EntryDescriptionС_Unfocused(object sender, FocusEventArgs e) {
             if (string.IsNullOrEmpty(EntryDescriptionС.Text))
                 return;
-                xmarkConsume3.IsVisible = EntryDescriptionС.Text.Length > 35;
+                xmarkConsume3.IsVisible = EntryDescriptionС.Text.Length > 20;
         }
 
 
@@ -187,11 +201,14 @@ namespace FinanceApplication.views
         private void EntryDescription_Unfocused(object sender, FocusEventArgs e)
         {
             try {
-                if (string.IsNullOrEmpty(EntryDescription.Text) || EntryDescription.Text.Length > 35)
+                if (string.IsNullOrEmpty(EntryDescription.Text) || EntryDescription.Text.Length > 25)
                     xmarkIncome3.IsVisible = true;
             }
             catch {
-}
+            }
         }
+
+        private async void IncorrectData() =>
+         await DisplayAlert("Неправвильные данные", "проверьте введенные данные", "ОK");
     }
 }

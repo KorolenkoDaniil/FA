@@ -28,6 +28,11 @@ namespace FinanceApplication.icons
             "FinanceApplication.icons.Circle-xmark.png", 
             "FinanceApplication.icons.palette.png",
             "FinanceApplication.icons.IconOfIcon.png", //18
+            "FinanceApplication.icons.erase.png", //19
+            "FinanceApplication.icons.inst.png", //20
+            "FinanceApplication.icons.google.png", //21
+            "FinanceApplication.icons.teleg.png", //22
+            "FinanceApplication.icons.pass.png", //23
         };
 
         public static string[] WalletsIcons = new string[]

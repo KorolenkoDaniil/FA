@@ -36,9 +36,9 @@
                 <RowDefinition Height=".066*"/>
                 <RowDefinition Height=".1*"/>
                 <RowDefinition Height=".12*"/>
-                <RowDefinition Height=".05*"/>
+                <RowDefinition Height=".07*"/>
                 <RowDefinition Height=".096*"/>
-                <RowDefinition Height=".083*"/>
+                <RowDefinition Height=".063*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".86*"/>
@@ -72,11 +72,34 @@
                 <Button x:Name="LogInButton" Style="{StaticResource ButtonStyle}" Text="Log In" Clicked="LogInClicked"/>
             </Frame>
 
-            <Label Text="Or use csocial medis" HorizontalOptions="Center" TextColor="Black" FontSize="14" FontFamily="OpenSans-Regular" Grid.Column="0" Grid.Row="9"/>
+            <Grid Grid.Column="0" Grid.Row="9">
+                <Label HorizontalOptions="Center" Text="Use social networks or" TextColor="Black" FontSize="14" FontFamily="OpenSans-Regular" Grid.Column="0" Grid.Row="0"/>
+                <Label HorizontalOptions="Center" Text="entered by pin-code" TextColor="Black" FontSize="14" FontFamily="OpenSans-Regular" Grid.Column="0" Grid.Row="1"/>
+            </Grid>
 
+            <Grid Grid.Column="0" Grid.Row="10" HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="35"/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="pass" Grid.Row="0" Grid.Column="0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToPinCodePage"/> 
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image x:Name="teleg" Grid.Row="0" Grid.Column="2"/>
+                <Image x:Name="google" Grid.Row="0" Grid.Column="4"/>
+                <Image x:Name="inst" Grid.Row="0" Grid.Column="6"/>
+            </Grid>
+            
 
             <Frame x:Name="ErrorLabel" CornerRadius="10" Padding="0" Grid.Column="0" Grid.Row="11" BackgroundColor="#ffd9d9">
-                <Label VerticalOptions="Center" HorizontalOptions="Center" Text="ERROR. Please check your email and password"></Label>
+            <Label VerticalOptions="Center" HorizontalOptions="Center" Text="ERROR. Please check your email and password"></Label>
             </Frame>
             <Frame x:Name="BadRequestLabel" CornerRadius="10" Padding="0" Grid.Column="0" Grid.Row="11" BackgroundColor="#ffd9d9">
                 <Label VerticalOptions="Center" HorizontalOptions="Center" Text="ERROR. User with this data not found"></Label>

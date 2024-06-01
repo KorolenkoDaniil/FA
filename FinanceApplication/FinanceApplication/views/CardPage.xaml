@@ -55,8 +55,8 @@
                                         <RowDefinition Height=".1*"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width=".5*"/>
-                                        <ColumnDefinition Width=".5*"/>
+                                        <ColumnDefinition Width=".65*"/>
+                                        <ColumnDefinition Width=".35*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Text="{Binding Name}" Style="{StaticResource TextOpenSans}" TextColor="Black" Grid.Column="0" Grid.Row="0"/>
                                     <Label Text="{Binding Type}" Style="{StaticResource TextOpenSans}"  FontSize="Small" Margin="0" TextColor="#a3a3a3" Grid.Column="0" Grid.Row="1"/>
@@ -71,8 +71,8 @@
                                     <AbsoluteLayout Grid.Column="0" Grid.Row="2">
                                         <Frame BackgroundColor="Gray" CornerRadius="10" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, .4, .8 "/>
                                     </AbsoluteLayout>
-                                    <Label Text="Amount of money" Style="{StaticResource TextOpenSans}" TextColor="{Binding Amount}" Grid.Column="0" Grid.Row="3"/>
-                                    <Label Text="{Binding Amount, StringFormat='${0}'}" HorizontalOptions="End" Style="{StaticResource TextOpenSans}" TextColor="{Binding Amount}" Grid.Column="1" Grid.Row="3"/>
+                                    <Label Text="Amount of money" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="3"/>
+                                    <Label Text="{Binding Amount}" HorizontalOptions="End" Style="{StaticResource TextOpenSans}" Grid.Column="1" Grid.Row="3"/>
                                 </Grid>
                             </Frame>
                         </StackLayout>

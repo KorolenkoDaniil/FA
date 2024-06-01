@@ -38,7 +38,7 @@ namespace FinanceApplication.core
 
         public override string ToString()
         {
-            return $"Name {Name} DarkMode {DarkMode}s CategorySum {CategorySum} IconId {IconId} IconSource {IconSource}";
+            return $"Name {Name} DarkMode {DarkMode}s CategorySum {CategorySum} IconId {IconId} IconSource {IconSource} IsProfit {IsProfit}";
         }
     }
 }

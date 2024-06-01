@@ -40,44 +40,80 @@ namespace FinanceApplication.views
         }
         public NewCardPage(ExtendedWallet wallet)
         {
+            Console.WriteLine(wallet + "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
             InitializeComponent();
             PickerType.ItemsSource = Context.WalletTypes;
             this.wallet = wallet;
             CodeFromConstructions();
             Create.Text = "Сохранить"; 
             Cancel.Text = "Удалить";
-            EntryName.Text = wallet.Name;
-            walletIcon.Source = wallet.WalletIconPath;
-            int index = Context.WalletTypes.IndexOf(wallet.Type);
-            PickerType.SelectedIndex = index; 
-            WalletImage.BackgroundColor = Color.FromHex(wallet.DarkMode);
-            delete = true;
-            Top.Text = "";
-            EntrySum.Text = wallet.Amount.ToString();
-            CheckboxOfInclude.IsChecked = wallet.Include;
-        }
-
-        public NewCardPage(ExtendedWallet wallet, bool f)
-        {
-            InitializeComponent();
-            PickerType.ItemsSource = Context.WalletTypes;
-            this.wallet = wallet;
-            CodeFromConstructions();
-            Create.Text = "Сохранить";
-            Cancel.Text = "Удалить";
             if (!string.IsNullOrEmpty(wallet.Name))
                 EntryName.Text = wallet.Name;
-
+            
             walletIcon.Source = wallet.WalletIconPath;
 
             int index = Context.WalletTypes.IndexOf(wallet.Type);
-            PickerType.SelectedIndex = index;
+            PickerType.SelectedIndex = index; 
+            
             WalletImage.BackgroundColor = Color.FromHex(wallet.DarkMode);
+
+            EntrySum.Text = wallet.Amount.ToString();
+
             delete = true;
-            if (!string.IsNullOrEmpty(EntrySum.Text))
-                EntrySum.Text = wallet.Amount.ToString();
+            Top.Text = "";
             CheckboxOfInclude.IsChecked = wallet.Include;
+
+
         }
+
+  
+        //public NewCardPage(ExtendedWallet wallet)
+        //{
+        //    InitializeComponent();
+        //    PickerType.ItemsSource = Context.WalletTypes;
+        //    this.wallet = wallet;
+        //    CodeFromConstructions();
+        //    Create.Text = "Сохранить";
+        //    Cancel.Text = "Удалить";
+        //    EntryName.Text = wallet.Name;
+        //    walletIcon.Source = wallet.WalletIconPath;
+        //    int index = Context.WalletTypes.IndexOf(wallet.Type);
+        //    PickerType.SelectedIndex = index;
+        //    WalletImage.BackgroundColor = Color.FromHex(wallet.DarkMode);
+        //    delete = true;
+        //    Top.Text = "";
+        //    EntrySum.Text = wallet.Amount.ToString();
+        //    CheckboxOfInclude.IsChecked = wallet.Include;
+        //}
+
+        //public NewCardPage(ExtendedWallet wallet, bool f)
+        //{
+        //    InitializeComponent();
+        //    PickerType.ItemsSource = Context.WalletTypes;
+        //    this.wallet = wallet;
+        //    CodeFromConstructions();
+        //    Create.Text = "Сохранить";
+        //    Cancel.Text = "Удалить";
+        //    if (!string.IsNullOrEmpty(wallet.Name))
+        //        EntryName.Text = wallet.Name;
+
+        //    walletIcon.Source = wallet.WalletIconPath;
+
+        //    int index = Context.WalletTypes.IndexOf(wallet.Type);
+        //    PickerType.SelectedIndex = index;
+        //    WalletImage.BackgroundColor = Color.FromHex(wallet.DarkMode);
+        //    delete = true;
+        //    if (!string.IsNullOrEmpty(EntrySum.Text))
+        //        EntrySum.Text = wallet.Amount.ToString();
+        //    CheckboxOfInclude.IsChecked = wallet.Include;
+
+
+
+        //    wallet.Amount = decimal.TryParse(EntrySum.Text, out sum) ? sum : 0;
+        //    wallet.Type = Context.WalletTypes[PickerType.SelectedIndex];
+        //    wallet.Name = string.IsNullOrEmpty(EntryName.Text) ? "" : EntryName.Text;
+        //    wallet.Include = CheckboxOfInclude.IsChecked;
+        //}
         public void CodeFromConstructions()
         {
             NavigationPage.SetHasNavigationBar(this, false); 
@@ -119,18 +155,39 @@ namespace FinanceApplication.views
 
         private async void IconButton_Clicked(object sender, EventArgs e)
         {
+            wallet.Amount = decimal.TryParse(EntrySum.Text, out sum)? sum: 0;
+            wallet.Type = Context.WalletTypes[PickerType.SelectedIndex];
+            wallet.Name = EntryName.Text;
             wallet.Include = CheckboxOfInclude.IsChecked;
-            //wallet.WalletId 
+            wallet.DarkMode = WalletImage.BackgroundColor.ToHex();
             await Navigation.PushAsync(new IconPickerPage(wallet));
         }
 
 
 
-        private async void ColorButton_Clicked(object sender, EventArgs e) =>
+        private async void ColorButton_Clicked(object sender, EventArgs e)
+        {
+            wallet.Amount = decimal.TryParse(EntrySum.Text, out sum) ? sum : 0;
+            wallet.Type = Context.WalletTypes[PickerType.SelectedIndex];
+            wallet.Name = EntryName.Text;
+            wallet.Include = CheckboxOfInclude.IsChecked;
             await Navigation.PushAsync(new ColorPickerPage(wallet));
+        }
 
-        private void EntryName_TextChanged(object sender, TextChangedEventArgs e) { }
-        private void EntrySum_TextChanged(object sender, TextChangedEventArgs e) { }
+        private void EntryName_TextChanged(object sender, TextChangedEventArgs e) 
+        {
+            if (EntryName.Text.Length > 25)
+                xmark1.IsVisible = true;
+            else
+                xmark1.IsVisible = false;
+        }
+        private void EntrySum_TextChanged(object sender, TextChangedEventArgs e) 
+        {
+            if (!decimal.TryParse(EntrySum.Text, out sum) || string.IsNullOrEmpty(EntrySum.Text) || sum > 10000)
+                xmark3.IsVisible = true;
+            else
+                xmark3.IsVisible = false;
+        }
         private void EntryName_Focused(object sender, FocusEventArgs e) 
         {
             xmark1.IsVisible = false;
@@ -155,7 +212,6 @@ namespace FinanceApplication.views
 
             if (ValidationBeforeSaving())
             {
-
                 Device.StartTimer(TimeSpan.FromSeconds(2), () =>
                 {
                     EntrySum.IsEnabled = false;
@@ -170,7 +226,7 @@ namespace FinanceApplication.views
                 Resave(isSend);
                 await Navigation.PushAsync(new CardPage());
             }
-            else return;
+            else IncorrectData();
         }
         private bool ValidationBeforeSaving()
         {
@@ -208,5 +264,7 @@ namespace FinanceApplication.views
         {
             await DisplayAlert("Последний кошелек", "кошелек не может быть удален,\nтк он последний", "ОK"); await Navigation.PushAsync(new CardPage());
         }
+        private async void IncorrectData() =>
+           await DisplayAlert("неправильные данные", "проверьте введенные данные", "ОK");
     }
 }

@@ -15,7 +15,6 @@ namespace FinanceApplication.views
         ExtendedCategory category;
         Random random = new Random();
         bool delete;
-        bool profit;
 
         public NewCategoryPage(bool profit)
         {
@@ -28,14 +27,14 @@ namespace FinanceApplication.views
             CreateSave.Text = "создать";
             Cancel.Text = "отмена";
             delete = false;
-            //category.IsProfit = profit;
-            this.profit = profit;
+            category.IsProfit = profit;
             CategoryImage.BackgroundColor = Color.FromHex(Context.Colors.FirstOrDefault(color => color.ColorId == category.ColorId).DarkMode);
             categoryIcon.Source = ImageSource.FromResource(Icons.CategoriesIcons[category.IconId]);
         }
 
         public NewCategoryPage(ExtendedCategory category)
         {
+            Console.WriteLine(category);
             InitializeComponent();
             ShowImages();
             this.category = category;
@@ -44,29 +43,14 @@ namespace FinanceApplication.views
             CreateSave.Text = "Сохранить";
             Cancel.Text = "удалить";
             delete = true;
-            EntryCategoryName.Text = category.Name;
-        }
-
-        public NewCategoryPage(ExtendedCategory category, bool f)
-        {
-            InitializeComponent();
-            ShowImages();
-            this.category = category;
-            CategoryImage.BackgroundColor = Color.FromHex(Context.Colors.First(color => color.ColorId == category.ColorId).DarkMode);
-
-            categoryIcon.Source = category.IconSource;
-
-            CreateSave.Text = "Сохранить";
-            Cancel.Text = "удалить";
-            delete = true;
-
-            if (!string.IsNullOrEmpty(EntryCategoryName.Text))
+            if (!string.IsNullOrEmpty(category.Name))
                 EntryCategoryName.Text = category.Name;
         }
 
         private void EntryCategoryName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (EntryCategoryName.Text.Length < 20) category.Name = EntryCategoryName.Text;
+            if (EntryCategoryName.Text.Length > 25)
+                xmarkCategoryName.IsVisible = true;
         }
 
         private void ShowImages()
@@ -84,7 +68,7 @@ namespace FinanceApplication.views
             if (!delete) await Navigation.PushAsync(new CategoriesPage());
             else
             {
-                if (Context.Categories.Count == 1)
+                if (Context.Categories.Where(cat => cat.IsProfit).Count() == 1 || Context.Categories.Where(cat => !cat.IsProfit).Count() == 1)
                 {
                     AlertButton_Clicked();
                     return;
@@ -114,25 +98,32 @@ namespace FinanceApplication.views
 
         private async void Create_Clicked(object sender, EventArgs e)
         {
-            ValidationBeforeSaving();
-
-            Device.StartTimer(TimeSpan.FromSeconds(4), () =>
+            if (ValidationBeforeSaving())
             {
-                CreateSave.IsEnabled = false;
-                Cancel.IsEnabled = false;
-                ColorPicker.IsEnabled = false;
-                ImagePicker.IsEnabled = false;
-                return false;
-            });
-
-            Category isSend = await CategoryRepository.SaveCategory(new Category(EntryCategoryName.Text, Context.User.UserId, category.ColorId, category.IconId, category.CategoryId, profit));
-            Resave(isSend);
-            await Navigation.PushAsync(new CategoriesPage());
+                Device.StartTimer(TimeSpan.FromSeconds(4), () =>
+                {
+                    CreateSave.IsEnabled = false;
+                    Cancel.IsEnabled = false;
+                    ColorPicker.IsEnabled = false;
+                    ImagePicker.IsEnabled = false;
+                    return false;
+                });
+                Console.WriteLine(category + " 6666666666666666666666666666666666666666666666666");
+                Category isSend = await CategoryRepository.SaveCategory(new Category(EntryCategoryName.Text, Context.User.UserId, category.ColorId, category.IconId, category.CategoryId, category.IsProfit));
+                Resave(isSend);
+                await Navigation.PushAsync(new CategoriesPage());
+            }
+            else
+            {
+                IncorrectData();
+            }
+         
         }
 
-        private void ValidationBeforeSaving()
+        private bool ValidationBeforeSaving()
         {
-            if (!Validator.ValidateString(EntryCategoryName.Text, 20)) return;
+            if (!Validator.ValidateString(EntryCategoryName.Text, 25)) return false;
+            return true;
         }
 
 
@@ -151,12 +142,17 @@ namespace FinanceApplication.views
         }
 
 
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private async void ToIconPickerPage(object sender, EventArgs e)
         {
+            category.Name = EntryCategoryName.Text;
             await Navigation.PushAsync(new IconPickerPage(category));
         }
 
-        private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e) => await Navigation.PushAsync(new ColorPickerPage(category));
+        private async void ToColorPickerPage(object sender, EventArgs e)
+        {
+            category.Name = EntryCategoryName.Text;
+            await Navigation.PushAsync(new ColorPickerPage(category));
+        }
 
         private async void AlertButton_Clicked()
         {
@@ -164,5 +160,7 @@ namespace FinanceApplication.views
             await Navigation.PushAsync(new CategoriesPage());
         }
 
+        private async void IncorrectData() =>
+            await DisplayAlert("Неправвильные данные", "проверьте введенные данные", "ОK");
     }
 }

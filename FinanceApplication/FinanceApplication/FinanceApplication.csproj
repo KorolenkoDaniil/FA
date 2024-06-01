@@ -21,13 +21,18 @@
     <None Remove="icons\CategoriesIcons\free-icon-font-mug-hot-alt-7409435.png" />
     <None Remove="icons\CategoriesIcons\free-icon-font-salad-12007638.png" />
     <None Remove="icons\CategoriesIcons\free-icon-font-subscription-13085534.png" />
+    <None Remove="icons\erase.png" />
+    <None Remove="icons\google.png" />
     <None Remove="icons\IconOfIcon.png" />
+    <None Remove="icons\inst.png" />
     <None Remove="icons\list.png" />
     <None Remove="icons\LRow.png" />
     <None Remove="icons\OIG1.png" />
     <None Remove="icons\palette.png" />
+    <None Remove="icons\pass.png" />
     <None Remove="icons\Rrow.png" />
     <None Remove="icons\settings.png" />
+    <None Remove="icons\teleg.png" />
     <None Remove="icons\trashCan.png" />
     <None Remove="icons\URow.png" />
     <None Remove="icons\WalletsIcons\free-icon-font-bank-3914993.png" />
@@ -37,6 +42,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="icons\pass.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="icons\erase.png" />
+    <EmbeddedResource Include="icons\inst.png" />
+    <EmbeddedResource Include="icons\google.png" />
+    <EmbeddedResource Include="icons\teleg.png" />
     <EmbeddedResource Include="icons\IconOfIcon.png" />
     <EmbeddedResource Include="icons\palette.png" />
     <EmbeddedResource Include="icons\WalletsIcons\free-icon-font-bank-3914993.png" />

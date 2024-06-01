@@ -1,4 +1,5 @@
 ﻿using FinanceApp.classes;
+using FinanceApplication.core;
 using FinanceApplication.core.Colors;
 using FinanceApplication.views;
 using Newtonsoft.Json;
@@ -12,7 +13,7 @@ namespace FinanceApplication
     public partial class MainPage : ContentPage
     {
         string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Colors");
-
+        string path2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "AuntificationCode");
 
         public MainPage()
         {
@@ -28,7 +29,25 @@ namespace FinanceApplication
                 GetColors();
                 Console.WriteLine("цвета получили с сервера");
             }
+            
+
+            Console.WriteLine("$$$$$$$$$$$$$$$$$$$$$$$$$$$$  1");
+            //File.Delete(path2);
+            Console.WriteLine(File.Exists(path2));
+            if (File.Exists(path2))
+            {
+                ToPasswordPage();
+            }
+            Console.WriteLine("$$$$$$$$$$$$$$$$$$$$$$$$$$$$  2");
+
         }
+
+        public async void  ToPasswordPage()
+        {
+            Console.WriteLine("$$$$$$$$$$$$$$$$$$$$$$$$$$$$  3");
+            await Navigation.PushAsync(new PasswordPage(path2));
+        }
+
 
         private async void GetColors()
         {
@@ -52,6 +71,7 @@ namespace FinanceApplication
 
         private void GetColorsFromFile()
         {
+          
             string ColorsFroFile = File.ReadAllText(path);
             Context.SetColorsCollection(JsonConvert.DeserializeObject<List<Colorss>>(ColorsFroFile));
 

@@ -75,7 +75,7 @@ namespace FinanceApplication.views
 
         private async void ToCardPage(object sender, EventArgs e) => await Navigation.PushAsync(new CardPage());
         private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage());
-        private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage(DateTime.Now));
+        private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage());
         private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage());
         private async void ToConverterPage(object sender, EventArgs e)
         {

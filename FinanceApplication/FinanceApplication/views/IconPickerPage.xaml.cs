@@ -119,7 +119,7 @@ namespace FinanceApplication.views
                 category.IconId = button.id;
                 Console.WriteLine("_______________________________________________________________________________4");
                 Console.WriteLine(category);
-                await Navigation.PushAsync(new NewCategoryPage(category, true));
+                await Navigation.PushAsync(new NewCategoryPage(category));
                 Console.WriteLine("_______________________________________________________________________________5");
             }
         }
@@ -133,7 +133,7 @@ namespace FinanceApplication.views
                 wallet.IconId = button.id;
                 Console.WriteLine("_______________________________________________________________________________4");
                 Console.WriteLine(wallet);
-                await Navigation.PushAsync(new NewCardPage(wallet, true));
+                await Navigation.PushAsync(new NewCardPage(wallet));
                 Console.WriteLine("_______________________________________________________________________________5");
             }
         }

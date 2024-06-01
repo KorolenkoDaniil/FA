@@ -10,6 +10,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static Java.Util.Jar.Attributes;
 
 namespace FinanceApplication.views
 {
@@ -17,7 +18,6 @@ namespace FinanceApplication.views
     public partial class AuthorisationPage : ContentPage
     {
         private Regex regex = new Regex(@"@gmail.com$");
-
         public AuthorisationPage()
         {
             InitializeComponent();
@@ -27,9 +27,11 @@ namespace FinanceApplication.views
             BadRequestLabel.IsVisible = false;
             Loading.IsVisible = false;
             CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
-            //_______________________________________________
-            File.Create();
-            //_______________________________________________
+
+            pass.Source = ImageSource.FromResource(Icons.Iconspath[23]);
+            teleg.Source = ImageSource.FromResource(Icons.Iconspath[22]);
+            google.Source = ImageSource.FromResource(Icons.Iconspath[21]);
+            inst.Source = ImageSource.FromResource(Icons.Iconspath[20]);
         }
 
         private async void LogInClicked(object sender, EventArgs e)
@@ -60,7 +62,7 @@ namespace FinanceApplication.views
                         Context.SetWalletsCollection(await WalletRepository.GetWallets(Context.User.UserId));
                         Context.SetCategoryCollection(await CategoryRepository.GetCategories(Context.User.UserId));
                         Context.SetOperationsCollection(await OperationRepository.GetOperations(Context.User.UserId));
-                        await Navigation.PushAsync(new ListPage(DateTime.Now));
+                        await Navigation.PushAsync(new ListPage());
                     }
                     else BadRequestLabel.IsVisible = true;
                 }
@@ -89,5 +91,7 @@ namespace FinanceApplication.views
             else
                 CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[15]);
         }
+
+        private async void ToPinCodePage(object sender, EventArgs e) => await Navigation.PushAsync(new PasswordPage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "AuntificationCode")));
     }
 }
