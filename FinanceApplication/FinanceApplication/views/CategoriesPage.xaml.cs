@@ -21,6 +21,7 @@ namespace FinanceApplication.views
             InitializeComponent();
             ShowCategories();
             NavigationPage.SetHasNavigationBar(this, false);
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
             imageCard.Source = ImageSource.FromResource(Icons.Iconspath[2]);
             imageCathegory.Source = ImageSource.FromResource(Icons.Iconspath[3]);
             imageList.Source = ImageSource.FromResource(Icons.Iconspath[8]);
@@ -74,7 +75,7 @@ namespace FinanceApplication.views
             Currency currencyRates = await CurrencyRepository.GetCurrency();
             await Navigation.PushAsync(new ConverterPage(currencyRates));
         } 
-        private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsPage());
+        private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SetingsPage());
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e) => await Navigation.PushAsync(new NewCategoryPage(profit));
 
         private void Button_enrease_Clicked(object sender, EventArgs e)

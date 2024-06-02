@@ -21,7 +21,7 @@ namespace FinanceApplication.views
             NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = this;
             NoOperations.IsVisible = false;
-
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
             imageCard.Source = ImageSource.FromResource(Icons.Iconspath[2]);
             imageCathegory.Source = ImageSource.FromResource(Icons.Iconspath[3]);
             imageList.Source = ImageSource.FromResource(Icons.Iconspath[8]);
@@ -65,9 +65,9 @@ namespace FinanceApplication.views
             decimal increase = ListOperations.Where(oper => oper.Profit).Sum(operation => operation.Sum), 
                     consume = ListOperations.Where(oper => !oper.Profit).Sum(operation => operation.Sum);
 
-            totalIncrese.Text = "$" + increase;
-            totalConsume.Text = "$" + consume;
-            total.Text = "$" + (increase - consume);
+            totalIncrese.Text = Context.User.SelectedCurrency + " " + increase;
+            totalConsume.Text = Context.User.SelectedCurrency + " " + consume;
+            total.Text = Context.User.SelectedCurrency + " " + (increase - consume);
 
 
             List<string> uniqueDates = ListOperations.Select(o => o.Date).Distinct().ToList();
@@ -112,7 +112,7 @@ namespace FinanceApplication.views
             Currency currencyRates = await CurrencyRepository.GetCurrency();
             await Navigation.PushAsync(new ConverterPage(currencyRates));
         }
-        private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsPage());
+        private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SetingsPage());
 
         private void DayButton(object sender, EventArgs e)
         {

@@ -1,4 +1,5 @@
-﻿using FinanceApplication.core.Currency;
+﻿using FinanceApp.classes;
+using FinanceApplication.core.Currency;
 using FinanceApplication.icons;
 using System;
 using Xamarin.Forms;
@@ -21,6 +22,7 @@ namespace FinanceApplication.views
             InitializeIcons();
             UpdateCurrencyValues(1);
             InitializeEventHandlers();
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
         }
 
         private void InitializeIcons()
@@ -130,7 +132,7 @@ namespace FinanceApplication.views
         private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage());
         private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage());
         private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage());
-        private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SettingsPage());
+        private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SetingsPage());
         
     }
 }

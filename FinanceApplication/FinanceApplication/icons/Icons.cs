@@ -33,6 +33,15 @@ namespace FinanceApplication.icons
             "FinanceApplication.icons.google.png", //21
             "FinanceApplication.icons.teleg.png", //22
             "FinanceApplication.icons.pass.png", //23
+            "FinanceApplication.icons.Logo1.png", //24
+            "FinanceApplication.icons.defender.png", //25
+            "FinanceApplication.icons.comment.png", //26
+            "FinanceApplication.icons.i.png", //27
+            "FinanceApplication.icons.mode.png", //28
+            "FinanceApplication.icons.color.png", //29
+            "FinanceApplication.icons.currency.png", //30
+            "FinanceApplication.icons.pincode.png", //31
+            "FinanceApplication.icons.reminder.png", //32
         };
 
         public static string[] WalletsIcons = new string[]

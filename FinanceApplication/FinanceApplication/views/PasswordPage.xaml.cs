@@ -21,11 +21,11 @@ namespace FinanceApplication.views
         Button[] buttons = new Button[4];
         AutorisationJson userdata;
 
-        public PasswordPage(string path)
+        public PasswordPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            string userData = File.ReadAllText(path);
+            string userData = File.ReadAllText(Context.codePath);
             Console.WriteLine("$$$$$$$$$$$$$$$$$$$$$$$$$$$$  4");
             Console.WriteLine(userData);
             Console.WriteLine("$$$$$$$$$$$$$$$$$$$$$$$$$$$$  4");

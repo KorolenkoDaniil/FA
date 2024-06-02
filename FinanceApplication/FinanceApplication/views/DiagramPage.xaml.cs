@@ -17,6 +17,7 @@ namespace FinanceApplication.views
         public DiagramPage()
         {
             InitializeComponent();
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
 
             List<ExtendedCategory> extendedCategories = (from category in Context.Categories
                                                          join color in Context.Colors on category.ColorId equals color.ColorId

@@ -36,6 +36,7 @@ namespace FinanceApplication.views
             wallet.UserId = Context.User.UserId;
 
             walletIcon.Source = ImageSource.FromResource(Icons.WalletsIcons[IconId]);
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
 
         }
         public NewCardPage(ExtendedWallet wallet)
@@ -62,7 +63,7 @@ namespace FinanceApplication.views
             delete = true;
             Top.Text = "";
             CheckboxOfInclude.IsChecked = wallet.Include;
-
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
 
         }
 

@@ -17,7 +17,7 @@
     </ContentPage.Resources>
 
 
-    <AbsoluteLayout BackgroundColor="White">
+    <AbsoluteLayout x:Name="back">
 
         <AbsoluteLayout x:Name="IncomePage" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" BackgroundColor="White">
             <Frame CornerRadius="30" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".5, .2, .9, .5" BackgroundColor="#FFF7EC">

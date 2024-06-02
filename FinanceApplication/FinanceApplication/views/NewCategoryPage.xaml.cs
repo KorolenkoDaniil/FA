@@ -30,6 +30,7 @@ namespace FinanceApplication.views
             category.IsProfit = profit;
             CategoryImage.BackgroundColor = Color.FromHex(Context.Colors.FirstOrDefault(color => color.ColorId == category.ColorId).DarkMode);
             categoryIcon.Source = ImageSource.FromResource(Icons.CategoriesIcons[category.IconId]);
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
         }
 
         public NewCategoryPage(ExtendedCategory category)
@@ -45,6 +46,7 @@ namespace FinanceApplication.views
             delete = true;
             if (!string.IsNullOrEmpty(category.Name))
                 EntryCategoryName.Text = category.Name;
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
         }
 
         private void EntryCategoryName_TextChanged(object sender, TextChangedEventArgs e)

@@ -21,15 +21,24 @@
     <None Remove="icons\CategoriesIcons\free-icon-font-mug-hot-alt-7409435.png" />
     <None Remove="icons\CategoriesIcons\free-icon-font-salad-12007638.png" />
     <None Remove="icons\CategoriesIcons\free-icon-font-subscription-13085534.png" />
+    <None Remove="icons\color.png" />
+    <None Remove="icons\comment.png" />
+    <None Remove="icons\currency.png" />
+    <None Remove="icons\defender.png" />
     <None Remove="icons\erase.png" />
     <None Remove="icons\google.png" />
+    <None Remove="icons\i.png" />
     <None Remove="icons\IconOfIcon.png" />
     <None Remove="icons\inst.png" />
     <None Remove="icons\list.png" />
+    <None Remove="icons\Logo1.png" />
     <None Remove="icons\LRow.png" />
+    <None Remove="icons\mode.png" />
     <None Remove="icons\OIG1.png" />
     <None Remove="icons\palette.png" />
     <None Remove="icons\pass.png" />
+    <None Remove="icons\pincode.png" />
+    <None Remove="icons\reminder.png" />
     <None Remove="icons\Rrow.png" />
     <None Remove="icons\settings.png" />
     <None Remove="icons\teleg.png" />
@@ -42,6 +51,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="icons\color.png" />
+    <EmbeddedResource Include="icons\comment.png" />
+    <EmbeddedResource Include="icons\currency.png" />
+    <EmbeddedResource Include="icons\defender.png" />
+    <EmbeddedResource Include="icons\i.png" />
+    <EmbeddedResource Include="icons\Logo1.png" />
+    <EmbeddedResource Include="icons\mode.png" />
     <EmbeddedResource Include="icons\pass.png" />
   </ItemGroup>
 
@@ -49,6 +65,8 @@
     <EmbeddedResource Include="icons\erase.png" />
     <EmbeddedResource Include="icons\inst.png" />
     <EmbeddedResource Include="icons\google.png" />
+    <EmbeddedResource Include="icons\pincode.png" />
+    <EmbeddedResource Include="icons\reminder.png" />
     <EmbeddedResource Include="icons\teleg.png" />
     <EmbeddedResource Include="icons\IconOfIcon.png" />
     <EmbeddedResource Include="icons\palette.png" />
@@ -130,6 +148,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="views\ConverterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="views\CurrencySelectionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="views\DiagramPage.xaml">

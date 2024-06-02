@@ -13,7 +13,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <AbsoluteLayout BackgroundColor="#F5F5F5" Padding="0">
+    <AbsoluteLayout x:Name="back" Padding="0">
         <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height=".18*"/>
@@ -65,7 +65,7 @@
                 <CollectionView.ItemTemplate >
                     <DataTemplate>
                         <StackLayout>
-                            <Frame BackgroundColor="White" Margin="10, 12, 10, 0">
+                            <Frame BackgroundColor="White" CornerRadius="15" Margin="10, 12, 10, 0">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width=".25*"/>

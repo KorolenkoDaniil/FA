@@ -20,6 +20,8 @@ namespace FinanceApplication.views
     {
         private Regex regex = new Regex(@"@gmail.com$");
         public Random random = new Random();
+        bool registration = true;
+
         public RegistrationPage()
         {
             InitializeComponent();
@@ -29,32 +31,64 @@ namespace FinanceApplication.views
             BadRequestLabel.IsVisible = false;
             Loading.IsVisible = false;
             CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
+            topLabel.Text = "регистрация в KorFin";
+            CreateButton.Text = "создать";
+            registration = true;
+        }
+
+        public RegistrationPage(bool f)
+        {
+            InitializeComponent();
+            registration = f;
+            NavigationPage.SetHasNavigationBar(this, false);
+            BindingContext = this;
+            ErrorLabel.IsVisible = false;
+            BadRequestLabel.IsVisible = false;
+            Loading.IsVisible = false;
+            CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[16]);
+            topLabel.Text = "Замена  игрока!!";
+            CreateButton.Text = "сохранить";
+            entryEmail.Text = Context.User.Email;
+            entryNickname.Text = Context.User.NickName;
         }
 
         private async void CreateClicked(object sender, EventArgs e)
         {
-            DisableControls();
-            try
+            Console.WriteLine(registration + " ^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+;            DisableControls();
+            if (registration)
             {
-                if (!ValidateInputs()) return;
-                await SaveUserAndChangeTheme();
-                if (Context.User != null)
+                try
                 {
-                    await HandleWallets();
-                    await HandleCategories();
-                    await HandleOperations();
-                    await Navigation.PushAsync(new ListPage());
+                    if (!ValidateInputs()) return;
+                    await SaveUserAndChangeTheme();
+                    if (Context.User != null)
+                    {
+                        await HandleWallets();
+                        await HandleCategories();
+                        await HandleOperations();
+                        await Navigation.PushAsync(new ListPage());
+                    }
+                    else BadRequestLabel.IsVisible = true;
                 }
-                else BadRequestLabel.IsVisible = true;
+                catch (Exception ex)
+                {
+                    Console.WriteLine("=============" + ex.Message);
+                }
+                finally
+                {
+                    EnableControlsAfterDelay();
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine("=============" + ex.Message);
+                ValidateInputs();
+                User oldUser = new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, Context.User.ColorId, Context.User.AppModeColor, Context.User.SelectedCurrency);
+                oldUser.UserId = Context.User.UserId;
+                await UserRepository.SaveUser(oldUser);
+                await Navigation.PushAsync(new ListPage());
             }
-            finally
-            {
-                EnableControlsAfterDelay();
-            }
+            EnableControlsAfterDelay();
         }
 
         private void DisableControls()
@@ -92,7 +126,7 @@ namespace FinanceApplication.views
 
         private async Task SaveUserAndChangeTheme()
         {
-            Context.ChangeUser(await UserRepository.SaveUser(new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, 1, true)));
+            Context.ChangeUser(await UserRepository.SaveUser(new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, 1, "#F5F5F5", "BYN")));
             Context.ChangeTheme(await ColorRepository.GetColor(1));
         }
 

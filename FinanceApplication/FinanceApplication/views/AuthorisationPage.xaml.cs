@@ -92,6 +92,6 @@ namespace FinanceApplication.views
                 CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[15]);
         }
 
-        private async void ToPinCodePage(object sender, EventArgs e) => await Navigation.PushAsync(new PasswordPage(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "AuntificationCode")));
+        private async void ToPinCodePage(object sender, EventArgs e) => await Navigation.PushAsync(new PasswordPage());
     }
 }

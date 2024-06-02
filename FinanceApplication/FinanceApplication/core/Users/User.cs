@@ -7,19 +7,21 @@
         public string Email { get;  set; }
         public string Password { get; set; }
         public int ColorId { get; set; }
-        public bool AppModeWhite { get; set; }
-        public User(string name, string email, string password, int colorid, bool appMode)
+        public string AppModeColor { get; set; }
+        public string SelectedCurrency { get; set; }
+        public User(string name, string email, string password, int colorid, string appModeColor, string selectedCurrency)
         {
             NickName = name;
             Email = email;
             Password = password;
             ColorId = colorid;
-            AppModeWhite = appMode;
+            AppModeColor = appModeColor;
+            SelectedCurrency = selectedCurrency;
         }
 
         public User () { }
 
-        public override string ToString() => $"{UserId} {NickName} {Email} {Password} {ColorId}";
+        public override string ToString() => $"{UserId} {NickName} {Email} {Password} {ColorId} selectedCurrency {SelectedCurrency}";
       
     }
 }

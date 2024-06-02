@@ -15,7 +15,7 @@ namespace Server.Controllers
         [HttpPost]
         public User Registration([FromBody] User user)
         {
-            user.UserId = UserRepository.SaveUser(user);
+            user = UserRepository.SaveUser(user);
             return user;
         }
 

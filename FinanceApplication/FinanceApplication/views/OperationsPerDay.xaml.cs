@@ -13,7 +13,8 @@ namespace FinanceApplication.views
         public OperationsPerDay (OperationsDays dayOperations)
 		{
 			InitializeComponent ();
-			this.dayOperations = dayOperations;
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
+            this.dayOperations = dayOperations;
         }
 
 

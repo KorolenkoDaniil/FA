@@ -14,14 +14,17 @@ namespace Server.Users
             UserDB.CreateTable<User>();
         }
 
-        public int SaveUser(User user)
+        public User SaveUser(User user)
         {
-
-            User foundUser = UserDB.Table<User>().FirstOrDefault(u => u.Email == user.Email);
-            if (foundUser == null)
+            Console.WriteLine("!!!" + user);
+            var existingUser = UserDB.Table<User>().FirstOrDefault(w => w.UserId == user.UserId);
+            if (existingUser != null)
+                UserDB.Update(user);
+            else
                 UserDB.Insert(user);
-            return UserDB.Table<User>().FirstOrDefault(u => u.Email == user.Email).UserId;
+            return UserDB.Table<User>().FirstOrDefault(w => w.UserId == user.UserId);
         }
+
 
         public User SearchByEmailAndPassword(string email, string password)
         {

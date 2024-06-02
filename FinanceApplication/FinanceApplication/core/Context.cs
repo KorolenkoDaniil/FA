@@ -3,7 +3,9 @@ using FinanceApp.classes.Wallets;
 using FinanceApplication.core.Category;
 using FinanceApplication.core.Colors;
 using FinanceApplication.core.Operations;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace FinanceApp.classes
@@ -21,6 +23,9 @@ namespace FinanceApp.classes
 
         public static bool monthPeriod = true;
         public static decimal OperationsSum { get; private set; }
+
+        public static string colorsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Colors");
+        public static string codePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "AuntificationCode");
 
         public static string[] WalletTypes = new string[]
         {

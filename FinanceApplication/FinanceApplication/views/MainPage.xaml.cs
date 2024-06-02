@@ -1,6 +1,7 @@
 ﻿using FinanceApp.classes;
 using FinanceApplication.core;
 using FinanceApplication.core.Colors;
+using FinanceApplication.icons;
 using FinanceApplication.views;
 using Newtonsoft.Json;
 using System;
@@ -12,14 +13,13 @@ namespace FinanceApplication
 {
     public partial class MainPage : ContentPage
     {
-        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Colors");
-        string path2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "AuntificationCode");
-
+  
         public MainPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            if (File.Exists(path))
+            Logo.Source = ImageSource.FromResource(Icons.Iconspath[24]);
+            if (File.Exists(Context.colorsPath))
             {
                 GetColorsFromFile();
                 Console.WriteLine("цвета получили из файла");
@@ -29,23 +29,21 @@ namespace FinanceApplication
                 GetColors();
                 Console.WriteLine("цвета получили с сервера");
             }
-            
 
-            Console.WriteLine("$$$$$$$$$$$$$$$$$$$$$$$$$$$$  1");
+          
+
             //File.Delete(path2);
-            Console.WriteLine(File.Exists(path2));
-            if (File.Exists(path2))
+            Console.WriteLine(File.Exists(Context.codePath));
+            if (File.Exists(Context.codePath))
             {
                 ToPasswordPage();
             }
-            Console.WriteLine("$$$$$$$$$$$$$$$$$$$$$$$$$$$$  2");
 
         }
 
         public async void  ToPasswordPage()
         {
-            Console.WriteLine("$$$$$$$$$$$$$$$$$$$$$$$$$$$$  3");
-            await Navigation.PushAsync(new PasswordPage(path2));
+            await Navigation.PushAsync(new PasswordPage());
         }
 
 
@@ -65,14 +63,14 @@ namespace FinanceApplication
         private void SaveColorsToFile(List<Colorss> colors)
         {
             string json = JsonConvert.SerializeObject(colors);
-            File.WriteAllText(path, json);
+            File.WriteAllText(Context.colorsPath, json);
         }
 
 
         private void GetColorsFromFile()
         {
           
-            string ColorsFroFile = File.ReadAllText(path);
+            string ColorsFroFile = File.ReadAllText(Context.colorsPath);
             Context.SetColorsCollection(JsonConvert.DeserializeObject<List<Colorss>>(ColorsFroFile));
 
             if (Context.Colors.Count == 0)

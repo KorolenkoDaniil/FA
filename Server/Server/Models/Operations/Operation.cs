@@ -15,10 +15,9 @@ namespace Server.Operations
         public int WalletId { get; set; }
         public string Cathegory { get; set; }
         public string Description { get; set; }
-
         public Operation() { }
 
-        public Operation(int operationId ,int userID, string date, bool profit, decimal sum, int wallet, string cathegory, string description)
+        public Operation(int operationId, int userID, string date, bool profit, decimal sum, int wallet, string cathegory, string description)
         {
             Id = operationId;
             UserID = userID;

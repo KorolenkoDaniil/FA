@@ -17,7 +17,7 @@ namespace FinanceApplication.views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
             this.category = category;
             CreateCategoryButtons();
         }
@@ -26,7 +26,7 @@ namespace FinanceApplication.views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
             this.wallet = wallet;
             CreateCardButtons();
         }

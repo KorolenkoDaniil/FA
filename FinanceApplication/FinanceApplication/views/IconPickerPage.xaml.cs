@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using FinanceApplication.icons;
 using System;
+using FinanceApp.classes;
 
 namespace FinanceApplication.views
 {
@@ -19,11 +20,12 @@ namespace FinanceApplication.views
             this.category = category;
             Console.WriteLine("_______________________________________________________________________________1");
             CreateCategoryButtons();
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
         }
 
         public IconPickerPage(ExtendedWallet wallet)
         {
-
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
             Console.WriteLine(wallet + "33333333333333333333333333333333333333333");
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);

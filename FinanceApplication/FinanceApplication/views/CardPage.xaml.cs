@@ -22,6 +22,7 @@ namespace FinanceApplication.views
             {
                 Console.WriteLine(Context.Wallets[i]);
             }
+            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
             imageCard.Source = ImageSource.FromResource(Icons.Iconspath[2]);
             imageCathegory.Source = ImageSource.FromResource(Icons.Iconspath[3]);
             imageList.Source = ImageSource.FromResource(Icons.Iconspath[8]);

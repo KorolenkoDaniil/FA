@@ -1,156 +1,120 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FinanceApplication.views.SettingsPage">
-    <AbsoluteLayout>
-        <Grid VerticalOptions="Fill" HorizontalOptions="Fill" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height=".2*"/>
-                <RowDefinition Height=".8*"/>
-            </Grid.RowDefinitions>
+             x:Class="FinanceApplication.views.SetingsPage">
 
-            <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="AliceBlue">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".25*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                </Grid>
-            </Frame>
 
-            <ScrollView Grid.Row="1" Grid.Column="0">
-                <StackLayout>
-                    <Grid HeightRequest="100">
+    <AbsoluteLayout x:Name="back" Padding="0">
+            <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".08*"/>
+                    <RowDefinition Height=".1*"/>
+                    <RowDefinition Height=".82*"/>
+                </Grid.RowDefinitions>
+
+                <Frame Grid.Column="0" Grid.Row="0" Padding="15">
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".25*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".4*"/>
+                            <ColumnDefinition Width=".1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="Настройки" TextColor="Black" Grid.Column="0" Grid.Row="0"/>
 
-                        <Label Grid.Row="0" Text="Напоминания" HorizontalOptions="Start" FontSize="18" Grid.Column="1" BackgroundColor="Transparent">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1"/>
-                            </Label.GestureRecognizers>
-                        </Label>
                     </Grid>
-
-                    <Grid HeightRequest="100">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".25*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Row="0" Grid.Column="0"/>
-
-                        <Label  Grid.Row="0" Text="Валюта" VerticalOptions="Center" HorizontalOptions="Start" FontSize="18" Grid.Column="1" BackgroundColor="Transparent">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </Grid>
-
-                    <Grid HeightRequest="100">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".25*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Row="0" Grid.Column="0"/>
-
-                        <Label  Grid.Row="0" Text="сменить пароль" VerticalOptions="Center" HorizontalOptions="Start" FontSize="18" Grid.Column="1" BackgroundColor="Transparent">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </Grid>
-
-                    <Grid HeightRequest="100">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".25*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Row="0" Grid.Column="0"/>
-
-                        <Label  Grid.Row="0" Text="Тема приложения" VerticalOptions="Center" HorizontalOptions="Start" FontSize="18" Grid.Column="1" BackgroundColor="Transparent">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </Grid>
+                </Frame>
 
 
-                    <Grid HeightRequest="100" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".25*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+            <AbsoluteLayout Grid.Row="1" Grid.Column="0">
+                <Frame CornerRadius="1000" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .7, 75, 75" Padding="0">
+                    <Image x:Name="Logo" BackgroundColor="White" VerticalOptions="Center" HorizontalOptions="Center" />
+                </Frame>
+            </AbsoluteLayout>
 
-                        <Image Grid.Row="0" Grid.Column="0"/>
+            <Grid Grid.Column="0" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".2*"/>
+                    <ColumnDefinition Width=".55*"/>
+                    <ColumnDefinition Width=".2*"/>
+                    <ColumnDefinition Width=".05*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".05*"/>
+                    <RowDefinition Height=".05*"/>
+                    <RowDefinition Height=".05*"/>
+                    <RowDefinition Height=".05*"/>
+                    <RowDefinition Height=".05*"/>
+                    <RowDefinition Height=".05*"/>
+                    <RowDefinition Height=".05*"/>
+                    <RowDefinition Height=".05*"/>
+                    <RowDefinition Height=".05*"/>
+                    <RowDefinition Height=".05*"/>
+                    <RowDefinition Height=".05*"/>
+                </Grid.RowDefinitions>
 
-                        <Label  Grid.Row="0" Text="App mode" VerticalOptions="Center" HorizontalOptions="Start" FontSize="18" Grid.Column="1" BackgroundColor="Transparent">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </Grid>
+                <AbsoluteLayout Grid.Column="0" Grid.Row="0">
+                    <Image  x:Name="reminder" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 30, 30"></Image>
+                </AbsoluteLayout>
+                <Label Text="Напоминания" Grid.Column="1" Grid.Row="0" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center" ></Label>
 
-                    <Grid HeightRequest="100" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".25*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                <AbsoluteLayout Grid.Column="0" Grid.Row="1">
+                    <Image  x:Name="currency" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 30, 30"></Image>
+                </AbsoluteLayout>
+                
+                <Label Text="Валюта" Grid.Column="1" Grid.Row="1"  TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToPageOfChoisingCurrency"/>
+                    </Label.GestureRecognizers>
+                </Label>
 
-                        <Image Grid.Row="0" Grid.Column="0"/>
+                <AbsoluteLayout Grid.Column="0" Grid.Row="2">
+                    <Image  x:Name="pincode" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 30, 30"></Image>
+                </AbsoluteLayout>
+                <Label Text="Изменить пароль" Grid.Column="1" Grid.Row="2"  TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ChangePasswordAndPin"/>
+                    </Label.GestureRecognizers>
+                </Label>
 
-                        <CheckBox x:Name="fileExist" Grid.Row="0" Grid.Column="1" CheckedChanged="CheckBox_CheckedChanged" IsChecked="false"/>
-                    </Grid>
+                <AbsoluteLayout Grid.Column="0" Grid.Row="3">
+                    <Image  x:Name="pass" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 30, 30"></Image>
+                </AbsoluteLayout>
+                <Label Text="Pin Code для входа" Grid.Column="1" Grid.Row="3"  TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped_3"/>
+                    </Label.GestureRecognizers>
+                </Label>
 
-                   <!--================================================-->
-                    <Grid HeightRequest="100" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".25*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                <AbsoluteLayout Grid.Column="0" Grid.Row="4">
+                    <Image  x:Name="color" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 30, 30"></Image>
+                </AbsoluteLayout>
+                <Label Text="Тема приложения" Grid.Column="1" Grid.Row="4"  TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center"/>
 
-                        <Image Grid.Row="0" Grid.Column="0"/>
-                        <Label  Grid.Row="0" Text="App mode" VerticalOptions="Center" HorizontalOptions="Start" FontSize="18" Grid.Column="1" BackgroundColor="Transparent">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </Grid>
+                <AbsoluteLayout Grid.Column="0" Grid.Row="5">
+                    <Image  x:Name="mode"  Rotation="90" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 30, 30"></Image>
+                </AbsoluteLayout>
+                <Label Text="Режим приложения темный" Grid.Column="1" Grid.Row="5"  TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                <Switch x:Name="switchMode" OnColor="Red" ThumbColor="#5f3fb5" Toggled="Switch_Toggled" Grid.Column="2" Grid.Row="5" ></Switch>
 
-                    <Grid HeightRequest="100" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".25*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                <Label Margin="20, 0" Text="Дополнительная информация" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6"  TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center"></Label>
 
-                        <Image Grid.Row="0" Grid.Column="0"/>
-                        <Label  Grid.Row="0" Text="App mode" VerticalOptions="Center" HorizontalOptions="Start" FontSize="18" Grid.Column="1" BackgroundColor="Transparent">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </Grid>
+                <AbsoluteLayout Grid.Column="0" Grid.Row="7">
+                    <Image  x:Name="i" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 30, 30"></Image>
+                </AbsoluteLayout>
+                <Label Text="Информация" Grid.Column="1" Grid.Row="7"  TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center"></Label>
 
-                    <Grid HeightRequest="100" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".25*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                <AbsoluteLayout Grid.Column="0" Grid.Row="8">
+                    <Image  x:Name="comment" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 30, 30"></Image>
+                </AbsoluteLayout>
+                <Label Text="Отправить вопросы и предложения" Grid.Column="1" Grid.Row="8" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center" ></Label>
 
-                        <Image Grid.Row="0" Grid.Column="0"/>
-                        <Label  Grid.Row="0" Text="App mode" VerticalOptions="Center" HorizontalOptions="Start" FontSize="18" Grid.Column="1" BackgroundColor="Transparent">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </Grid>
-                </StackLayout>
-            </ScrollView>
+                <AbsoluteLayout Grid.Column="0" Grid.Row="9">
+                    <Image  x:Name="defender" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 30, 30"></Image>
+                </AbsoluteLayout>
+                <Label Text="Политика конфиденциальности" Grid.Column="1" Grid.Row="9" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+
+            </Grid>
         </Grid>
     </AbsoluteLayout>
 </ContentPage>

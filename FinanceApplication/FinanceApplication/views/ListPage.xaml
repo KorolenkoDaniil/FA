@@ -13,7 +13,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <AbsoluteLayout BackgroundColor="#F5F5F5" Padding="0">
+    <AbsoluteLayout x:Name="back" Padding="0">
         <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height=".08*"/>

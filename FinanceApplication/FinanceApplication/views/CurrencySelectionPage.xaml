@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinanceApplication.views.CurrencySelectionPage">
+    <ContentPage.Content >
+        <StackLayout x:Name="back">
+            <Button Text="USA" Clicked="Change"/>
+            <Button Text="EUR" Clicked="Change"/>
+            <Button Text="BYN" Clicked="Change"/>
+            <Button Text="PLN" Clicked="Change"/>
+            <Button Text="CNY" Clicked="Change"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

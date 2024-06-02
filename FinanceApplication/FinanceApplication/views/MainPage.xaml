@@ -20,7 +20,12 @@
             </Grid.RowDefinitions>
 
 
-            <Image x:Name="Logo" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0"/>
+            <AbsoluteLayout Grid.Row="1" Grid.Column="0">
+                <Frame CornerRadius="1000" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 100, 100" Padding="0">
+                    <Image x:Name="Logo" BackgroundColor="White" VerticalOptions="Center" HorizontalOptions="Center" />
+                </Frame>
+            </AbsoluteLayout>
+           
 
             <Button Clicked="ToSignInPage" BorderColor="Bisque" BorderWidth="2" Text="Sign In" Grid.Row="3" Grid.Column="0" WidthRequest="115" HeightRequest="115" CornerRadius="100" VerticalOptions="Center" HorizontalOptions="Center" />
 
