@@ -5,6 +5,7 @@ using FinanceApplication.core.Operations;
 using FinanceApplication.icons;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -43,6 +44,7 @@ namespace FinanceApplication.views
             xmarkIncome0.IsVisible = xmarkIncome1.IsVisible = xmarkIncome2.IsVisible = xmarkIncome3.IsVisible = false;
 
             List<string> walletsNames = new List<string>();
+          
             foreach (Wallet wallet in Context.Wallets)
                 walletsNames.Add(wallet.Name);
 
@@ -52,15 +54,17 @@ namespace FinanceApplication.views
             WalletPicker.SelectedItem = walletsNames[0];
             WalletPickerС.SelectedItem = walletsNames[0];
 
-            List<string> CategoriesNames = new List<string>();
-            foreach (Category category in Context.Categories)
-                CategoriesNames.Add(category.Name);
 
+            List<string> CategoriesNames = new List<string>();
+            List<string> CategoriesNamesC = new List<string>();
+
+            CategoriesNames = Context.Categories.Where(cat => cat.IsProfit == true).Select(cat => cat.Name).ToList();
+            CategoriesNamesC = Context.Categories.Where(cat => cat.IsProfit == false).Select(cat => cat.Name).ToList();
 
             CathegoryPicker.ItemsSource = CategoriesNames;
-            CathegoryPickerС.ItemsSource = CategoriesNames;
+            CathegoryPickerС.ItemsSource = CategoriesNamesC;
             CathegoryPicker.SelectedItem = CategoriesNames[0];
-            CathegoryPickerС.SelectedItem = CategoriesNames[0];
+            CathegoryPickerС.SelectedItem = CategoriesNamesC[0];
         }
 
         private void buttonTochangePage(object sender, EventArgs e)

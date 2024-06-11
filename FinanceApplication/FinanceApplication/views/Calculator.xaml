@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinanceApplication.views.Calculator">
+
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".3*"/>
+            <RowDefinition Height=".2*"/>
+            <RowDefinition Height=".5*"/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="text" Grid.Row="0" Grid.Column="0" FontSize="40" HorizontalOptions="End" Margin="15"/>
+        <Label x:Name="result" Grid.Row="1" Grid.Column="0" FontSize="32" HorizontalOptions="End"  Margin="15"/>
+
+        <Frame Grid.Row="3" Grid.Column="0" BackgroundColor="Transparent">
+            <Grid>
+                <Button Grid.Row="0" Grid.Column="0" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="AC" TextColor="Black" Clicked="Button_Clicked"/>
+                <Button Grid.Row="0" Grid.Column="1" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="%" TextColor="Black" Clicked="operation_clicked"/>
+
+                <Button Grid.Row="0" Grid.Column="3" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="/" TextColor="Black" Clicked="operation_clicked"/>
+                <Button Grid.Row="1" Grid.Column="0" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="7" TextColor="Black" Clicked="number_clicked"/>
+                <Button Grid.Row="1" Grid.Column="1" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="8" TextColor="Black" Clicked="number_clicked"/>
+                <Button Grid.Row="1" Grid.Column="2" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="9" TextColor="Black" Clicked="number_clicked"/>
+                <Button Grid.Row="1" Grid.Column="3" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="*" TextColor="Black" Clicked="operation_clicked"/>
+                <Button Grid.Row="2" Grid.Column="0" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="4" TextColor="Black" Clicked="number_clicked"/>
+                <Button Grid.Row="2" Grid.Column="1" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="5" TextColor="Black" Clicked="number_clicked"/>
+                <Button Grid.Row="2" Grid.Column="2" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="6" TextColor="Black" Clicked="number_clicked"/>
+                <Button Grid.Row="2" Grid.Column="3" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="-" TextColor="Black" Clicked="operation_clicked"/>
+                <Button Grid.Row="3" Grid.Column="0" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="1" TextColor="Black" Clicked="number_clicked"/>
+                <Button Grid.Row="3" Grid.Column="1" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="2" TextColor="Black" Clicked="number_clicked"/>
+                <Button Grid.Row="3" Grid.Column="2" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="3" TextColor="Black" Clicked="number_clicked"/>
+                <Button Grid.Row="3" Grid.Column="3" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="+" TextColor="Black" Clicked="operation_clicked"/>
+                <Button Grid.Row="4" Grid.Column="0" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="00" TextColor="Black" Clicked="number_clicked"/>
+                <Button Grid.Row="4" Grid.Column="1" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="0" TextColor="Black" Clicked="number_clicked"/>
+                <Button Grid.Row="4" Grid.Column="2" CornerRadius="200" BackgroundColor="#e0dede" Padding="0" Text="." TextColor="Black" Clicked="number_clicked"/>
+                <Button Grid.Row="4" Grid.Column="3" CornerRadius="200" BackgroundColor="Red" Padding="0" Text="=" TextColor="Black" Clicked="CalculateFromString"/>
+
+                <Frame Grid.Row="0" Grid.Column="2" CornerRadius="200" BackgroundColor="#e0dede" Padding="0">
+                    <AbsoluteLayout>
+                        <Image x:Name="Arase" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 50, 50" BackgroundColor="Transparent">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Arase_Clicked" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </AbsoluteLayout>
+                </Frame>
+            </Grid>
+        </Frame>
+    </Grid>
+</ContentPage>

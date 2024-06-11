@@ -121,7 +121,11 @@
                     <AbsoluteLayout x:Name="a6" Grid.Column="0" Grid.Row="7">
                         <Image  x:Name="i" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 30, 30"></Image>
                     </AbsoluteLayout>
-                    <Label x:Name="a7" Text="Информация" Grid.Column="1" Grid.Row="7"  TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                    <Label x:Name="a7" Text="Информация" Grid.Column="1" Grid.Row="7"  TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="InformationAlert"/>
+                        </Label.GestureRecognizers>
+                    </Label>
 
                     <AbsoluteLayout x:Name="a8" Grid.Column="0" Grid.Row="8">
                         <Image  x:Name="comment" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .5, 30, 30"></Image>

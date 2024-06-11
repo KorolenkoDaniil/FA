@@ -171,5 +171,9 @@ namespace FinanceApplication.views
         {
             code2.TextColor = Color.Black;
         }
+
+        private async void InformationAlert(object sender, EventArgs e) =>
+           await DisplayAlert("", "Название: Мои финансы;\r\nВерсия: 0.1v;\r\nАвтор: Короленко Данила Алексеевич Т-191;\r\nДата релиза: 11.06.2024;\r\nКраткая информация: \"Мои финансы\" - это мобильное приложение, которое предназначено для частичной автоматизации личной бухгалетрии, с возможностью категоризировать свои финансовые операции. С помощью наглядных диаграмм пользователь имеет возможность анализировать свои дохожы и расходы.\r\nCreated with Dr.Explain - Free restricted license", "ОK");
+
     }
 }

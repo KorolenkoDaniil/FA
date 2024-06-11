@@ -38,7 +38,7 @@
                         <ColumnDefinition Width=".05*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="Transactions" Grid.Column="1"  VerticalOptions="Center" Grid.Row="0" Style="{StaticResource TextOpenSans}" />
+                    <Label Text="Главное меню" Grid.Column="1"  VerticalOptions="Center" Grid.Row="0" Style="{StaticResource TextOpenSans}" />
                     
                     <Image x:Name="Settings" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="3">
                         <Image.GestureRecognizers>
@@ -49,7 +49,7 @@
                 </Grid>
             </Frame>
 
-            <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="1" VerticalOptions="End" FontSize="Medium" Text="Period balance"/>
+            <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="1" VerticalOptions="End" FontSize="Medium" Text="Баланс за период"/>
             <!--<Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="2" FontSize="32" Text="{Binding totalBalance}"/>-->
             <Label x:Name="total" Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="2" FontSize="32" />
 
@@ -65,8 +65,8 @@
 
                     <!--<Image Grid.Row="0" Grid.Column="0"/>-->
 
-                    <Label Style="{StaticResource TextOpenSans}" Text="Increase" Grid.Row="0" VerticalTextAlignment="Center" Grid.Column="1"/>
-                    <Label Style="{StaticResource TextOpenSans}" x:Name="totalIncrese" HorizontalOptions="End" Grid.Row="0" Grid.Column="2" VerticalTextAlignment="Center" TextColor="#20CB3B"/>
+                    <Label Style="{StaticResource TextOpenSans}" Text="Доходы" Grid.Row="0" VerticalTextAlignment="Center" Grid.Column="1"/>
+                    <Label Style="{StaticResource TextOpenSans}" x:Name="totalIncrese"  HorizontalOptions="End" Grid.Row="0" Grid.Column="2" VerticalTextAlignment="Center" TextColor="#20CB3B"/>
                 </Grid>
             </Frame>
 
@@ -81,7 +81,7 @@
 
                     <!--<Image Grid.Row="0" Grid.Column="0"/>-->
 
-                    <Label Style="{StaticResource TextOpenSans}" Text="Expenses" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center"/>
+                    <Label Style="{StaticResource TextOpenSans}" Text="Расходы" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center"/>
                     <Label Style="{StaticResource TextOpenSans}" x:Name="totalConsume" HorizontalOptions="End" Grid.Row="0" Grid.Column="2" VerticalTextAlignment="Center" TextColor="Red"/>
                 </Grid>
             </Frame>
@@ -98,7 +98,7 @@
                     <RowDefinition Height=".5*" />
                 </Grid.RowDefinitions>
 
-                <Label Style="{StaticResource TextOpenSans}" Text="Spending calendar"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"/>
+                <Label Style="{StaticResource TextOpenSans}" Text="Календарь расходов"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"/>
 
                 <Button Clicked="DayButton" x:Name="dayButton" Grid.Column="0" Grid.Row="1" Text="день" Padding="0" Margin="0" FontSize="Micro" BackgroundColor="Transparent" TextColor="Black" CornerRadius="100" BorderWidth="1"/>
                 <Button Clicked="WeekButton"  x:Name="weekButton" Grid.Column="1" Grid.Row="1" Text="неделя" Margin="0" FontSize="Micro" BackgroundColor="Transparent" TextColor="Black" CornerRadius="100" BorderWidth="1" BorderColor="Black"/>

@@ -16,24 +16,71 @@
     <AbsoluteLayout x:Name="back" Padding="0">
         <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" >
             <Grid.RowDefinitions>
-                <RowDefinition Height=".08*"/>
-                <RowDefinition Height=".08*"/>
-                <RowDefinition Height=".08*"/>
-                <RowDefinition Height=".695*"/>
-                <RowDefinition Height=".065*"/>
+                <RowDefinition Height=".1*"/>
+                <RowDefinition Height=".9*"/>
             </Grid.RowDefinitions>
 
             <Frame Grid.Column="0" Grid.Row="0" Padding="15">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".5*"/>
-                        <ColumnDefinition Width=".4*"/>
-                        <ColumnDefinition Width=".1*"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/> 
+                    </Grid.RowDefinitions>
 
-                    <Label Text="Operations" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}"/>
+                    <Label Text="" x:Name="Title" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}"/>
                 </Grid>
             </Frame>
+
+            <ScrollView Grid.Row="1" Grid.Column="0">
+                <StackLayout VerticalOptions="Fill">
+                    <CollectionView  x:Name="OperationsCollection" SelectionMode="Single" SelectionChanged="OnItemSelected" VerticalOptions="Fill">
+                        <CollectionView.ItemTemplate >
+                            <DataTemplate>
+                                <StackLayout VerticalOptions="Fill">
+                                    <Frame BackgroundColor="White" Margin="10, 12, 10, 0">
+                                        <StackLayout VerticalOptions="Fill" Orientation="Vertical" Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="75" Padding="0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width=".7*"/>
+                                                    <ColumnDefinition Width=".3*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Sum}" HorizontalOptions="Center" WidthRequest="35" Style="{StaticResource TextOpenSans}" TextColor="GreenYellow"/>
+                                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding WalletName}" WidthRequest="35" Style="{StaticResource TextOpenSans}"/>
+                                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding Cathegory}" WidthRequest="35" Style="{StaticResource TextOpenSans}"/>
+                                                <Label Grid.Row="2" Grid.Column="0" FontAttributes="Italic" FontSize="18" Text="{Binding Description}" WidthRequest="35" Style="{StaticResource TextOpenSans}"/>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <CollectionView x:Name="OperationsCollection1" SelectionMode="Single" SelectionChanged="OnItemSelected1" VerticalOptions="Fill">
+                        <CollectionView.ItemTemplate >
+                            <DataTemplate>
+                                <StackLayout VerticalOptions="Fill">
+                                    <Frame BackgroundColor="White" Margin="10, 12, 10, 0" Padding="10">
+                                        <StackLayout VerticalOptions="Fill" Orientation="Vertical" Margin="0" HorizontalOptions="FillAndExpand" HeightRequest="75" Padding="0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width=".7*"/>
+                                                    <ColumnDefinition Width=".3*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Sum}" HorizontalOptions="Center" Style="{StaticResource TextOpenSans}" TextColor="Red"/>
+                                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding WalletName}" Style="{StaticResource TextOpenSans}"/>
+                                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding Cathegory}" Style="{StaticResource TextOpenSans}"/>
+                                                <Label Grid.Row="2" Grid.Column="0" FontAttributes="Italic" FontSize="18" Text="{Binding Description}" Style="{StaticResource TextOpenSans}"/>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+            
         </Grid>
     </AbsoluteLayout>
 </ContentPage>
+
+

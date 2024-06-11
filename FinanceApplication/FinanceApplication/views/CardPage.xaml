@@ -31,12 +31,12 @@
                         <ColumnDefinition Width=".1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="Cards" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}"/>
+                    <Label Text="Карты/кошельки" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}"/>
 
                 </Grid>
             </Frame>
 
-            <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="1" VerticalOptions="End" FontSize="Medium" Text="Total balance on cards"/>
+            <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="1" VerticalOptions="End" FontSize="Medium" Text="Общий баланс"/>
             <Label Margin="15, 0,0,0" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="2" x:Name="CardsSum" FontSize="32"/>
 
 
@@ -70,7 +70,7 @@
                                     <AbsoluteLayout Grid.Column="0" Grid.Row="2">
                                         <Frame BackgroundColor="Gray" CornerRadius="10" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, .4, .8 "/>
                                     </AbsoluteLayout>
-                                    <Label Text="Amount of money" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="3"/>
+                                    <Label Text="Сумма на карте" Style="{StaticResource TextOpenSans}" Grid.Column="0" Grid.Row="3"/>
                                     <Label Text="{Binding Amount}" HorizontalOptions="End" Style="{StaticResource TextOpenSans}" Grid.Column="1" Grid.Row="3"/>
                                 </Grid>
                             </Frame>

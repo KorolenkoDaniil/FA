@@ -23,7 +23,7 @@ namespace FinanceApplication.core.Category
         {
             CategoryId = categoryid;
         }
-        public override string ToString() => $"{CategoryId} {Name} {UserId} {ColorId}";
+        public override string ToString() => $"{CategoryId} {Name} {UserId} {ColorId} IsProfit {IsProfit}";
         public override bool Equals(object obj) => obj is Category category && category.CategoryId == CategoryId;
     }
 }

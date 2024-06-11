@@ -25,6 +25,8 @@ namespace FinanceApplication.views
                                                          join color in Context.Colors on category.ColorId equals color.ColorId
                                                          select new ExtendedCategory(category.Name, color.DarkMode, category.IconId, category.CategoryId, Context.User.UserId, category.ColorId, category.IsProfit)).ToList();
 
+            
+
             List<ChartEntry> entries1 = new List<ChartEntry>();
             List<ChartEntry> entries2 = new List<ChartEntry>();
 
@@ -32,6 +34,7 @@ namespace FinanceApplication.views
 
             foreach (ExtendedCategory category in extendedCategories.Where(exCat => exCat.IsProfit))
             {
+                category.CalculateSum();
                 entries1.Add(new ChartEntry((float)category.CategorySum)
                 {
                     Color = SKColor.Parse(category.DarkMode),
@@ -81,6 +84,7 @@ namespace FinanceApplication.views
 
             foreach (ExtendedCategory category in extendedCategories.Where(exCat => !exCat.IsProfit))
             {
+                category.CalculateSum();
                 entries2.Add(new ChartEntry((float)category.CategorySum)
                 {
                     Color = SKColor.Parse(category.DarkMode),

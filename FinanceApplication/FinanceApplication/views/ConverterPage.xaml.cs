@@ -149,6 +149,11 @@ namespace FinanceApplication.views
         private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage());
         private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage());
         private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SetingsPage());
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Calculator());
+        }
     }
 
 }

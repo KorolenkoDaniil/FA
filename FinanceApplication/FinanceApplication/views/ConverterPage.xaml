@@ -26,19 +26,15 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width=".05*"/>
-                        <ColumnDefinition Width=".35*"/>
                         <ColumnDefinition Width=".45*"/>
-                        <ColumnDefinition Width=".1*"/>
+                        <ColumnDefinition Width=".35*"/>
                         <ColumnDefinition Width=".05*"/>
+                        <ColumnDefinition Width=".001*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="Converter" Grid.Column="1"  VerticalOptions="Center" Grid.Row="0" Style="{StaticResource TextOpenSans}" />
+                    <Label Text="Конвертер" Grid.Column="1"  VerticalOptions="Center" Grid.Row="0" Style="{StaticResource TextOpenSans}" />
 
-                    <Image x:Name="Settings" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="3">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToSettingsPage" />
-                        </Image.GestureRecognizers>
-                    </Image>
+                    <Button Text="Калькулятор" Clicked="Button_Clicked" FontSize="Micro" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black" BorderWidth="1" Grid.Column="2" CornerRadius="10" VerticalOptions="Center" Grid.Row="0"/>
                 </Grid>
             </Frame>
 
