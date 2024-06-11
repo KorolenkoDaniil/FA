@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-
 namespace FinanceApplication.core.Currency
 {
     internal class CurrencyRepository
@@ -14,11 +13,8 @@ namespace FinanceApplication.core.Currency
         public async static Task<Currency> GetCurrency()
         {
             Dictionary<string, string> userData = new Dictionary<string, string>();
-       
             FormUrlEncodedContent form = new FormUrlEncodedContent(userData);
-
             HttpResponseMessage response = await httpClient.PostAsync(Links.GetCurrency, form);
-
             if (response.IsSuccessStatusCode)
             {
                 string CurrencyJson = await response.Content.ReadAsStringAsync();
@@ -29,7 +25,7 @@ namespace FinanceApplication.core.Currency
                 return currency;
             }
             else
-               return null;
+                return null;
         }
     }
 }

@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 namespace FinanceApp.classes
 {
     public static class Context
@@ -20,15 +19,11 @@ namespace FinanceApp.classes
         public static List<Colorss> Colors { get; private set; }
         public static decimal IncreaseOperationsSum { get; private set; }
         public static decimal ConsumeOperationsSum { get; private set; } = 0;
-
         public static bool monthPeriod = true;
         public static decimal OperationsSum { get; private set; }
-
         public static string colorsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Colors");
         public static string codePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "AuntificationCode");
-
-        public static string[] WalletTypes = new string[]
-        {
+        public static string[] WalletTypes = new string[]{
             "Денежные средства",
             "Сберегательный счет",
             "Расчетный счет",
@@ -36,9 +31,7 @@ namespace FinanceApp.classes
             "Дебетовая карта",
             "Копилка",
             "Криптовалютный кошелек",
-            "кредитная карта"
-        };
-
+            "кредитная карта"};
         public static void ChangeTheme(Colorss color) => Color = color;
         public static void ChangeUser(User user) => User = user;
         public static void SetWalletsCollection(List<Wallet> wallets) => Wallets = wallets;
@@ -50,10 +43,8 @@ namespace FinanceApp.classes
             CalculateConsumeSum();
         }
         public static void SetColorsCollection(List<Colorss> colors) => Colors = colors;
-
         public static void CalculateIncreaseSum() =>
             IncreaseOperationsSum = Operations.Where(op => op.Profit).Sum(u => u.Sum);
-
         public static void CalculateConsumeSum() =>
             ConsumeOperationsSum = Operations.Where(op => !op.Profit).Sum(u => u.Sum);
     }

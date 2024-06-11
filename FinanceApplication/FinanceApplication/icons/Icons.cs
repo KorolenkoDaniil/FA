@@ -1,5 +1,4 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -9,7 +8,7 @@ namespace FinanceApplication.icons
     {
         public static string[] Iconspath = new string[]
         {
-            "FinanceApplication.icons.calendar.png", 
+            "FinanceApplication.icons.calendar.png",
             "FinanceApplication.icons.calenda2.png", //1
             "FinanceApplication.icons.card.png",
             "FinanceApplication.icons.categories.png",
@@ -23,9 +22,9 @@ namespace FinanceApplication.icons
             "FinanceApplication.icons.Rrow.png",
             "FinanceApplication.icons.settings.png",
             "FinanceApplication.icons.trashCan.png",
-            "FinanceApplication.icons.URow.png", 
+            "FinanceApplication.icons.URow.png",
             "FinanceApplication.icons.Check-circle.png", //15
-            "FinanceApplication.icons.Circle-xmark.png", 
+            "FinanceApplication.icons.Circle-xmark.png",
             "FinanceApplication.icons.palette.png",
             "FinanceApplication.icons.IconOfIcon.png", //18
             "FinanceApplication.icons.erase.png", //19

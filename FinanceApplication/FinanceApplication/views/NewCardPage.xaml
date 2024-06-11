@@ -64,7 +64,7 @@
 
                     <Button x:Name="ColorButton" BackgroundColor="Transparent" TextColor="Black" Clicked="ColorButton_Clicked" Text="выбрать цвет" Grid.Row="3" Grid.Column="1" />
 
-                    
+
                     <Entry x:Name="EntrySum" TextChanged="EntrySum_TextChanged" Focused="EntrySum_Focused" Keyboard="Numeric" Placeholder="остаток средств" Text="0" PlaceholderColor="#8f8f8f" TextColor="Black" FontSize="Medium" Grid.Row="4" Grid.Column="1"/>
                     <Label Grid.Row="5" Grid.Column="1" VerticalOptions="Center" TextColor="Black" Text="включить в общий баланс"/>
 
@@ -78,7 +78,7 @@
                             <ColumnDefinition Width=".05*"/>
                             <ColumnDefinition Width=".5*"/>
                         </Grid.ColumnDefinitions>
-    
+
                         <Button x:Name="Cancel" Clicked="Cancel_Clicked" FontSize="Small" Text="Отмена" TextColor="Black" Grid.Row="0" Grid.Column="0" CornerRadius="30" BackgroundColor="Transparent" BorderColor="Black" BorderWidth="1"/>
                         <Button x:Name="Create" Clicked="Create_Clicked" FontSize="Small" Text="Создать" TextColor="Black" Grid.Row="0" Grid.Column="2" CornerRadius="30" BackgroundColor="Transparent" BorderColor="Black" BorderWidth="1" Margin="0"/>
                     </Grid>

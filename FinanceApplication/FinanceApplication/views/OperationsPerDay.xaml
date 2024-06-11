@@ -34,23 +34,6 @@
                     <Label Text="Operations" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextOpenSans}"/>
                 </Grid>
             </Frame>
-
-
-            <!--<CollectionView Grid.Row="6" Grid.Column="0" x:Name="OperationsCollectionPerDay" SelectionMode="Single" SelectionChanged="OnItemSelected">
-                <CollectionView.ItemTemplate >
-                    <DataTemplate>
-                        <StackLayout>
-                            <Frame BackgroundColor="White" Margin="10, 12, 10, 0">
-                                <StackLayout>
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="45" Padding="0,0,0,0">
-                                        
-                                    </StackLayout>
-                                </StackLayout>
-                            </Frame>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>-->
         </Grid>
     </AbsoluteLayout>
 </ContentPage>

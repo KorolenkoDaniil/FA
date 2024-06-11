@@ -13,10 +13,10 @@ namespace FinanceApplication.views
     public partial class SetingsPage : ContentPage
     {
         string path2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "AuntificationCode");
+        int f = 0;
         public SetingsPage()
         {
             InitializeComponent();
-            //fileExist.IsChecked = File.Exists(path2);
             NavigationPage.SetHasNavigationBar(this, false);
             reminder.Source = ImageSource.FromResource(Icons.Iconspath[32]);
             currency.Source = ImageSource.FromResource(Icons.Iconspath[30]);
@@ -33,6 +33,7 @@ namespace FinanceApplication.views
                 switchMode.IsToggled = false;
             else
                 switchMode.IsToggled = true;
+            PinCodeInput.IsVisible = false;
         }
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
@@ -40,46 +41,7 @@ namespace FinanceApplication.views
 
         }
 
-    
         private static object fileLock = new object();
-
-        private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            Console.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^1"); 
-            if (sender is CheckBox checkbox)
-            {
-                Console.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^2" + checkbox.IsChecked);
-
-                if (checkbox.IsChecked)
-                {
-                    AutorisationJson data = new AutorisationJson();
-                    data.code = "1234";
-                    data.userEmail = Context.User.Email;
-                    data.password = Context.User.Password;
-
-                    string userData = JsonConvert.SerializeObject(data);
-
-                    lock (fileLock)
-                    {
-                        File.WriteAllText(path2, userData);
-                    }
-
-                    Console.WriteLine("ФАЙЛ СОЗДАН");
-                    Console.WriteLine(File.ReadAllText(path2));
-                }
-                else
-                {
-                    lock (fileLock)
-                    {
-                        if (File.Exists(path2))
-                        {
-                            File.Delete(path2);
-                            Console.WriteLine("ФАЙЛ УДАЛЕН");
-                        }
-                    }
-                }
-            }
-        }
 
         private async void ToPageOfChoisingCurrency(object sender, EventArgs e)
         {
@@ -93,7 +55,50 @@ namespace FinanceApplication.views
 
         private void TapGestureRecognizer_Tapped_3(object sender, EventArgs e)
         {
+            if (f % 2 == 0)
+            {
+                if (File.Exists(path2))
+                {
+                    pinCodeRow.Height = 230;
+                    but2.IsVisible = true;
+                }
+                else
+                {
+                    pinCodeRow.Height = 180;
+                    but2.IsVisible = false;
+                }
+                PinCodeInput.IsVisible = true;
+            }
+            else
+            {
+                pinCodeRow.Height = 50;
+                PinCodeInput.IsVisible = false;
+            }
+            f++;
+        }
 
+        private void TapGestureRecognizer_Tapped_3()
+        {
+            if (f % 2 == 0)
+            {
+                if (File.Exists(path2))
+                {
+                    pinCodeRow.Height = 230;
+                    but2.IsVisible = true;
+                }
+                else
+                {
+                    pinCodeRow.Height = 180;
+                    but2.IsVisible = false;
+                }
+                PinCodeInput.IsVisible = true;
+            }
+            else
+            {
+                pinCodeRow.Height = 50;
+                PinCodeInput.IsVisible = false;
+            }
+            f++;
         }
 
         private async void Switch_Toggled(object sender, ToggledEventArgs e)
@@ -102,16 +107,69 @@ namespace FinanceApplication.views
             {
                 Context.User.AppModeColor = "#5e5e6b";
                 back.BackgroundColor = Color.FromHex("#5e5e6b");
-                await Navigation.PushAsync(new ListPage());
             }
             else
             {
                 Context.User.AppModeColor = "#F5F5F5";
                 back.BackgroundColor = Color.FromHex("#F5F5F5");
-                await Navigation.PushAsync(new ListPage());
-
             }
+            await Navigation.PushAsync(new ListPage());
+        }
 
+        private async void CreateFile(object sender, EventArgs e)
+        {
+            if (!code1.Text.Equals(code2.Text) || code1.Text.Length != 4 || code2.Text.Length != 4)
+            {
+                code2.TextColor = Color.Red;
+            }
+            else
+            {
+                AutorisationJson data = new AutorisationJson();
+                data.code = code1.Text;
+                data.userEmail = Context.User.Email;
+                data.password = Context.User.Password;
+
+                string userData = JsonConvert.SerializeObject(data);
+
+                lock (fileLock)
+                {
+                    File.WriteAllText(path2, userData);
+                }
+
+                Console.WriteLine("ФАЙЛ СОЗДАН");
+                Console.WriteLine(File.ReadAllText(path2));
+                TapGestureRecognizer_Tapped_3();
+                code1.Text = "";
+                code2.Text = "";
+                await Navigation.PushAsync(new ListPage());
+            }
+        }
+
+        private async void DeleteFile(object sender, EventArgs e)
+        {
+            if (File.Exists(path2))
+            {
+                File.Delete(path2);
+                Console.WriteLine("ФАЙЛ УДАЛЕН");
+                await Navigation.PushAsync(new ListPage());
+            }
+        }
+
+        private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(code1.Text)) return;
+            if (code1.Text.Length > 4) return;
+        }
+
+        private void Entry_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(code2.Text)) return;
+            if (code2.Text.Length > 4) return;
+        }
+
+        private void code2_Focused(object sender, FocusEventArgs e)
+        {
+            code2.TextColor = Color.Black;
         }
     }
 }

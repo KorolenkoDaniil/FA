@@ -62,7 +62,7 @@ namespace FinanceApplication.views
                 Console.WriteLine(item);
             }
 
-            decimal increase = ListOperations.Where(oper => oper.Profit).Sum(operation => operation.Sum), 
+            decimal increase = ListOperations.Where(oper => oper.Profit).Sum(operation => operation.Sum),
                     consume = ListOperations.Where(oper => !oper.Profit).Sum(operation => operation.Sum);
 
             totalIncrese.Text = Context.User.SelectedCurrency + " " + increase;
@@ -101,7 +101,7 @@ namespace FinanceApplication.views
             OperationsCollection.SelectedItem = null;
         }
 
-      
+
         private async void ToNewOperationPage(object sender, EventArgs e) => await Navigation.PushAsync(new NewOperationPage());
         private async void ToCardPage(object sender, EventArgs e) => await Navigation.PushAsync(new CardPage());
         private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage());

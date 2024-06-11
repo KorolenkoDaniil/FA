@@ -1,9 +1,4 @@
-﻿using FinanceApp.classes.Users;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FinanceApp.classes.Wallets
+﻿namespace FinanceApp.classes.Wallets
 {
     public class Wallet
     {
@@ -15,10 +10,8 @@ namespace FinanceApp.classes.Wallets
         public int ColorId { get; set; }
         public bool Include { get; set; }
         public int IconId { get; set; }
-
-        public Wallet () { }
-
-        public Wallet (int userid, string name, string type, decimal amount, int colorID, bool include, int iconid)
+        public Wallet() { }
+        public Wallet(int userid, string name, string type, decimal amount, int colorID, bool include, int iconid)
         {
             UserId = userid;
             Name = name;
@@ -28,9 +21,9 @@ namespace FinanceApp.classes.Wallets
             Include = include;
             IconId = iconid;
         }
-
-        public Wallet (int WalletId, int userid, string name, string type, decimal amount, int colorID, bool include, int iconid): this(userid, name,  type,  amount,  colorID, include, iconid){
-           this.WalletId = WalletId;
+        public Wallet(int WalletId, int userid, string name, string type, decimal amount, int colorID, bool include, int iconid) : this(userid, name, type, amount, colorID, include, iconid)
+        {
+            this.WalletId = WalletId;
         }
         public override string ToString() => $"WalletId {WalletId} UserId {UserId} Name {Name} Type {Type} Amount {Amount} ColorId {ColorId} Include {Include} IconId {IconId}";
         public override bool Equals(object obj) => obj is Wallet wallet && wallet.WalletId == WalletId;

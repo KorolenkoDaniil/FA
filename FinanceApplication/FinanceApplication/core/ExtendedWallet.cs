@@ -13,7 +13,7 @@ namespace FinanceApplication.core
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
-        public bool Include {  get; set; }
+        public bool Include { get; set; }
         public decimal Amount { get; set; }
         public string DarkMode { get; set; }
         public int ColorId { get; set; }
@@ -34,7 +34,6 @@ namespace FinanceApplication.core
             WalletIconPath = Icons.WalletsIcons[IconId];
             CalculateSum();
         }
-
         public override string ToString()
         {
             return $"WalletId {WalletId} UserId {UserId} Name {Name} Type {Type} ColorId {ColorId} Amount {Amount} DarkMode {DarkMode} IconId {IconId}";
@@ -46,8 +45,8 @@ namespace FinanceApplication.core
             DarkMode = color.DarkMode;
         }
 
-        public void CalculateSum() => 
+        public void CalculateSum() =>
            Amount = Context.Operations.Where(operation => operation.WalletId == WalletId && operation.Profit).Sum(o => o.Sum) - Context.Operations.Where(operation => operation.WalletId == WalletId && !operation.Profit).Sum(o => o.Sum);
-        
+
     }
 }

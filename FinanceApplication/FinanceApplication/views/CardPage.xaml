@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FinanceApplication.views.CardPage">
 
@@ -66,8 +65,8 @@
                                             <Image Source="{Binding Path=WalletIconPath}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
                                         </Frame>
                                     </AbsoluteLayout>
-                                   
-                                    
+
+
                                     <AbsoluteLayout Grid.Column="0" Grid.Row="2">
                                         <Frame BackgroundColor="Gray" CornerRadius="10" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, .4, .8 "/>
                                     </AbsoluteLayout>

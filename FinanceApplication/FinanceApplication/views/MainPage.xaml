@@ -25,7 +25,7 @@
                     <Image x:Name="Logo" BackgroundColor="White" VerticalOptions="Center" HorizontalOptions="Center" />
                 </Frame>
             </AbsoluteLayout>
-           
+
 
             <Button Clicked="ToSignInPage" BorderColor="Bisque" BorderWidth="2" Text="Sign In" Grid.Row="3" Grid.Column="0" WidthRequest="115" HeightRequest="115" CornerRadius="100" VerticalOptions="Center" HorizontalOptions="Center" />
 
@@ -34,7 +34,7 @@
 
 
         <Frame AbsoluteLayout.LayoutFlags="All" BackgroundColor="White" AbsoluteLayout.LayoutBounds="1, 1, 1, .1"/>
-        
+
         <Frame AbsoluteLayout.LayoutFlags="All" BackgroundColor="#303030" AbsoluteLayout.LayoutBounds="0, .98, 1, .2" Rotation="15"/>
 
         <Frame AbsoluteLayout.LayoutFlags="All" BackgroundColor="Bisque" AbsoluteLayout.LayoutBounds="2.3, 4.7, .8, .8" Rotation="165"/>

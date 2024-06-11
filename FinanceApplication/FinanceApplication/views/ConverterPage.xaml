@@ -17,7 +17,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.09*"/>
-                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height=".001*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height=".08*"/>
             </Grid.RowDefinitions>
@@ -49,8 +49,6 @@
                     <ColumnDefinition Width=".49*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Row="0" Grid.Column="0" CornerRadius="30" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black" BorderWidth="1" Margin="20, 0, 0, 0" Text="банк покупает" VerticalOptions="End" />
-                <Button Grid.Row="0" Grid.Column="2" CornerRadius="30" BackgroundColor="Transparent" TextColor="Black" BorderColor="Black" BorderWidth="1" Margin="0, 0, 20, 0" Text="банк продает" VerticalOptions="End" />
             </Grid>
 
 
@@ -74,10 +72,10 @@
 
                     <AbsoluteLayout Grid.Row="0" Grid.Column="1">
                         <Frame CornerRadius="10" BackgroundColor="AliceBlue" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, 1, .5" VerticalOptions="Fill"  HorizontalOptions="Fill" Padding="0">
-                            <Entry x:Name="EntryUSD" Text="1" TextColor="Black" Keyboard="Numeric"/>
+                            <Entry x:Name="EntryUSD" Unfocused="EntryUSD_TextChanged" Text="1" TextColor="Black" Keyboard="Numeric"/>
                         </Frame>
 
-                        <Label Text="Доллар США" HorizontalOptions="End" TextColor="Black" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 1, .7, .2" />
+                        <Label Text="Доллар США" HorizontalOptions="End" Unfocused="EntryUSD_TextChanged" TextColor="Black" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 1, .7, .2" />
 
                     </AbsoluteLayout>
                 </Grid>
@@ -94,7 +92,7 @@
 
                     <AbsoluteLayout Grid.Row="0" Grid.Column="1">
                         <Frame CornerRadius="10" BackgroundColor="AliceBlue" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, 1, .5" VerticalOptions="Fill"  HorizontalOptions="Fill" Padding="0">
-                            <Entry x:Name="EntryEUR" TextColor="Black" Keyboard="Numeric"/>
+                            <Entry x:Name="EntryEUR" TextColor="Black" Unfocused="EntryEUR_TextChanged" Keyboard="Numeric"/>
                         </Frame>
 
                         <Label Text="Евро" HorizontalOptions="End" TextColor="Black" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 1, .8, .2" />
@@ -114,7 +112,7 @@
 
                     <AbsoluteLayout Grid.Row="0" Grid.Column="1">
                         <Frame CornerRadius="10" BackgroundColor="AliceBlue" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, 1, .5" VerticalOptions="Fill"  HorizontalOptions="Fill" Padding="0">
-                            <Entry  x:Name="EntryBYN"  TextColor="Black" Keyboard="Numeric"/>
+                            <Entry  x:Name="EntryBYN" Unfocused="EntryBYN_TextChanged" TextColor="Black" Keyboard="Numeric"/>
                         </Frame>
 
                         <Label Text="Белорусский рубль" HorizontalOptions="End" TextColor="Black" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 1, .8, .2" />
@@ -132,7 +130,7 @@
 
                     <AbsoluteLayout Grid.Row="0" Grid.Column="1">
                         <Frame CornerRadius="10" BackgroundColor="AliceBlue" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, 1, .5" VerticalOptions="Fill"  HorizontalOptions="Fill" Padding="0">
-                            <Entry x:Name="EntryRUB"  TextColor="Black" Keyboard="Numeric"/>
+                            <Entry x:Name="EntryRUB" Unfocused="EntryRUB_TextChanged"  TextColor="Black" Keyboard="Numeric"/>
                         </Frame>
 
                         <Label Text="Российский рубль" HorizontalOptions="End" TextColor="Black" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 1, .8, .2" />
@@ -151,7 +149,7 @@
 
                     <AbsoluteLayout Grid.Row="0" Grid.Column="1">
                         <Frame CornerRadius="10" BackgroundColor="AliceBlue" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, 1, .5" VerticalOptions="Fill"  HorizontalOptions="Fill" Padding="0">
-                            <Entry x:Name="EntryPLN" TextColor="Black" Keyboard="Numeric"/>
+                            <Entry x:Name="EntryPLN" Unfocused="EntryPLN_TextChanged" TextColor="Black" Keyboard="Numeric"/>
                         </Frame>
 
                         <Label Text="Польский злотый" HorizontalOptions="End" TextColor="Black" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 1, .5, .2" />
@@ -169,14 +167,14 @@
 
                     <AbsoluteLayout Grid.Row="0" Grid.Column="1">
                         <Frame CornerRadius="10" BackgroundColor="AliceBlue" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, 1, .5" VerticalOptions="Fill"  HorizontalOptions="Fill" Padding="0">
-                            <Entry x:Name="EntryCNY" TextColor="Black" Keyboard="Numeric"/>
+                            <Entry x:Name="EntryCNY" Unfocused="EntryCNY_TextChanged" TextColor="Black" Keyboard="Numeric"/>
                         </Frame>
 
                         <Label Text="Китайская юань" HorizontalOptions="End" TextColor="Black" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1, 1, .5, .2" />
 
                     </AbsoluteLayout>
                 </Grid>
-                  
+
             </Grid>
 
 

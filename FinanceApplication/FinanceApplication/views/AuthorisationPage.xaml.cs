@@ -45,12 +45,14 @@ namespace FinanceApplication.views
                 Loading.IsVisible = true;
                 BadRequestLabel.IsVisible = false;
 
-                if (!Validator.ValidateString(entryEmail.Text, 20) || !Validator.ValidateString(entryPass1.Text, 15)) { ErrorLabel.IsVisible = true; 
-                    return; 
+                if (!Validator.ValidateString(entryEmail.Text, 20) || !Validator.ValidateString(entryPass1.Text, 15))
+                {
+                    ErrorLabel.IsVisible = true;
+                    return;
                 }
-                else if (!regex.IsMatch(entryEmail.Text)) 
-                { 
-                    ErrorLabel.IsVisible = true; 
+                else if (!regex.IsMatch(entryEmail.Text))
+                {
+                    ErrorLabel.IsVisible = true;
                     return;
                 }
                 else
@@ -58,7 +60,7 @@ namespace FinanceApplication.views
                     Context.ChangeUser(await UserRepository.AuthoriseUser(entryEmail.Text, entryPass1.Text));
                     if (Context.User != null)
                     {
-                        Context.ChangeTheme(await ColorRepository.GetColor( Context.User.ColorId));
+                        Context.ChangeTheme(await ColorRepository.GetColor(Context.User.ColorId));
                         Context.SetWalletsCollection(await WalletRepository.GetWallets(Context.User.UserId));
                         Context.SetCategoryCollection(await CategoryRepository.GetCategories(Context.User.UserId));
                         Context.SetOperationsCollection(await OperationRepository.GetOperations(Context.User.UserId));
@@ -92,6 +94,17 @@ namespace FinanceApplication.views
                 CheckImage.Source = ImageSource.FromResource(Icons.Iconspath[15]);
         }
 
-        private async void ToPinCodePage(object sender, EventArgs e) => await Navigation.PushAsync(new PasswordPage());
+        private async void ToPinCodePage(object sender, EventArgs e)
+        {
+            if (!File.Exists(Context.codePath))
+            {
+                FileIsNotExist();
+                return;
+            }
+            await Navigation.PushAsync(new PasswordPage());
+        }
+
+        private async void FileIsNotExist() =>
+          await DisplayAlert("Функция не включена", "включите в настройках использование пин кода для входа", "ОK");
     }
 }

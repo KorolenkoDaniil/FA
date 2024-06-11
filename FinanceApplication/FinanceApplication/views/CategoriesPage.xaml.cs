@@ -63,18 +63,18 @@ namespace FinanceApplication.views
             CategoriesCollection.SelectedItem = null;
         }
 
- 
+
 
         private async void ToNewCategoryPage(object sender, EventArgs e) => await Navigation.PushAsync(new NewOperationPage());
         private async void ToCardPage(object sender, EventArgs e) => await Navigation.PushAsync(new CardPage());
         private async void ToCategoriesPage(object sender, EventArgs e) => await Navigation.PushAsync(new CategoriesPage());
         private async void ToListPage(object sender, EventArgs e) => await Navigation.PushAsync(new ListPage());
         private async void ToDiagramPage(object sender, EventArgs e) => await Navigation.PushAsync(new DiagramPage());
-        private async void ToConverterPage(object sender, EventArgs e) 
+        private async void ToConverterPage(object sender, EventArgs e)
         {
             Currency currencyRates = await CurrencyRepository.GetCurrency();
             await Navigation.PushAsync(new ConverterPage(currencyRates));
-        } 
+        }
         private async void ToSettingsPage(object sender, EventArgs e) => await Navigation.PushAsync(new SetingsPage());
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e) => await Navigation.PushAsync(new NewCategoryPage(profit));
 

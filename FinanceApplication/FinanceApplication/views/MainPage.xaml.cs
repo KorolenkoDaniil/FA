@@ -13,7 +13,7 @@ namespace FinanceApplication
 {
     public partial class MainPage : ContentPage
     {
-  
+
         public MainPage()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace FinanceApplication
                 Console.WriteLine("цвета получили с сервера");
             }
 
-          
+
 
             //File.Delete(path2);
             Console.WriteLine(File.Exists(Context.codePath));
@@ -41,7 +41,7 @@ namespace FinanceApplication
 
         }
 
-        public async void  ToPasswordPage()
+        public async void ToPasswordPage()
         {
             await Navigation.PushAsync(new PasswordPage());
         }
@@ -69,7 +69,7 @@ namespace FinanceApplication
 
         private void GetColorsFromFile()
         {
-          
+
             string ColorsFroFile = File.ReadAllText(Context.colorsPath);
             Context.SetColorsCollection(JsonConvert.DeserializeObject<List<Colorss>>(ColorsFroFile));
 

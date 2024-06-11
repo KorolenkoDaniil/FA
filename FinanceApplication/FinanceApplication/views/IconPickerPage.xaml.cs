@@ -20,14 +20,13 @@ namespace FinanceApplication.views
             this.category = category;
             Console.WriteLine("_______________________________________________________________________________1");
             CreateCategoryButtons();
-            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
+            bback.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
         }
 
         public IconPickerPage(ExtendedWallet wallet)
         {
-            back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
-            Console.WriteLine(wallet + "33333333333333333333333333333333333333333");
             InitializeComponent();
+            bback.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
             NavigationPage.SetHasNavigationBar(this, false);
             Console.WriteLine("_______________________________________________________________________________1");
             this.wallet = wallet;
@@ -90,7 +89,7 @@ namespace FinanceApplication.views
                     BackgroundColor = Color.Transparent,
                     BorderWidth = 1,
                     BorderColor = Color.Black,
-                    id = i 
+                    id = i
                 };
 
                 newButton.Clicked += ChangeCardIcon;
@@ -117,7 +116,7 @@ namespace FinanceApplication.views
             Console.WriteLine("_______________________________________________________________________________3");
             if (sender is ExtendedImageButton button)
             {
-                category.IconSource= button.Source;
+                category.IconSource = button.Source;
                 category.IconId = button.id;
                 Console.WriteLine("_______________________________________________________________________________4");
                 Console.WriteLine(category);

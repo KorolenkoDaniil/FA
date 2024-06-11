@@ -30,7 +30,7 @@
                             </Frame>
                         </AbsoluteLayout>
                     </StackLayout>
-                    
+
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height=".28*"/>
@@ -44,7 +44,7 @@
                             <ColumnDefinition Width=".05*"/>
                         </Grid.ColumnDefinitions>
 
-                        
+
                         <Image x:Name="CathegoryImage" Grid.Column="0" Grid.Row="0" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"/>
                         <Image x:Name="IconImage" Grid.Column="0" Grid.Row="1" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"/>
                         <Image x:Name="ColorImage" Grid.Column="0" Grid.Row="2" Scale="1" HorizontalOptions="Center" VerticalOptions="Center"/>
@@ -55,7 +55,7 @@
                         <Button x:Name="ImagePicker" VerticalOptions="Center" Grid.Row="1" Grid.Column="1" Text="выбрать иконку" Clicked="ToIconPickerPage" TextColor="Black" BackgroundColor="Transparent"/>
                         <Button x:Name="ColorPicker" VerticalOptions="Center" Text="выбрать цвет" Grid.Row="2" Grid.Column="1" Clicked="ToColorPickerPage" TextColor="Black" BackgroundColor="Transparent"/>
 
-                  
+
                         <Image x:Name="xmarkCategoryName" Grid.Row="0" Grid.Column="2"/>
 
 
@@ -68,7 +68,7 @@
 
                             <Button x:Name="Cancel" Clicked="Cancel_Clicked" Text="Отмена" Grid.Row="0" Grid.Column="0" FontSize="Small" TextColor="Black" CornerRadius="30" BackgroundColor="Transparent" BorderColor="Black" BorderWidth="1"/>
                             <Button x:Name="CreateSave" Clicked="Create_Clicked" Text="Создать" Grid.Row="0" Grid.Column="2" FontSize="Small" TextColor="Black" CornerRadius="30" BackgroundColor="Transparent" BorderColor="Black" BorderWidth="1"/>
- 
+
                         </Grid>
 
                     </Grid>

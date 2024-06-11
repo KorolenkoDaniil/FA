@@ -55,7 +55,7 @@ namespace FinanceApplication.views
         private async void CreateClicked(object sender, EventArgs e)
         {
             Console.WriteLine(registration + " ^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-;            DisableControls();
+            ; DisableControls();
             if (registration)
             {
                 try
@@ -82,11 +82,17 @@ namespace FinanceApplication.views
             }
             else
             {
-                ValidateInputs();
-                User oldUser = new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, Context.User.ColorId, Context.User.AppModeColor, Context.User.SelectedCurrency);
-                oldUser.UserId = Context.User.UserId;
-                await UserRepository.SaveUser(oldUser);
-                await Navigation.PushAsync(new ListPage());
+                if (!ValidateInputs())
+                {
+                    BadRequestLabel.IsVisible = true; return;
+                }
+                else
+                {
+                    User oldUser = new User(entryNickname.Text, entryEmail.Text, entryPass1.Text, Context.User.ColorId, Context.User.AppModeColor, Context.User.SelectedCurrency);
+                    oldUser.UserId = Context.User.UserId;
+                    Context.ChangeUser(await UserRepository.SaveUser(oldUser));
+                    await Navigation.PushAsync(new ListPage());
+                }
             }
             EnableControlsAfterDelay();
         }
@@ -163,7 +169,7 @@ namespace FinanceApplication.views
             Context.SetCategoryCollection(await CategoryRepository.GetCategories(Context.User.UserId));
         }
 
-            private async Task HandleOperations()
+        private async Task HandleOperations()
         {
             Context.SetOperationsCollection(await OperationRepository.GetOperations(Context.User.UserId));
         }

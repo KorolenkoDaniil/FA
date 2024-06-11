@@ -4,7 +4,7 @@
              x:Class="FinanceApplication.views.IconPickerPage">
     <ContentPage.Content>
         <AbsoluteLayout x:Name="back" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
-            <Frame CornerRadius="30" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".5, .2, .9, .5" BackgroundColor="#FFF7EC">
+            <Frame CornerRadius="30" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".5, .2, .9, .5" x:Name="bback" >
                 <ScrollView>
                     <Grid x:Name="IconsGrid"/>
                 </ScrollView>

@@ -125,8 +125,8 @@
             </Frame>
 
         </Grid>
-        
-        
+
+
         <Frame x:Name="PlusButton" BackgroundColor="Transparent" Padding="0" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".9, .9, 50, 50" CornerRadius="30">
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"/>

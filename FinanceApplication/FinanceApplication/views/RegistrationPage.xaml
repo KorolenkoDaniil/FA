@@ -55,7 +55,7 @@
 
             <Image Grid.Column="0" Grid.Row="1"/>
 
-     
+
             <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="2" Margin="0">
                 <StackLayout>
                     <Label Style="{StaticResource Text1}" Text="Email" Margin="10, 0,0,0" />
@@ -77,14 +77,14 @@
             <Frame  Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="6">
                 <StackLayout>
                     <Label Style="{StaticResource Text1}" Text="Password" Margin="10, 0,0,0"/>
-                    <Entry x:Name="entryPass1" TextColor="Black" Margin="10, 0,0,0"/>
+                    <Entry x:Name="entryPass1" IsPassword="True" TextColor="Black" Margin="10, 0,0,0"/>
                 </StackLayout>
             </Frame>
 
             <Frame  Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="8">
                 <StackLayout>
                     <Label Style="{StaticResource Text1}" Text="Repeat password" Margin="10, 0,0,0"/>
-                    <Entry x:Name="entryPass2" TextColor="Black" Margin="10, 0,0,0"/>
+                    <Entry x:Name="entryPass2" IsPassword="True" TextColor="Black" Margin="10, 0,0,0"/>
                 </StackLayout>
             </Frame>
 
@@ -94,7 +94,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>

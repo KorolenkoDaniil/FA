@@ -119,7 +119,7 @@ namespace FinanceApplication.views
             {
                 IncorrectData();
             }
-         
+
         }
 
         private bool ValidationBeforeSaving()
@@ -153,6 +153,7 @@ namespace FinanceApplication.views
         private async void ToColorPickerPage(object sender, EventArgs e)
         {
             category.Name = EntryCategoryName.Text;
+            category.IconSource = categoryIcon.Source;
             await Navigation.PushAsync(new ColorPickerPage(category));
         }
 

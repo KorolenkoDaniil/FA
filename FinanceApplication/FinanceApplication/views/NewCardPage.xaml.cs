@@ -13,19 +13,19 @@ namespace FinanceApplication.views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewCardPage : ContentPage
     {
-        ExtendedWallet wallet = new ExtendedWallet(); 
+        ExtendedWallet wallet = new ExtendedWallet();
         Random random = new Random();
         bool delete;
         decimal sum = 0;
         public NewCardPage()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             PickerType.ItemsSource = Context.WalletTypes;
             wallet = new ExtendedWallet();
             CodeFromConstructions();
-            Create.Text = "Создать"; 
+            Create.Text = "Создать";
             Cancel.Text = "Отмена";
-            delete = false; 
+            delete = false;
             wallet.ColorId = random.Next(0, Context.Colors.Count - 1);
             int IconId = random.Next(0, Icons.WalletsIcons.Length - 1);
             WalletImage.BackgroundColor = Color.FromHex(Context.Colors.FirstOrDefault(color => color.ColorId == wallet.ColorId).DarkMode);
@@ -46,16 +46,16 @@ namespace FinanceApplication.views
             PickerType.ItemsSource = Context.WalletTypes;
             this.wallet = wallet;
             CodeFromConstructions();
-            Create.Text = "Сохранить"; 
+            Create.Text = "Сохранить";
             Cancel.Text = "Удалить";
             if (!string.IsNullOrEmpty(wallet.Name))
                 EntryName.Text = wallet.Name;
-            
+
             walletIcon.Source = wallet.WalletIconPath;
 
             int index = Context.WalletTypes.IndexOf(wallet.Type);
-            PickerType.SelectedIndex = index; 
-            
+            PickerType.SelectedIndex = index;
+
             WalletImage.BackgroundColor = Color.FromHex(wallet.DarkMode);
 
             EntrySum.Text = wallet.Amount.ToString();
@@ -67,66 +67,18 @@ namespace FinanceApplication.views
 
         }
 
-  
-        //public NewCardPage(ExtendedWallet wallet)
-        //{
-        //    InitializeComponent();
-        //    PickerType.ItemsSource = Context.WalletTypes;
-        //    this.wallet = wallet;
-        //    CodeFromConstructions();
-        //    Create.Text = "Сохранить";
-        //    Cancel.Text = "Удалить";
-        //    EntryName.Text = wallet.Name;
-        //    walletIcon.Source = wallet.WalletIconPath;
-        //    int index = Context.WalletTypes.IndexOf(wallet.Type);
-        //    PickerType.SelectedIndex = index;
-        //    WalletImage.BackgroundColor = Color.FromHex(wallet.DarkMode);
-        //    delete = true;
-        //    Top.Text = "";
-        //    EntrySum.Text = wallet.Amount.ToString();
-        //    CheckboxOfInclude.IsChecked = wallet.Include;
-        //}
-
-        //public NewCardPage(ExtendedWallet wallet, bool f)
-        //{
-        //    InitializeComponent();
-        //    PickerType.ItemsSource = Context.WalletTypes;
-        //    this.wallet = wallet;
-        //    CodeFromConstructions();
-        //    Create.Text = "Сохранить";
-        //    Cancel.Text = "Удалить";
-        //    if (!string.IsNullOrEmpty(wallet.Name))
-        //        EntryName.Text = wallet.Name;
-
-        //    walletIcon.Source = wallet.WalletIconPath;
-
-        //    int index = Context.WalletTypes.IndexOf(wallet.Type);
-        //    PickerType.SelectedIndex = index;
-        //    WalletImage.BackgroundColor = Color.FromHex(wallet.DarkMode);
-        //    delete = true;
-        //    if (!string.IsNullOrEmpty(EntrySum.Text))
-        //        EntrySum.Text = wallet.Amount.ToString();
-        //    CheckboxOfInclude.IsChecked = wallet.Include;
-
-
-
-        //    wallet.Amount = decimal.TryParse(EntrySum.Text, out sum) ? sum : 0;
-        //    wallet.Type = Context.WalletTypes[PickerType.SelectedIndex];
-        //    wallet.Name = string.IsNullOrEmpty(EntryName.Text) ? "" : EntryName.Text;
-        //    wallet.Include = CheckboxOfInclude.IsChecked;
-        //}
         public void CodeFromConstructions()
         {
-            NavigationPage.SetHasNavigationBar(this, false); 
+            NavigationPage.SetHasNavigationBar(this, false);
             sumImage.Source = ImageSource.FromResource(Icons.Iconspath[11]);
-            walletImage.Source = ImageSource.FromResource(Icons.Iconspath[2]); 
+            walletImage.Source = ImageSource.FromResource(Icons.Iconspath[2]);
             colorImage.Source = ImageSource.FromResource(Icons.Iconspath[17]);
             descriptionImage.Source = ImageSource.FromResource(Icons.Iconspath[5]);
             IconImage.Source = ImageSource.FromResource(Icons.Iconspath[18]);
             xmark1.Source = ImageSource.FromResource(Icons.Iconspath[16]);
-            xmark2.Source = ImageSource.FromResource(Icons.Iconspath[16]); 
+            xmark2.Source = ImageSource.FromResource(Icons.Iconspath[16]);
             xmark3.Source = ImageSource.FromResource(Icons.Iconspath[16]);
-            xmark1.IsVisible = false; 
+            xmark1.IsVisible = false;
             xmark2.IsVisible = false;
             xmark3.IsVisible = false;
         }
@@ -142,13 +94,13 @@ namespace FinanceApplication.views
                     return;
                 }
                 Cancel.IsEnabled = false;
-                Create.IsEnabled = false; 
+                Create.IsEnabled = false;
                 int index = Context.Wallets.FindIndex(wal => wal.WalletId == wallet.WalletId);
-                await WalletRepository.DeleteWallet(Context.Wallets[index]); 
+                await WalletRepository.DeleteWallet(Context.Wallets[index]);
                 Context.Wallets.Remove(Context.Wallets[index]);
                 await Navigation.PushAsync(new CardPage());
             }
-            Cancel.IsEnabled = true; 
+            Cancel.IsEnabled = true;
             Create.IsEnabled = true;
         }
         private void PickerType_Focused(object sender, FocusEventArgs e) { }
@@ -156,11 +108,16 @@ namespace FinanceApplication.views
 
         private async void IconButton_Clicked(object sender, EventArgs e)
         {
-            wallet.Amount = decimal.TryParse(EntrySum.Text, out sum)? sum: 0;
+            wallet.Amount = decimal.TryParse(EntrySum.Text, out sum) ? sum : 0;
+            Console.WriteLine("1111");
             wallet.Type = Context.WalletTypes[PickerType.SelectedIndex];
+            Console.WriteLine("2222");
             wallet.Name = EntryName.Text;
+            Console.WriteLine("3333");
             wallet.Include = CheckboxOfInclude.IsChecked;
+            Console.WriteLine("444");
             wallet.DarkMode = WalletImage.BackgroundColor.ToHex();
+            Console.WriteLine("555");
             await Navigation.PushAsync(new IconPickerPage(wallet));
         }
 
@@ -175,25 +132,25 @@ namespace FinanceApplication.views
             await Navigation.PushAsync(new ColorPickerPage(wallet));
         }
 
-        private void EntryName_TextChanged(object sender, TextChangedEventArgs e) 
+        private void EntryName_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (EntryName.Text.Length > 25)
                 xmark1.IsVisible = true;
             else
                 xmark1.IsVisible = false;
         }
-        private void EntrySum_TextChanged(object sender, TextChangedEventArgs e) 
+        private void EntrySum_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!decimal.TryParse(EntrySum.Text, out sum) || string.IsNullOrEmpty(EntrySum.Text) || sum > 10000)
                 xmark3.IsVisible = true;
             else
                 xmark3.IsVisible = false;
         }
-        private void EntryName_Focused(object sender, FocusEventArgs e) 
+        private void EntryName_Focused(object sender, FocusEventArgs e)
         {
             xmark1.IsVisible = false;
         }
-        private void EntrySum_Focused(object sender, FocusEventArgs e) 
+        private void EntrySum_Focused(object sender, FocusEventArgs e)
         {
             xmark3.IsVisible = false;
         }
@@ -254,7 +211,7 @@ namespace FinanceApplication.views
 
             if (index != -1)
             {
-                Context.Wallets[index] = wallet; 
+                Context.Wallets[index] = wallet;
                 return;
             }
             Context.Wallets.Add(wallet);

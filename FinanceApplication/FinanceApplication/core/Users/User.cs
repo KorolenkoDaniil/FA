@@ -4,7 +4,7 @@
     {
         public int UserId { get; set; }
         public string NickName { get; set; }
-        public string Email { get;  set; }
+        public string Email { get; set; }
         public string Password { get; set; }
         public int ColorId { get; set; }
         public string AppModeColor { get; set; }
@@ -18,10 +18,7 @@
             AppModeColor = appModeColor;
             SelectedCurrency = selectedCurrency;
         }
-
-        public User () { }
-
+        public User() { }
         public override string ToString() => $"{UserId} {NickName} {Email} {Password} {ColorId} selectedCurrency {SelectedCurrency}";
-      
     }
 }

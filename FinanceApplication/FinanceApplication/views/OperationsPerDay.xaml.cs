@@ -6,19 +6,16 @@ using Xamarin.Forms.Xaml;
 namespace FinanceApplication.views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class OperationsPerDay : ContentPage
-	{
-		OperationsDays dayOperations;
+    public partial class OperationsPerDay : ContentPage
+    {
+        OperationsDays dayOperations;
 
-        public OperationsPerDay (OperationsDays dayOperations)
-		{
-			InitializeComponent ();
+        public OperationsPerDay(OperationsDays dayOperations)
+        {
+            InitializeComponent();
             back.BackgroundColor = Color.FromHex(Context.User.AppModeColor);
             this.dayOperations = dayOperations;
         }
 
-
-
-
-	}
+    }
 }

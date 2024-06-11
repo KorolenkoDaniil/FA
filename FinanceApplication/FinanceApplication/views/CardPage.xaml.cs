@@ -26,7 +26,7 @@ namespace FinanceApplication.views
             imageCard.Source = ImageSource.FromResource(Icons.Iconspath[2]);
             imageCathegory.Source = ImageSource.FromResource(Icons.Iconspath[3]);
             imageList.Source = ImageSource.FromResource(Icons.Iconspath[8]);
-            imageDiagram.Source = ImageSource.FromResource(Icons.Iconspath[6]);   
+            imageDiagram.Source = ImageSource.FromResource(Icons.Iconspath[6]);
             imageConverter.Source = ImageSource.FromResource(Icons.Iconspath[4]);
             ShowCards();
             BindingContext = this;

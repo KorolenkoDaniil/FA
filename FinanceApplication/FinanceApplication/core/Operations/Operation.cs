@@ -1,6 +1,5 @@
 ﻿using FinanceApp.classes.Wallets;
 using System;
-
 namespace FinanceApplication.core.Operations
 {
     public class Operation
@@ -13,9 +12,7 @@ namespace FinanceApplication.core.Operations
         public int WalletId { get; set; }
         public string Cathegory { get; set; }
         public string Description { get; set; }
-
         public Operation() { }
-
         public Operation(int userID, string date, bool profit, decimal sum, int wallet, string cathegory, string description)
         {
             UserID = userID;
@@ -26,10 +23,7 @@ namespace FinanceApplication.core.Operations
             Cathegory = cathegory;
             Description = description;
         }
-
         public override string ToString() => $"{Id} {UserID} {Date} {Profit} {Sum} id кошелька {WalletId} id категории {Cathegory} {Description}";
         public override bool Equals(object obj) => obj is Operation operation && operation.Id == Id;
-
-
     }
 }

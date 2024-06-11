@@ -136,6 +136,7 @@ namespace FinanceApplication.views
             }
         }
 
-        private async void ToMainPage(object sender, EventArgs e) => await Navigation.PopAsync();
+        private async void ToMainPage(object sender, EventArgs e) => await Navigation.PushAsync(new MainPage());
+
     }
 }

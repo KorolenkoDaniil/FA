@@ -45,7 +45,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Text="Authorisation" TextColor="Black" FontSize="24" FontAttributes="Bold" FontFamily="OpenSans-Regular" Grid.Column="0" Grid.Row="0"/>
-            
+
             <Label Text="Welcome back" HorizontalOptions="Center" TextColor="Black" FontSize="24" FontAttributes="Bold" FontFamily="OpenSans-Regular" Grid.Column="0" Grid.Row="1"/>
 
             <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="3" Margin="0">
@@ -64,7 +64,7 @@
             <Frame Style="{StaticResource FrameStyle}" Grid.Column="0" Grid.Row="5">
                 <StackLayout>
                     <Label Style="{StaticResource Text1}" Text="Password" Margin="10, 0,0,0"/>
-                    <Entry x:Name="entryPass1" TextColor="Black" Margin="10, 0,0,0"/>
+                    <Entry x:Name="entryPass1" IsPassword="True" TextColor="Black" Margin="10, 0,0,0"/>
                 </StackLayout>
             </Frame>
 
@@ -89,17 +89,17 @@
                 </Grid.ColumnDefinitions>
                 <Image x:Name="pass" Grid.Row="0" Grid.Column="0">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToPinCodePage"/> 
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ToPinCodePage"/>
                     </Image.GestureRecognizers>
                 </Image>
                 <Image x:Name="teleg" Grid.Row="0" Grid.Column="2"/>
                 <Image x:Name="google" Grid.Row="0" Grid.Column="4"/>
                 <Image x:Name="inst" Grid.Row="0" Grid.Column="6"/>
             </Grid>
-            
+
 
             <Frame x:Name="ErrorLabel" CornerRadius="10" Padding="0" Grid.Column="0" Grid.Row="11" BackgroundColor="#ffd9d9">
-            <Label VerticalOptions="Center" HorizontalOptions="Center" Text="ERROR. Please check your email and password"></Label>
+                <Label VerticalOptions="Center" HorizontalOptions="Center" Text="ERROR. Please check your email and password"></Label>
             </Frame>
             <Frame x:Name="BadRequestLabel" CornerRadius="10" Padding="0" Grid.Column="0" Grid.Row="11" BackgroundColor="#ffd9d9">
                 <Label VerticalOptions="Center" HorizontalOptions="Center" Text="ERROR. User with this data not found"></Label>

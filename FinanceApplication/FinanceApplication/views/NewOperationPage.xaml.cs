@@ -95,13 +95,13 @@ namespace FinanceApplication.views
 
         private bool Validation()
         {
-            if (WalletPicker.SelectedItem == null || CathegoryPicker.SelectedItem == null)  return false;
-            if (!decimal.TryParse(EntrySum.Text, out sum) || sum < 0 || sum > 10000 )  return false;
+            if (WalletPicker.SelectedItem == null || CathegoryPicker.SelectedItem == null) return false;
+            if (!decimal.TryParse(EntrySum.Text, out sum) || sum < 0 || sum > 10000) return false;
             if (!string.IsNullOrEmpty(EntryDescription.Text))
             {
                 if (EntryDescription.Text.Length > 30) return false;
             }
-            
+
             return true;
         }
 
@@ -110,7 +110,10 @@ namespace FinanceApplication.views
             if (WalletPickerС.SelectedItem == null || CathegoryPickerС.SelectedItem == null)
                 return false;
             if (!decimal.TryParse(EntrySumС.Text, out sum) || sum < 0 || sum > 10000) return false;
-            if (EntryDescriptionС.Text.Length > 30) return false;
+            if (!string.IsNullOrEmpty(EntryDescription.Text))
+            {
+                if (EntryDescriptionС.Text.Length > 30) return false;
+            }
 
             return true;
         }
@@ -141,7 +144,7 @@ namespace FinanceApplication.views
                 IncorrectData();
             }
 
-           
+
         }
 
         private async void CreateOperation(bool include, decimal sum, int walletpickerIndex, string selectedCategory, string description, string stringdate)
@@ -180,10 +183,11 @@ namespace FinanceApplication.views
         private void CathegoryPickerС_Focused(object sender, FocusEventArgs e) => xmarkConsume2.IsVisible = false;
         private void CathegoryPickerС_Unfocused(object sender, FocusEventArgs e) => xmarkConsume2.IsVisible = CathegoryPickerС.SelectedItem == null;
         private void EntryDescriptionС_Focused(object sender, FocusEventArgs e) => xmarkConsume3.IsVisible = false;
-        private void EntryDescriptionС_Unfocused(object sender, FocusEventArgs e) {
+        private void EntryDescriptionС_Unfocused(object sender, FocusEventArgs e)
+        {
             if (string.IsNullOrEmpty(EntryDescriptionС.Text))
                 return;
-                xmarkConsume3.IsVisible = EntryDescriptionС.Text.Length > 20;
+            xmarkConsume3.IsVisible = EntryDescriptionС.Text.Length > 20;
         }
 
 
@@ -200,11 +204,13 @@ namespace FinanceApplication.views
         private void EntryDescription_Focused(object sender, FocusEventArgs e) => xmarkIncome3.IsVisible = false;
         private void EntryDescription_Unfocused(object sender, FocusEventArgs e)
         {
-            try {
+            try
+            {
                 if (string.IsNullOrEmpty(EntryDescription.Text) || EntryDescription.Text.Length > 25)
                     xmarkIncome3.IsVisible = true;
             }
-            catch {
+            catch
+            {
             }
         }
 
